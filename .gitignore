@@ -1,6 +1,11 @@
+### Android template
 # Built application files
+*.iml
 *.apk
 *.ap_
+.idea
+.DS_Store
+/captures
 
 # Files for the Dalvik VM
 *.dex
@@ -27,6 +32,3 @@ proguard/
 
 # Android Studio Navigation editor temp files
 .navigation/
-
-# Android Studio captures folder
-captures/
