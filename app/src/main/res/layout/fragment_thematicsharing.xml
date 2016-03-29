@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/fragment_themtaic_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="20px"
+            android:text="专题分享"
+            android:textColor="#fff"
+            android:textSize="30px" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/pull_down_arrow"
+            android:layout_alignRight="@+id/line_of_title"
+            android:layout_toRightOf="@+id/fragment_title_tv"
+            android:layout_marginTop="30px"
+            android:layout_marginLeft="9px"/>
+
+        <ImageView
+            android:id="@+id/line_of_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/line_of_title"
+            android:layout_below="@+id/fragment_themtaic_title_tv"
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="14px"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="显示排序为 最新推荐"
+            android:textColor="#fff"
+            android:textSize="24px"
+            android:layout_below="@+id/line_of_title"
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="26px"/>
+    </RelativeLayout>
+</LinearLayout>
