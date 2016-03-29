@@ -2,4 +2,9 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_specialtopic_detail_viewpager_iv_marginBottom">100dp</dimen>
+    <dimen name="activity_specialtopic_detail_share_iv_marginBottom">40dp</dimen>
+    <dimen name="activity_specialtopic_detail_share_iv_marginRight">40dp</dimen>
+    <dimen name="activity_specialtopic_detail_close_iv_marginRight">40dp</dimen>
+    <dimen name="activity_specialtopic_detail_close_iv_marginTop">40dp</dimen>
 </resources>
