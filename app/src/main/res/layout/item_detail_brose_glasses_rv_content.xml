@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_detail_brose_glasses_rv_content_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/item_detail_brose_glasses_rv_content_back_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@mipmap/ic_launcher" />
+
+    <LinearLayout
+        android:id="@+id/item_detail_brose_glasses_rv_content_src_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="590px"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="550px"
+            android:background="#000000"
+            android:orientation="vertical"
+            android:paddingLeft="30px"
+            android:paddingRight="30px"
+            android:id="@+id/item_detail_brose_glasses_rv_content_src_content_layout">
+
+            <View
+                android:id="@+id/item_detail_brose_glasses_rv_content_top_title_view"
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:layout_marginTop="28px"
+                android:background="#fff" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+
+                    android:layout_marginRight="26px">
+
+                    <TextView
+                        android:id="@+id/item_detail_brose_glasses_rv_content_title_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@id/item_detail_brose_glasses_rv_content_top_title_view"
+                        android:layout_marginTop="30px"
+                        android:text="来自时尚之都英国"
+                        android:textColor="#fff"
+                        android:textSize="32px" />
+
+                    <TextView
+                        android:id="@+id/item_detail_brose_glasses_rv_content_etitle_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@id/item_detail_brose_glasses_rv_content_title_tv"
+                        android:layout_marginTop="10px"
+                        android:text="11231245125125"
+                        android:textColor="#fff"
+
+                        android:textSize="24px" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/item_detail_brose_glasses_rv_content_location_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="巴黎"
+                    android:textColor="#fff"
+                    android:textSize="64px"
+                    android:layout_marginLeft="24px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
+            <View
+                android:id="@+id/item_detail_brose_glasses_rv_content_bottom_title_view"
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:layout_marginTop="26px"
+                android:background="#fff" />
+            <TextView
+                android:id="@+id/item_detail_brose_glasses_rv_content_src_content_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="#fff"
+                android:layout_marginTop="28px"
+                android:textSize="26px"
+                android:layout_marginBottom="44px"
+                android:text="这是一段测试的巴拉巴这是一段测试的巴拉巴这是一段测试的巴拉巴这是一段测试的巴拉巴这是一段测试的巴拉巴这是一段测试的巴拉巴"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
