@@ -23,14 +23,15 @@ public class MainActivity extends BaseActivity {
 
     // 初始化数据，绑定组件
     @Override
-    protected void initData() {
+    protected void initView() {
         fragments = new ArrayList<>();
         verticalViewPager = (VerticalViewPager) findViewById(R.id.homepage_verticalviewpager);
     }
 
     // 给ViewPager添加Fragment
     @Override
-    protected void initView() {
+    protected void initData() {
+
         for (int i = 0; i < 3; i++) {
             fragments.add(new GoodsFragment());
         }

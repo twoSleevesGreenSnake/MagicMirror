@@ -18,8 +18,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(setLayout());// 绑定布局
-        initView();// 其他操作
-        initData();// 初始化数据，绑定组件
+        initView();// 初始化数据，绑定组件
+        initData();// 其他操作
     }
 
     public <T extends View> T bindView(int ResId) {

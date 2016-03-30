@@ -14,4 +14,8 @@
     <string name="fragment_shoppingcart_nothings_tv">您的購物車裹没有商品</string>
     <string name="fragment_themtaic_title_tv">專题分享</string>
     <string name="fragment_themtaic_show_tv">顯示排序爲 最新推薦</string>
+    <string name="fragment_palingglasses_title_tv">浏览平光镜</string>
+    <string name="fragment_sunglasses_title_tv">浏览太阳镜</string>
+    <string name="fragment_menu_themtaic_title_tv">專题分享</string>
+    <string name="fragment_menu_shoppingcart_title_tv">我的購物車</string>
 </resources>

@@ -103,6 +103,7 @@ public class NetHelper {
 
     public interface NetListener<T> {
         void onSuccess(T t);
+
         void onFailure(Request request, IOException e);
     }
 
