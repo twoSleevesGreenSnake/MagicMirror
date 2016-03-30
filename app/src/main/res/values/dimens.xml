@@ -64,4 +64,14 @@
     <dimen name="item_fragment_goods_describe_tv_marginLeft">32px</dimen>
     <dimen name="item_fragment_goods_describe_tv_marginTop">46px</dimen>
     <dimen name="item_fragment_goods_describe_tv_textSize">30px</dimen>
+    <dimen name="item_detail_browse_last_second_content_iv">67dp</dimen>
+    <dimen name="item_browse_last_first_relayout_marginTop">116dp</dimen>
+    <dimen name="item_detail_browse_last_content_purchase_consult_title_tv_marginTop">19dp</dimen>
+    <dimen name="item_detail_browse_last_content_purchase_consult_content_tv_marginTop">6dp</dimen>
+    <dimen name="item_browse_last_second_relayout_marginTop">55dp</dimen>
+    <dimen name="item_browse_last_third_relayout_marginTop">55dp</dimen>
+    <dimen name="item_detail_browse_last_content_about_return_iv">19dp</dimen>
+    <dimen name="item_detail_browse_last_content_purchase_about_return_iv_marginTop">6dp</dimen>
+    <dimen name="item_detail_browse_last_content_purchase_consult_tract_order_tv_marginTop">6dp
+    </dimen>
 </resources>

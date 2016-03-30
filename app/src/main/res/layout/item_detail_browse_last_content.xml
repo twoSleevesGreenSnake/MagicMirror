@@ -7,14 +7,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="232px">
+        android:layout_marginTop="@dimen/item_browse_last_first_relayout_marginTop">
 
         <TextView
             android:id="@+id/item_detail_browse_last_content_purchase_consult_title_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="购买咨询"
+            android:text="@string/item_browse_last_first_title_tv"
             android:textColor="#333"
             android:textSize="36px" />
 
@@ -23,16 +23,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/item_detail_browse_last_content_purchase_consult_title_tv"
-            android:layout_marginTop="38px"
+            android:layout_marginTop="@dimen/item_detail_browse_last_content_purchase_consult_title_tv_marginTop"
             android:src="@mipmap/black_horizontal_stripe" />
 
         <TextView
             android:id="@+id/item_detail_browse_last_content_purchase_consult_content_tv"
-            android:text="如果您对把巴拉巴拉啦啦啦啦啦啦啦啦啦啦了哈哈哈哈哈哈吼吼吼的合法"
+            android:text="@string/item_detail_browse_last_content_purchase_consult_content_tv"
             android:layout_below="@+id/item_detail_browse_last_content_purchase_consult_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12px"
+            android:layout_marginTop="@dimen/item_detail_browse_last_content_purchase_consult_content_tv_marginTop"
             android:maxEms="15"
             android:layout_centerInParent="true"
             android:textColor="#333"
@@ -41,11 +41,11 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="110px">
+        android:layout_marginTop="@dimen/item_browse_last_second_relayout_marginTop">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="订单追踪"
+            android:text="@string/item_detail_browse_last_content_tract_order_title_tv"
             android:textSize="36px"
             android:textColor="#333"
             android:gravity="center"
@@ -59,12 +59,12 @@
             android:src="@mipmap/black_horizontal_stripe" />
 
         <TextView
-            android:id="@+id/item_detail_browse_last_content_purchase_consult_tract_order__tv"
-            android:text="如果您对把巴拉巴拉啦啦啦啦啦啦啦啦啦啦了哈哈哈哈哈哈吼吼吼的合法"
+            android:id="@+id/item_detail_browse_last_content_purchase_consult_tract_order_tv"
+            android:text="@string/item_detail_browse_last_content_purchase_consult_tract_order__tv"
             android:layout_below="@+id/item_detail_browse_last_content_tract_order_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12px"
+            android:layout_marginTop="@dimen/item_detail_browse_last_content_purchase_consult_tract_order_tv_marginTop"
             android:maxEms="15"
             android:layout_centerInParent="true"
             android:textColor="#333"
@@ -73,11 +73,11 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="110px">
+        android:layout_marginTop="@dimen/item_browse_last_third_relayout_marginTop">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="关于退货"
+            android:text="@string/item_detail_browse_last_content_about_return_title_tv"
             android:textSize="36px"
             android:textColor="#333"
             android:gravity="center"
@@ -87,16 +87,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/item_detail_browse_last_content_about_return_title_tv"
-            android:layout_marginTop="38px"
+            android:layout_marginTop="@dimen/item_detail_browse_last_content_about_return_iv"
             android:src="@mipmap/black_horizontal_stripe" />
 
         <TextView
             android:id="@+id/item_detail_browse_last_content_purchase_about_return_iv"
-            android:text="如果您对把巴拉巴拉啦啦啦啦啦啦啦啦啦啦了哈哈哈哈哈哈吼吼吼的合法"
+            android:text="@string/item_detail_browse_last_content_purchase_about_return_iv"
             android:layout_below="@+id/item_detail_browse_last_content_about_return_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12px"
+            android:layout_marginTop="@dimen/item_detail_browse_last_content_purchase_about_return_iv_marginTop"
             android:maxEms="15"
             android:layout_centerInParent="true"
             android:textColor="#333"

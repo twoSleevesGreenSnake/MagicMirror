@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">MagicMirror</string>
+    <string name="item_browse_last_first_title_tv">购买咨询</string>
+    <string name="item_detail_browse_last_content_purchase_consult_content_tv">如果您对把巴拉巴拉啦啦啦啦啦啦啦啦啦啦了哈哈哈哈哈哈吼吼吼的合法</string>
+    <string name="item_detail_browse_last_content_about_return_title_tv">关于退货</string>
+    <string name="item_detail_browse_last_content_purchase_consult_tract_order__tv">如果您对把巴拉巴拉啦啦啦啦啦啦啦啦啦啦了哈哈哈哈哈哈吼吼吼的合法</string>
+    <string name="item_detail_browse_last_content_tract_order_title_tv">订单追踪</string>
+    <string name="item_detail_browse_last_content_purchase_about_return_iv">如果您对把巴拉巴拉啦啦啦啦啦啦啦啦啦啦了哈哈哈哈哈哈吼吼吼的合法</string>
     <string name="activity_main_login_tv">登録</string>
     <string name="fragment_goods_title_tv">瀏覽所有分類</string>
     <string name="fragment_goods_show_tv">顯示排序爲 最新推薦</string>
