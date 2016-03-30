@@ -1,5 +1,6 @@
 package com.qoo.magicmirror.homepage;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.qoo.magicmirror.R;
@@ -24,7 +27,7 @@ import java.util.ArrayList;
  * <p/>
  * 商品展示的Fragment
  */
-public class GoodsFragment extends Fragment {
+public class GoodsFragment extends Fragment implements View.OnClickListener {
 
     private RecyclerView recyclerView;
     private GoodsRecycleViewAdapter adapter;
@@ -39,7 +42,6 @@ public class GoodsFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        data = new ArrayList<>();
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_goods_rv);
         titleTv = (TextView) view.findViewById(R.id.fragment_title_tv);
     }
@@ -48,6 +50,7 @@ public class GoodsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
+        titleTv.setOnClickListener(this);
     }
 
     private void initView() {
@@ -65,35 +68,38 @@ public class GoodsFragment extends Fragment {
         value.add("");
         value.add("");
         value.add("1.0.0");
-        NetHelper netHelper = new NetHelper(getActivity());
-        netHelper.getPostInfo("index.php/products/goods_list", token, value, null, new NetHelper.NetListener() {
+
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.fragment_title_tv:
+                showMenuPopWindow(v);
+                break;
+        }
+    }
+
+    /**
+     * 显示PopupWindow
+     * @param v 父布局
+     */
+    private void showMenuPopWindow(View v) {
+        final PopupWindow popupWindow = new PopupWindow(getActivity());
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_menu_popupwindow, null);
+        popupWindow.setContentView(view);
+
+        popupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
+        popupWindow.setHeight(LinearLayout.LayoutParams.MATCH_PARENT);
+        popupWindow.setAnimationStyle(R.anim.fragment_menu_popupwindow);
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSuccess(Object o) {
-
-            }
-
-            @Override
-            public void onFailure(Request request, IOException e) {
-
+            public void onClick(View v) {
+                popupWindow.dismiss();
             }
         });
-//            @Override
-//            public void onSuccess(FragmentTitleBean fragmentTitleBean) {
-//                data= (ArrayList<FragmentTitleBean.DataEntity>) fragmentTitleBean.getData();
-//                Log.d("GoodsFragment", fragmentTitleBean.getData().get(1).getCategory_id());
-//                GridLayoutManager gm = new GridLayoutManager(getActivity(), 1);
-//                gm.setOrientation(LinearLayoutManager.HORIZONTAL);
-//                recyclerView.setLayoutManager(gm);
-//                adapter = new GoodsRecycleViewAdapter(data, getActivity());
-//                recyclerView.setAdapter(adapter);
-//            }
-//
-//            @Override
-//            public void onFailure(Request request, IOException e) {
-//
-//            }
-//        });
-
-
+        // 指定位置显示
+        popupWindow.showAtLocation(v,LinearLayout.HORIZONTAL,0,0);
     }
 }

@@ -72,6 +72,7 @@
     <dimen name="item_browse_last_third_relayout_marginTop">55dp</dimen>
     <dimen name="item_detail_browse_last_content_about_return_iv">19dp</dimen>
     <dimen name="item_detail_browse_last_content_purchase_about_return_iv_marginTop">6dp</dimen>
+<<<<<<< HEAD
     <dimen name="item_detail_browse_last_content_purchase_consult_tract_order_tv_marginTop">6dp
     </dimen>
 
@@ -115,4 +116,16 @@
     <dimen name="item_detail_browse_last_content_purchase_about_return_iv_textSize">26px</dimen>
     <dimen name="item_detail_browse_last_content_about_return_title_tv_textSize">36px</dimen>
     <dimen name="item_detail_browse_last_content_tract_order_title_tv_textSize">36px</dimen>
+=======
+    <dimen name="item_detail_browse_last_content_purchase_consult_tract_order_tv_marginTop">6dp</dimen>
+    <dimen name="layout_width_zero">0dp</dimen>
+    <dimen name="fragment_menu_popupwindow_classification_tv_marginTop">148px</dimen>
+    <dimen name="fragment_menu_popupwindow_classification_tv_marginLeft">48px</dimen>
+    <dimen name="fragment_menu_popupwindow_classification_tv_textSize">28px</dimen>
+    <dimen name="fragment_menu_popupwindow_plaingglasses_tv_marginTop">78px</dimen>
+    <dimen name="fragment_menu_popupwindow_plaingglasses_tv_textSize">28px</dimen>
+    <dimen name="fragment_menu_popupwindow_sunglasses_tv_marginLeft">48px</dimen>
+    <dimen name="fragment_menu_popupwindow_sunglasses_tv_marginTop">78px</dimen>
+    <dimen name="fragment_menu_popupwindow_sunglasses_tv_textSize">28px</dimen>
+>>>>>>> feature/首页菜单
 </resources>

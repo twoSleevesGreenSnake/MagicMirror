@@ -95,8 +95,6 @@ public class NetHelper {
 
             @Override
             public void onResponse(com.squareup.okhttp.Response response) throws IOException {
-
-                Log.d("NetHelper", response.body().string());
                 T t = new Gson().fromJson(response.body().string(), cls);
                 listener.onSuccess(t);
             }
@@ -105,6 +103,7 @@ public class NetHelper {
 
     public interface NetListener<T> {
         void onSuccess(T t);
+
         void onFailure(Request request, IOException e);
     }
 
