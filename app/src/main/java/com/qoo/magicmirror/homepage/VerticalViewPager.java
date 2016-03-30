@@ -9,113 +9,22 @@ import android.view.View;
 
 /**
  * Created by dllo on 16/3/29.
+ *
+ * over_scroll_always滚动模式（默认），over_scroll_if_content_scrolls（允许在滚动只有查看内容大于容器），over_scroll_never，只有当视图是能够滚动，设置滚动模式的视图将有一个效果。
+ *
+ * 用于实现主页面纵向滑动的Viewpager的自定义类
  */
 public class VerticalViewPager extends ViewPager {
 
-    //
-//    private float xDistance,yDistance,xLast,yLast;
-//
-//    public VerticalViewPager(Context context) {
-//        super(context);
-//        init();
-//    }
-//
-//    public VerticalViewPager(Context context, AttributeSet attrs) {
-//        super(context, attrs);
-//        init();
-//    }
-//
-//    private void init() {
-//        setPageTransformer(true, new VerticalPageTransformer());
-//        setOverScrollMode(OVER_SCROLL_NEVER);
-//    }
-//
-//    private class VerticalPageTransformer implements ViewPager.PageTransformer{
-//
-//        @Override
-//        public void transformPage(View page, float position) {
-//            if (position < -1) {
-//                page.setAlpha(0);
-//            } else if (position <= 1) {
-//                page.setAlpha(1);
-//
-//                page.setTranslationX(page.getWidth() * -position);
-//
-//                float yPosition = position * page.getHeight();
-//                page.setTranslationY(yPosition);
-//
-//            } else {
-//                page.setAlpha(0);
-//            }
-//        }
-//    }
-//
-//    private MotionEvent swapXY(MotionEvent event) {
-//        float width = getWidth();
-//        float height = getHeight();
-//
-//        float newX = (event.getY() / height) * width;
-//        float newY = (event.getX() / width) * height;
-//
-//        event.setLocation(newX, newY);
-//
-//        return event;
-//    }
-//
-//    @Override
-//    public boolean onTouchEvent(MotionEvent ev) {
-////        switch (ev.getAction()){
-////            case MotionEvent.ACTION_DOWN: // 按下
-////                xDistance = yDistance = 0;
-////                xLast = ev.getX();
-////                yLast = ev.getY();
-////                break;
-////            case MotionEvent.ACTION_MOVE: // 松开
-////                final float moveX = ev.getX();
-////                final float moveY = ev.getY();
-////                xDistance = Math.abs(moveX - xLast);
-////                yDistance = Math.abs(moveY - yLast);
-////                Log.d("VerticalViewPager", "yDistance:" + yDistance);
-////                if (xDistance >yDistance) {
-////                    Log.d("VerticaPager44444", "yDistance:" + yDistance);
-////                    return super.onTouchEvent(swapXY(ev));
-////                }
-////        }
-////        Log.d("VerticaPager666666666", "yDistance:" + yDistance);
-//        return super.onTouchEvent(swapXY(ev));
-//
-//
-//    }
-//
-//    @Override
-//    public boolean onInterceptTouchEvent(MotionEvent ev) {
-//        switch (ev.getAction()){
-//            case MotionEvent.ACTION_DOWN: // 按下
-//                xDistance = yDistance = 0;
-//                xLast = ev.getX();
-//                yLast = ev.getY();
-//                break;
-//            case MotionEvent.ACTION_MOVE: // 松开
-//                final float moveX = ev.getX();
-//                final float moveY = ev.getY();
-//                xDistance = Math.abs(moveX - xLast);
-//                yDistance = Math.abs(moveY - yLast);
-////                Log.d("VerticalViewPager", "yDistance:" + yDistance);
-//                if (xDistance < yDistance) {
-//                    return true;
-//                }
-//        }
-////                        Log.d("VerticalViewPager", "yDistance:" + yDistance);
-//
-//        return false;
-//
-//    }
-//    public boolean onInterceptHoverEvent(MotionEvent event) {
-//        boolean intercepted = super.onInterceptHoverEvent(swapXY(event));
-//        swapXY(event);
-//        return intercepted;
-//    }
-    private float xDistance, yDistance, xLast, yLast;
+    // X,Y调换后新的X,Y的坐标
+    private float newX;
+    private float newY;
+    // 鼠标按下后的X,Y坐标
+    private float startX;
+    private float startY;
+    // 鼠标移动
+    private float moveX;
+    private float moveY;
 
     public VerticalViewPager(Context context) {
         super(context);
@@ -138,113 +47,62 @@ public class VerticalViewPager extends ViewPager {
         public void transformPage(View page, float position) {
             if (position < -1) {
                 page.setAlpha(0);
-            } else if (position <= 1) {
+            } else if (position <= 1) {// 已经存在的视图，和即将出现的视图
                 page.setAlpha(1);
+                // 显示的页面相对于整个页面的大小
                 page.setTranslationX(page.getWidth() * -position);
                 float yPosition = position * page.getHeight();
                 page.setTranslationY(yPosition);
-
             } else {
                 page.setAlpha(0);
             }
         }
     }
 
+    /**
+     * 改变点击的X,Y坐标
+     * @param event 点击滑动事件
+     * @return 改变后的X,Y坐标
+     */
     private MotionEvent swapXY(MotionEvent event) {
         float width = getWidth();
         float height = getHeight();
-        float newX = (event.getY() / height) * width;
-        float newY = (event.getX() / width) * height;
+        newX = (event.getY() / height) * width;
+        newY = (event.getX() / width) * height;
         event.setLocation(newX, newY);
         return event;
     }
 
     @Override
-    public boolean onInterceptHoverEvent(MotionEvent event) {
-        boolean intercepted = super.onInterceptHoverEvent(swapXY(event));
+    public boolean onInterceptTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                startX = event.getX();
+                startY = event.getY();
+                Log.d("VerticalViewPager", "startX:" + startX);
+                Log.d("VerticalViewPager", "startY:" + startY);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                moveX = event.getX();
+                moveY = event.getY();
+                Log.d("VerticalViewPager", "moveX:" + moveX);
+                Log.d("VerticalViewPager", "moveY:" + moveY);
+                break;
+        }
+        boolean intercepted = super.onInterceptTouchEvent(swapXY(event));
         swapXY(event);
+        float distanceY = Math.abs(moveY - startY);
+        float distanceX = Math.abs(moveX - startX);
+        if (distanceY > distanceX) {// 小于不拦截子布局，大于拦截
+            Log.d("VerticalViewPager", "distanceY:" + distanceY);
+            Log.d("VerticalViewPager", "distanceX:" + distanceX);
+            return true;
+        }
         return intercepted;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return super.onTouchEvent(swapXY(event));
-    }
-
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        boolean flag = false;
-        switch (ev.getAction()) {
-            case MotionEvent.ACTION_DOWN: // 按下
-                xDistance = yDistance = 0;
-                xLast = ev.getX();
-                yLast = ev.getY();
-                break;
-            case MotionEvent.ACTION_MOVE: // 松开
-                final float moveX = ev.getX();
-                final float moveY = ev.getY();
-                xDistance = Math.abs(moveX - xLast);
-                yDistance = Math.abs(moveY - yLast);
-                Log.d("VerticalViewPager", "yDistance:" + yDistance);
-                if (xDistance < yDistance) {
-                    flag =true;
-                    Log.d("VerticalViewPager", "flag:" + flag);
-                    return flag;
-                }
-        }
-        Log.d("VerticalViewPagerflag", "flag:" + flag);
-      return flag;
-    }
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        switch (ev.getAction()) {
-            case MotionEvent.ACTION_DOWN: // 按下
-                xDistance = yDistance = 0;
-                xLast = ev.getX();
-                yLast = ev.getY();
-                break;
-            case MotionEvent.ACTION_MOVE: // 松开
-                final float moveXm = ev.getX();
-                final float moveYm = ev.getY();
-                xDistance = Math.abs(moveXm - xLast);
-                yDistance = Math.abs(moveYm - yLast);
-                Log.d("VerticalViewPager", "yDistance:" + yDistance);
-                if (xDistance < yDistance) {
-                    if (moveYm - yLast<-300){
-                        View v = (View) getParent();
-                         if ( getChildAt(getCurrentItem())!=null) {
-                             getChildAt(getCurrentItem()).scrollTo((int) v.getX(), (int) moveYm);
-
-                         }
-                        break;
-                    }
-                    if (moveYm - yLast>300){
-                        View v = (View) getParent();
-                        if ( getChildAt(getCurrentItem())!=null) {
-                            getChildAt(getCurrentItem()).scrollTo((int) v.getX(), (int) moveYm);
-                        }
-                        break;
-                    }
-                }
-            case MotionEvent.ACTION_UP: // 松开
-                final float moveX = ev.getX();
-                final float moveY = ev.getY();
-                xDistance = Math.abs(moveX - xLast);
-                yDistance = Math.abs(moveY - yLast);
-                Log.d("VerticalViewPager", "yDistance:" + yDistance);
-                if (xDistance < yDistance) {
-                    if (moveY - yLast<-300){
-
-                    setCurrentItem(getCurrentItem()+1);
-
-                    return true;}
-                    if (moveY - yLast>300){
-                        setCurrentItem(getCurrentItem()-1);
-                    }
-                }
-        }
-        return super.dispatchTouchEvent(ev);
-
     }
 }

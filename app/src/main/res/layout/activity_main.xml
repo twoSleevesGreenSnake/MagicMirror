@@ -20,24 +20,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="24dp"
+            android:layout_marginBottom="@dimen/activity_main_iv_marginBottom"
+            android:layout_marginLeft="@dimen/activity_main_iv_marginLeft"
             android:src="@mipmap/mirror" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginRight="24dp">
+            android:layout_marginBottom="@dimen/activity_main_login_rl_marginBottom"
+            android:layout_marginRight="@dimen/activity_main_login_rl_marginRight">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:text="登陆"
-                android:textColor="#fff"
-                android:textSize="24px" />
+                android:text="@string/activity_main_login_tv"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/activity_main_login_tv_textSize" />
         </RelativeLayout>
     </FrameLayout>
 </RelativeLayout>

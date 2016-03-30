@@ -13,17 +13,17 @@
             android:id="@+id/fragment_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:text="我的购物车"
-            android:textColor="#fff"
-            android:textSize="30px" />
+            android:layout_marginLeft="@dimen/fragment_shoppingcart_title_tv_marginLeft"
+            android:layout_marginTop="@dimen/fragment_shoppingcart_title_tv_marginTop"
+            android:text="@string/fragment_shoppingcart_title_tv"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/fragment_shoppingcart_title_tv_textSize" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginLeft="@dimen/fragment_shoppingcart_title_iv_marginLeft"
+            android:layout_marginTop="@dimen/fragment_shoppingcart_title_iv_marginTop"
             android:layout_toRightOf="@+id/fragment_title_tv"
             android:src="@mipmap/pull_down_arrow" />
 
@@ -32,37 +32,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/fragment_title_tv"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="7dp"
+            android:layout_marginLeft="@dimen/fragment_shoppingcart_line_of_title_marginLeft"
+            android:layout_marginTop="@dimen/fragment_shoppingcart_line_of_title_marginTop"
             android:src="@mipmap/line_of_title" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/line_of_title"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="13dp"
-            android:text="显示排序为 最新推荐"
-            android:textColor="#fff"
-            android:textSize="24px" />
+            android:layout_marginLeft="@dimen/fragment_shoppingcart_show_tv_marginLeft"
+            android:layout_marginTop="@dimen/fragment_shoppingcart_show_tv_marginTop"
+            android:text="@string/fragment_shoppingcart_show_tv"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/fragment_shoppingcart_show_tv_textSize" />
 
         <ImageView
             android:id="@+id/fragment_shoppingcar_img_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/fragment_shoppingcart_img_iv_marginLeft"
+            android:layout_marginTop="@dimen/fragment_shoppingcart_img_iv_marginTop"
             android:layout_toRightOf="@+id/line_of_title"
-            android:layout_marginLeft="18dp"
-            android:layout_marginTop="175dp"
             android:src="@mipmap/empty_state" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_below="@+id/fragment_shoppingcar_img_iv"
-            android:layout_marginTop="15dp"
-            android:text="您的购物车裹没有商品"
-            android:textColor="#fff"
-            android:textSize="30px" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/fragment_shoppingcart_nothings_tv_marginTop"
+            android:text="@string/fragment_shoppingcart_nothings_tv"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/fragment_shoppingcart_nothings_tv_textSize" />
     </RelativeLayout>
 </LinearLayout>

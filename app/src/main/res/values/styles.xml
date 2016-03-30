@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ItemFragmentGoodsNameTv">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ItemFragmentGoodsPriceTv">
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

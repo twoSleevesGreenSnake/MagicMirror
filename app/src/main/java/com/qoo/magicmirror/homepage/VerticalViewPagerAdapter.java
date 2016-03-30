@@ -11,6 +11,8 @@ import java.util.List;
 
 /**
  * Created by dllo on 16/3/29.
+ *
+ * 主页纵向滑动的ViewPager的Fragment的适配器
  */
 public class VerticalViewPagerAdapter extends FragmentPagerAdapter {
 
@@ -22,7 +24,6 @@ public class VerticalViewPagerAdapter extends FragmentPagerAdapter {
         this.fragments = fragments;
         this.context = context;
     }
-
 
     @Override
     public Fragment getItem(int position) {

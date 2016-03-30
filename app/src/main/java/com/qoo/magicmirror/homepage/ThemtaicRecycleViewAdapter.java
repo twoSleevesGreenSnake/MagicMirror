@@ -12,41 +12,39 @@ import com.qoo.magicmirror.R;
 import java.util.ArrayList;
 
 /**
- * Created by dllo on 16/3/29.
- *
- * 商品展示的RecycleView的Adapter
+ * Created by dllo on 16/3/30.
  */
-public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleViewAdapter.MyViewHolder> {
+public class ThemtaicRecycleViewAdapter extends RecyclerView.Adapter<ThemtaicRecycleViewAdapter.MyViewHolder> {
 
-    private ArrayList<TestData> data;
+    private ArrayList<TestData> datas;
     private Context context;
 
-    public GoodsRecycleViewAdapter(ArrayList<TestData> data, Context context) {
-        this.data = data;
+    public ThemtaicRecycleViewAdapter(ArrayList<TestData> datas, Context context) {
+        this.datas = datas;
         this.context = context;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.item_fragment_goods, parent, false));
+        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_fragment_themtaic, parent , false));
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.textView.setText(data.get(position).getTv());
+        holder.textView.setText(datas.get(position).getTv());
     }
+
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return datas != null && datas.size() > 0 ? datas.size() : 0;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView textView;
-
+        TextView textView;
         public MyViewHolder(View itemView) {
             super(itemView);
-            textView = (TextView) itemView.findViewById(R.id.textview);
+            textView = (TextView) itemView.findViewById(R.id.tv);
         }
     }
 }

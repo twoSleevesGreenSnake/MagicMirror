@@ -17,25 +17,25 @@ import java.util.ArrayList;
 /**
  * Created by dllo on 16/3/29.
  *
- * 商品展示的Fragment
+ * 专题分享的Fragment
  */
-public class GoodsFragment extends Fragment {
+public class ThematicFragment extends Fragment {
 
-    private ArrayList<TestData> data;
     private RecyclerView recyclerView;
-    private GoodsRecycleViewAdapter adapter;
+    private ThemtaicRecycleViewAdapter adapter;
+    private ArrayList<TestData> datas;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_goods, container, false);
+        return inflater.inflate(R.layout.fragment_thematicsharing, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        data = new ArrayList<>();
-        recyclerView = (RecyclerView) view.findViewById(R.id.fragment_goods_rv);
+        datas = new ArrayList<>();
+        recyclerView = (RecyclerView) view.findViewById(R.id.fragment_themtaic_rv);
     }
 
     @Override
@@ -43,13 +43,12 @@ public class GoodsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         for (int i = 0; i < 50; i++) {
-            data.add(new TestData("test" + i));
+            datas.add(new TestData("test" + i));
         }
         GridLayoutManager gm = new GridLayoutManager(getActivity(), 1);
         gm.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(gm);
-        adapter = new GoodsRecycleViewAdapter(data, getActivity());
+        adapter = new ThemtaicRecycleViewAdapter(datas, getActivity());
         recyclerView.setAdapter(adapter);
-
     }
 }
