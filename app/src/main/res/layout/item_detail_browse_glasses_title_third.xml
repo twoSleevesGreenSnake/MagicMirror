@@ -6,17 +6,17 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/item_detail_brose_glasses_rv_title_tv"
-    android:layout_marginLeft="54px"
-    android:text="巴拉巴拉"
-    android:layout_marginTop="102px"
-    android:textColor="#333"/>
+    android:layout_marginLeft="@dimen/item_detail_brose_glasses_rv_title_tv_marginLeft"
+    android:text="@string/item_detail_brose_glasses_rv_title_tv_content"
+    android:layout_marginTop="@dimen/item_detail_brose_glasses_rv_title_tv_marginTop"
+    android:textColor="@color/colorLight_Black"/>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/line_of_create_account"
         android:layout_below="@id/item_detail_brose_glasses_rv_title_tv"
-        android:layout_marginTop="24px"
-        android:layout_marginLeft="54px"
-        android:layout_marginRight="54px"/>
+        android:layout_marginTop="@dimen/item_detail_brose_glasses_rv_line_marginTop"
+        android:layout_marginLeft="@dimen/item_detail_brose_glasses_rv_line_marginLeft"
+        android:layout_marginRight="@dimen/item_detail_brose_glasses_rv_line_marginRight"/>
 
 </com.zhy.autolayout.AutoRelativeLayout>

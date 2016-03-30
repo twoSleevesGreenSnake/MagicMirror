@@ -74,6 +74,7 @@
     <dimen name="item_detail_browse_last_content_purchase_about_return_iv_marginTop">6dp</dimen>
     <dimen name="item_detail_browse_last_content_purchase_consult_tract_order_tv_marginTop">6dp
     </dimen>
+
     <dimen name="item_detail_brose_glasses_rv_content_src_content_layout_width">590px</dimen>
     <dimen name="item_detail_brose_glasses_rv_content_src_content_layout_marginTop">550px</dimen>
     <dimen name="item_detail_brose_glasses_rv_content_src_content_layout_paddingLeft">30px</dimen>
@@ -88,4 +89,30 @@
     <dimen name="item_detail_brose_glasses_rv_content_bottom_title_view_marginTop">26px</dimen>
     <dimen name="item_detail_brose_glasses_rv_content_src_content_tv_marginBottom">44px</dimen>
     <dimen name="item_detail_brose_glasses_rv_content_src_content_tv_marginTop">28px</dimen>
+
+    <dimen name="item_detail_browse_glasses_rv_head_first_e_title_tv_marginTop">38px</dimen>
+    <dimen name="item_detail_browse_glasses_rv_head_first_e_title_tv_textSize">70px</dimen>
+    <dimen name="item_detail_browse_glasses_rv_head_first_name_marginTop">54px</dimen>
+    <dimen name="item_detail_browse_glasses_rv_head_first_name_height">76px</dimen>
+    <dimen name="item_detail_browse_glasses_rv_head_first_top_vew_width">510px</dimen>
+    <dimen name="item_detail_browse_glasses_rv_head_first_top_vew_height">4px</dimen>
+    <dimen name="item_detail_brose_glasses_rv_head_first_etitle_text_size">42px</dimen>
+    <dimen name="item_detail_browse_glasses_rv_head_first_bottom_vew_width">510px</dimen>
+    <dimen name="item_detail_browse_glasses_rv_head_first_bottom_vew_height">4px</dimen>
+    <dimen name="item_detail_brose_glasses_rv_head_first_content_tv_width">510px</dimen>
+    <dimen name="item_detail_brose_glasses_rv_head_first_content_tv_marginTop">50px</dimen>
+    <dimen name="item_detail_brose_glasses_rv_head_first_content_tv_textSize">24px</dimen>
+    <dimen name="item_detail_brose_glasses_rv_title_tv_marginLeft">54px</dimen>
+    <dimen name="item_detail_brose_glasses_rv_title_tv_marginTop">102px</dimen>
+    <dimen name="item_detail_brose_glasses_rv_line_marginTop">24px</dimen>
+    <dimen name="item_detail_brose_glasses_rv_line_marginLeft">54px</dimen>
+    <dimen name="item_detail_brose_glasses_rv_line_marginRight">54px</dimen>
+    <dimen name="item_detail_browse_last_content_purchase_consult_title_tv_textSize">36px</dimen>
+    <dimen name="item_detail_browse_last_content_purchase_consult_content_tv_textSize">26px</dimen>
+    <dimen name="item_detail_browse_last_content_tract_order_iv_marginTop">38px</dimen>
+    <dimen name="item_detail_browse_last_content_purchase_consult_tract_order_tv_textSize">26px
+    </dimen>
+    <dimen name="item_detail_browse_last_content_purchase_about_return_iv_textSize">26px</dimen>
+    <dimen name="item_detail_browse_last_content_about_return_title_tv_textSize">36px</dimen>
+    <dimen name="item_detail_browse_last_content_tract_order_title_tv_textSize">36px</dimen>
 </resources>
