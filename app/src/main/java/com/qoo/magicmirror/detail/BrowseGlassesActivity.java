@@ -33,7 +33,6 @@ public class BrowseGlassesActivity extends BaseActivity {
     protected void initView() {
         recyclerView = bindView(R.id.activity_detail_browse_glasses_rv);
         NetHelper helper = new NetHelper(this);
-        helper.test();
 
     }
 

@@ -27,8 +27,7 @@ dependencies {
     compile 'com.android.support:support-v4:23.2.0'
     compile 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
     compile 'com.google.code.gson:gson:2.2.4'
-<<<<<<< HEAD
-=======
+
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.squareup.okio:okio:1.5.0'
     compile files('libs/MobCommons-2016.0301.1053.jar')
@@ -41,5 +40,4 @@ dependencies {
     compile files('libs/ShareSDK-Wechat-Core-2.7.0.jar')
     compile files('libs/ShareSDK-Wechat-Moments-2.7.0.jar')
 
->>>>>>> 2b473fecc23a773cd668ac7913c5c769799ee979
 }
