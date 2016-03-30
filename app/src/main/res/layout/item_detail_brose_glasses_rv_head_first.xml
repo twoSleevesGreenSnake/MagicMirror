@@ -13,22 +13,23 @@
         android:background="@mipmap/display_frame">
 
         <TextView
+            android:id="@+id/item_detail_browse_glasses_rv_head_first_e_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textColor="#fff"
-            android:layout_marginTop="38px"
-            android:textSize="70px"
-            android:text="english"
+            android:layout_marginTop="@dimen/item_detail_browse_glasses_rv_head_first_e_title_tv_marginTop"
+            android:textSize="@dimen/item_detail_browse_glasses_rv_head_first_e_title_tv_textSize"
+            android:text="@string/item_detail_browse_glasses_rv_head_first_e_title_tv_content"
             android:layout_gravity="center_horizontal"/>
       <RelativeLayout
           android:layout_width="wrap_content"
-          android:layout_marginTop="54px"
-          android:layout_height="76px"
+          android:layout_marginTop="@dimen/item_detail_browse_glasses_rv_head_first_name_marginTop"
+          android:layout_height="@dimen/item_detail_browse_glasses_rv_head_first_name_height"
           android:layout_gravity="center_horizontal">
           <View
-              android:layout_width="510px"
-              android:layout_height="4px"
+              android:layout_width="@dimen/item_detail_browse_glasses_rv_head_first_top_vew_width"
+              android:layout_height="@dimen/item_detail_browse_glasses_rv_head_first_top_vew_height"
               android:id="@+id/item_detail_brose_glasses_rv_head_first_top_view"
               android:layout_centerHorizontal="true"
               android:background="#fff"/>
@@ -38,13 +39,13 @@
             android:layout_height="wrap_content"
             android:id="@+id/item_detail_brose_glasses_rv_head_first_etitle"
             android:layout_above="@id/item_detail_brose_glasses_rv_content_top_title_view"
-            android:textSize="42px"
+            android:textSize="@dimen/item_detail_brose_glasses_rv_head_first_etitle_text_size"
             android:textColor="#fff"
-            android:text="太阳镜"
+            android:text="@string/item_detail_brose_glasses_rv_head_first_etitle_content"
             android:layout_centerInParent="true"/>
           <View
-              android:layout_width="510px"
-              android:layout_height="4px"
+              android:layout_width="@dimen/item_detail_browse_glasses_rv_head_first_bottom_vew_width"
+              android:layout_height="@dimen/item_detail_browse_glasses_rv_head_first_bottom_vew_height"
               android:background="#fff"
               android:layout_alignParentBottom="true"
               android:layout_centerInParent="true"/>
@@ -52,10 +53,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:width="510px"
-            android:layout_marginTop="50px"
-            android:textSize="24px"
-            android:text="巴拉巴拉巴巴拉巴拉巴"
+            android:width="@dimen/item_detail_brose_glasses_rv_head_first_content_tv_width"
+            android:layout_marginTop="@dimen/item_detail_brose_glasses_rv_head_first_content_tv_marginTop"
+            android:textSize="@dimen/item_detail_brose_glasses_rv_head_first_content_tv_textSize"
+            android:text="@string/item_detail_brose_glasses_rv_head_first_content_tv_content"
             android:layout_gravity="center_horizontal"
             android:id="@+id/item_detail_brose_glasses_rv_head_first_content_tv"
             android:textColor="#fff"/>

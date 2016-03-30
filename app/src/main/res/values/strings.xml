@@ -14,4 +14,8 @@
     <string name="fragment_shoppingcart_nothings_tv">您的購物車裹没有商品</string>
     <string name="fragment_themtaic_title_tv">專题分享</string>
     <string name="fragment_themtaic_show_tv">顯示排序爲 最新推薦</string>
+    <string name="item_detail_browse_glasses_rv_head_first_e_title_tv_content">english</string>
+    <string name="item_detail_brose_glasses_rv_head_first_etitle_content">太阳镜</string>
+    <string name="item_detail_brose_glasses_rv_head_first_content_tv_content">巴拉巴拉巴巴拉巴拉巴</string>
+    <string name="item_detail_brose_glasses_rv_title_tv_content">巴拉巴拉</string>
 </resources>

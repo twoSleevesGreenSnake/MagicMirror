@@ -15,8 +15,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/item_browse_last_first_title_tv"
-            android:textColor="#333"
-            android:textSize="36px" />
+            android:textColor="@color/colorLight_Black"
+            android:textSize="@dimen/item_detail_browse_last_content_purchase_consult_title_tv_textSize" />
 
         <ImageView
             android:id="@+id/item_detail_browse_last_content_purchase_consult_iv"
@@ -35,8 +35,8 @@
             android:layout_marginTop="@dimen/item_detail_browse_last_content_purchase_consult_content_tv_marginTop"
             android:maxEms="15"
             android:layout_centerInParent="true"
-            android:textColor="#333"
-            android:textSize="26px"/>
+            android:textColor="@color/colorLight_Black"
+            android:textSize="@dimen/item_detail_browse_last_content_purchase_consult_content_tv_textSize"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -46,8 +46,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/item_detail_browse_last_content_tract_order_title_tv"
-            android:textSize="36px"
-            android:textColor="#333"
+            android:textSize="@dimen/item_detail_browse_last_content_tract_order_title_tv_textSize"
+            android:textColor="@color/colorLight_Black"
             android:gravity="center"
             android:id="@+id/item_detail_browse_last_content_tract_order_title_tv"/>
         <ImageView
@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/item_detail_browse_last_content_tract_order_title_tv"
-            android:layout_marginTop="38px"
+            android:layout_marginTop="@dimen/item_detail_browse_last_content_tract_order_iv_marginTop"
             android:src="@mipmap/black_horizontal_stripe" />
 
         <TextView
@@ -67,8 +67,8 @@
             android:layout_marginTop="@dimen/item_detail_browse_last_content_purchase_consult_tract_order_tv_marginTop"
             android:maxEms="15"
             android:layout_centerInParent="true"
-            android:textColor="#333"
-            android:textSize="26px"/>
+            android:textColor="@color/colorLight_Black"
+            android:textSize="@dimen/item_detail_browse_last_content_purchase_consult_tract_order_tv_textSize"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -78,8 +78,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/item_detail_browse_last_content_about_return_title_tv"
-            android:textSize="36px"
-            android:textColor="#333"
+            android:textSize="@dimen/item_detail_browse_last_content_about_return_title_tv_textSize"
+            android:textColor="@color/colorLight_Black"
             android:gravity="center"
             android:id="@+id/item_detail_browse_last_content_about_return_title_tv"/>
         <ImageView
@@ -99,7 +99,7 @@
             android:layout_marginTop="@dimen/item_detail_browse_last_content_purchase_about_return_iv_marginTop"
             android:maxEms="15"
             android:layout_centerInParent="true"
-            android:textColor="#333"
-            android:textSize="26px"/>
+            android:textColor="@color/colorLight_Black"
+            android:textSize="@dimen/item_detail_browse_last_content_purchase_about_return_iv_textSize"/>
     </RelativeLayout>
 </com.zhy.autolayout.AutoLinearLayout>
