@@ -77,22 +77,6 @@ public class GoodsFragment extends Fragment {
 
             }
         });
-//            @Override
-//            public void onSuccess(FragmentTitleBean fragmentTitleBean) {
-//                data= (ArrayList<FragmentTitleBean.DataEntity>) fragmentTitleBean.getData();
-//                Log.d("GoodsFragment", fragmentTitleBean.getData().get(1).getCategory_id());
-//                GridLayoutManager gm = new GridLayoutManager(getActivity(), 1);
-//                gm.setOrientation(LinearLayoutManager.HORIZONTAL);
-//                recyclerView.setLayoutManager(gm);
-//                adapter = new GoodsRecycleViewAdapter(data, getActivity());
-//                recyclerView.setAdapter(adapter);
-//            }
-//
-//            @Override
-//            public void onFailure(Request request, IOException e) {
-//
-//            }
-//        });
 
 
     }
