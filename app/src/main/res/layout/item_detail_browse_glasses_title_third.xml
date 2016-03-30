@@ -13,9 +13,10 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/black_horizontal_stripe"
+        android:src="@mipmap/line_of_create_account"
         android:layout_below="@id/item_detail_brose_glasses_rv_title_tv"
         android:layout_marginTop="24px"
-        android:layout_marginLeft="54px"/>
+        android:layout_marginLeft="54px"
+        android:layout_marginRight="54px"/>
 
 </RelativeLayout>

@@ -11,6 +11,8 @@ import android.view.WindowManager;
  * Created by dllo on 16/3/29.
  */
 public abstract class BaseActivity extends AppCompatActivity {
+    protected static String token = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -23,6 +25,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     public <T extends View> T bindView(int ResId) {
         T t = (T) findViewById(ResId);
         return t;
+    }
+
+    public static void setToken(String token) {
+        BaseActivity.token = token;
     }
 
     protected abstract int setLayout();
