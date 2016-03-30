@@ -5,6 +5,8 @@ import com.qoo.magicmirror.base.BaseActivity;
 
 /**
  * Created by dllo on 16/3/30.
+ *
+ * App 首页菜单
  */
 public class MenuActivity extends BaseActivity {
 
