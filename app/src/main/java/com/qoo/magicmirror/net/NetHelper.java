@@ -24,10 +24,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-<<<<<<< HEAD
 import java.io.OutputStream;
-=======
->>>>>>> feature/首页菜单
 import java.util.ArrayList;
 
 /**
@@ -98,13 +95,9 @@ public class NetHelper {
 
             @Override
             public void onResponse(com.squareup.okhttp.Response response) throws IOException {
-<<<<<<< HEAD
 
-                T t = new Gson().fromJson(response.body().string(),cls);
-=======
                 Log.d("NetHelper", response.body().string());
                 T t = new Gson().fromJson(response.body().string(), cls);
->>>>>>> feature/首页菜单
                 listener.onSuccess(t);
             }
         });
