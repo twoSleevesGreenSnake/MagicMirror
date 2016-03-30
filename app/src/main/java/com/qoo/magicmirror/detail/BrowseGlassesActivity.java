@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 
 import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.base.BaseActivity;
+import com.qoo.magicmirror.net.NetHelper;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,8 @@ public class BrowseGlassesActivity extends BaseActivity {
     @Override
     protected void initView() {
         recyclerView = bindView(R.id.activity_detail_browse_glasses_rv);
+        NetHelper helper = new NetHelper(this);
+        helper.test();
 
     }
 
