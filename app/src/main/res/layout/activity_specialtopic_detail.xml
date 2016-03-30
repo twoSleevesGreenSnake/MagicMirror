@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <com.giraffe.detail.VerticalViewpager
+                <com.qoo.magicmirror.detail.VerticalViewpager
                     android:id="@+id/activity_specialtopic_detail_viewpager"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
