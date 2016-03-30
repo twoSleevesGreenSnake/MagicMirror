@@ -23,7 +23,7 @@ public class ThematicFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private ThemtaicRecycleViewAdapter adapter;
-    private ArrayList<TestData> datas;
+
 
     @Nullable
     @Override
@@ -34,7 +34,6 @@ public class ThematicFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        datas = new ArrayList<>();
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_themtaic_rv);
     }
 
@@ -42,13 +41,11 @@ public class ThematicFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        for (int i = 0; i < 50; i++) {
-            datas.add(new TestData("test" + i));
-        }
+
         GridLayoutManager gm = new GridLayoutManager(getActivity(), 1);
         gm.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(gm);
-        adapter = new ThemtaicRecycleViewAdapter(datas, getActivity());
+//        adapter = new ThemtaicRecycleViewAdapter(datas, getActivity());
         recyclerView.setAdapter(adapter);
     }
 }

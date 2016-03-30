@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">MagicMirror</string>
-    <string name="activity_main_login_tv">登陆</string>
-    <string name="fragment_goods_title_tv">浏览所有类别</string>
-    <string name="fragment_goods_show_tv">显示排序为 最新推荐</string>
-    <string name="fragment_shoppingcart_title_tv">我的购物车</string>
-    <string name="fragment_shoppingcart_show_tv">显示排序为 最新推荐</string>
-    <string name="fragment_shoppingcart_nothings_tv">您的购物车裹没有商品</string>
-    <string name="fragment_themtaic_title_tv">专题分享</string>
-    <string name="fragment_themtaic_show_tv">显示排序为 最新推荐</string>
+    <string name="activity_main_login_tv">登録</string>
+    <string name="fragment_goods_title_tv">瀏覽所有分類</string>
+    <string name="fragment_goods_show_tv">顯示排序爲 最新推薦</string>
+    <string name="fragment_shoppingcart_title_tv">我的購物車</string>
+    <string name="fragment_shoppingcart_show_tv">顯示排序爲 最新推薦</string>
+    <string name="fragment_shoppingcart_nothings_tv">您的購物車裹没有商品</string>
+    <string name="fragment_themtaic_title_tv">專题分享</string>
+    <string name="fragment_themtaic_show_tv">顯示排序爲 最新推薦</string>
 </resources>

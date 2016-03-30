@@ -18,13 +18,13 @@ import java.util.ArrayList;
  */
 public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleViewAdapter.MyViewHolder> {
 
-    private ArrayList<TestData> data;
+//    private ArrayList<FragmentTitleBean.DataEntity> data;
     private Context context;
 
-    public GoodsRecycleViewAdapter(ArrayList<TestData> data, Context context) {
-        this.data = data;
-        this.context = context;
-    }
+//    public GoodsRecycleViewAdapter(ArrayList<FragmentTitleBean.DataEntity> data, Context context) {
+//        this.data = data;
+//        this.context = context;
+//    }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -33,12 +33,12 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.textView.setText(data.get(position).getTv());
+//        holder.textView.setText(data.get(position).getCategory_name());
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return 0;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {

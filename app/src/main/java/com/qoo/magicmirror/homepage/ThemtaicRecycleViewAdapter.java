@@ -16,11 +16,10 @@ import java.util.ArrayList;
  */
 public class ThemtaicRecycleViewAdapter extends RecyclerView.Adapter<ThemtaicRecycleViewAdapter.MyViewHolder> {
 
-    private ArrayList<TestData> datas;
     private Context context;
 
-    public ThemtaicRecycleViewAdapter(ArrayList<TestData> datas, Context context) {
-        this.datas = datas;
+    public ThemtaicRecycleViewAdapter(Context context) {
+
         this.context = context;
     }
 
@@ -31,13 +30,13 @@ public class ThemtaicRecycleViewAdapter extends RecyclerView.Adapter<ThemtaicRec
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.textView.setText(datas.get(position).getTv());
+//        holder.textView.setText(datas.get(position).getTv());
     }
 
 
     @Override
     public int getItemCount() {
-        return datas != null && datas.size() > 0 ? datas.size() : 0;
+        return 0;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
