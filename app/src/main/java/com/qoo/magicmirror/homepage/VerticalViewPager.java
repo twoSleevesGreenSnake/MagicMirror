@@ -9,9 +9,9 @@ import android.view.View;
 
 /**
  * Created by dllo on 16/3/29.
- *
+ * <p/>
  * over_scroll_always滚动模式（默认），over_scroll_if_content_scrolls（允许在滚动只有查看内容大于容器），over_scroll_never，只有当视图是能够滚动，设置滚动模式的视图将有一个效果。
- *
+ * <p/>
  * 用于实现主页面纵向滑动的Viewpager的自定义类
  */
 public class VerticalViewPager extends ViewPager {
@@ -61,8 +61,9 @@ public class VerticalViewPager extends ViewPager {
 
     /**
      * 改变点击的X,Y坐标
+     *
      * @param event 点击滑动事件
-     * @return 改变后的X,Y坐标
+     * @return 改变后的X, Y坐标
      */
     private MotionEvent swapXY(MotionEvent event) {
         float width = getWidth();

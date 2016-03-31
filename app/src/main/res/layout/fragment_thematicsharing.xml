@@ -15,7 +15,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/fragment_themtaic_title_tv_marginLeft"
             android:layout_marginTop="@dimen/fragment_themtaic_title_tv_marginTop"
-            android:text="@string/fragment_themtaic_title_tv"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/fragment_themtaic_title_tv_textSize" />
 

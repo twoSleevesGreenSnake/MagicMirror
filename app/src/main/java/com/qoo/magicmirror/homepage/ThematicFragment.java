@@ -6,9 +6,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.qoo.magicmirror.R;
 
@@ -23,6 +25,8 @@ public class ThematicFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private ThemtaicRecycleViewAdapter adapter;
+    private ArrayList<String> titles;
+    private TextView titleTv;
 
 
     @Nullable
@@ -35,12 +39,16 @@ public class ThematicFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_themtaic_rv);
+        titleTv = (TextView) view.findViewById(R.id.fragment_themtaic_title_tv);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        Bundle bundle = getArguments();
+        titles = bundle.getStringArrayList("title");
+        Log.d("ThematicFragment", "titles:" + titles);
+        titleTv.setText(titles.get(4));
 
         GridLayoutManager gm = new GridLayoutManager(getActivity(), 1);
         gm.setOrientation(LinearLayoutManager.HORIZONTAL);
