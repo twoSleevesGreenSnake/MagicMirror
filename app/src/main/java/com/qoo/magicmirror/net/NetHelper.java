@@ -8,10 +8,12 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.util.LruCache;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.google.gson.Gson;
+import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.constants.NetConstants;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.FormEncodingBuilder;
@@ -129,6 +131,12 @@ public class NetHelper<T> {
         void onSuccess(T t);
 
         void onFailure();
+    }
+
+    public void setImage(ImageView imageView, String url) {
+        ImageLoader.ImageListener listener = ImageLoader.getImageListener(imageView, R.mipmap.ic_launcher, R.mipmap.ic_launcher);
+        loader.get(url, listener);
+
     }
 
     // 内存缓存
