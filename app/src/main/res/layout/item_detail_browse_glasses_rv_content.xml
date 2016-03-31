@@ -1,26 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/item_detail_brose_glasses_rv_content_layout"
     android:layout_width="match_parent"
-    android:layout_height="400dp">
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    >
 
     <ImageView
         android:id="@+id/item_detail_brose_glasses_rv_content_back_img"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:src="@mipmap/ic_launcher" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:src="@mipmap/ic_launcher"
+        android:background="#123456"
+        />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/item_detail_brose_glasses_rv_content_src_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_alignParentBottom="true"
+        >
 
         <LinearLayout
-            android:id="@+id/item_detail_brose_glasses_rv_content_src_content_layout"
+            android:id="@+id/item_detail_brose_glasses_rv_content_src_content_layout1"
             android:layout_width="@dimen/item_detail_brose_glasses_rv_content_src_content_layout_width"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/item_detail_brose_glasses_rv_content_src_content_layout_marginTop"
             android:background="#000000"
@@ -99,5 +106,5 @@
                 android:textColor="#fff"
                 android:textSize="26px" />
         </LinearLayout>
-    </LinearLayout>
-</com.zhy.autolayout.AutoRelativeLayout>
+    </RelativeLayout>
+</com.zhy.autolayout.AutoFrameLayout>

@@ -30,29 +30,29 @@
             android:id="@+id/item_detail_browse_last_content_purchase_consult_content_tv"
             android:text="@string/item_detail_browse_last_content_purchase_consult_content_tv"
             android:layout_below="@+id/item_detail_browse_last_content_purchase_consult_iv"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/item_detail_browse_last_content_purchase_consult_content_tv_width"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/item_detail_browse_last_content_purchase_consult_content_tv_marginTop"
-            android:maxEms="15"
             android:layout_centerInParent="true"
             android:textColor="@color/colorLight_Black"
             android:textSize="@dimen/item_detail_browse_last_content_purchase_consult_content_tv_textSize"/>
     </RelativeLayout>
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/item_browse_last_second_relayout_marginTop">
+        android:layout_marginTop="@dimen/item_browse_last_second_relayout_marginTop"
+        android:layout_gravity="center_horizontal">
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/item_detail_browse_last_content_tract_order_title_tv"
             android:textSize="@dimen/item_detail_browse_last_content_tract_order_title_tv_textSize"
             android:textColor="@color/colorLight_Black"
-            android:gravity="center"
+            android:layout_centerHorizontal="true"
             android:id="@+id/item_detail_browse_last_content_tract_order_title_tv"/>
         <ImageView
             android:id="@+id/item_detail_browse_last_content_tract_order_iv"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/item_detail_browse_last_content_tract_order_title_tv"
             android:layout_marginTop="@dimen/item_detail_browse_last_content_tract_order_iv_marginTop"
@@ -62,13 +62,13 @@
             android:id="@+id/item_detail_browse_last_content_purchase_consult_tract_order_tv"
             android:text="@string/item_detail_browse_last_content_purchase_consult_tract_order__tv"
             android:layout_below="@+id/item_detail_browse_last_content_tract_order_iv"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/item_detail_browse_last_content_purchase_consult_content_tv_width"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/item_detail_browse_last_content_purchase_consult_tract_order_tv_marginTop"
-            android:maxEms="15"
             android:layout_centerInParent="true"
             android:textColor="@color/colorLight_Black"
-            android:textSize="@dimen/item_detail_browse_last_content_purchase_consult_tract_order_tv_textSize"/>
+            android:textSize="@dimen/item_detail_browse_last_content_purchase_consult_tract_order_tv_textSize"
+            />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -94,10 +94,9 @@
             android:id="@+id/item_detail_browse_last_content_purchase_about_return_iv"
             android:text="@string/item_detail_browse_last_content_purchase_about_return_iv"
             android:layout_below="@+id/item_detail_browse_last_content_about_return_iv"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/item_detail_browse_last_content_purchase_consult_content_tv_width"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/item_detail_browse_last_content_purchase_about_return_iv_marginTop"
-            android:maxEms="15"
             android:layout_centerInParent="true"
             android:textColor="@color/colorLight_Black"
             android:textSize="@dimen/item_detail_browse_last_content_purchase_about_return_iv_textSize"/>
