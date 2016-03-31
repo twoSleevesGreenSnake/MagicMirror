@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.util.LruCache;
 import android.util.Log;
 
@@ -30,12 +32,14 @@ import java.util.ArrayList;
 /**
  * Created by dllo on 16/3/29.
  */
-public class NetHelper {
+public class NetHelper<T> {
     private RequestQueue requestQueue;
     private ImageLoader loader;
     private String diskPath;
     private final OkHttpClient mOkHttpClient;
     private Context context;
+    private Handler handler;
+    private NetListener listener;
 
     /**
      * 此构造方法并有没有彻底整完 有很大的问题 因为并没有了解okhttp的用法,只是强行使用而已
@@ -62,6 +66,21 @@ public class NetHelper {
 //            loader = new ImageLoader(requestQueue, new DiskCache());
         }
         loader = new ImageLoader(requestQueue, new DoubleCache());
+        handler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                if (msg.what ==1){
+                    listener.onSuccess(msg.obj);
+                }
+                if (msg.what==2){
+                    listener.onFailure();
+                }
+
+
+
+                return false;
+            }
+        });
     }
 
 
@@ -75,6 +94,7 @@ public class NetHelper {
      */
     public <T> void getPostInfo(String url, ArrayList<String> keys, ArrayList<String> values, final Class<T> cls, final NetListener<T> listener) {
         FormEncodingBuilder builder = new FormEncodingBuilder();
+        this.listener = listener;
         for (int i = 0; i < keys.size(); i++) {
             builder.add(keys.get(i), values.get(i));
         }
@@ -90,13 +110,17 @@ public class NetHelper {
         mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
-                listener.onFailure(request, e);
+                handler.sendEmptyMessage(2);
             }
 
             @Override
             public void onResponse(com.squareup.okhttp.Response response) throws IOException {
                 T t = new Gson().fromJson(response.body().string(), cls);
-                listener.onSuccess(t);
+                Message message = new Message();
+                message.what = 1;
+                message.obj = t;
+                handler.sendMessage(message);
+
             }
         });
     }
@@ -104,7 +128,7 @@ public class NetHelper {
     public interface NetListener<T> {
         void onSuccess(T t);
 
-        void onFailure(Request request, IOException e);
+        void onFailure();
     }
 
     // 内存缓存

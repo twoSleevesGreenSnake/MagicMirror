@@ -97,7 +97,7 @@ public class BrowseGlassesActivity extends BaseActivity {
                    @Override
                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                        super.onScrolled(recyclerView, dx, dy);
-                       linearLayout.scrollTo((int) itemView.getX(), (int) itemView.getY() / 5);
+                       linearLayout.scrollTo((int) itemView.getX(), -(int) itemView.getY() / 5);
 
                    }
                });
