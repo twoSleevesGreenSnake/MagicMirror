@@ -13,10 +13,7 @@ import com.zhy.autolayout.AutoLayoutActivity;
  * Created by dllo on 16/3/29.
  */
 public abstract class BaseActivity extends AutoLayoutActivity {
-<<<<<<< HEAD
-=======
 
->>>>>>> feature/首页网络解析继续2
     protected static String token = "";
 
     @Override
