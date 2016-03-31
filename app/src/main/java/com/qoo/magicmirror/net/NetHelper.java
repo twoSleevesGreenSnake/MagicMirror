@@ -9,6 +9,7 @@ import android.os.Message;
 import android.support.v4.util.LruCache;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
@@ -118,6 +119,7 @@ public class NetHelper<T> {
             @Override
             public void onResponse(com.squareup.okhttp.Response response) throws IOException {
                 T t = new Gson().fromJson(response.body().string(), cls);
+//                Toast.makeText(context, "12123231123", Toast.LENGTH_SHORT).show();
                 Message message = new Message();
                 message.what = 1;
                 message.obj = t;

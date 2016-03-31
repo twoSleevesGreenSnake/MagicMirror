@@ -30,6 +30,7 @@ dependencies {
     compile 'com.zhy:autolayout:1.4.3'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.squareup.okio:okio:1.5.0'
+    compile 'com.zhy:autolayout:1.4.3'
     compile files('libs/MobCommons-2016.0301.1053.jar')
     compile files('libs/MobTools-2016.0301.1053.jar')
     compile files('libs/ShareSDK-Core-2.7.0.jar')

@@ -1,61 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/bg"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/fragment_menu_goods_title_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorWhite"
-        android:layout_marginTop="@dimen/fragment_menu_popupwindow_classification_tv_marginTop"
-        android:layout_marginLeft="@dimen/fragment_menu_popupwindow_classification_tv_marginLeft"
-        android:textSize="@dimen/fragment_menu_popupwindow_classification_tv_textSize"
-        android:text="@string/fragment_goods_title_tv" />
+    <LinearLayout
+        android:layout_width="@dimen/layout_width_zero"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/fragment_menu_plainglasses_title_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/fragment_menu_popupwindow_classification_tv_marginLeft"
-        android:layout_marginTop="@dimen/fragment_menu_popupwindow_plaingglasses_tv_marginTop"
-        android:textColor="@color/colorWhite"
-        android:layout_below="@id/fragment_menu_goods_title_tv"
-        android:textSize="@dimen/fragment_menu_popupwindow_plaingglasses_tv_textSize"
-        android:text="@string/fragment_palingglasses_title_tv" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_width_zero"
+            android:layout_weight="5">
 
-    <TextView
-        android:id="@+id/fragment_menu_sunglasses_title_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/fragment_menu_popupwindow_sunglasses_tv_marginLeft"
-        android:layout_marginTop="@dimen/fragment_menu_popupwindow_sunglasses_tv_marginTop"
-        android:layout_below="@id/fragment_menu_plainglasses_title_tv"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/fragment_menu_popupwindow_sunglasses_tv_textSize"
-        android:text="@string/fragment_sunglasses_title_tv" />
+            <ListView
+                android:id="@+id/fragment_menu_lv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_menu_popupwindow_lv_margintTop" />
 
-    <TextView
-        android:id="@+id/fragment_menu_themtaic_title_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/fragment_menu_popupwindow_sunglasses_tv_marginLeft"
-        android:layout_marginTop="@dimen/fragment_menu_popupwindow_sunglasses_tv_marginTop"
-        android:layout_below="@id/fragment_menu_sunglasses_title_tv"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/fragment_menu_popupwindow_sunglasses_tv_textSize"
-        android:text="@string/fragment_menu_themtaic_title_tv" />
+        </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/fragment_menu_popupwindow_sunglasses_tv_marginLeft"
-        android:layout_marginTop="@dimen/fragment_menu_popupwindow_sunglasses_tv_marginTop"
-        android:layout_below="@id/fragment_menu_themtaic_title_tv"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/fragment_menu_popupwindow_sunglasses_tv_textSize"
-        android:text="@string/fragment_menu_shoppingcart_title_tv" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_width_zero"
+            android:layout_weight="3"
+            android:orientation="vertical">
 
-</com.zhy.autolayout.AutoRelativeLayout>
+            <LinearLayout
+                android:id="@+id/fragment_menu_popupwindow_shoppingcart_title_ll"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_width_zero"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/fragment_menu_popupwindow_shoppingcart_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/fragment_menu_popupwindow_classification_tv_marginLeft"
+
+                    android:text="@string/fragment_menu_shoppingcart_title_tv"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/fragment_menu_popupwindow_plaingglasses_tv_textSize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fragment_menu_popupwindow_gohome_title_ll"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_width_zero"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/fragment_menu_popupwindow_gohome_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/fragment_menu_popupwindow_shoppingcart_title_ll"
+                    android:layout_marginLeft="@dimen/fragment_menu_popupwindow_classification_tv_marginLeft"
+                    android:text="@string/fragment_mune_popupwindow_gohome"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/fragment_menu_popupwindow_plaingglasses_tv_textSize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fragment_menu_popupwindow_shoppingcart_loginout_ll"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_width_zero"
+                android:layout_weight="1"></LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="@dimen/layout_width_zero"
+        android:layout_height="match_parent"
+        android:layout_weight="1.5" />
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/fragment_menu_goods_title_tv"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textColor="@color/colorWhite"-->
+    <!--android:layout_marginTop="@dimen/fragment_menu_popupwindow_classification_tv_marginTop"-->
+    <!--android:layout_marginLeft="@dimen/fragment_menu_popupwindow_classification_tv_marginLeft"-->
+    <!--android:textSize="@dimen/fragment_menu_popupwindow_classification_tv_textSize"-->
+    <!--android:text="@string/fragment_goods_title_tv" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/fragment_menu_plainglasses_title_tv"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="@dimen/fragment_menu_popupwindow_classification_tv_marginLeft"-->
+    <!--android:layout_marginTop="@dimen/fragment_menu_popupwindow_plaingglasses_tv_marginTop"-->
+    <!--android:textColor="@color/colorWhite"-->
+    <!--android:layout_below="@id/fragment_menu_goods_title_tv"-->
+    <!--android:textSize="@dimen/fragment_menu_popupwindow_plaingglasses_tv_textSize"-->
+    <!--android:text="@string/fragment_palingglasses_title_tv" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/fragment_menu_sunglasses_title_tv"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="@dimen/fragment_menu_popupwindow_sunglasses_tv_marginLeft"-->
+    <!--android:layout_marginTop="@dimen/fragment_menu_popupwindow_sunglasses_tv_marginTop"-->
+    <!--android:layout_below="@id/fragment_menu_plainglasses_title_tv"-->
+    <!--android:textColor="@color/colorWhite"-->
+    <!--android:textSize="@dimen/fragment_menu_popupwindow_sunglasses_tv_textSize"-->
+    <!--android:text="@string/fragment_sunglasses_title_tv" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/fragment_menu_themtaic_title_tv"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="@dimen/fragment_menu_popupwindow_sunglasses_tv_marginLeft"-->
+    <!--android:layout_marginTop="@dimen/fragment_menu_popupwindow_sunglasses_tv_marginTop"-->
+    <!--android:layout_below="@id/fragment_menu_sunglasses_title_tv"-->
+    <!--android:textColor="@color/colorWhite"-->
+    <!--android:textSize="@dimen/fragment_menu_popupwindow_sunglasses_tv_textSize"-->
+    <!--android:text="@string/fragment_menu_themtaic_title_tv" />-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="@dimen/fragment_menu_popupwindow_sunglasses_tv_marginLeft"-->
+    <!--android:layout_marginTop="@dimen/fragment_menu_popupwindow_sunglasses_tv_marginTop"-->
+    <!--android:layout_below="@id/fragment_menu_themtaic_title_tv"-->
+    <!--android:textColor="@color/colorWhite"-->
+    <!--android:textSize="@dimen/fragment_menu_popupwindow_sunglasses_tv_textSize"-->
+    <!--android:text="@string/fragment_menu_shoppingcart_title_tv" />-->
+
+</LinearLayout>

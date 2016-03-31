@@ -5,48 +5,53 @@
     android:background="@mipmap/bg"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/fragment_goods_title_rl"
+    <FrameLayout
+        android:id="@+id/fragment_goods_title_fl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/fragment_title_tv"
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/fragment_goods_title_tv_marginLeft"
-            android:layout_marginTop="@dimen/fragment_goods_title_tv_marginTop"
-            android:text="@string/fragment_goods_title_tv"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/fragment_goods_title_tv_textSize" />
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/fragment_goods_title_iv_marginLeft"
-            android:layout_marginTop="@dimen/fragment_goods_title_iv_marginTop"
-            android:layout_toRightOf="@+id/fragment_title_tv"
-            android:src="@mipmap/pull_down_arrow" />
+            <TextView
+                android:id="@+id/fragment_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/fragment_goods_title_tv_marginLeft"
+                android:layout_marginTop="@dimen/fragment_goods_title_tv_marginTop"
+                android:text="@string/fragment_goods_title_tv"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/fragment_goods_title_tv_textSize" />
 
-        <ImageView
-            android:id="@+id/line_of_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/fragment_title_tv"
-            android:layout_marginLeft="@dimen/fragment_goods_line_of_title_marginLeft"
-            android:layout_marginTop="@dimen/fragment_goods_line_of_title_marginTop"
-            android:src="@mipmap/line_of_title" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/fragment_goods_title_iv_marginLeft"
+                android:layout_marginTop="@dimen/fragment_goods_title_iv_marginTop"
+                android:layout_toRightOf="@+id/fragment_title_tv"
+                android:src="@mipmap/pull_down_arrow" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/line_of_title"
-            android:layout_marginLeft="@dimen/fragment_goods_show_tv_marginLeft"
-            android:layout_marginTop="@dimen/fragment_goods_show_tv_marginTop"
-            android:text="@string/fragment_goods_show_tv"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/fragment_goods_show_tv_textSize" />
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/line_of_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fragment_title_tv"
+                android:layout_marginLeft="@dimen/fragment_goods_line_of_title_marginLeft"
+                android:layout_marginTop="@dimen/fragment_goods_line_of_title_marginTop"
+                android:src="@mipmap/line_of_title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/line_of_title"
+                android:layout_marginLeft="@dimen/fragment_goods_show_tv_marginLeft"
+                android:layout_marginTop="@dimen/fragment_goods_show_tv_marginTop"
+                android:text="@string/fragment_goods_show_tv"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/fragment_goods_show_tv_textSize" />
+        </RelativeLayout>
+    </FrameLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/fragment_goods_rv"

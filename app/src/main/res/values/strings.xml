@@ -20,8 +20,20 @@
     <string name="item_detail_brose_glasses_rv_title_tv_content">巴拉巴拉</string>
     <string name="fragment_palingglasses_title_tv">浏览平光镜</string>
     <string name="fragment_sunglasses_title_tv">浏览太阳镜</string>
+    <string name="fragment_discount_title_tv">折扣专区</string>
     <string name="fragment_menu_themtaic_title_tv">專题分享</string>
     <string name="fragment_menu_shoppingcart_title_tv">我的購物車</string>
+    <string name="token">token</string>
+    <string name="device_type">device_type</string>
+    <string name="page">page</string>
+    <string name="last_time">last_time</string>
+    <string name="category_id">category_id</string>
+    <string name="version">version</string>
+    <string name="one">1</string>
+    <string name="one_point_zero_point_zero">1.0.0</string>
+    <string name="fragment_mune_popupwindow_gohome">返回首页</string>
+    <string name="gohome_tv">返回首页</string>
+    <string name="loginout_tv">退出</string>
 
 
 </resources>

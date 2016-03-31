@@ -127,4 +127,5 @@
     <dimen name="item_fragment_goods_marginTop">70px</dimen>
     <dimen name="item_fragment_goods_marginLeft">22px</dimen>
     <dimen name="item_fragment_goods_rl_height">950px</dimen>
+    <dimen name="fragment_menu_popupwindow_lv_margintTop">70px</dimen>
 </resources>
