@@ -2,6 +2,8 @@ package com.qoo.magicmirror.homepage;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,9 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.qoo.magicmirror.R;
+import com.qoo.magicmirror.constants.NetConstants;
 import com.qoo.magicmirror.net.NetHelper;
 import com.squareup.okhttp.Request;
 
@@ -31,7 +35,9 @@ public class GoodsFragment extends Fragment implements View.OnClickListener {
 
     private RecyclerView recyclerView;
     private GoodsRecycleViewAdapter adapter;
-    private TextView titleTv;
+    private ArrayList<GoodsListBean.DataEntity.ListEntity> datas;
+    private Handler handler;
+    private RelativeLayout titleRl;
 
     @Nullable
     @Override
@@ -43,14 +49,26 @@ public class GoodsFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_goods_rv);
-        titleTv = (TextView) view.findViewById(R.id.fragment_title_tv);
+        titleRl = (RelativeLayout) view.findViewById(R.id.fragment_goods_title_rl);
+        datas = new ArrayList<>();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
-        titleTv.setOnClickListener(this);
+        handler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                adapter = new GoodsRecycleViewAdapter(datas, getActivity());
+                GridLayoutManager gm = new GridLayoutManager(getActivity(), 1);
+                gm.setOrientation(GridLayoutManager.HORIZONTAL);
+                recyclerView.setLayoutManager(gm);
+                recyclerView.setAdapter(adapter);
+                return false;
+            }
+        });
+        titleRl.setOnClickListener(this);
     }
 
     private void initView() {
@@ -68,14 +86,24 @@ public class GoodsFragment extends Fragment implements View.OnClickListener {
         value.add("");
         value.add("");
         value.add("1.0.0");
+        NetHelper netHelper = new NetHelper(getContext());
+        netHelper.getPostInfo(NetConstants.GOODS_TYPE, token, value, GoodsListBean.class, new NetHelper.NetListener<GoodsListBean>() {
+            @Override
+            public void onSuccess(GoodsListBean goodsListBean) {
+                datas = (ArrayList<GoodsListBean.DataEntity.ListEntity>) goodsListBean.getData().getList();
+                handler.sendEmptyMessage(1);
 
-
+            }
+            @Override
+            public void onFailure(Request request, IOException e) {
+            }
+        });
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.fragment_title_tv:
+            case R.id.fragment_goods_title_rl:
                 showMenuPopWindow(v);
                 break;
         }

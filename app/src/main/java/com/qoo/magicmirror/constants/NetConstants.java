@@ -5,4 +5,6 @@ package com.qoo.magicmirror.constants;
  */
 public class NetConstants {
     public static final String SERVIE_ADRESS = "http://api101.test.mirroreye.cn/";
+
+    public static final String GOODS_TYPE = "index.php/products/goods_list";
 }
