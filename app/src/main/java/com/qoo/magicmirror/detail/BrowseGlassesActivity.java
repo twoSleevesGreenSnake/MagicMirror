@@ -2,15 +2,18 @@ package com.qoo.magicmirror.detail;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.base.BaseActivity;
+import com.qoo.magicmirror.net.NetHelper;
 
 import java.util.ArrayList;
 
@@ -20,7 +23,7 @@ import java.util.ArrayList;
 public class BrowseGlassesActivity extends BaseActivity {
     private RecyclerView recyclerView;
     private ArrayList<String> strings;
-
+    private NetHelper netHelper;
     /**
      * 实现浏览眼镜详情的activity
      *
@@ -34,6 +37,7 @@ public class BrowseGlassesActivity extends BaseActivity {
     @Override
     protected void initView() {
         recyclerView = bindView(R.id.activity_detail_browse_glasses_rv);
+        netHelper = new NetHelper(this);
     }
 
     @Override
@@ -105,6 +109,9 @@ public class BrowseGlassesActivity extends BaseActivity {
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             if (getItemViewType(position) == CONTENT_MODE) {
                 ((BrowseGlassesHolder) holder).contentPosition = position;
+                netHelper.setImage(((BrowseGlassesHolder) holder).backImg,"http://7xprhi.com2.z0.glb.qiniucdn.com/sliver21b93bca79f1dca3a37a3eb7e7850095e.jpg");
+                ((BrowseGlassesHolder) holder).height =((BrowseGlassesHolder) holder).srcLayout.getBottom()-((BrowseGlassesHolder) holder).srcLayout.getTop();
+                Log.i("height1111111",((BrowseGlassesHolder) holder).height+"");
             }
 //
         }
@@ -115,10 +122,12 @@ public class BrowseGlassesActivity extends BaseActivity {
         }
 
         class BrowseGlassesHolder extends RecyclerView.ViewHolder {
-            private LinearLayout linearLayout, srcLayout;
+            private LinearLayout  srcLayout;
+            private RelativeLayout relativeLayout;
             private int contentPosition;
             private TextView titleTv, eTitleTv, locationTv, contentTv;
             private ImageView backImg;
+            private int height;
 
             /**
              * 浏览眼镜详情的缓存类
@@ -131,9 +140,9 @@ public class BrowseGlassesActivity extends BaseActivity {
                 eTitleTv = (TextView) itemView.findViewById(R.id.item_detail_brose_glasses_rv_content_etitle_tv);
                 locationTv = (TextView) itemView.findViewById(R.id.item_detail_brose_glasses_rv_content_location_tv);
                 contentTv = (TextView) itemView.findViewById(R.id.item_detail_brose_glasses_rv_content_src_content_tv);
-                srcLayout = (LinearLayout) itemView.findViewById(R.id.item_detail_brose_glasses_rv_content_src_content_layout);
-                linearLayout = (LinearLayout) itemView.findViewById(R.id.item_detail_brose_glasses_rv_content_src_layout);
-
+                srcLayout = (LinearLayout) itemView.findViewById(R.id.item_detail_brose_glasses_rv_content_src_content_layout1);
+                relativeLayout = (RelativeLayout) itemView.findViewById(R.id.item_detail_brose_glasses_rv_content_src_layout);
+                backImg = (ImageView) itemView.findViewById(R.id.item_detail_brose_glasses_rv_content_back_img);
                 recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                     @Override
                     public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -143,9 +152,11 @@ public class BrowseGlassesActivity extends BaseActivity {
                     @Override
                     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                         super.onScrolled(recyclerView, dx, dy);
+
                         //实现滑动的核心代码
                         if (BrowseGlassesAdapter.this.getItemViewType(contentPosition) == CONTENT_MODE) {
-                            linearLayout.scrollTo((int) itemView.getX(), -(int) itemView.getY() / 2);
+                            relativeLayout.scrollTo((int) itemView.getX(), -((int) itemView.getY()-800)/2);
+                            Log.i("height",height+"");
                         }
 
                     }
@@ -192,6 +203,7 @@ public class BrowseGlassesActivity extends BaseActivity {
             private TextView titleTv;
             public HeadSecondItemHolder(View itemView) {
                 super(itemView);
+
                 titleTv = (TextView) itemView.findViewById(R.id.item_detail_browse_glasses_rv_title_second_tv);
             }
         }

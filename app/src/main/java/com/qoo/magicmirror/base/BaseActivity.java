@@ -7,10 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.zhy.autolayout.AutoLayoutActivity;
+
 /**
  * Created by dllo on 16/3/29.
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AutoLayoutActivity {
     protected static String token = "";
 
     @Override
