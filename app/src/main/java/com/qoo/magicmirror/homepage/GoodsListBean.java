@@ -1,5 +1,8 @@
 package com.qoo.magicmirror.homepage;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -10,8 +13,7 @@ import java.util.List;
 /**
  * Created by dllo on 16/3/30.
  */
-public class GoodsListBean {
-
+public class GoodsListBean implements Parcelable {
 
     /**
      * result : 1
@@ -27,6 +29,23 @@ public class GoodsListBean {
      */
 
     private DataEntity data;
+
+    protected GoodsListBean(Parcel in) {
+        result = in.readString();
+        msg = in.readString();
+    }
+
+    public static final Creator<GoodsListBean> CREATOR = new Creator<GoodsListBean>() {
+        @Override
+        public GoodsListBean createFromParcel(Parcel in) {
+            return new GoodsListBean(in);
+        }
+
+        @Override
+        public GoodsListBean[] newArray(int size) {
+            return new GoodsListBean[size];
+        }
+    };
 
     public static GoodsListBean objectFromData(String str, String key) {
 
@@ -65,7 +84,18 @@ public class GoodsListBean {
         return data;
     }
 
-    public static class DataEntity {
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(result);
+        dest.writeString(msg);
+    }
+
+    public static class DataEntity implements Parcelable {
         /**
          * first_time : 1455524521
          * last_time : 1452078872
@@ -96,6 +126,23 @@ public class GoodsListBean {
 
         private List<ListEntity> list;
 
+        protected DataEntity(Parcel in) {
+            pagination = in.readParcelable(PaginationEntity.class.getClassLoader());
+            list = in.createTypedArrayList(ListEntity.CREATOR);
+        }
+
+        public static final Creator<DataEntity> CREATOR = new Creator<DataEntity>() {
+            @Override
+            public DataEntity createFromParcel(Parcel in) {
+                return new DataEntity(in);
+            }
+
+            @Override
+            public DataEntity[] newArray(int size) {
+                return new DataEntity[size];
+            }
+        };
+
         public static DataEntity objectFromData(String str, String key) {
 
             try {
@@ -125,10 +172,39 @@ public class GoodsListBean {
             return list;
         }
 
-        public static class PaginationEntity {
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeParcelable(pagination, flags);
+            dest.writeTypedList(list);
+        }
+
+        public static class PaginationEntity implements Parcelable {
             private String first_time;
             private String last_time;
             private String has_more;
+
+            protected PaginationEntity(Parcel in) {
+                first_time = in.readString();
+                last_time = in.readString();
+                has_more = in.readString();
+            }
+
+            public static final Creator<PaginationEntity> CREATOR = new Creator<PaginationEntity>() {
+                @Override
+                public PaginationEntity createFromParcel(Parcel in) {
+                    return new PaginationEntity(in);
+                }
+
+                @Override
+                public PaginationEntity[] newArray(int size) {
+                    return new PaginationEntity[size];
+                }
+            };
 
             public static PaginationEntity objectFromData(String str, String key) {
 
@@ -166,9 +242,21 @@ public class GoodsListBean {
             public String getHas_more() {
                 return has_more;
             }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeString(first_time);
+                dest.writeString(last_time);
+                dest.writeString(has_more);
+            }
         }
 
-        public static class ListEntity {
+        public static class ListEntity implements Parcelable {
             private String goods_id;
             private String goods_pic;
             private String goods_img;
@@ -201,6 +289,38 @@ public class GoodsListBean {
              */
 
             private List<DesignDesEntity> design_des;
+
+            protected ListEntity(Parcel in) {
+                goods_id = in.readString();
+                goods_pic = in.readString();
+                goods_img = in.readString();
+                goods_name = in.readString();
+                model = in.readString();
+                last_storge = in.readString();
+                whole_storge = in.readString();
+                height = in.readString();
+                ordain = in.readString();
+                product_area = in.readString();
+                goods_price = in.readString();
+                discount_price = in.readString();
+                brand = in.readString();
+                info_des = in.readString();
+                goods_share = in.readString();
+                goods_data = in.createTypedArrayList(GoodsDataEntity.CREATOR);
+                design_des = in.createTypedArrayList(DesignDesEntity.CREATOR);
+            }
+
+            public static final Creator<ListEntity> CREATOR = new Creator<ListEntity>() {
+                @Override
+                public ListEntity createFromParcel(Parcel in) {
+                    return new ListEntity(in);
+                }
+
+                @Override
+                public ListEntity[] newArray(int size) {
+                    return new ListEntity[size];
+                }
+            };
 
             public static ListEntity objectFromData(String str, String key) {
 
@@ -351,13 +471,60 @@ public class GoodsListBean {
                 return design_des;
             }
 
-            public static class GoodsDataEntity {
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeString(goods_id);
+                dest.writeString(goods_pic);
+                dest.writeString(goods_img);
+                dest.writeString(goods_name);
+                dest.writeString(model);
+                dest.writeString(last_storge);
+                dest.writeString(whole_storge);
+                dest.writeString(height);
+                dest.writeString(ordain);
+                dest.writeString(product_area);
+                dest.writeString(goods_price);
+                dest.writeString(discount_price);
+                dest.writeString(brand);
+                dest.writeString(info_des);
+                dest.writeString(goods_share);
+                dest.writeTypedList(goods_data);
+                dest.writeTypedList(design_des);
+            }
+
+            public static class GoodsDataEntity implements Parcelable {
                 private String introContent;
                 private String cellHeight;
                 private String name;
                 private String location;
                 private String country;
                 private String english;
+
+                protected GoodsDataEntity(Parcel in) {
+                    introContent = in.readString();
+                    cellHeight = in.readString();
+                    name = in.readString();
+                    location = in.readString();
+                    country = in.readString();
+                    english = in.readString();
+                }
+
+                public static final Creator<GoodsDataEntity> CREATOR = new Creator<GoodsDataEntity>() {
+                    @Override
+                    public GoodsDataEntity createFromParcel(Parcel in) {
+                        return new GoodsDataEntity(in);
+                    }
+
+                    @Override
+                    public GoodsDataEntity[] newArray(int size) {
+                        return new GoodsDataEntity[size];
+                    }
+                };
 
                 public static GoodsDataEntity objectFromData(String str, String key) {
 
@@ -419,12 +586,45 @@ public class GoodsListBean {
                 public String getEnglish() {
                     return english;
                 }
+
+                @Override
+                public int describeContents() {
+                    return 0;
+                }
+
+                @Override
+                public void writeToParcel(Parcel dest, int flags) {
+                    dest.writeString(introContent);
+                    dest.writeString(cellHeight);
+                    dest.writeString(name);
+                    dest.writeString(location);
+                    dest.writeString(country);
+                    dest.writeString(english);
+                }
             }
 
-            public static class DesignDesEntity {
+            public static class DesignDesEntity implements Parcelable{
                 private String img;
                 private String cellHeight;
                 private String type;
+
+                protected DesignDesEntity(Parcel in) {
+                    img = in.readString();
+                    cellHeight = in.readString();
+                    type = in.readString();
+                }
+
+                public static final Creator<DesignDesEntity> CREATOR = new Creator<DesignDesEntity>() {
+                    @Override
+                    public DesignDesEntity createFromParcel(Parcel in) {
+                        return new DesignDesEntity(in);
+                    }
+
+                    @Override
+                    public DesignDesEntity[] newArray(int size) {
+                        return new DesignDesEntity[size];
+                    }
+                };
 
                 public static DesignDesEntity objectFromData(String str, String key) {
 
@@ -461,6 +661,18 @@ public class GoodsListBean {
 
                 public String getType() {
                     return type;
+                }
+
+                @Override
+                public int describeContents() {
+                    return 0;
+                }
+
+                @Override
+                public void writeToParcel(Parcel dest, int flags) {
+                    dest.writeString(img);
+                    dest.writeString(cellHeight);
+                    dest.writeString(type);
                 }
             }
         }

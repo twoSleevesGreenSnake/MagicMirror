@@ -39,6 +39,6 @@ public class VerticalViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return titles.size();
+        return 5;
     }
 }

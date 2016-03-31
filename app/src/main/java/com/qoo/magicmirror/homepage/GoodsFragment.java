@@ -1,10 +1,8 @@
 package com.qoo.magicmirror.homepage;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,7 +14,6 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.qoo.magicmirror.R;
@@ -39,7 +36,7 @@ public class GoodsFragment extends Fragment implements View.OnClickListener {
     private int position;
     private String titles;
     private ArrayList<String> popTitles;
-    private TextView title;
+    private TextView titleTv;
 
     /**
      * 提供静态方法，添加fragment
@@ -69,7 +66,7 @@ public class GoodsFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_goods_rv);
         titleFl = (FrameLayout) view.findViewById(R.id.fragment_goods_title_fl);
-        title = (TextView) view.findViewById(R.id.fragment_title_tv);
+        titleTv = (TextView) view.findViewById(R.id.fragment_title_tv);
         datas = new ArrayList<>();
     }
 
@@ -82,6 +79,7 @@ public class GoodsFragment extends Fragment implements View.OnClickListener {
         popTitles = bundle.getStringArrayList("poptitles");
         Log.d("GoodsFragment", "popTitles:" + popTitles);
         initView();
+        titleTv.setText(popTitles.get(position));
         titleFl.setOnClickListener(this);
     }
 
@@ -105,7 +103,7 @@ public class GoodsFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onSuccess(GoodsListBean goodsListBean) {
                         datas = (ArrayList<GoodsListBean.DataEntity.ListEntity>) goodsListBean.getData().getList();
-                        adapter = new GoodsRecycleViewAdapter(datas, getActivity());
+                        adapter = new GoodsRecycleViewAdapter(datas, getActivity(), position);
                         GridLayoutManager gm = new GridLayoutManager(getActivity(), 1);
                         gm.setOrientation(GridLayoutManager.HORIZONTAL);
                         recyclerView.setLayoutManager(gm);

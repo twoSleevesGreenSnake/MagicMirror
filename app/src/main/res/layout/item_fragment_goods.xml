@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/item_fragment_goods_marginLeft"
     android:layout_marginTop="@dimen/item_fragment_goods_marginTop"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/item_fragment_goods_ll">
 
     <RelativeLayout
         android:layout_width="@dimen/item_fragment_goods_iv_width"
@@ -74,4 +75,4 @@
                 android:textSize="@dimen/item_fragment_goods_describe_tv_textSize" />
         </RelativeLayout>
     </RelativeLayout>
-</com.zhy.autolayout.AutoLinearLayout>
+</LinearLayout>

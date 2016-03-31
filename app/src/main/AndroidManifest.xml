@@ -37,6 +37,7 @@
             <!--</intent-filter>-->
         </activity>
         <activity android:name=".detail.SpecialTopicDetailActivity" />
+        <activity android:name=".detail.BrowseGlassesActivity"/>
 
         <activity
             android:name="com.mob.tools.MobUIShell"
@@ -66,7 +67,7 @@
             android:value="720" />
         <meta-data
             android:name="design_height"
-            android:value="1280" />
+            android:value="1319" />
     </application>
 
 </manifest>
