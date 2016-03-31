@@ -127,9 +127,38 @@
     <dimen name="item_fragment_goods_marginTop">70px</dimen>
     <dimen name="item_fragment_goods_marginLeft">22px</dimen>
     <dimen name="item_fragment_goods_rl_height">950px</dimen>
+<<<<<<< HEAD
     <dimen name="item_detail_brose_glasses_rv_head_first_price_tv_textSize">36px</dimen>
     <dimen name="item_detail_brose_glasses_rv_head_first_price_tv_marginTop">48px</dimen>
     <dimen name="item_detail_browse_last_content_purchase_consult_content_tv_width">480px</dimen>
 
     <dimen name="fragment_menu_popupwindow_lv_margintTop">70px</dimen>
+=======
+    <dimen name="activity_login_close_iv_marginLeft">56px</dimen>
+    <dimen name="activity_login_close_iv_marginTop">30px</dimen>
+    <dimen name="activity_login_black_line_iv_marginTop">20px</dimen>
+    <dimen name="activity_login_phonenumber_and_password_tv_marginLeft">30px</dimen>
+    <dimen name="activity_login_phonenumber_tv_marginTop">40px</dimen>
+    <dimen name="activity_login_phone_number_et_height">35dp</dimen>
+    <dimen name="activity_login_phone_number_et_marginLeft_and_marginRight">30px</dimen>
+    <dimen name="activity_login_phone_number_et_marginTop">20px</dimen>
+    <dimen name="activity_login_password_tv_marginTop">30px</dimen>
+    <dimen name="activity_login_password_et_height">35dp</dimen>
+    <dimen name="activity_login_password_et_marginLeft">30px</dimen>
+    <dimen name="activity_login_password_et_marginRight">30px</dimen>
+    <dimen name="activity_login_password_et_marginTop">20px</dimen>
+    <dimen name="activity_login_forget_password_tv_marginRight">30px</dimen>
+    <dimen name="activity_login_forget_password_tv_marginTop">20px</dimen>
+    <dimen name="activity_login_btn_marginLeft">30px</dimen>
+    <dimen name="activity_login_btn_marginRight">30px</dimen>
+    <dimen name="activity_login_btn_marginTop">70px</dimen>
+    <dimen name="activity_login_create_account_marginLeft">30px</dimen>
+    <dimen name="activity_login_create_account_marginRight">30px</dimen>
+    <dimen name="activity_login_create_account_marginTop">30px</dimen>
+    <dimen name="activit_login_relativelayout_marginTop">80dp</dimen>
+    <dimen name="activity_login_linearlayout_marginBottom">50px</dimen>
+    <dimen name="activity_login_linearlayout_marginTop">50px</dimen>
+    <dimen name="activity_login_sina_iv_marginLeft">120dp</dimen>
+    <dimen name="activity_login_wechat_iv_marginLeft">30dp</dimen>
+>>>>>>> 7e70d6ae50f7d48c2fed68ca7a1a58af0eb25209
 </resources>

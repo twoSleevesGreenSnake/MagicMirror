@@ -1,8 +1,11 @@
 package com.qoo.magicmirror.detail;
 
 import android.support.v4.view.PagerAdapter;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.qoo.magicmirror.R;
 
 import java.util.ArrayList;
 
@@ -29,6 +32,7 @@ public class VerticalViewpagerAdapter extends PagerAdapter {
     //实例化页卡
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
+        View view = LayoutInflater.from(container.getContext()).inflate(R.layout.activity_specialtopic_detail_viewpager,container,false);
         container.addView(views.get(position));
         return views.get(position);
     }
