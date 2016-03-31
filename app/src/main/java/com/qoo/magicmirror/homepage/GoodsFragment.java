@@ -57,17 +57,6 @@ public class GoodsFragment extends Fragment implements View.OnClickListener {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
-        handler = new Handler(new Handler.Callback() {
-            @Override
-            public boolean handleMessage(Message msg) {
-                adapter = new GoodsRecycleViewAdapter(datas, getActivity());
-                GridLayoutManager gm = new GridLayoutManager(getActivity(), 1);
-                gm.setOrientation(GridLayoutManager.HORIZONTAL);
-                recyclerView.setLayoutManager(gm);
-                recyclerView.setAdapter(adapter);
-                return false;
-            }
-        });
         titleRl.setOnClickListener(this);
     }
 
@@ -91,13 +80,25 @@ public class GoodsFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onSuccess(GoodsListBean goodsListBean) {
                 datas = (ArrayList<GoodsListBean.DataEntity.ListEntity>) goodsListBean.getData().getList();
-                handler.sendEmptyMessage(1);
+                adapter = new GoodsRecycleViewAdapter(datas, getActivity());
+                GridLayoutManager gm = new GridLayoutManager(getActivity(), 1);
+                gm.setOrientation(GridLayoutManager.HORIZONTAL);
+                recyclerView.setLayoutManager(gm);
+                recyclerView.setAdapter(adapter);
 
             }
-            @Override
-            public void onFailure(Request request, IOException e) {
-            }
-        });
+
+                    @Override
+                    public void onFailure() {
+
+                    }
+
+
+        }
+
+
+
+        );
     }
 
     @Override

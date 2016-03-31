@@ -2,7 +2,7 @@
 <com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/item_detail_brose_glasses_rv_content_layout"
     android:layout_width="match_parent"
-    android:layout_height="400dp">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/item_detail_brose_glasses_rv_content_back_img"

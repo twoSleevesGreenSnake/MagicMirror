@@ -127,4 +127,7 @@
     <dimen name="item_fragment_goods_marginTop">70px</dimen>
     <dimen name="item_fragment_goods_marginLeft">22px</dimen>
     <dimen name="item_fragment_goods_rl_height">950px</dimen>
+    <dimen name="item_detail_brose_glasses_rv_head_first_price_tv_textSize">36px</dimen>
+    <dimen name="item_detail_brose_glasses_rv_head_first_price_tv_marginTop">48px</dimen>
+    <dimen name="item_detail_browse_last_content_purchase_consult_content_tv_width">480px</dimen>
 </resources>

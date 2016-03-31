@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textColor="#fff"
+            android:textColor="@color/colorWhite"
             android:layout_marginTop="@dimen/item_detail_browse_glasses_rv_head_first_e_title_tv_marginTop"
             android:textSize="@dimen/item_detail_browse_glasses_rv_head_first_e_title_tv_textSize"
             android:text="@string/item_detail_browse_glasses_rv_head_first_e_title_tv_content"
@@ -37,16 +37,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/item_detail_brose_glasses_rv_head_first_etitle"
+            android:id="@+id/item_detail_brose_glasses_rv_head_first_type_title"
             android:layout_above="@id/item_detail_brose_glasses_rv_content_top_title_view"
             android:textSize="@dimen/item_detail_brose_glasses_rv_head_first_etitle_text_size"
-            android:textColor="#fff"
+            android:textColor="@color/colorWhite"
             android:text="@string/item_detail_brose_glasses_rv_head_first_etitle_content"
             android:layout_centerInParent="true"/>
           <View
               android:layout_width="@dimen/item_detail_browse_glasses_rv_head_first_bottom_vew_width"
               android:layout_height="@dimen/item_detail_browse_glasses_rv_head_first_bottom_vew_height"
-              android:background="#fff"
+              android:background="@color/colorWhite"
               android:layout_alignParentBottom="true"
               android:layout_centerInParent="true"/>
       </RelativeLayout>
@@ -59,10 +59,15 @@
             android:text="@string/item_detail_brose_glasses_rv_head_first_content_tv_content"
             android:layout_gravity="center_horizontal"
             android:id="@+id/item_detail_brose_glasses_rv_head_first_content_tv"
-            android:textColor="#fff"/>
+            android:textColor="@color/colorWhite"/>
         <TextView
+            android:layout_marginTop="@dimen/item_detail_brose_glasses_rv_head_first_price_tv_marginTop"
+            android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/item_detail_brose_glasses_rv_head_first_price_tv"/>
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/item_detail_brose_glasses_rv_head_first_price_tv_textSize"
+            android:id="@+id/item_detail_brose_glasses_rv_head_first_price_tv"
+            android:text="99999"/>
     </LinearLayout>
 </com.zhy.autolayout.AutoRelativeLayout>
