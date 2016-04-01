@@ -61,8 +61,6 @@ public class BrowseGlassesActivity extends BaseActivity {
 
         recyclerView.setAdapter(new BrowseGlassesAdapter());
         recyclerView.setLayoutManager(new LinearLayoutManager(BrowseGlassesActivity.this));
-<<<<<<< HEAD
-=======
 //        strings = new ArrayList<>();
 //        for (int i = 0; i < 30; i++) {
 //            strings.add("1");
@@ -94,7 +92,6 @@ public class BrowseGlassesActivity extends BaseActivity {
 //
 //            }
 //        });
->>>>>>> feature/继续继续
 
 
 

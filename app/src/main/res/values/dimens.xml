@@ -158,11 +158,9 @@
     <dimen name="activity_login_sina_iv_marginLeft">120dp</dimen>
     <dimen name="activity_login_wechat_iv_marginLeft">30dp</dimen>
     <dimen name="fragment_menu_popupwindow_line_iv_marginTop">22px</dimen>
-<<<<<<< HEAD
     <dimen name="item_detail_brose_glasses_rv_content_top_title_view_textSize">32px</dimen>
     <dimen name="item_detail_brose_glasses_rv_content_location_tv_textSize">64px</dimen>
     <dimen name="item_detail_brose_glasses_rv_content_src_content_tv_textSize">26px</dimen>
-=======
     <dimen name="item_fragment_thematic_rl_height">128px</dimen>
     <dimen name="item_fragment_thematic_line_iv_marginLeft">34px</dimen>
     <dimen name="item_fragment_thematic_line_iv_marginRight">34px</dimen>
@@ -173,6 +171,5 @@
     <dimen name="item_fragment_fl_marginTop">15px</dimen>
     <dimen name="item_fragment_thematic_marginLeft">22px</dimen>
     <dimen name="item_fragment_thematic_marginTop">70px</dimen>
->>>>>>> feature/继续继续
-    >>>>>>> 7e70d6ae50f7d48c2fed68ca7a1a58af0eb25209
+
 </resources>

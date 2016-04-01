@@ -199,9 +199,7 @@ public class NetHelper<T> {
 
         void onFailure();
     }
-<<<<<<< HEAD
 
-=======
 //
 //    public void setImage(ImageView imageView, String url) {
 //        ImageLoader.ImageListener listener = ImageLoader.getImageListener(imageView, R.mipmap.ic_launcher, R.mipmap.ic_launcher);
@@ -299,5 +297,4 @@ public class NetHelper<T> {
 //            diskCache.putBitmap(url, bitmap);
 //        }
 //    }
->>>>>>> feature/继续继续
 }
