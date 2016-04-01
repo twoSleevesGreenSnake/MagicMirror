@@ -28,20 +28,12 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
     private VerticalViewpagerAdapter verticalViewpagerAdapter;
     private ArrayList<View> views;
     private VerticalViewpager verticalViewpager;
-    private int[] middlePic = {R.mipmap.m, R.mipmap.zhua};
-    private int[] background = {R.mipmap.tiger, R.mipmap.cat};
-    private ArrayList<SpecialTopicDetailBean.DataEntity.ListEntity> datas;
-    private ImageView specialNethermostIv, viewpagerIv,shareIv,closeIv;
+    private ArrayList<SpecialTopicDetailBean.DataEntity.StoryDataEntity> datas;
+    private SpecialTopicDetailBean.DataEntity.StoryDataEntity data;
+    private ImageView specialNethermostIv, viewpagerIv, shareIv, closeIv;
 
     private String storyId;
 
-
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_specialtopic_detail);
-//        initview();
-//    }
 
     @Override
     protected int setLayout() {
@@ -58,28 +50,49 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
 
         ArrayList<String> token = new ArrayList<>();
         token.add(getString(R.string.token));
-        token.add(getString(R.string.story_uid));
         token.add(getString(R.string.device_type));
-        token.add(getString(R.string.page));
-        token.add(getString(R.string.last_time));
+        token.add(getString(R.string.stroy_id));
         ArrayList<String> value = new ArrayList<>();
         value.add("");
-        value.add("");
-        value.add(getString(R.string.one));
-        value.add("");
-        value.add("");
+        value.add("1");
+        value.add("2");
         final NetHelper netHelper = new NetHelper(this);
+<<<<<<< HEAD
         netHelper.getPostInfo(NetConstants.THEMATIC_TYPE, token, value,SpecialTopicDetailBean.class, new NetHelper.NetListener<SpecialTopicDetailBean>() {
+=======
+        netHelper.getPostInfo(NetConstants.SHARE_SPECIAL, token, value, SpecialTopicDetailBean.class, new NetHelper.NetListener<SpecialTopicDetailBean>() {
+>>>>>>> feature/继续之前解析专题
             @Override
             public void onSuccess(SpecialTopicDetailBean specialTopicDetailBean) {
-                datas = (ArrayList<SpecialTopicDetailBean.DataEntity.ListEntity>) specialTopicDetailBean.getData().getList();
-                netHelper.setImage(specialNethermostIv,datas.get(0).getStory_img());
-                for (int i = 0; i < datas.size() ; i++) {
-                    View view = LayoutInflater.from(SpecialTopicDetailActivity.this).inflate(R.layout.activity_specialtopic_detail_viewpager, null);
-                    views.add(view);
-                netHelper.setImage(specialNethermostIv,datas.get(i).getStory_img());
-                }
+                data = specialTopicDetailBean.getData().getStory_data();
 
+                netHelper.setImage(specialNethermostIv, data.getImg_array().get(0));
+//                Log.d("！！！！！！", data.getImg_array().get(0));
+                for (int i = 0; i < data.getImg_array().size(); i++) {
+                    View view = LayoutInflater.from(SpecialTopicDetailActivity.this).inflate(R.layout.activity_specialtopic_detail_viewpager, null);
+
+                    views.add(view);
+                }
+                verticalViewpagerAdapter = new VerticalViewpagerAdapter(views);
+
+                verticalViewpager.setAdapter(verticalViewpagerAdapter);
+                verticalViewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                    }
+
+                    @Override
+                    public void onPageSelected(int position) {
+                        netHelper.setImage(specialNethermostIv, data.getImg_array().get(position));
+
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
+
+                    }
+                });
             }
 
             @Override
@@ -97,45 +110,23 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
         verticalViewpager = (VerticalViewpager) findViewById(R.id.activity_specialtopic_detail_viewpager);
         closeIv = (ImageView) findViewById(R.id.activity_specialtopic_detail_close_iv);
         shareIv = (ImageView) findViewById(R.id.activity_specialtopic_detail_share_iv);
+        specialNethermostIv = (ImageView) findViewById(R.id.activity_specialtopic_detail_nethermost_iv);
+
         closeIv.setOnClickListener(this);
         shareIv.setOnClickListener(this);
-        specialNethermostIv = (ImageView) findViewById(R.id.activity_specialtopic_detail_nethermost_iv);
 //        specialNethermostIv.setImageResource(background[0]);
 //        for (int i = 0; i < middlePic.length; i++) {
 //            View view = LayoutInflater.from(SpecialTopicDetailActivity.this).inflate(R.layout.activity_specialtopic_detail_viewpager, null);
 //            views.add(view);
 //        }
 
-        verticalViewpagerAdapter = new VerticalViewpagerAdapter(views);
-        verticalViewpager.setAdapter(verticalViewpagerAdapter);
-
-        verticalViewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                specialNethermostIv.setImageResource(background[position]);
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
 
     }
 
 
-
-
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.activity_specialtopic_detail_share_iv:
 //
                 ShareSDK.initSDK(this);

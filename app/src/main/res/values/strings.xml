@@ -30,6 +30,7 @@
     <string name="category_id">category_id</string>
     <string name="version">version</string>
     <string name="one">1</string>
+    <string name="stroy_id">story_id</string>
     <string name="one_point_zero_point_zero">1.0.0</string>
     <string name="fragment_mune_popupwindow_gohome">返回首页</string>
     <string name="gohome_tv">返回首页</string>

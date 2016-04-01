@@ -23,12 +23,21 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< HEAD
         <activity android:name=".homepage.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+=======
+        <!--<activity android:name=".homepage.MainActivity">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
+>>>>>>> feature/继续之前解析专题
         <activity android:name=".loginandregister.LoginActivity"/>
 
         <activity android:name=".detail.BrowseGlassesActivity"/>
@@ -38,7 +47,12 @@
         <!--</intent-filter>-->
         <!--</activity>-->
 
-        <activity android:name=".detail.SpecialTopicDetailActivity" />
+        <activity android:name=".detail.SpecialTopicDetailActivity" >
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
 
         <!--<activity android:name=".detail.BrowseGlassesActivity"/>-->
