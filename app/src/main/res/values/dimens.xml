@@ -119,7 +119,7 @@
     <dimen name="fragment_menu_popupwindow_classification_tv_marginTop">148px</dimen>
     <dimen name="fragment_menu_popupwindow_classification_tv_marginLeft">48px</dimen>
     <dimen name="fragment_menu_popupwindow_classification_tv_textSize">28px</dimen>
-    <dimen name="fragment_menu_popupwindow_plaingglasses_tv_marginTop">78px</dimen>
+    <dimen name="fragment_menu_popupwindow_plaingglasses_tv_marginTop">44px</dimen>
     <dimen name="fragment_menu_popupwindow_plaingglasses_tv_textSize">28px</dimen>
     <dimen name="fragment_menu_popupwindow_sunglasses_tv_marginLeft">48px</dimen>
     <dimen name="fragment_menu_popupwindow_sunglasses_tv_marginTop">78px</dimen>
@@ -157,5 +157,6 @@
     <dimen name="activity_login_linearlayout_marginTop">50px</dimen>
     <dimen name="activity_login_sina_iv_marginLeft">120dp</dimen>
     <dimen name="activity_login_wechat_iv_marginLeft">30dp</dimen>
->>>>>>> 7e70d6ae50f7d48c2fed68ca7a1a58af0eb25209
+    <dimen name="fragment_menu_popupwindow_line_iv_marginTop">22px</dimen>
+    >>>>>>> 7e70d6ae50f7d48c2fed68ca7a1a58af0eb25209
 </resources>

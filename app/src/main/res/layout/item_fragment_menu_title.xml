@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/fragment_menu_popipwindow_title_ll">
 
     <TextView
         android:id="@+id/fragment_menu_goods_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorWhite"
-        android:layout_marginTop="@dimen/fragment_menu_popupwindow_plaingglasses_tv_marginTop"
         android:layout_marginLeft="@dimen/fragment_menu_popupwindow_classification_tv_marginLeft"
-        android:textSize="@dimen/fragment_menu_popupwindow_classification_tv_textSize"
-        android:text="@string/fragment_goods_title_tv" />
+        android:layout_marginTop="@dimen/fragment_menu_popupwindow_plaingglasses_tv_marginTop"
+        android:text="@string/fragment_goods_title_tv"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/fragment_menu_popupwindow_classification_tv_textSize" />
+
+    <ImageView
+        android:id="@+id/fragment_popupwindow_title_line_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/line_of_title"
+        android:layout_marginLeft="@dimen/fragment_menu_popupwindow_classification_tv_marginLeft"
+        android:layout_marginTop="@dimen/fragment_menu_popupwindow_line_iv_marginTop"
+        />
 
 </LinearLayout>

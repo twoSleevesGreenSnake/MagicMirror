@@ -33,7 +33,7 @@ public class VerticalViewPagerAdapter extends FragmentPagerAdapter {
         if (position < 3) {
             return GoodsFragment.getInstance(position, titles.get(position), (ArrayList<String>) titles);
         } else {
-            return fragments.get(position-3);
+            return fragments.get(position - 3);
         }
     }
 
