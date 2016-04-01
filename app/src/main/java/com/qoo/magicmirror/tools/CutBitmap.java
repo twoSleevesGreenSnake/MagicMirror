@@ -24,7 +24,7 @@ public class CutBitmap extends Drawable{
         paint = new Paint();
         BitmapShader shader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
         paint.setShader(shader);
-        pheight = bitmap.getHeight()-200;
+        pheight = bitmap.getHeight();
         this.cutLenth = cutLenth;
     }
 

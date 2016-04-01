@@ -27,7 +27,6 @@
             android:layout_marginTop="@dimen/item_detail_brose_glasses_rv_content_src_content_layout_marginTop"
             android:background="#000000"
             android:orientation="vertical"
-
             android:paddingLeft="@dimen/item_detail_brose_glasses_rv_content_src_content_layout_paddingLeft"
             android:paddingRight="@dimen/item_detail_brose_glasses_rv_content_src_content_layout_paddingRight">
 
@@ -55,9 +54,8 @@
                         android:layout_height="wrap_content"
                         android:layout_above="@id/item_detail_brose_glasses_rv_content_top_title_view"
                         android:layout_marginTop="@dimen/item_detail_brose_glasses_rv_content_title_tv_marginTop"
-                        android:text="来自时尚之都英国"
                         android:textColor="#fff"
-                        android:textSize="32px" />
+                        android:textSize="@dimen/item_detail_brose_glasses_rv_content_top_title_view_textSize" />
 
                     <TextView
                         android:id="@+id/item_detail_brose_glasses_rv_content_etitle_tv"
@@ -65,7 +63,6 @@
                         android:layout_height="wrap_content"
                         android:layout_above="@id/item_detail_brose_glasses_rv_content_title_tv"
                         android:layout_marginTop="@dimen/item_detail_brose_glasses_rv_content_etitle_tv_marginTop"
-                        android:text="11231245125125"
                         android:textColor="#fff"
 
                         android:textSize="24px" />
@@ -78,9 +75,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerInParent="true"
                     android:layout_marginLeft="@dimen/item_detail_brose_glasses_rv_content_location_tv_marginLeft"
-                    android:text="巴黎"
-                    android:textColor="#fff"
-                    android:textSize="64px" />
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/item_detail_brose_glasses_rv_content_location_tv_textSize" />
 
             </RelativeLayout>
 
@@ -89,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/item_detail_brose_glasses_rv_content_bottom_title_view_height"
                 android:layout_marginTop="@dimen/item_detail_brose_glasses_rv_content_bottom_title_view_marginTop"
-                android:background="#fff" />
+                android:background="@color/colorWhite" />
 
             <TextView
                 android:id="@+id/item_detail_brose_glasses_rv_content_src_content_tv"
@@ -98,9 +94,8 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/item_detail_brose_glasses_rv_content_src_content_tv_marginBottom"
                 android:layout_marginTop="@dimen/item_detail_brose_glasses_rv_content_src_content_tv_marginTop"
-                android:text="这是一段测试的巴拉巴这是一段测试的巴拉巴这是一段测试的巴拉巴这是一段测试的巴拉巴这是一段测试的巴拉巴这是一段测试的巴拉巴"
-                android:textColor="#fff"
-                android:textSize="26px" />
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/item_detail_brose_glasses_rv_content_src_content_tv_textSize" />
         </LinearLayout>
     </RelativeLayout>
 </com.zhy.autolayout.AutoRelativeLayout>

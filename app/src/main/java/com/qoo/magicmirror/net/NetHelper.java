@@ -3,11 +3,13 @@ package com.qoo.magicmirror.net;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.util.LruCache;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.android.volley.RequestQueue;
@@ -17,6 +19,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
 import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 import com.qoo.magicmirror.R;
@@ -58,15 +61,11 @@ public class NetHelper<T> {
         super();
         this.context = context;
         mOkHttpClient = new OkHttpClient();
-        requestQueue = SingleQueue.newSingleQueue(context).getRequestQueue();
-//        loader = new ImageLoader(requestQueue, new MemoryCache());
-
-
-//        File cacheDir = StorageUtils.getCacheDirectory(context);  //缓存文件夹路径
-        //初始化这个configuration
         configuration = new ImageLoaderConfiguration.Builder(context).build();
         ImageLoader.getInstance().init(configuration);
         imageLoader = ImageLoader.getInstance();
+
+        //设置imageloader
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.mipmap.ic_launcher) // 设置图片下载期间显示的图片
                 .showImageForEmptyUri(R.mipmap.ic_launcher) // 设置图片Uri为空或是错误的时候显示的图片
@@ -81,7 +80,7 @@ public class NetHelper<T> {
                 .handler(new Handler()) // default
                 .build();
 
-
+//
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             File file = Environment.getExternalStorageDirectory();
             diskPath = file.getAbsolutePath();
@@ -93,6 +92,7 @@ public class NetHelper<T> {
         if (file.exists()) {
             diskPath = file.getAbsolutePath();
         }
+        //handler回调之后的方法,用来刷新UI主线程
         handler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
@@ -109,6 +109,13 @@ public class NetHelper<T> {
         });
 
     }
+
+    /**
+     * 切图的方法
+     * @param imageView 组件
+     * @param url   网址
+     * @param cutLenth 切掉的高度,取下部分
+     */
     public void setDrawable(ImageView imageView,String url,int cutLenth){
         Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url);
         if (bitmap==null){
@@ -122,6 +129,22 @@ public class NetHelper<T> {
         else imageView.setImageBitmap(bitmap);
     }
 
+    /**
+     * 给view 网络拉取背景的方法
+     * @param v 组件
+     * @param url 网址
+     */
+    public void setBackGround(View v,String url){
+        Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url);
+
+        v.setBackground(new BitmapDrawable(context.getResources(),bitmap));
+    }
+
+    /**
+     * 给imageview 拉取图片并显示的方法
+     * @param imageView 组件
+     * @param url 网址
+     */
     public void setImage(ImageView imageView, String url) {
         imageLoader.displayImage(url, imageView, options);
     }
@@ -167,106 +190,14 @@ public class NetHelper<T> {
         });
     }
 
+    /**
+     * 用来区分拉取结果不同的 回调接口
+     * @param <T>
+     */
     public interface NetListener<T> {
         void onSuccess(T t);
 
         void onFailure();
     }
-//
-//    public void setImage(ImageView imageView, String url) {
-//        ImageLoader.ImageListener listener = ImageLoader.getImageListener(imageView, R.mipmap.ic_launcher, R.mipmap.ic_launcher);
-//        loader.get(url, listener);
-//
-//    }
-//
-//    // 内存缓存
-//    public class MemoryCache implements ImageLoader.ImageCache {
-//        private LruCache<String, Bitmap> cache;
-//
-//        public MemoryCache() {
-//            long maxSize = Runtime.getRuntime().maxMemory() / 1024;
-//            int cacheSize = (int) (maxSize / 4);
-//            cache = new LruCache<String, Bitmap>(cacheSize) {
-//                @Override
-//                protected int sizeOf(String key, Bitmap value) {
-//
-//                    return value.getRowBytes() * value.getHeight() / 1024;
-//                }
-//            };
-//        }
-//
-//        @Override
-//        public Bitmap getBitmap(String url) {
-//            return cache.get(url);
-//        }
-//
-//        @Override
-//        public void putBitmap(String url, Bitmap bitmap) {
-//            cache.put(url, bitmap);
-//        }
-//    }
-//
-//    // 硬盘缓存
-//    public class DiskCache implements ImageLoader.ImageCache {
-//
-//        @Override
-//        public Bitmap getBitmap(String url) {
-//            String fileName = url.substring(url.lastIndexOf("/") + 1, url.length());
-//            //用文件名拼接出实际文件存储路径
-//            String filePath = diskPath + "/" + fileName;
-//            Bitmap bitmap = BitmapFactory.decodeFile(filePath);
-//            return bitmap;
-//        }
-//
-//        @Override
-//        public void putBitmap(String url, Bitmap bitmap) {
-//            //获取url中的图片名称
-//            String fileName = url.substring(url.lastIndexOf("/") + 1, url.length());
-//            //用文件名拼接出实际文件存储路径
-//            String filePath = diskPath + "/" + fileName;
-//            FileOutputStream fos = null;
-//            try {
-//                fos = new FileOutputStream(filePath);
-//                //将bitmap对象写入文件中
-//                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            } finally {
-//                //关闭文件流
-//                if (fos != null) {
-//                    try {
-//                        fos.close();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
-//    // 双重缓存的方式
-//    public class DoubleCache implements ImageLoader.ImageCache {
-//        private MemoryCache memoryCache;
-//        private DiskCache diskCache;
-//
-//        public DoubleCache() {
-//            memoryCache = new MemoryCache();
-//            diskCache = new DiskCache();
-//        }
-//
-//        @Override
-//        public Bitmap getBitmap(String url) {
-//            Bitmap bitmap = memoryCache.getBitmap(url);
-//            if (bitmap == null) {
-//                bitmap = diskCache.getBitmap(url);
-//            }
-//            return bitmap;
-//        }
-//
-//        @Override
-//        public void putBitmap(String url, Bitmap bitmap) {
-//            memoryCache.putBitmap(url, bitmap);
-//            diskCache.putBitmap(url, bitmap);
-//        }
-//    }
+
 }
