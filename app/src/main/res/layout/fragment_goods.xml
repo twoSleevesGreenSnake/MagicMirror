@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <FrameLayout
+        android:layout_marginTop="@dimen/item_fragment_fl_marginTop"
         android:id="@+id/fragment_goods_title_fl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">

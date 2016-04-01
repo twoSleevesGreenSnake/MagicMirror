@@ -6,7 +6,9 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:id="@+id/fragment_thematic_rl"
+        android:layout_marginTop="@dimen/item_fragment_fl_marginTop"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <TextView

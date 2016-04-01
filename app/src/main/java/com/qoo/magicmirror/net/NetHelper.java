@@ -1,6 +1,7 @@
 package com.qoo.magicmirror.net;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -162,7 +163,6 @@ public class NetHelper<T> {
                 message.what = 1;
                 message.obj = t;
                 handler.sendMessage(message);
-
             }
         });
     }

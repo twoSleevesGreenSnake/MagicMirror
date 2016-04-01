@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg"
+    android:orientation="horizontal"
+    android:weightSum="2.5">
+
+    <ListView
+        android:id="@+id/fragment_menu_lv"
+        android:layout_width="@dimen/layout_width_zero"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/fragment_menu_ll"
+        android:layout_width="@dimen/layout_width_zero"
+        android:layout_height="match_parent"
+        android:layout_weight="1.5" />
+
+</LinearLayout>

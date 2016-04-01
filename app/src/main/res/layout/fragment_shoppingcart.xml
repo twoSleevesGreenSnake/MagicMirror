@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:layout_marginTop="@dimen/item_fragment_fl_marginTop"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

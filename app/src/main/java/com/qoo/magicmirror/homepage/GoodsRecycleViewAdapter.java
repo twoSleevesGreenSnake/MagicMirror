@@ -25,6 +25,7 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
 
     private ArrayList<GoodsListBean.DataEntity.ListEntity> data;
     private Context context;
+    // MainActivity传递过来的ViewPager的位置
     private int mainPosition;
 
     public GoodsRecycleViewAdapter(ArrayList<GoodsListBean.DataEntity.ListEntity> data, Context context, int mainPosition) {

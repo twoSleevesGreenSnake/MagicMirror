@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/bg"
-    tools:context=".homepage.MainActivity">
+    tools:context=".homepage.HomeActivity">
 
 
     <FrameLayout
@@ -15,6 +15,12 @@
             android:id="@+id/homepage_verticalviewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+        <FrameLayout
+            android:id="@+id/activity_main_menu_fl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
 
         <ImageView
             android:id="@+id/main_activity_logo_img"
@@ -41,4 +47,5 @@
                 android:textSize="@dimen/activity_main_login_tv_textSize" />
         </RelativeLayout>
     </FrameLayout>
-</com.zhy.autolayout.AutoRelativeLayout>
+
+</RelativeLayout>

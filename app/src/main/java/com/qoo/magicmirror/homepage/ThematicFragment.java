@@ -10,9 +10,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.qoo.magicmirror.R;
+import com.qoo.magicmirror.constants.NetConstants;
+import com.qoo.magicmirror.net.NetHelper;
 
 import java.util.ArrayList;
 
@@ -24,10 +27,21 @@ import java.util.ArrayList;
 public class ThematicFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private ThemtaicRecycleViewAdapter adapter;
+    private ThematicRecycleViewAdapter adapter;
+    // MainActivity传递过来的标题集合
     private ArrayList<String> titles;
+    // 标题
     private TextView titleTv;
+    // 标题所在的相对布局
+    private RelativeLayout relativeLayout;
+    private ArrayList<ThematicBean.DataEntity.ListEntity> datas;
+    private NetHelper netHelper;
+    private MenuListener menuListener;
 
+
+    public void setMenuListener(MenuListener menuListener) {
+        this.menuListener = menuListener;
+    }
 
     @Nullable
     @Override
@@ -40,20 +54,60 @@ public class ThematicFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_themtaic_rv);
         titleTv = (TextView) view.findViewById(R.id.fragment_themtaic_title_tv);
+        relativeLayout = (RelativeLayout) view.findViewById(R.id.fragment_thematic_rl);
+        datas = new ArrayList<>();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initData();// 接收接收MainActivity传递的titles
+        initView();// 解析recycleView数据
+    }
+
+    private void initData() {
         Bundle bundle = getArguments();
         titles = bundle.getStringArrayList("themtaictitle");
         Log.d("themtaictitle", "titles:" + titles);
         titleTv.setText(titles.get(3));
+    }
 
-        GridLayoutManager gm = new GridLayoutManager(getActivity(), 1);
-        gm.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(gm);
-//        adapter = new ThemtaicRecycleViewAdapter(datas, getActivity());
-        recyclerView.setAdapter(adapter);
+    private void initView() {
+        netHelper = new NetHelper(getContext());
+        ArrayList<String> token = new ArrayList<>();
+        ArrayList<String> value = new ArrayList<>();
+        token.add(getString(R.string.token));
+        token.add(getString(R.string.story_uid));
+        token.add(getString(R.string.device_type));
+        token.add(getString(R.string.page));
+        token.add(getString(R.string.last_time));
+        value.add("");
+        value.add("");
+        value.add(getString(R.string.one));
+        value.add("");
+        value.add("");
+        netHelper.getPostInfo(NetConstants.THEMATIC_TYPE, token, value, ThematicBean.class, new NetHelper.NetListener<ThematicBean>() {
+            @Override
+            public void onSuccess(ThematicBean thematicBean) {
+                datas = (ArrayList<ThematicBean.DataEntity.ListEntity>) thematicBean.getData().getList();
+                adapter = new ThematicRecycleViewAdapter(datas, getActivity());
+                GridLayoutManager gm = new GridLayoutManager(getActivity(), 1);
+                gm.setOrientation(LinearLayoutManager.HORIZONTAL);
+                recyclerView.setLayoutManager(gm);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
+
+        relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                menuListener.clickMenu();
+            }
+        });
     }
 }

@@ -1,5 +1,6 @@
 package com.qoo.magicmirror.homepage;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,12 +16,22 @@ import java.util.ArrayList;
 
 /**
  * Created by dllo on 16/3/29.
+ *
+ * 购物车页面
  */
-public class ShoppingCartFragment extends Fragment implements View.OnClickListener {
+public class ShoppingCartFragment extends Fragment {
 
+    // 接收MainActivity传递的titles
     private ArrayList<String> shoppingTitle;
+    // 标题
     private TextView titleTv;
+    // 标题所在的相对布局
     private RelativeLayout titleRl;
+    private MenuListener menuListener;
+
+    public void setMenuListener(MenuListener menuListener) {
+        this.menuListener = menuListener;
+    }
 
     @Nullable
     @Override
@@ -39,19 +50,22 @@ public class ShoppingCartFragment extends Fragment implements View.OnClickListen
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initView();// 接收MainActivity传递的titles
+        initData();// 设置listview以外的布局的点击事件隐藏fragment
+    }
+
+    private void initData() {
+        titleRl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                menuListener.clickMenu();
+            }
+        });
+    }
+
+    private void initView() {
         Bundle bundle = getArguments();
         shoppingTitle = bundle.getStringArrayList("shoppingTitle");
         titleTv.setText(shoppingTitle.get(4));
-        titleRl.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.fragment_shopping_title_rl:
-//                GoodsFragment
-                // TODO 点击PopupWindow
-                break;
-        }
     }
 }

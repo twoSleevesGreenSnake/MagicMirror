@@ -1,22 +1,15 @@
 package com.qoo.magicmirror.homepage;
 
-import android.content.Context;
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.qoo.magicmirror.R;
@@ -30,25 +23,24 @@ import java.util.ArrayList;
  * <p/>
  * 商品展示的Fragment
  */
-public class GoodsFragment extends Fragment implements View.OnClickListener {
+public class GoodsFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private GoodsRecycleViewAdapter adapter;
     private ArrayList<GoodsListBean.DataEntity.ListEntity> datas;
+    // 标题的帧布局
     private FrameLayout titleFl;
+    // MainActivity适配器传递过来的Viewpager的position
     private int position;
-    private String titles;
+    // MainActivity传递过来的标题集合
     private ArrayList<String> popTitles;
+    // 标题
     private TextView titleTv;
-    private PopClickListener popClickListener;
-    private PopupWindow popupWindow;
+    private MenuListener menuListener;
 
 
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        popClickListener = (GoodsFragment.PopClickListener) context;
+    public void setMenuListener(MenuListener menuListener) {
+        this.menuListener = menuListener;
     }
 
     /**
@@ -58,11 +50,10 @@ public class GoodsFragment extends Fragment implements View.OnClickListener {
      * @param position viewpager的位置
      * @return 新的Fragment
      */
-    public static Fragment getInstance(int position, String titles, ArrayList<String> popTitles) {
+    public static Fragment getInstance(int position, ArrayList<String> popTitles) {
         Fragment instance = new GoodsFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(Value.putPosition, position);
-        bundle.putString(Value.putTitles, titles);
         bundle.putStringArrayList(Value.putPopTitles, popTitles);
         instance.setArguments(bundle);
         return instance;
@@ -74,6 +65,7 @@ public class GoodsFragment extends Fragment implements View.OnClickListener {
         return inflater.inflate(R.layout.fragment_goods, container, false);
     }
 
+    // 绑定组件ID，初始化
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -83,16 +75,26 @@ public class GoodsFragment extends Fragment implements View.OnClickListener {
         datas = new ArrayList<>();
     }
 
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initData();// 接收静态方法传来的值，设置标题，标题点击事件
+        initView();// 解析数据
+
+    }
+
+    private void initData() {
         Bundle bundle = getArguments();
         position = bundle.getInt(Value.putPosition);
-        titles = bundle.getString(Value.putTitles);
         popTitles = bundle.getStringArrayList(Value.putPopTitles);
-        initView();
         titleTv.setText(popTitles.get(position));
-        titleFl.setOnClickListener(this);
+        titleFl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                menuListener.clickMenu();
+            }
+        });
     }
 
     private void initView() {
@@ -129,110 +131,4 @@ public class GoodsFragment extends Fragment implements View.OnClickListener {
                 }
         );
     }
-
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.fragment_goods_title_fl:
-                showMenuPopWindow(v);
-                break;
-        }
-    }
-
-
-    /**
-     * 显示PopupWindow
-     *
-     * @param v 父布局
-     */
-    public void showMenuPopWindow(View v) {
-        popupWindow = new PopupWindow(getActivity());
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_menu_popupwindow, null);
-        popupWindow.setContentView(view);
-        ListView listView = (ListView) view.findViewById(R.id.fragment_menu_lv);
-        int checkedPosition = listView.getCheckedItemPosition();
-        MenuAdapter menuAdapter = new MenuAdapter(popTitles,checkedPosition);
-        listView.setAdapter(menuAdapter);
-        popupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
-        popupWindow.setHeight(LinearLayout.LayoutParams.MATCH_PARENT);
-        popupWindow.setAnimationStyle(R.anim.fragment_menu_popupwindow);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popupWindow.dismiss();
-            }
-        });
-        // 指定位置显示
-        popupWindow.showAtLocation(v, LinearLayout.HORIZONTAL, 0, 0);
-    }
-
-    /**
-     * PopupWindow的适配器
-     */
-    private class MenuAdapter extends BaseAdapter {
-
-        private ArrayList<String> titles;
-        private int checkedPosition;
-
-        public MenuAdapter(ArrayList<String> titles, int checkedPosition) {
-            this.titles = titles;
-            this.checkedPosition = checkedPosition;
-        }
-
-        @Override
-        public int getCount() {
-            return titles.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return titles.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(final int position, View convertView, final ViewGroup parent) {
-            MyViewholder myViewholder;
-            if (convertView == null) {
-                convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_fragment_menu_title, parent, false);
-                myViewholder = new MyViewholder();
-                myViewholder.titleTv = (TextView) convertView.findViewById(R.id.fragment_menu_goods_title_tv);
-                myViewholder.menuLl = (LinearLayout) convertView.findViewById(R.id.fragment_menu_popipwindow_title_ll);
-                myViewholder.lineIv = (ImageView) convertView.findViewById(R.id.fragment_popupwindow_title_line_iv);
-                convertView.setTag(myViewholder);
-            } else {
-                myViewholder = (MyViewholder) convertView.getTag();
-            }
-            myViewholder.titleTv.setText(titles.get(position));
-            myViewholder.menuLl.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    popClickListener.popClickListener(position);
-                    popupWindow.dismiss();
-                }
-            });
-            if (checkedPosition == position) {
-                myViewholder.lineIv.setVisibility(convertView.VISIBLE);
-            } else {
-                myViewholder.lineIv.setVisibility(convertView.INVISIBLE);
-            }
-            return convertView;
-        }
-
-        private class MyViewholder {
-            TextView titleTv;
-            LinearLayout menuLl;
-            ImageView lineIv;
-        }
-    }
-
-    public interface PopClickListener {
-        void popClickListener(int popMenuPosition);
-    }
-
 }
