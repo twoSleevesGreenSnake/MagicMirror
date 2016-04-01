@@ -34,6 +34,8 @@
     <string name="fragment_mune_popupwindow_gohome">返回首页</string>
     <string name="gohome_tv">返回首页</string>
     <string name="loginout_tv">退出</string>
+    <string name="story_uid">story_uid</string>
+
 
 
 </resources>
