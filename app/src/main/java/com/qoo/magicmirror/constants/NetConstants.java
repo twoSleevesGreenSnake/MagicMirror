@@ -8,9 +8,6 @@ package com.qoo.magicmirror.constants;
 public final class NetConstants {
 
     public static final String SERVIE_ADRESS = "http://api101.test.mirroreye.cn/";
-
-<<<<<<< HEAD
-
     // 启动图
     public static final String STARTED_IMG = "index.php/index/started_img";
     // 商品列表
@@ -65,10 +62,6 @@ public final class NetConstants {
     public static final String DAILY_RECOMMENDATION = "index.php/index/mrtj";
     // 分享开关
     public static final String SHARED_SWITCH = "index.php/index/share_switch";
-=======
-    public static final String GOODS_TYPE = "index.php/products/goods_list";
-    public static final String SHARE_SPECIAL_HOMEPAGE = "index.php/story/story_list";
-    public static final String SHARE_SPECIAL = "index.php/story/info";
->>>>>>> feature/继续之前解析专题
+
 
 }

@@ -57,11 +57,8 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
         value.add("1");
         value.add("2");
         final NetHelper netHelper = new NetHelper(this);
-<<<<<<< HEAD
-        netHelper.getPostInfo(NetConstants.THEMATIC_TYPE, token, value,SpecialTopicDetailBean.class, new NetHelper.NetListener<SpecialTopicDetailBean>() {
-=======
-        netHelper.getPostInfo(NetConstants.SHARE_SPECIAL, token, value, SpecialTopicDetailBean.class, new NetHelper.NetListener<SpecialTopicDetailBean>() {
->>>>>>> feature/继续之前解析专题
+
+        netHelper.getPostInfo(NetConstants.STORY_INFO, token, value, SpecialTopicDetailBean.class, new NetHelper.NetListener<SpecialTopicDetailBean>() {
             @Override
             public void onSuccess(SpecialTopicDetailBean specialTopicDetailBean) {
                 data = specialTopicDetailBean.getData().getStory_data();

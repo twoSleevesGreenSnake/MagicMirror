@@ -103,9 +103,8 @@ public class NetHelper<T> {
             public boolean handleMessage(Message msg) {
                 if (msg.what == 1) {
                     String result = (String) msg.obj;
-                    Log.d("Sysout","result:" + result);
-                    T t = new Gson().fromJson(result, cls);
 
+                    T t = new Gson().fromJson(result, cls);
                     listener.onSuccess(t);
 
                 }
@@ -120,17 +119,14 @@ public class NetHelper<T> {
 
     }
 
-<<<<<<< HEAD
     /**
      * 切图的方法
      * @param imageView 组件
      * @param url   网址
      * @param cutLenth 切掉的高度,取下部分
      */
-    public void setDrawable(ImageView imageView,String url,int cutLenth){
-=======
+
     public void setDrawable(ImageView imageView, String url, int cutLenth) {
->>>>>>> feature/继续之前解析专题
         Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url);
         if (bitmap == null) {
             return;
@@ -180,7 +176,7 @@ public class NetHelper<T> {
 
         Request request = new Request.Builder()
 
-                .url(NetConstants.SERVIE_ADRESS + NetConstants.SHARE_SPECIAL)
+                .url(NetConstants.SERVIE_ADRESS + url)
 
                 .post(formBody)
 
