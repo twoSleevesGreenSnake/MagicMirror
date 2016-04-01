@@ -49,7 +49,7 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, BrowseGlassesActivity.class);
-                intent.putExtra("GoodsListBean.DataEntity.ListEntity", data.get(mainPosition));
+                intent.putExtra(Value.putGoodsListBeanDataEntityListEntity, data.get(mainPosition));
                 context.startActivity(intent);
             }
         });

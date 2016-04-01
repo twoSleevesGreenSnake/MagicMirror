@@ -188,9 +188,9 @@ public class NetHelper<T> {
 //            int cacheSize = (int) (maxSize / 4);
 //            cache = new LruCache<String, Bitmap>(cacheSize) {
 //                @Override
-//                protected int sizeOf(String key, Bitmap value) {
+//                protected int sizeOf(String key, Bitmap Value) {
 //
-//                    return value.getRowBytes() * value.getHeight() / 1024;
+//                    return Value.getRowBytes() * Value.getHeight() / 1024;
 //                }
 //            };
 //        }

@@ -62,14 +62,14 @@ public class BrowseGlassesActivity extends BaseActivity {
 //        token.add(getString(R.string.last_time));
 //        token.add(getString(R.string.category_id));
 //        token.add(getString(R.string.version));
-//        ArrayList<String> value = new ArrayList<>();
-//        value.add("");
-//        value.add(getString(R.string.one));
-//        value.add("");
-//        value.add("");
-//        value.add("");
-//        value.add(getString(R.string.one_point_zero_point_zero));
-//        netHelper.getPostInfo(NetConstants.GOODS_TYPE, token, value, GoodsListBean.class, new NetHelper.NetListener<GoodsListBean>() {
+//        ArrayList<String> Value = new ArrayList<>();
+//        Value.add("");
+//        Value.add(getString(R.string.one));
+//        Value.add("");
+//        Value.add("");
+//        Value.add("");
+//        Value.add(getString(R.string.one_point_zero_point_zero));
+//        netHelper.getPostInfo(NetConstants.GOODS_TYPE, token, Value, GoodsListBean.class, new NetHelper.NetListener<GoodsListBean>() {
 //            @Override
 //            public void onSuccess(GoodsListBean goodsListBean) {
 //                data = goodsListBean.getData().getList().get(0);

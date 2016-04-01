@@ -53,12 +53,12 @@ public class MainActivity extends BaseActivity implements GoodsFragment.PopClick
 
         ThematicFragment thematicFragment = new ThematicFragment();
         Bundle bundleT = new Bundle();
-        bundleT.putStringArrayList("themtaictitle", titles);
+        bundleT.putStringArrayList(Value.putThematicTitle, titles);
         thematicFragment.setArguments(bundleT);
         fragments.add(thematicFragment);
         ShoppingCartFragment shoppingCartFragment = new ShoppingCartFragment();
         Bundle bundleS = new Bundle();
-        bundleS.putStringArrayList("shoppingTitle", titles);
+        bundleS.putStringArrayList(Value.putShoppingTitle, titles);
         shoppingCartFragment.setArguments(bundleS);
         fragments.add(shoppingCartFragment);
         adapter = new VerticalViewPagerAdapter(getSupportFragmentManager(), fragments, titles, this);
@@ -67,7 +67,6 @@ public class MainActivity extends BaseActivity implements GoodsFragment.PopClick
         logoIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "点了", Toast.LENGTH_SHORT).show();
             }
         });
     }

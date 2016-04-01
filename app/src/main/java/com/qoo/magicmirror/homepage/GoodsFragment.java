@@ -43,6 +43,8 @@ public class GoodsFragment extends Fragment implements View.OnClickListener {
     private PopClickListener popClickListener;
     private PopupWindow popupWindow;
 
+
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -59,9 +61,9 @@ public class GoodsFragment extends Fragment implements View.OnClickListener {
     public static Fragment getInstance(int position, String titles, ArrayList<String> popTitles) {
         Fragment instance = new GoodsFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("position", position);
-        bundle.putString("titles", titles);
-        bundle.putStringArrayList("poptitles", popTitles);
+        bundle.putInt(Value.putPosition, position);
+        bundle.putString(Value.putTitles, titles);
+        bundle.putStringArrayList(Value.putPopTitles, popTitles);
         instance.setArguments(bundle);
         return instance;
     }
@@ -85,10 +87,9 @@ public class GoodsFragment extends Fragment implements View.OnClickListener {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Bundle bundle = getArguments();
-        position = bundle.getInt("position");
-        titles = bundle.getString("titles");
-        popTitles = bundle.getStringArrayList("poptitles");
-        Log.d("GoodsFragment", "popTitles:" + popTitles);
+        position = bundle.getInt(Value.putPosition);
+        titles = bundle.getString(Value.putTitles);
+        popTitles = bundle.getStringArrayList(Value.putPopTitles);
         initView();
         titleTv.setText(popTitles.get(position));
         titleFl.setOnClickListener(this);
