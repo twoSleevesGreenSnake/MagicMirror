@@ -76,28 +76,21 @@ public class VerticalViewPager extends ViewPager {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
+        boolean intercepted = super.onInterceptTouchEvent(swapXY(event));
+        swapXY(event);
+        int action = event.getAction();
+        switch (action){
             case MotionEvent.ACTION_DOWN:
                 startX = event.getX();
                 startY = event.getY();
-                Log.d("VerticalViewPager", "startX:" + startX);
-                Log.d("VerticalViewPager", "startY:" + startY);
                 break;
             case MotionEvent.ACTION_MOVE:
-                moveX = event.getX();
-                moveY = event.getY();
-                Log.d("VerticalViewPager", "moveX:" + moveX);
-                Log.d("VerticalViewPager", "moveY:" + moveY);
+                float moveX = event.getX();
+                float moveY = event.getY();
+                if(Math.abs(moveY - startY) - Math.abs(moveX - startX) > 0){
+                    return true;
+                }
                 break;
-        }
-        boolean intercepted = super.onInterceptTouchEvent(swapXY(event));
-        swapXY(event);
-        float distanceY = Math.abs(moveY - startY);
-        float distanceX = Math.abs(moveX - startX);
-        if (distanceY > distanceX) {// 小于不拦截子布局，大于拦截
-            Log.d("VerticalViewPager", "distanceY:" + distanceY);
-            Log.d("VerticalViewPager", "distanceX:" + distanceX);
-            return true;
         }
         return intercepted;
     }

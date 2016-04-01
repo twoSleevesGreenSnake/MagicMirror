@@ -46,9 +46,9 @@ public class ThematicFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Bundle bundle = getArguments();
-        titles = bundle.getStringArrayList("title");
-        Log.d("ThematicFragment", "titles:" + titles);
-        titleTv.setText(titles.get(4));
+        titles = bundle.getStringArrayList("themtaictitle");
+        Log.d("themtaictitle", "titles:" + titles);
+        titleTv.setText(titles.get(3));
 
         GridLayoutManager gm = new GridLayoutManager(getActivity(), 1);
         gm.setOrientation(LinearLayoutManager.HORIZONTAL);
