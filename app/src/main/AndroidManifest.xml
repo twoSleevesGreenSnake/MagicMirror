@@ -23,21 +23,23 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".detail.BrowseGlassesActivity">
+        <!--<activity android:name=".detail.BrowseGlassesActivity">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
+        <activity android:name=".loginandregister.LoginActivity"/>
+
+
+        <activity android:name=".detail.SpecialTopicDetailActivity" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".loginandregister.LoginActivity">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
-
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
-        <activity android:name=".detail.SpecialTopicDetailActivity" />
-        <activity android:name=".detail.BrowseGlassesActivity"/>
+        <!--<activity android:name=".detail.BrowseGlassesActivity"/>-->
 
         <activity
             android:name="com.mob.tools.MobUIShell"

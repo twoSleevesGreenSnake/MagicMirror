@@ -1,5 +1,6 @@
 package com.qoo.magicmirror.detail;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,9 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.qoo.magicmirror.R;
+import com.qoo.magicmirror.base.BaseActivity;
+import com.qoo.magicmirror.constants.NetConstants;
+import com.qoo.magicmirror.net.NetHelper;
 
 import java.util.ArrayList;
 
@@ -17,44 +21,81 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
 /**
  * Created by Giraffe on 16/3/29.
  */
-public class SpecialTopicDetailActivity extends AppCompatActivity implements View.OnClickListener {
+public class SpecialTopicDetailActivity extends BaseActivity implements View.OnClickListener {
     private VerticalViewpagerAdapter verticalViewpagerAdapter;
     private ArrayList<View> views;
     private VerticalViewpager verticalViewpager;
     private int[] middlePic = {R.mipmap.m, R.mipmap.zhua};
     private int[] background = {R.mipmap.tiger, R.mipmap.cat};
+    private ArrayList<SpecialTopicDetailBean.DataEntity.ListEntity> datas;
     private ImageView specialNethermostIv, viewpagerIv,shareIv,closeIv;
 
 
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_specialtopic_detail);
+//        initview();
+//    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_specialtopic_detail);
-        initview();
+    protected int setLayout() {
+        return R.layout.activity_specialtopic_detail;
     }
 
-    private void initview() {
+    @Override
+    protected void initData() {
+
+        ArrayList<String> token = new ArrayList<>();
+        token.add(getString(R.string.token));
+        token.add(getString(R.string.story_uid));
+        token.add(getString(R.string.device_type));
+        token.add(getString(R.string.page));
+        token.add(getString(R.string.last_time));
+        ArrayList<String> value = new ArrayList<>();
+        value.add("");
+        value.add("");
+        value.add(getString(R.string.one));
+        value.add("");
+        value.add("");
+        final NetHelper netHelper = new NetHelper(this);
+        netHelper.getPostInfo(NetConstants.SHARE_SPECIAL, token, value,SpecialTopicDetailBean.class, new NetHelper.NetListener<SpecialTopicDetailBean>() {
+            @Override
+            public void onSuccess(SpecialTopicDetailBean specialTopicDetailBean) {
+                datas = (ArrayList<SpecialTopicDetailBean.DataEntity.ListEntity>) specialTopicDetailBean.getData().getList();
+                netHelper.setImage(specialNethermostIv,datas.get(0).getStory_img());
+                for (int i = 0; i < datas.size() ; i++) {
+                    View view = LayoutInflater.from(SpecialTopicDetailActivity.this).inflate(R.layout.activity_specialtopic_detail_viewpager, null);
+                    views.add(view);
+                netHelper.setImage(specialNethermostIv,datas.get(i).getStory_img());
+                }
+
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
+
+    }
+
+    @Override
+    protected void initView() {
         views = new ArrayList<>();
+        datas = new ArrayList<>();
         verticalViewpager = (VerticalViewpager) findViewById(R.id.activity_specialtopic_detail_viewpager);
         closeIv = (ImageView) findViewById(R.id.activity_specialtopic_detail_close_iv);
         shareIv = (ImageView) findViewById(R.id.activity_specialtopic_detail_share_iv);
         closeIv.setOnClickListener(this);
         shareIv.setOnClickListener(this);
         specialNethermostIv = (ImageView) findViewById(R.id.activity_specialtopic_detail_nethermost_iv);
-        specialNethermostIv.setImageResource(background[0]);
-        for (int i = 0; i < middlePic.length; i++) {
-            View view = LayoutInflater.from(SpecialTopicDetailActivity.this).inflate(R.layout.activity_specialtopic_detail_viewpager, null);
-            viewpagerIv = (ImageView) view.findViewById(R.id.activity_specialtopic_detail_viewpager_iv);
-            viewpagerIv.setImageResource(middlePic[i]);
-//            viewpagerIv.setOnLongClickListener(new View.OnLongClickListener() {
-//                @Override
-//                public boolean onLongClick(View v) {
-//
-//                    return true;
-//                }
-//            });
-            views.add(view);
-        }
+//        specialNethermostIv.setImageResource(background[0]);
+//        for (int i = 0; i < middlePic.length; i++) {
+//            View view = LayoutInflater.from(SpecialTopicDetailActivity.this).inflate(R.layout.activity_specialtopic_detail_viewpager, null);
+//            views.add(view);
+//        }
+
         verticalViewpagerAdapter = new VerticalViewpagerAdapter(views);
         verticalViewpager.setAdapter(verticalViewpagerAdapter);
 
@@ -78,6 +119,8 @@ public class SpecialTopicDetailActivity extends AppCompatActivity implements Vie
 
 
     }
+
+
 
 
     @Override
