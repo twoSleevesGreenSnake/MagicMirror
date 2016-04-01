@@ -1,6 +1,7 @@
 package com.qoo.magicmirror.net;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -21,17 +22,20 @@ import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.constants.NetConstants;
+import com.qoo.magicmirror.detail.SpecialTopicDetailBean;
 import com.qoo.magicmirror.tools.CutBitmap;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 
 /**
@@ -47,6 +51,7 @@ public class NetHelper<T> {
     private ImageLoaderConfiguration configuration;
     private ImageLoader imageLoader;
     private final DisplayImageOptions options;
+    private Class<T> cls;
 
     /**
      * 此构造方法并有没有彻底整完 有很大的问题 因为并没有了解okhttp的用法,只是强行使用而已
@@ -97,7 +102,12 @@ public class NetHelper<T> {
             @Override
             public boolean handleMessage(Message msg) {
                 if (msg.what == 1) {
-                    listener.onSuccess(msg.obj);
+                    String result = (String) msg.obj;
+                    Log.d("Sysout","result:" + result);
+                    T t = new Gson().fromJson(result, cls);
+
+                    listener.onSuccess(t);
+
                 }
                 if (msg.what == 2) {
                     listener.onFailure();
@@ -109,17 +119,17 @@ public class NetHelper<T> {
         });
 
     }
-    public void setDrawable(ImageView imageView,String url,int cutLenth){
+
+    public void setDrawable(ImageView imageView, String url, int cutLenth) {
         Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url);
-        if (bitmap==null){
+        if (bitmap == null) {
             return;
         }
-        if (bitmap.getHeight()>500) {
+        if (bitmap.getHeight() > 500) {
 
             Bitmap newBitmap = Bitmap.createBitmap(bitmap, 0, cutLenth, bitmap.getWidth(), bitmap.getHeight() - cutLenth);
             imageView.setImageBitmap(newBitmap);
-        }
-        else imageView.setImageBitmap(bitmap);
+        } else imageView.setImageBitmap(bitmap);
     }
 
     public void setImage(ImageView imageView, String url) {
@@ -132,10 +142,10 @@ public class NetHelper<T> {
      * @param values   拼接参数的valve结合
      * @param cls      实体类的class对象
      * @param listener 请求之后的回调接口
-     * @param <T>      不知道需要解析何种类型的泛型
      */
-    public <T> void getPostInfo(String url, ArrayList<String> keys, ArrayList<String> values, final Class<T> cls, final NetListener<T> listener) {
+    public void getPostInfo(String url, ArrayList<String> keys, ArrayList<String> values, final Class<T> cls, final NetListener<T> listener) {
         FormEncodingBuilder builder = new FormEncodingBuilder();
+        this.cls = cls;
         this.listener = listener;
         for (int i = 0; i < keys.size(); i++) {
             builder.add(keys.get(i), values.get(i));
@@ -144,7 +154,7 @@ public class NetHelper<T> {
 
         Request request = new Request.Builder()
 
-                .url(NetConstants.SERVIE_ADRESS + url)
+                .url(NetConstants.SERVIE_ADRESS + NetConstants.SHARE_SPECIAL)
 
                 .post(formBody)
 
@@ -157,10 +167,11 @@ public class NetHelper<T> {
 
             @Override
             public void onResponse(com.squareup.okhttp.Response response) throws IOException {
-                T t = new Gson().fromJson(response.body().string(), cls);
+
+
                 Message message = new Message();
                 message.what = 1;
-                message.obj = t;
+                message.obj = response.body().string();
                 handler.sendMessage(message);
 
             }

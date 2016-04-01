@@ -9,23 +9,25 @@
 
 
         <RelativeLayout
+            android:id="@+id/activity_specialtopic_detail_viewpager_rl"
             android:layout_alignParentBottom="true"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/activity_specialtopic_detail_viewpager_rl_width"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="60dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
+            android:layout_marginBottom="@dimen/activity_specialtopic_detail_viewpager_rl_marginBottom"
+            android:layout_marginLeft="@dimen/activity_specialtopic_detail_viewpager_rl_marginLeft"
+            android:layout_marginRight="@dimen/activity_specialtopic_detail_viewpager_rl_marginRight"
             android:background="@mipmap/display_background_frame">
 
             <TextView
                 android:id="@+id/activity_specialtopic_detail_viewpager_little_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="60px"
-                android:layout_marginTop="42px"
+                android:layout_marginLeft="@dimen/activity_specialtopic_detail_viewpager_little_title_marginLeft"
+                android:layout_marginTop="@dimen/activity_specialtopic_detail_viewpager_little_title_marginTop"
+
                 android:text="巴拉巴拉小魔仙"
-                android:textColor="#fff"
-                android:textSize="22px" />
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/activity_specialtopic_detail_viewpager_little_title_textSize" />
 
             <TextView
                 android:id="@+id/activity_specialtopic_detail_viewpager_main_title"
@@ -33,11 +35,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/activity_specialtopic_detail_viewpager_little_title"
-                android:layout_marginLeft="60px"
-                android:layout_marginTop="22px"
+                android:layout_marginLeft="@dimen/activity_specialtopic_detail_viewpager_main_title_marginLeft"
+                android:layout_marginTop="@dimen/activity_specialtopic_detail_viewpager_main_title_marginTop"
                 android:text="hahahahahahah"
-                android:textColor="#fff"
-                android:textSize="34px" />
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/activity_specialtopic_detail_viewpager_main_title_textSize" />
 
             <TextView
                 android:id="@+id/activity_specialtopic_detail_viewpager_content"
@@ -45,12 +47,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/activity_specialtopic_detail_viewpager_main_title"
-                android:layout_marginLeft="60px"
-                android:layout_marginRight="190px"
-                android:layout_marginTop="22px"
+                android:layout_marginLeft="@dimen/activity_specialtopic_detail_viewpager_content_marginLeft"
+                android:layout_marginRight="@dimen/activity_specialtopic_detail_viewpager_content_marginRight"
+                android:layout_marginTop="@dimen/activity_specialtopic_detail_viewpager_content_marginTop"
                 android:text="按时发生地方绝对是爱上的咖啡萨科技风按空格或放大看是否就法规发生地方"
-                android:textColor="#fff"
-                android:textSize="20px" />
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/activity_specialtopic_detail_viewpager_content_textSize" />
         </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>

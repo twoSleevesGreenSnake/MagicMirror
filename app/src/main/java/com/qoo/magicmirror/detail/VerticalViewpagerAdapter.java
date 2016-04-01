@@ -32,7 +32,7 @@ public class VerticalViewpagerAdapter extends PagerAdapter {
     //实例化页卡
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        View view = LayoutInflater.from(container.getContext()).inflate(R.layout.activity_specialtopic_detail_viewpager,container,false);
+
         container.addView(views.get(position));
         return views.get(position);
     }

@@ -3,10 +3,10 @@
     <dimen name="activity_horizontal_margin">32px</dimen>
     <dimen name="activity_vertical_margin">32px</dimen>
     <dimen name="activity_specialtopic_detail_viewpager_iv_marginBottom">200px</dimen>
-    <dimen name="activity_specialtopic_detail_share_iv_marginBottom">80px</dimen>
-    <dimen name="activity_specialtopic_detail_share_iv_marginRight">80px</dimen>
-    <dimen name="activity_specialtopic_detail_close_iv_marginRight">80px</dimen>
-    <dimen name="activity_specialtopic_detail_close_iv_marginTop">80px</dimen>
+    <dimen name="activity_specialtopic_detail_share_iv_marginBottom">40px</dimen>
+    <dimen name="activity_specialtopic_detail_share_iv_marginRight">40px</dimen>
+    <dimen name="activity_specialtopic_detail_close_iv_marginRight">40px</dimen>
+    <dimen name="activity_specialtopic_detail_close_iv_marginTop">50px</dimen>
     <dimen name="activity_main_iv_marginBottom">40px</dimen>
     <dimen name="activity_main_iv_marginLeft">48px</dimen>
     <dimen name="activity_main_login_rl_marginBottom">40px</dimen>
@@ -158,5 +158,19 @@
     <dimen name="activity_login_sina_iv_marginLeft">120dp</dimen>
     <dimen name="activity_login_wechat_iv_marginLeft">30dp</dimen>
     <dimen name="fragment_menu_popupwindow_line_iv_marginTop">22px</dimen>
+    <dimen name="activity_specialtopic_detail_viewpager_rl_width">640px</dimen>
+    <dimen name="activity_specialtopic_detail_viewpager_rl_marginBottom">130px</dimen>
+    <dimen name="activity_specialtopic_detail_viewpager_rl_marginLeft">35px</dimen>
+    <dimen name="activity_specialtopic_detail_viewpager_rl_marginRight">35px</dimen>
+    <dimen name="activity_specialtopic_detail_viewpager_little_title_marginLeft">60px</dimen>
+    <dimen name="activity_specialtopic_detail_viewpager_little_title_marginTop">62px</dimen>
+    <dimen name="activity_specialtopic_detail_viewpager_little_title_textSize">22px</dimen>
+    <dimen name="activity_specialtopic_detail_viewpager_main_title_marginLeft">60px</dimen>
+    <dimen name="activity_specialtopic_detail_viewpager_main_title_marginTop">22px</dimen>
+    <dimen name="activity_specialtopic_detail_viewpager_main_title_textSize">34px</dimen>
+    <dimen name="activity_specialtopic_detail_viewpager_content_marginLeft">60px</dimen>
+    <dimen name="activity_specialtopic_detail_viewpager_content_marginRight">190px</dimen>
+    <dimen name="activity_specialtopic_detail_viewpager_content_marginTop">22px</dimen>
+    <dimen name="activity_specialtopic_detail_viewpager_content_textSize">20px</dimen>
     >>>>>>> 7e70d6ae50f7d48c2fed68ca7a1a58af0eb25209
 </resources>
