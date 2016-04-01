@@ -21,6 +21,7 @@ import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.constants.NetConstants;
+import com.qoo.magicmirror.tools.CutBitmap;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
@@ -107,6 +108,18 @@ public class NetHelper<T> {
             }
         });
 
+    }
+    public void setDrawable(ImageView imageView,String url,int cutLenth){
+        Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url);
+        if (bitmap==null){
+            return;
+        }
+        if (bitmap.getHeight()>500) {
+
+            Bitmap newBitmap = Bitmap.createBitmap(bitmap, 0, cutLenth, bitmap.getWidth(), bitmap.getHeight() - cutLenth);
+            imageView.setImageBitmap(newBitmap);
+        }
+        else imageView.setImageBitmap(bitmap);
     }
 
     public void setImage(ImageView imageView, String url) {

@@ -107,9 +107,10 @@ public class BrowseGlassesActivity extends BaseActivity {
             if (position == getItemCount() - 1) {
                 return LAST_MODE;
             }
-            if (position == getItemCount() - 2) {
-                return LAST_SECOND_MODE;
-            } else {
+//            if (position == getItemCount() - 2) {
+//                return LAST_SECOND_MODE;
+//            }
+        else {
                 return CONTENT_MODE;
             }
         }
@@ -124,10 +125,10 @@ public class BrowseGlassesActivity extends BaseActivity {
                 return new FirstItemHolder(LayoutInflater.from(parent.getContext()).
                         inflate(R.layout.item_detail_browse_glasses_rv_head_first, parent, false));
             }
-            if (viewType == LAST_SECOND_MODE) {
-                return new LastSecondItemHolder(LayoutInflater.from(parent.getContext()).
-                        inflate(R.layout.item_detail_browse_last_second_content, parent, false));
-            }
+//            if (viewType == LAST_SECOND_MODE) {
+//                return new BrowseGlassesHolder(LayoutInflater.from(parent.getContext()).
+//                        inflate(R.layout.item_detail_browse_glasses_rv_content, parent, false));
+//            }
 
             if (viewType == HEAD_SECOND_MODE) {
                 return new HeadSecondItemHolder(LayoutInflater.from(parent.getContext()).
@@ -141,16 +142,34 @@ public class BrowseGlassesActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+//            if (getItemViewType(position) == LAST_SECOND_MODE) {
+//                ((BrowseGlassesHolder) holder).contentPosition = position;
+//                ((BrowseGlassesHolder) holder).contentTv.setText(data.getGoods_data().get(position -2).getIntroContent());
+//                ((BrowseGlassesHolder) holder).titleTv.setText(data.getGoods_data().get(position -2).getLocation());
+//                ((BrowseGlassesHolder) holder).eTitleTv.setText(data.getGoods_data().get(position -2).getEnglish());
+//                ((BrowseGlassesHolder) holder).locationTv.setText(data.getGoods_data().get(position -2).getCountry());
+//                if (data.getDesign_des().size() < position - 2) {
+//                    return;
+//                }
+//
+//                netHelper.setImage(((BrowseGlassesHolder) holder).backImg, data.getDesign_des().get(position - 2).getImg());
+//
+//            }
             if (getItemViewType(position) == CONTENT_MODE) {
                 ((BrowseGlassesHolder) holder).contentPosition = position;
-                ((BrowseGlassesHolder) holder).contentTv.setText(data.getGoods_data().get(position + 2).getIntroContent());
-                ((BrowseGlassesHolder) holder).titleTv.setText(data.getGoods_data().get(position + 2).getLocation());
-                ((BrowseGlassesHolder) holder).eTitleTv.setText(data.getGoods_data().get(position + 2).getEnglish());
-                ((BrowseGlassesHolder) holder).locationTv.setText(data.getGoods_data().get(position + 2).getCountry());
+                ((BrowseGlassesHolder) holder).contentTv.setText(data.getGoods_data().get(position -2).getIntroContent());
+                ((BrowseGlassesHolder) holder).titleTv.setText(data.getGoods_data().get(position -2).getLocation());
+                ((BrowseGlassesHolder) holder).eTitleTv.setText(data.getGoods_data().get(position -2).getEnglish());
+                ((BrowseGlassesHolder) holder).locationTv.setText(data.getGoods_data().get(position -2).getCountry());
                 if (data.getDesign_des().size() < position - 2) {
                     return;
                 }
-                netHelper.setImage(((BrowseGlassesHolder) holder).backImg, data.getDesign_des().get(position - 2).getImg());
+                if (position!=getItemCount()-2) {
+                    netHelper.setDrawable(((BrowseGlassesHolder) holder).backImg, data.getDesign_des().get(position - 2).getImg(), 250);
+                }
+                else {
+                    netHelper.setImage(((BrowseGlassesHolder) holder).backImg,data.getDesign_des().get(position - 2).getImg());
+                }
 
             }
             if (getItemViewType(position) == HEAD_MODE) {
@@ -165,7 +184,7 @@ public class BrowseGlassesActivity extends BaseActivity {
 
         @Override
         public int getItemCount() {
-            return data.getGoods_data().size() + 4;
+            return data.getGoods_data().size() + 3;
         }
 
         class BrowseGlassesHolder extends RecyclerView.ViewHolder {
@@ -202,7 +221,7 @@ public class BrowseGlassesActivity extends BaseActivity {
 
                         //实现滑动的核心代码
                         if (BrowseGlassesAdapter.this.getItemViewType(contentPosition) == CONTENT_MODE) {
-                            relativeLayout.scrollTo((int) itemView.getX(), -((int) itemView.getY()) / 2);
+                            relativeLayout.scrollTo((int) itemView.getX(), -((int) itemView.getY()) / 5+100);
                             Log.i("height", height + "");
                         }
 
