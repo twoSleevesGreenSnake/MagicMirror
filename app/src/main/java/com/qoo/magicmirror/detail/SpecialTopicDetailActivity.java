@@ -1,9 +1,11 @@
 package com.qoo.magicmirror.detail;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,6 +13,7 @@ import android.widget.ImageView;
 import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.base.BaseActivity;
 import com.qoo.magicmirror.constants.NetConstants;
+import com.qoo.magicmirror.homepage.Value;
 import com.qoo.magicmirror.net.NetHelper;
 
 import java.util.ArrayList;
@@ -30,6 +33,8 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
     private ArrayList<SpecialTopicDetailBean.DataEntity.ListEntity> datas;
     private ImageView specialNethermostIv, viewpagerIv,shareIv,closeIv;
 
+    private String storyId;
+
 
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,11 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
     @Override
     protected void initData() {
 
+        // 接收首页的storyId
+        Intent intent = getIntent();
+        storyId = intent.getStringExtra(Value.putStoryId);
+        Log.d("SpecialTopicDetailActiv", storyId);
+
         ArrayList<String> token = new ArrayList<>();
         token.add(getString(R.string.token));
         token.add(getString(R.string.story_uid));
@@ -59,7 +69,7 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
         value.add("");
         value.add("");
         final NetHelper netHelper = new NetHelper(this);
-        netHelper.getPostInfo(NetConstants.SHARE_SPECIAL, token, value,SpecialTopicDetailBean.class, new NetHelper.NetListener<SpecialTopicDetailBean>() {
+        netHelper.getPostInfo(NetConstants.THEMATIC_TYPE, token, value,SpecialTopicDetailBean.class, new NetHelper.NetListener<SpecialTopicDetailBean>() {
             @Override
             public void onSuccess(SpecialTopicDetailBean specialTopicDetailBean) {
                 datas = (ArrayList<SpecialTopicDetailBean.DataEntity.ListEntity>) specialTopicDetailBean.getData().getList();

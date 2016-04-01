@@ -1,11 +1,11 @@
-package com.qoo.magicmirror.detail;
+package com.qoo.magicmirror.homepage;
 
 import java.util.List;
 
 /**
  * Created by dllo on 16/4/1.
  */
-public class SpecialTopicDetailBean {
+public class ThematicBean {
     /**
      * result : 1
      * msg :

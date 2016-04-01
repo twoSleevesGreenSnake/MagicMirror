@@ -1,6 +1,7 @@
 package com.qoo.magicmirror.net;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -185,7 +186,6 @@ public class NetHelper<T> {
                 message.what = 1;
                 message.obj = t;
                 handler.sendMessage(message);
-
             }
         });
     }
@@ -199,5 +199,105 @@ public class NetHelper<T> {
 
         void onFailure();
     }
+<<<<<<< HEAD
 
+=======
+//
+//    public void setImage(ImageView imageView, String url) {
+//        ImageLoader.ImageListener listener = ImageLoader.getImageListener(imageView, R.mipmap.ic_launcher, R.mipmap.ic_launcher);
+//        loader.get(url, listener);
+//
+//    }
+//
+//    // 内存缓存
+//    public class MemoryCache implements ImageLoader.ImageCache {
+//        private LruCache<String, Bitmap> cache;
+//
+//        public MemoryCache() {
+//            long maxSize = Runtime.getRuntime().maxMemory() / 1024;
+//            int cacheSize = (int) (maxSize / 4);
+//            cache = new LruCache<String, Bitmap>(cacheSize) {
+//                @Override
+//                protected int sizeOf(String key, Bitmap Value) {
+//
+//                    return Value.getRowBytes() * Value.getHeight() / 1024;
+//                }
+//            };
+//        }
+//
+//        @Override
+//        public Bitmap getBitmap(String url) {
+//            return cache.get(url);
+//        }
+//
+//        @Override
+//        public void putBitmap(String url, Bitmap bitmap) {
+//            cache.put(url, bitmap);
+//        }
+//    }
+//
+//    // 硬盘缓存
+//    public class DiskCache implements ImageLoader.ImageCache {
+//
+//        @Override
+//        public Bitmap getBitmap(String url) {
+//            String fileName = url.substring(url.lastIndexOf("/") + 1, url.length());
+//            //用文件名拼接出实际文件存储路径
+//            String filePath = diskPath + "/" + fileName;
+//            Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+//            return bitmap;
+//        }
+//
+//        @Override
+//        public void putBitmap(String url, Bitmap bitmap) {
+//            //获取url中的图片名称
+//            String fileName = url.substring(url.lastIndexOf("/") + 1, url.length());
+//            //用文件名拼接出实际文件存储路径
+//            String filePath = diskPath + "/" + fileName;
+//            FileOutputStream fos = null;
+//            try {
+//                fos = new FileOutputStream(filePath);
+//                //将bitmap对象写入文件中
+//                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            } finally {
+//                //关闭文件流
+//                if (fos != null) {
+//                    try {
+//                        fos.close();
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    // 双重缓存的方式
+//    public class DoubleCache implements ImageLoader.ImageCache {
+//        private MemoryCache memoryCache;
+//        private DiskCache diskCache;
+//
+//        public DoubleCache() {
+//            memoryCache = new MemoryCache();
+//            diskCache = new DiskCache();
+//        }
+//
+//        @Override
+//        public Bitmap getBitmap(String url) {
+//            Bitmap bitmap = memoryCache.getBitmap(url);
+//            if (bitmap == null) {
+//                bitmap = diskCache.getBitmap(url);
+//            }
+//            return bitmap;
+//        }
+//
+//        @Override
+//        public void putBitmap(String url, Bitmap bitmap) {
+//            memoryCache.putBitmap(url, bitmap);
+//            diskCache.putBitmap(url, bitmap);
+//        }
+//    }
+>>>>>>> feature/继续继续
 }

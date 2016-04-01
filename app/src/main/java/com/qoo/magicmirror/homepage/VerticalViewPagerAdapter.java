@@ -20,9 +20,11 @@ public class VerticalViewPagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragments;
     private List<String> titles;
     private Context context;
+    private FragmentManager fm;
 
     public VerticalViewPagerAdapter(FragmentManager fm, ArrayList<Fragment> fragments, ArrayList<String> titles, Context context) {
         super(fm);
+        this.fm = fm;
         this.fragments = fragments;
         this.titles = titles;
         this.context = context;
@@ -31,7 +33,14 @@ public class VerticalViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position < 3) {
-            return GoodsFragment.getInstance(position, titles.get(position), (ArrayList<String>) titles);
+            final GoodsFragment fragment = (GoodsFragment) GoodsFragment.getInstance(position, (ArrayList<String>) titles);
+            fragment.setMenuListener(new MenuListener() {
+                @Override
+                public void clickMenu() {
+                    fm.beginTransaction().show(VerticalViewPagerAdapter.this.fm.findFragmentByTag("menu")).commit();
+                }
+            });
+            return fragment;
         } else {
             return fragments.get(position - 3);
         }

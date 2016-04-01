@@ -25,6 +25,7 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
 
     private ArrayList<GoodsListBean.DataEntity.ListEntity> data;
     private Context context;
+    // MainActivity传递过来的ViewPager的位置
     private int mainPosition;
 
     public GoodsRecycleViewAdapter(ArrayList<GoodsListBean.DataEntity.ListEntity> data, Context context, int mainPosition) {
@@ -49,7 +50,7 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, BrowseGlassesActivity.class);
-                intent.putExtra("GoodsListBean.DataEntity.ListEntity", data.get(mainPosition));
+                intent.putExtra(Value.putGoodsListBeanDataEntityListEntity, data.get(mainPosition));
                 context.startActivity(intent);
             }
         });

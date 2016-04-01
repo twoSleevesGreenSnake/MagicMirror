@@ -61,6 +61,40 @@ public class BrowseGlassesActivity extends BaseActivity {
 
         recyclerView.setAdapter(new BrowseGlassesAdapter());
         recyclerView.setLayoutManager(new LinearLayoutManager(BrowseGlassesActivity.this));
+<<<<<<< HEAD
+=======
+//        strings = new ArrayList<>();
+//        for (int i = 0; i < 30; i++) {
+//            strings.add("1");
+//        }
+//        ArrayList<String> token = new ArrayList<>();
+//        token.add(getString(R.string.token));
+//        token.add(getString(R.string.device_type));
+//        token.add(getString(R.string.page));
+//        token.add(getString(R.string.last_time));
+//        token.add(getString(R.string.category_id));
+//        token.add(getString(R.string.version));
+//        ArrayList<String> Value = new ArrayList<>();
+//        Value.add("");
+//        Value.add(getString(R.string.one));
+//        Value.add("");
+//        Value.add("");
+//        Value.add("");
+//        Value.add(getString(R.string.one_point_zero_point_zero));
+//        netHelper.getPostInfo(NetConstants.GOODS_TYPE, token, Value, GoodsListBean.class, new NetHelper.NetListener<GoodsListBean>() {
+//            @Override
+//            public void onSuccess(GoodsListBean goodsListBean) {
+//                data = goodsListBean.getData().getList().get(0);
+//                recyclerView.setAdapter(new BrowseGlassesAdapter());
+//                recyclerView.setLayoutManager(new LinearLayoutManager(BrowseGlassesActivity.this));
+//            }
+//
+//            @Override
+//            public void onFailure() {
+//
+//            }
+//        });
+>>>>>>> feature/继续继续
 
 
 
