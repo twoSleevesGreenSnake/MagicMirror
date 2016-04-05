@@ -23,6 +23,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< HEAD
         <!--<activity android:name=".homepage.HomeActivity">-->
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
@@ -31,6 +32,16 @@
         <!--</activity>-->
 
         <activity android:name=".loginandregister.LoginActivity" />
+=======
+        <activity android:name=".homepage.HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".homepage.WelcomeActivity"/>
+        <activity android:name=".loginandregister.LoginActivity"/>
+>>>>>>> feature/闪屏页开始
 
         <!--<activity android:name=".detail.BrowseGlassesActivity"/>-->
         <!--<intent-filter>-->

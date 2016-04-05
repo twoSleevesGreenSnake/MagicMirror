@@ -15,6 +15,8 @@ import android.widget.ImageView;
 
 import com.android.volley.RequestQueue;
 
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -33,6 +35,8 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
+
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -103,16 +107,12 @@ public class NetHelper<T> {
             public boolean handleMessage(Message msg) {
                 if (msg.what == 1) {
                     String result = (String) msg.obj;
-
                     T t = new Gson().fromJson(result, cls);
                     listener.onSuccess(t);
-
                 }
                 if (msg.what == 2) {
                     listener.onFailure();
                 }
-
-
                 return false;
             }
         });
@@ -209,12 +209,29 @@ public class NetHelper<T> {
 
             @Override
             public void onResponse(com.squareup.okhttp.Response response) throws IOException {
-
-
                 Message message = new Message();
                 message.what = 1;
                 message.obj = response.body().string();
                 handler.sendMessage(message);
+            }
+        });
+    }
+
+    // get
+    public void getGetInfo(String url,final Class<T> clazz, final NetListener listener) {
+        Request request = new Request.Builder()
+                .url(NetConstants.SERVIE_ADRESS + url)
+                .build();
+        mOkHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                listener.onFailure();
+            }
+            @Override
+            public void onResponse(Response response) throws IOException {
+                Log.d("NetHelper", "NetHelper+" + response.toString());
+                T t = new Gson().fromJson(response.body().string(), clazz);
+                listener.onSuccess(t);
             }
         });
     }

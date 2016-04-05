@@ -1,7 +1,10 @@
 package com.qoo.magicmirror.homepage;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -87,6 +90,8 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
             public void onClick(View v) {
             }
         });
+
+        startActivity(new Intent(this, WelcomeActivity.class));
     }
 
     /**
