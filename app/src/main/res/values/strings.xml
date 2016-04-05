@@ -36,7 +36,13 @@
     <string name="gohome_tv">返回首页</string>
     <string name="loginout_tv">退出</string>
     <string name="story_uid">story_uid</string>
-
+    <string name="activity_login_account_login">账号登录</string>
+    <string name="activity_login_phone_number_text">手机号</string>
+    <string name="activity_login_password_tv_text">密码</string>
+    <string name="activity_login_forget_password_tv">忘记密码？</string>
+    <string name="activity_login_btn_text">登录</string>
+    <string name="activity_login_create_account_btn">创建账号</string>
+    <string name="activity_login_use_social_contact">使用社交账号</string>
 
 
 </resources>

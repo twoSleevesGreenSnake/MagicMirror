@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -10,9 +11,9 @@
 
         <RelativeLayout
             android:id="@+id/activity_specialtopic_detail_viewpager_rl"
-            android:layout_alignParentBottom="true"
             android:layout_width="@dimen/activity_specialtopic_detail_viewpager_rl_width"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/activity_specialtopic_detail_viewpager_rl_marginBottom"
             android:layout_marginLeft="@dimen/activity_specialtopic_detail_viewpager_rl_marginLeft"
             android:layout_marginRight="@dimen/activity_specialtopic_detail_viewpager_rl_marginRight"
