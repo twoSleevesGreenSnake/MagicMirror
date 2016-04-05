@@ -37,7 +37,7 @@
         <activity android:name=".homepage.WelcomeActivity"/>
         <activity android:name=".detail.BrowseGlassesActivity"/>
 
-
+        <activity android:name=".detail.SpecialTopicDetailActivity"/>
 
 
 
