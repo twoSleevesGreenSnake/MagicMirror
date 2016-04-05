@@ -74,7 +74,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
     /**
      * 退出应用的方法
      */
-    public void  destoryAllActivitys(){
+    public void destoryAllActivitys(){
         Iterator<Map.Entry<Class<? extends BaseActivity>,BaseActivity>> it = activities.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry<Class<? extends BaseActivity>,BaseActivity> entry = it.next();

@@ -7,6 +7,10 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    
+    <style name="WelcomeBackTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/welcome_background</item>
+    </style>
 
     <style name="ItemFragmentGoodsNameTv">
         <item name="android:textStyle">bold</item>

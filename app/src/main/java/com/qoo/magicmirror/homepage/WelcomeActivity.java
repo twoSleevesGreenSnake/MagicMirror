@@ -41,9 +41,10 @@ public class WelcomeActivity extends BaseActivity {
                 Log.d("WelcomeActivity", "data:" + data);
                 handler.sendEmptyMessage(1);
             }
+
             @Override
             public void onFailure() {
-
+                finish();
             }
         });
 
@@ -55,19 +56,21 @@ public class WelcomeActivity extends BaseActivity {
         handler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
-
                 netHelper.setImage(imageView, data.getImg());
-
-                new Handler(new Handler.Callback() {
-                    @Override
-                    public boolean handleMessage(Message msg) {
-                        finish();
-                        return false;
-                    }
-                }).sendEmptyMessageDelayed(1, 3000);
                 return false;
             }
         });
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                finish();
+            }
+        }).start();
     }
 //    子线程通常执行耗时操作
 //    1. Message

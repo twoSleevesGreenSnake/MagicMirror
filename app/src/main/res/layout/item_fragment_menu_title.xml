@@ -22,6 +22,7 @@
         android:src="@mipmap/line_of_title"
         android:layout_marginLeft="@dimen/fragment_menu_popupwindow_classification_tv_marginLeft"
         android:layout_marginTop="@dimen/fragment_menu_popupwindow_line_iv_marginTop"
+        android:visibility="invisible"
         />
 
 </LinearLayout>
