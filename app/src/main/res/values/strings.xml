@@ -31,7 +31,7 @@
     <string name="version">version</string>
     <string name="one">1</string>
     <string name="stroy_id">story_id</string>
-    <string name="one_point_zero_point_zero">1.0.0</string>
+    <string name="one_point_zero_point_one">1.0.1</string>
     <string name="fragment_mune_popupwindow_gohome">返回首页</string>
     <string name="gohome_tv">返回首页</string>
     <string name="loginout_tv">退出</string>
@@ -43,6 +43,9 @@
     <string name="activity_login_btn_text">登录</string>
     <string name="activity_login_create_account_btn">创建账号</string>
     <string name="activity_login_use_social_contact">使用社交账号</string>
+    <string name="CHECKEDPOSITION">checkedPosition</string>
+    <string name="MENUTITLE">menutitle</string>
+    <string name="MENU">menu</string>
 
 
 </resources>

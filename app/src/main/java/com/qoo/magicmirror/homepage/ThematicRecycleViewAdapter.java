@@ -55,7 +55,7 @@ public class ThematicRecycleViewAdapter extends RecyclerView.Adapter<ThematicRec
 
     @Override
     public int getItemCount() {
-        return datas.size();
+        return datas != null && datas.size() > 0 ? datas.size() : 0;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {

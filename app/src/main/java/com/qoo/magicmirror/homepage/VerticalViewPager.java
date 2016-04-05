@@ -13,6 +13,8 @@ import android.view.View;
  * over_scroll_always滚动模式（默认），over_scroll_if_content_scrolls（允许在滚动只有查看内容大于容器），over_scroll_never，只有当视图是能够滚动，设置滚动模式的视图将有一个效果。
  * <p/>
  * 用于实现主页面纵向滑动的Viewpager的自定义类
+ *
+ * 触摸事件从父布局向子布局传递，再由子布局返回给父布局
  */
 public class VerticalViewPager extends ViewPager {
 
@@ -74,6 +76,12 @@ public class VerticalViewPager extends ViewPager {
         return event;
     }
 
+    /**
+     * onInterceptTouchEvent()是ViewGroup的一个方法,目的是在系统向该ViewGroup及其各个childView触发onTouchEvent()之前对相关事件进行一次拦截
+     * 即父布局拦截子布局的tuoch事件
+     * @param event 事件
+     * @return 是否拦截子布局的tuoch事件
+     */
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
         boolean intercepted = super.onInterceptTouchEvent(swapXY(event));
@@ -95,6 +103,12 @@ public class VerticalViewPager extends ViewPager {
         return intercepted;
     }
 
+    /**
+     * 是定义于View中的一个方法，处理传递到View的手势触摸事件。手势事件类型包括ACTION_DOWN,ACTION_MOVE,ACTION_UP,ACTION_CANCEL等事件；
+     * 子布局的tuoch事件
+     * @param event 事件
+     * @return 子布局执行的事件
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return super.onTouchEvent(swapXY(event));

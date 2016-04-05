@@ -64,6 +64,7 @@ public class ShoppingCartFragment extends Fragment {
     }
 
     private void initView() {
+        // 设置标题
         Bundle bundle = getArguments();
         shoppingTitle = bundle.getStringArrayList("shoppingTitle");
         titleTv.setText(shoppingTitle.get(4));

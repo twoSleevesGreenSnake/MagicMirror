@@ -1,6 +1,7 @@
 package com.qoo.magicmirror.homepage;
 
 
+import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -38,7 +39,11 @@ public class GoodsFragment extends Fragment {
     private TextView titleTv;
     private MenuListener menuListener;
 
-
+    /**
+     * 相当于初始化
+     *
+     * @param menuListener
+     */
     public void setMenuListener(MenuListener menuListener) {
         this.menuListener = menuListener;
     }
@@ -84,6 +89,7 @@ public class GoodsFragment extends Fragment {
 
     }
 
+
     private void initData() {
         Bundle bundle = getArguments();
         position = bundle.getInt(Value.putPosition);
@@ -111,7 +117,7 @@ public class GoodsFragment extends Fragment {
         value.add("");
         value.add("");
         value.add("");
-        value.add(getString(R.string.one_point_zero_point_zero));
+        value.add(getString(R.string.one_point_zero_point_one));
         NetHelper netHelper = new NetHelper(getContext());
         netHelper.getPostInfo(NetConstants.GOODS_TYPE, token, value, GoodsListBean.class, new NetHelper.NetListener<GoodsListBean>() {
                     @Override

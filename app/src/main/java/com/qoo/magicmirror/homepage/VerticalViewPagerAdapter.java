@@ -4,8 +4,8 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
-import android.view.ViewGroup;
+
+import com.qoo.magicmirror.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +37,7 @@ public class VerticalViewPagerAdapter extends FragmentPagerAdapter {
             fragment.setMenuListener(new MenuListener() {
                 @Override
                 public void clickMenu() {
-                    fm.beginTransaction().show(VerticalViewPagerAdapter.this.fm.findFragmentByTag("menu")).commit();
+                    fm.beginTransaction().setTransitionStyle(R.anim.fragment_menu_anim).show(VerticalViewPagerAdapter.this.fm.findFragmentByTag("menu")).commit();
                 }
             });
             return fragment;

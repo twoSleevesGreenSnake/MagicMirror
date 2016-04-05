@@ -24,9 +24,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-
-
-
         <activity android:name=".loginandregister.LoginActivity" />
         <activity android:name=".homepage.HomeActivity">
             <intent-filter>
@@ -34,15 +31,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".homepage.WelcomeActivity"/>
-        <activity android:name=".detail.BrowseGlassesActivity"/>
-
-
-
-
-
-
-
+        <activity
+            android:name=".homepage.WelcomeActivity"
+            android:theme="@style/WelcomeBackTheme" />
+        <activity android:name=".detail.BrowseGlassesActivity" />
 
         <activity
             android:name="com.mob.tools.MobUIShell"

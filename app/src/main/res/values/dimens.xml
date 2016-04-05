@@ -117,7 +117,7 @@
     <dimen name="fragment_menu_popupwindow_classification_tv_marginTop">148px</dimen>
     <dimen name="fragment_menu_popupwindow_classification_tv_marginLeft">48px</dimen>
     <dimen name="fragment_menu_popupwindow_classification_tv_textSize">28px</dimen>
-    <dimen name="fragment_menu_popupwindow_plaingglasses_tv_marginTop">44px</dimen>
+    <dimen name="fragment_menu_popupwindow_plaingglasses_tv_marginTop">66px</dimen>
     <dimen name="fragment_menu_popupwindow_plaingglasses_tv_textSize">28px</dimen>
     <dimen name="fragment_menu_popupwindow_sunglasses_tv_marginLeft">48px</dimen>
     <dimen name="fragment_menu_popupwindow_sunglasses_tv_marginTop">78px</dimen>

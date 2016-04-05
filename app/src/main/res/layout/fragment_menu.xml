@@ -7,11 +7,12 @@
     android:weightSum="2.5">
 
     <ListView
-        android:layout_marginTop="@dimen/fragment_menu_lv_marginTop"
         android:id="@+id/fragment_menu_lv"
         android:layout_width="@dimen/layout_width_zero"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_marginTop="@dimen/fragment_menu_lv_marginTop"
+        android:layout_weight="1"
+        android:divider="@android:color/transparent" />
 
     <LinearLayout
         android:id="@+id/fragment_menu_ll"
