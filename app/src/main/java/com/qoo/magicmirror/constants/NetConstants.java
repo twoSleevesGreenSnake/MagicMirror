@@ -11,11 +11,11 @@ public final class NetConstants {
     // 启动图
     public static final String STARTED_IMG = "index.php/index/started_img";
     // 商品列表
-    public static final String GOODS_TYPE = "index.php/products_test/goods_list";
+    public static final String GOODS_TYPE = "index.php/products/goods_list";
     // 故事列表
-    public static final String THEMATIC_TYPE = "index.php/story_test/story_list";
+    public static final String THEMATIC_TYPE = "index.php/story/story_list";
     // 故事信息
-    public static final String STORY_INFO = "index.php/story_test/info";
+    public static final String STORY_INFO = "index.php/story/info";
     // 用户登录
     public static final String USER_SIGN_UP = "index.php/user/reg";
     // 用户注册
@@ -25,7 +25,7 @@ public final class NetConstants {
     // 发送验证码
     public static final String SEND_CODE = "index.php/user/send_code";
     // 商品信息
-    public static final String GOODS_INFO = "index.php/products_test/goods_info";
+    public static final String GOODS_INFO = "index.php/products/goods_info";
     // 分类列表
     public static final String CATEGORY_LIST = "index.php/products/category_list";
     // 用户信息

@@ -29,7 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".homepage.WelcomeActivity"/>
         <activity android:name=".loginandregister.LoginActivity"/>
 
         <activity android:name=".detail.BrowseGlassesActivity"/>
