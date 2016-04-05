@@ -55,7 +55,7 @@ public class WelcomeActivity extends BaseActivity {
         handler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
-
+                
                 netHelper.setImage(imageView, data.getImg());
 
                 new Handler(new Handler.Callback() {
