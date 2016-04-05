@@ -74,7 +74,6 @@
     <dimen name="item_detail_browse_last_content_purchase_about_return_iv_marginTop">6dp</dimen>
     <dimen name="item_detail_browse_last_content_purchase_consult_tract_order_tv_marginTop">6dp
     </dimen>
-
     <dimen name="item_detail_brose_glasses_rv_content_src_content_layout_width">590px</dimen>
     <dimen name="item_detail_brose_glasses_rv_content_src_content_layout_marginTop">700px</dimen>
     <dimen name="item_detail_brose_glasses_rv_content_src_content_layout_paddingLeft">30px</dimen>
@@ -89,7 +88,6 @@
     <dimen name="item_detail_brose_glasses_rv_content_bottom_title_view_marginTop">26px</dimen>
     <dimen name="item_detail_brose_glasses_rv_content_src_content_tv_marginBottom">44px</dimen>
     <dimen name="item_detail_brose_glasses_rv_content_src_content_tv_marginTop">28px</dimen>
-
     <dimen name="item_detail_browse_glasses_rv_head_first_e_title_tv_marginTop">38px</dimen>
     <dimen name="item_detail_browse_glasses_rv_head_first_e_title_tv_textSize">70px</dimen>
     <dimen name="item_detail_browse_glasses_rv_head_first_name_marginTop">54px</dimen>
@@ -185,13 +183,10 @@
     <dimen name="activity_specialtopic_detail_viewpager_content_marginRight">190px</dimen>
     <dimen name="activity_specialtopic_detail_viewpager_content_marginTop">22px</dimen>
     <dimen name="activity_specialtopic_detail_viewpager_content_textSize">20px</dimen>
-<<<<<<< HEAD
     <dimen name="fragment_menu_lv_marginTop">82px</dimen>
-=======
     <dimen name="activity_login_account_login_textSize">34px</dimen>
     <dimen name="activity_login_phone_number_textSize">24px</dimen>
     <dimen name="activity_login_password_tv_textSize">24px</dimen>
     <dimen name="activity_login_forget_password_tv_textSize">26px</dimen>
     <dimen name="activity_login_use_social_contact_textSize">30px</dimen>
->>>>>>> feature/继续解析专题第二层
 </resources>
