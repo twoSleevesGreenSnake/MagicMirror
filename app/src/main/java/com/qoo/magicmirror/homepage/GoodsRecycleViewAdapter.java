@@ -3,6 +3,7 @@ package com.qoo.magicmirror.homepage;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,8 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
             public void onClick(View v) {
                 Intent intent = new Intent(context, BrowseGlassesActivity.class);
                 intent.putExtra(Value.putGoodsListBeanDataEntityListEntity, data.get(mainPosition));
+                Log.i("data", data.get(mainPosition).getGoods_data().toString());
+                BrowseGlassesActivity.setData(data.get(mainPosition));
                 context.startActivity(intent);
             }
         });

@@ -31,14 +31,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
         <activity
             android:name=".homepage.WelcomeActivity"
             android:theme="@style/WelcomeBackTheme" />
         <activity android:name=".detail.BrowseGlassesActivity" />
-=======
-        <activity android:name=".homepage.WelcomeActivity"/>
-        <activity android:name=".detail.BrowseGlassesActivity"/>
 
         <activity android:name=".detail.SpecialTopicDetailActivity"/>
 
@@ -46,7 +42,6 @@
 
 
 
->>>>>>> feature/优化专题分享细节
 
         <activity
             android:name="com.mob.tools.MobUIShell"

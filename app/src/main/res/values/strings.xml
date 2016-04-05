@@ -43,13 +43,9 @@
     <string name="activity_login_btn_text">登录</string>
     <string name="activity_login_create_account_btn">创建账号</string>
     <string name="activity_login_use_social_contact">使用社交账号</string>
-<<<<<<< HEAD
     <string name="CHECKEDPOSITION">checkedPosition</string>
     <string name="MENUTITLE">menutitle</string>
     <string name="MENU">menu</string>
-=======
     <string name="goods_detail_show">商品细节展示</string>
->>>>>>> feature/优化专题分享细节
-
 
 </resources>

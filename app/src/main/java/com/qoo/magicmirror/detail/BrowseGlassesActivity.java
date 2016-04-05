@@ -22,6 +22,7 @@ import com.qoo.magicmirror.base.BaseActivity;
 import com.qoo.magicmirror.base.BaseAdapter;
 import com.qoo.magicmirror.constants.NetConstants;
 import com.qoo.magicmirror.homepage.GoodsListBean;
+import com.qoo.magicmirror.homepage.Value;
 import com.qoo.magicmirror.net.NetHelper;
 
 import java.util.ArrayList;
@@ -33,13 +34,16 @@ public class BrowseGlassesActivity extends BaseActivity {
     private RecyclerView recyclerView;
     private ArrayList<String> strings;
     private NetHelper netHelper;
-    private GoodsListBean.DataEntity.ListEntity data;
+    private static GoodsListBean.DataEntity.ListEntity data;
     private int screenHeight;
     private boolean btnNotShow = true;
     private ImageView backIv,buyIv,pircturesIv;
     private LinearLayout btnLayout;
     private ObjectAnimator animation;
     private ObjectAnimator animationBack;
+    public static void setData (GoodsListBean.DataEntity.ListEntity data){
+        BrowseGlassesActivity.data = data;
+    }
 
     /**
      * 实现浏览眼镜详情的activity
@@ -76,12 +80,9 @@ public class BrowseGlassesActivity extends BaseActivity {
     }
     private void goneleLayout(){
         animationBack.start();
-//        btnLayout.setVisibility(View.GONE);
-
         new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
-//                btnLayout.setVisibility(View.GONE);
                 return false;
             }
         }).sendEmptyMessageDelayed(50, 1000);
@@ -92,10 +93,11 @@ public class BrowseGlassesActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        Intent intent = getIntent();
-        data = intent.getParcelableExtra("GoodsListBean.DataEntity.ListEntity");
+//        Intent intent = getIntent();
+//        data = intent.getParcelableExtra("GoodsListBean.DataEntity.ListEntity");
+
         final NetHelper helper = new NetHelper(this);
-        Log.i("img",data.getGoods_img());
+        Log.i("img",data.getGoods_data().toString());
         helper.setBackGround(bindView(R.id.activity_detail_browse_layout), data.getGoods_img());
 
         recyclerView.setAdapter(new BrowseGlassesAdapter());
