@@ -76,7 +76,7 @@
     </dimen>
 
     <dimen name="item_detail_brose_glasses_rv_content_src_content_layout_width">590px</dimen>
-    <dimen name="item_detail_brose_glasses_rv_content_src_content_layout_marginTop">900px</dimen>
+    <dimen name="item_detail_brose_glasses_rv_content_src_content_layout_marginTop">700px</dimen>
     <dimen name="item_detail_brose_glasses_rv_content_src_content_layout_paddingLeft">30px</dimen>
     <dimen name="item_detail_brose_glasses_rv_content_src_content_layout_paddingRight">30px</dimen>
     <dimen name="item_detail_brose_glasses_rv_content_top_title_view_height">2px</dimen>

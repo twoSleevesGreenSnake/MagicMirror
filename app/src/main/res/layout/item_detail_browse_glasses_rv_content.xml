@@ -16,7 +16,8 @@
     <RelativeLayout
         android:id="@+id/item_detail_brose_glasses_rv_content_src_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <LinearLayout
             android:id="@+id/item_detail_brose_glasses_rv_content_src_content_layout1"
@@ -28,7 +29,8 @@
             android:background="#000000"
             android:orientation="vertical"
             android:paddingLeft="@dimen/item_detail_brose_glasses_rv_content_src_content_layout_paddingLeft"
-            android:paddingRight="@dimen/item_detail_brose_glasses_rv_content_src_content_layout_paddingRight">
+            android:paddingRight="@dimen/item_detail_brose_glasses_rv_content_src_content_layout_paddingRight"
+            >
 
             <View
                 android:id="@+id/item_detail_brose_glasses_rv_content_top_title_view"
@@ -98,4 +100,8 @@
                 android:textSize="@dimen/item_detail_brose_glasses_rv_content_src_content_tv_textSize" />
         </LinearLayout>
     </RelativeLayout>
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:layout_alignParentBottom="true"/>-->
 </com.zhy.autolayout.AutoRelativeLayout>

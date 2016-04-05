@@ -126,16 +126,36 @@ public class NetHelper<T> {
      * @param cutLenth 切掉的高度,取下部分
      */
 
-    public void setDrawable(ImageView imageView, String url, int cutLenth) {
-        Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url);
-        if (bitmap == null) {
-            return;
-        }
-        if (bitmap.getHeight() > 500) {
+    public void setDrawable(final ImageView imageView, final String url, final int cutLenth) {
+        final Handler imageHandler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                if (msg.what==3){
+                    Bitmap bitmap = (Bitmap) msg.obj;
+                    if (bitmap == null) {
+                        return false;
+                    }
+                    if (bitmap.getHeight() > 500) {
 
-            Bitmap newBitmap = Bitmap.createBitmap(bitmap, 0, cutLenth, bitmap.getWidth(), bitmap.getHeight() - cutLenth);
-            imageView.setImageBitmap(newBitmap);
-        } else imageView.setImageBitmap(bitmap);
+                        Bitmap newBitmap = Bitmap.createBitmap(bitmap, 0, cutLenth, bitmap.getWidth(), bitmap.getHeight() - cutLenth);
+                        imageView.setImageBitmap(newBitmap);
+                    } else imageView.setImageBitmap(bitmap);
+
+                }
+                return false;
+            }
+        });
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url);
+                Message message = new Message();
+                message.what=3;
+                message.obj = bitmap;
+                imageHandler.sendMessage(message);
+            }
+        }).start();
+
     }
 
     /**
