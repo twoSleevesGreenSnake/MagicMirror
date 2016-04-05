@@ -18,6 +18,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
+import com.nostra13.universalimageloader.cache.disc.impl.BaseDiscCache;
+import com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -70,7 +73,7 @@ public class NetHelper<T> {
         super();
         this.context = context;
         mOkHttpClient = new OkHttpClient();
-        configuration = new ImageLoaderConfiguration.Builder(context).build();
+        configuration = new ImageLoaderConfiguration.Builder(context).diskCacheFileNameGenerator(new Md5FileNameGenerator()).build();
         ImageLoader.getInstance().init(configuration);
         imageLoader = ImageLoader.getInstance();
 
@@ -175,6 +178,7 @@ public class NetHelper<T> {
      * @param url 网址
      */
     public void setImage(ImageView imageView, String url) {
+        Log.i("path",imageLoader.getDiskCache().get(url).getPath());
         imageLoader.displayImage(url, imageView, options);
     }
 
@@ -343,4 +347,7 @@ public class NetHelper<T> {
 //            diskCache.putBitmap(url, bitmap);
 //        }
 //    }
+
+
+
 }

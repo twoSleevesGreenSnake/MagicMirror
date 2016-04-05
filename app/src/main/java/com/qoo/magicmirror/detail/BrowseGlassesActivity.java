@@ -1,5 +1,6 @@
 package com.qoo.magicmirror.detail;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -35,6 +36,10 @@ public class BrowseGlassesActivity extends BaseActivity {
     private GoodsListBean.DataEntity.ListEntity data;
     private int screenHeight;
     private boolean btnNotShow = true;
+    private ImageView backIv,buyIv,pircturesIv;
+    private LinearLayout btnLayout;
+    private ObjectAnimator animation;
+    private ObjectAnimator animationBack;
 
     /**
      * 实现浏览眼镜详情的activity
@@ -51,9 +56,39 @@ public class BrowseGlassesActivity extends BaseActivity {
         recyclerView = bindView(R.id.activity_detail_browse_glasses_rv);
         netHelper = new NetHelper(this);
         screenHeight = getWindowManager().getDefaultDisplay().getHeight();
+        btnLayout = bindView(R.id.activity_detail_browse_glasses_pictures_bottom_layout);
+        ObjectAnimator animator =ObjectAnimator.ofFloat(btnLayout, "translationX", -500);
+        animator.setDuration(1);
+        animator.start();
+
+        animation = ObjectAnimator.ofFloat(btnLayout, "translationX", 500);
+        animation.setDuration(1000);
+        animationBack = ObjectAnimator.ofFloat(btnLayout, "translationX", -500);
+        animationBack.setDuration(1000);
+
+
 
 
     }
+    private void visibleLayout(){
+
+        animation.start();
+    }
+    private void goneleLayout(){
+        animationBack.start();
+//        btnLayout.setVisibility(View.GONE);
+
+        new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+//                btnLayout.setVisibility(View.GONE);
+                return false;
+            }
+        }).sendEmptyMessageDelayed(50, 1000);
+
+    }
+
+
 
     @Override
     protected void initData() {
@@ -135,6 +170,9 @@ public class BrowseGlassesActivity extends BaseActivity {
                 if (position != getItemCount() - 2) {
                     netHelper.setDrawable(((BrowseGlassesHolder) holder).backImg, data.getDesign_des().get(position - 3).getImg(), 150);
                 } else {
+                    RelativeLayout.LayoutParams params= (RelativeLayout.LayoutParams) ((BrowseGlassesHolder) holder).backImg.getLayoutParams();
+                    params.setMargins(0,0,0,500);
+                    ((BrowseGlassesHolder) holder).backImg.setLayoutParams(params);
                     netHelper.setImage(((BrowseGlassesHolder) holder).backImg, data.getDesign_des().get(position - 3).getImg());
                 }
 
@@ -170,7 +208,6 @@ public class BrowseGlassesActivity extends BaseActivity {
              */
             public BrowseGlassesHolder(final View itemView) {
                 super(itemView);
-
                 titleTv = (TextView) itemView.findViewById(R.id.item_detail_brose_glasses_rv_content_title_tv);
                 eTitleTv = (TextView) itemView.findViewById(R.id.item_detail_brose_glasses_rv_content_etitle_tv);
                 locationTv = (TextView) itemView.findViewById(R.id.item_detail_brose_glasses_rv_content_location_tv);
@@ -213,7 +250,7 @@ public class BrowseGlassesActivity extends BaseActivity {
 
                         //实现滑动的核心代码
                         if (BrowseGlassesAdapter.this.getItemViewType(contentPosition) == CONTENT_MODE) {
-                            relativeLayout.scrollTo((int) itemView.getX(),-((int) itemView.getY()/10-200));
+                            relativeLayout.scrollTo((int) itemView.getX(),-((int) itemView.getY()/10-50));
 
                         }
 
@@ -271,22 +308,46 @@ public class BrowseGlassesActivity extends BaseActivity {
 
         class HeadSecondItemHolder extends RecyclerView.ViewHolder {
             private TextView titleTv;
+            private float itemY;
+
 
             public HeadSecondItemHolder(final View itemView) {
                 super(itemView);
+//                recyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
+//                    @Override
+//                    public void onChildViewAttachedToWindow(View view) {
+//                        if (view.getId() ==itemView.getId());{
+//                            Log.i("to","sssssss");
+//                        }
+//
+//
+//                    }
+//
+//                    @Override
+//                    public void onChildViewDetachedFromWindow(View view) {
+//                        if (view.getId() ==itemView.getId());{
+//                            Log.i("from","ggsdfsdfsdf");
+//
+//                        }
+//
+//                    }
+//                });
                 recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                     @Override
                     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                         super.onScrolled(recyclerView, dx, dy);
+
                         if (btnNotShow&&itemView.getY()<=0){
                             Toast.makeText(BrowseGlassesActivity.this, "按钮出现", Toast.LENGTH_SHORT).show();
+                            visibleLayout();
                             btnNotShow = false;
+
                         }
-                       else if (!btnNotShow){
+                        if (itemView.getY()>0&&!btnNotShow){
                             Toast.makeText(BrowseGlassesActivity.this, "按钮消失", Toast.LENGTH_SHORT).show();
+                            goneleLayout();
                             btnNotShow = true;
                         }
-//
                     }
                 });
                 titleTv = (TextView) itemView.findViewById(R.id.item_detail_browse_glasses_rv_title_second_tv);
