@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.base.BaseActivity;
@@ -24,15 +26,15 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
 /**
  * Created by Giraffe on 16/3/29.
  */
-public class SpecialTopicDetailActivity extends BaseActivity implements View.OnClickListener {
+public class SpecialTopicDetailActivity extends BaseActivity implements View.OnClickListener, View.OnLongClickListener {
     private VerticalViewpagerAdapter verticalViewpagerAdapter;
     private ArrayList<View> views;
     private VerticalViewpager verticalViewpager;
-    private ArrayList<SpecialTopicDetailBean.DataEntity.StoryDataEntity> datas;
     private SpecialTopicDetailBean.DataEntity.StoryDataEntity data;
     private ImageView specialNethermostIv, viewpagerIv, shareIv, closeIv;
-
+    private TextView smallTitleTv, titleTv, subTitleTv;
     private String storyId;
+    private RelativeLayout relativeLayout;
 
 
     @Override
@@ -63,13 +65,21 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
             public void onSuccess(SpecialTopicDetailBean specialTopicDetailBean) {
                 data = specialTopicDetailBean.getData().getStory_data();
 
-                netHelper.setImage(specialNethermostIv, data.getImg_array().get(0));
-//                Log.d("！！！！！！", data.getImg_array().get(0));
                 for (int i = 0; i < data.getImg_array().size(); i++) {
                     View view = LayoutInflater.from(SpecialTopicDetailActivity.this).inflate(R.layout.activity_specialtopic_detail_viewpager, null);
+                    smallTitleTv = (TextView) view.findViewById(R.id.activity_specialtopic_detail_viewpager_little_title);
+                    titleTv = (TextView) view.findViewById(R.id.activity_specialtopic_detail_viewpager_main_title);
+                    subTitleTv = (TextView) view.findViewById(R.id.activity_specialtopic_detail_viewpager_content);
+                    smallTitleTv.setText(data.getText_array().get(i).getSmallTitle());
+                    titleTv.setText(data.getText_array().get(i).getTitle());
+                    subTitleTv.setText(data.getText_array().get(i).getSubTitle());
 
                     views.add(view);
                 }
+                netHelper.setImage(specialNethermostIv, data.getImg_array().get(0));
+
+
+//                Log.d("！！！！！！", data.getImg_array().get(0));
                 verticalViewpagerAdapter = new VerticalViewpagerAdapter(views);
 
                 verticalViewpager.setAdapter(verticalViewpagerAdapter);
@@ -103,11 +113,12 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
     @Override
     protected void initView() {
         views = new ArrayList<>();
-        datas = new ArrayList<>();
         verticalViewpager = (VerticalViewpager) findViewById(R.id.activity_specialtopic_detail_viewpager);
         closeIv = (ImageView) findViewById(R.id.activity_specialtopic_detail_close_iv);
         shareIv = (ImageView) findViewById(R.id.activity_specialtopic_detail_share_iv);
         specialNethermostIv = (ImageView) findViewById(R.id.activity_specialtopic_detail_nethermost_iv);
+        relativeLayout = (RelativeLayout) findViewById(R.id.activity_specialtopic_detail_viewpager_rl);
+        relativeLayout.setOnLongClickListener(this);
 
         closeIv.setOnClickListener(this);
         shareIv.setOnClickListener(this);
@@ -152,5 +163,15 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        switch (v.getId()){
+            case R.id.activity_specialtopic_detail_viewpager_rl:
+                relativeLayout.setVisibility(View.INVISIBLE);
+                break;
+        }
+        return false;
     }
 }

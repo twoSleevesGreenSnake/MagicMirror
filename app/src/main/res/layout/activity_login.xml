@@ -13,9 +13,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_login_close_iv_marginLeft"
             android:layout_marginTop="@dimen/activity_login_close_iv_marginTop"
-            android:text="账号登录"
-            android:textColor="#333"
-            android:textSize="34px" />
+            android:text="@string/activity_login_account_login"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/activity_login_account_login_textSize" />
 
         <ImageView
             android:id="@+id/activity_login_close_iv"
@@ -38,9 +38,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/activity_login_phonenumber_and_password_tv_marginLeft"
         android:layout_marginTop="@dimen/activity_login_phonenumber_tv_marginTop"
-        android:text="手机号"
-        android:textColor="#333"
-        android:textSize="24px" />
+        android:text="@string/activity_login_phone_number_text"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/activity_login_phone_number_textSize" />
 
     <EditText
         android:id="@+id/activity_login_phone_number_et"
@@ -58,9 +58,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/activity_login_phonenumber_and_password_tv_marginLeft"
         android:layout_marginTop="@dimen/activity_login_password_tv_marginTop"
-        android:text="密码"
-        android:textColor="#333"
-        android:textSize="24px" />
+        android:text="@string/activity_login_password_tv_text"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/activity_login_password_tv_textSize" />
 
     <EditText
         android:id="@+id/activity_login_password_et"
@@ -80,9 +80,9 @@
         android:layout_gravity="right"
         android:layout_marginRight="@dimen/activity_login_forget_password_tv_marginRight"
         android:layout_marginTop="@dimen/activity_login_forget_password_tv_marginTop"
-        android:text="忘记密码？"
-        android:textColor="#333"
-        android:textSize="26px" />
+        android:text="@string/activity_login_forget_password_tv"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/activity_login_forget_password_tv_textSize" />
 
     <Button
         android:id="@+id/activity_login_btn"
@@ -92,8 +92,8 @@
         android:layout_marginRight="@dimen/activity_login_btn_marginRight"
         android:layout_marginTop="@dimen/activity_login_btn_marginTop"
         android:background="@mipmap/enable_state_button"
-        android:text="登录"
-        android:textColor="#fff" />
+        android:text="@string/activity_login_btn_text"
+        android:textColor="@color/colorWhite" />
 
     <Button
         android:id="@+id/activity_login_create_account"
@@ -103,8 +103,8 @@
         android:layout_marginRight="@dimen/activity_login_create_account_marginRight"
         android:layout_marginTop="@dimen/activity_login_create_account_marginTop"
         android:background="@mipmap/create_account"
-        android:text="创建账号"
-        android:textColor="#fff" />
+        android:text="@string/activity_login_create_account_btn"
+        android:textColor="@color/colorWhite" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -115,9 +115,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="使用社交账号"
-            android:textColor="#333"
-            android:textSize="30px" />
+            android:text="@string/activity_login_use_social_contact"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/activity_login_use_social_contact_textSize" />
 
 
     </RelativeLayout>

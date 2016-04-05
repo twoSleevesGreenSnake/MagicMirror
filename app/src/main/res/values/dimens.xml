@@ -185,5 +185,13 @@
     <dimen name="activity_specialtopic_detail_viewpager_content_marginRight">190px</dimen>
     <dimen name="activity_specialtopic_detail_viewpager_content_marginTop">22px</dimen>
     <dimen name="activity_specialtopic_detail_viewpager_content_textSize">20px</dimen>
+<<<<<<< HEAD
     <dimen name="fragment_menu_lv_marginTop">82px</dimen>
+=======
+    <dimen name="activity_login_account_login_textSize">34px</dimen>
+    <dimen name="activity_login_phone_number_textSize">24px</dimen>
+    <dimen name="activity_login_password_tv_textSize">24px</dimen>
+    <dimen name="activity_login_forget_password_tv_textSize">26px</dimen>
+    <dimen name="activity_login_use_social_contact_textSize">30px</dimen>
+>>>>>>> feature/继续解析专题第二层
 </resources>
