@@ -189,4 +189,6 @@
     <dimen name="activity_login_password_tv_textSize">24px</dimen>
     <dimen name="activity_login_forget_password_tv_textSize">26px</dimen>
     <dimen name="activity_login_use_social_contact_textSize">30px</dimen>
+    <dimen name="goods_detail_textSize">34px</dimen>
+    <dimen name="activity_wearatlas_iv_marginTop">20px</dimen>
 </resources>

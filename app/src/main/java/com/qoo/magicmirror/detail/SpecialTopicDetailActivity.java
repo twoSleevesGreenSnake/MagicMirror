@@ -1,15 +1,17 @@
 package com.qoo.magicmirror.detail;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.qoo.magicmirror.R;
@@ -26,7 +28,7 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
 /**
  * Created by Giraffe on 16/3/29.
  */
-public class SpecialTopicDetailActivity extends BaseActivity implements View.OnClickListener, View.OnLongClickListener {
+public class SpecialTopicDetailActivity extends BaseActivity implements View.OnClickListener {
     private VerticalViewpagerAdapter verticalViewpagerAdapter;
     private ArrayList<View> views;
     private VerticalViewpager verticalViewpager;
@@ -34,8 +36,23 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
     private ImageView specialNethermostIv, viewpagerIv, shareIv, closeIv;
     private TextView smallTitleTv, titleTv, subTitleTv;
     private String storyId;
-    private RelativeLayout relativeLayout;
+    private FrameLayout frameLayoutMiddle, frameLayoutUppermost, frameLayoutMain;
+    private static final int COMPLETED = 0;
+    private int time = 0;
 
+    private boolean isLongClick;
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == COMPLETED) {
+                frameLayoutMiddle.setVisibility(View.INVISIBLE);
+                Animation animation = AnimationUtils.loadAnimation(SpecialTopicDetailActivity.this, R.anim.special_topic_anim_invisible);
+                frameLayoutMiddle.setAnimation(animation);
+                frameLayoutUppermost.setAnimation(animation);
+                frameLayoutUppermost.setVisibility(View.INVISIBLE);
+            }
+        }
+    };
 
     @Override
     protected int setLayout() {
@@ -67,6 +84,7 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
 
                 for (int i = 0; i < data.getImg_array().size(); i++) {
                     View view = LayoutInflater.from(SpecialTopicDetailActivity.this).inflate(R.layout.activity_specialtopic_detail_viewpager, null);
+
                     smallTitleTv = (TextView) view.findViewById(R.id.activity_specialtopic_detail_viewpager_little_title);
                     titleTv = (TextView) view.findViewById(R.id.activity_specialtopic_detail_viewpager_main_title);
                     subTitleTv = (TextView) view.findViewById(R.id.activity_specialtopic_detail_viewpager_content);
@@ -75,13 +93,32 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
                     subTitleTv.setText(data.getText_array().get(i).getSubTitle());
 
                     views.add(view);
+//
                 }
                 netHelper.setImage(specialNethermostIv, data.getImg_array().get(0));
 
 
 //                Log.d("！！！！！！", data.getImg_array().get(0));
                 verticalViewpagerAdapter = new VerticalViewpagerAdapter(views);
+                verticalViewpager.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                            isLongClick = true;
+                            new onTouchThread().start();
 
+                        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                            time = 0;
+                            isLongClick = false;
+                            Animation animation = AnimationUtils.loadAnimation(SpecialTopicDetailActivity.this, R.anim.special_topic_anim_visible);
+                            frameLayoutMiddle.setAnimation(animation);
+                            frameLayoutUppermost.setAnimation(animation);
+                            frameLayoutMiddle.setVisibility(View.VISIBLE);
+                            frameLayoutUppermost.setVisibility(View.VISIBLE);
+                        }
+                        return false;
+                    }
+                });
                 verticalViewpager.setAdapter(verticalViewpagerAdapter);
                 verticalViewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                     @Override
@@ -100,6 +137,8 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
 
                     }
                 });
+
+
             }
 
             @Override
@@ -117,16 +156,14 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
         closeIv = (ImageView) findViewById(R.id.activity_specialtopic_detail_close_iv);
         shareIv = (ImageView) findViewById(R.id.activity_specialtopic_detail_share_iv);
         specialNethermostIv = (ImageView) findViewById(R.id.activity_specialtopic_detail_nethermost_iv);
-        relativeLayout = (RelativeLayout) findViewById(R.id.activity_specialtopic_detail_viewpager_rl);
-        relativeLayout.setOnLongClickListener(this);
+        frameLayoutMiddle = (FrameLayout) findViewById(R.id.framelayout_middle);
+        frameLayoutUppermost = (FrameLayout) findViewById(R.id.framelayout_uppermost);
+
+//        frameLayoutMain = (FrameLayout) findViewById(R.id.activity_specialtopic_detail_main_framelayout);
+//                frameLayoutUppermost = (FrameLayout) findViewById(R.id.framelayout_uppermost);
 
         closeIv.setOnClickListener(this);
         shareIv.setOnClickListener(this);
-//        specialNethermostIv.setImageResource(background[0]);
-//        for (int i = 0; i < middlePic.length; i++) {
-//            View view = LayoutInflater.from(SpecialTopicDetailActivity.this).inflate(R.layout.activity_specialtopic_detail_viewpager, null);
-//            views.add(view);
-//        }
 
 
     }
@@ -163,15 +200,39 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
                 finish();
                 break;
         }
+
+
     }
 
-    @Override
-    public boolean onLongClick(View v) {
-        switch (v.getId()){
-            case R.id.activity_specialtopic_detail_viewpager_rl:
-                relativeLayout.setVisibility(View.INVISIBLE);
-                break;
+    private class onTouchThread extends Thread {
+        @Override
+        public void run() {
+//            try {
+//                Thread.sleep(2000);
+//                Message msg = new Message();
+//                msg.what = COMPLETED;
+//                handler.sendMessage(msg);
+//
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//
+            while (isLongClick) {
+                time++;
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (time >= 2) {
+
+                    handler.sendEmptyMessage(0);
+                    break;
+                }
+            }
+
+
         }
-        return false;
     }
+
 }
