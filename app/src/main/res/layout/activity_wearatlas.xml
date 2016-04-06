@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_wearatlas_tv_marginTop"
         android:text="@string/goods_detail_show"
+        android:layout_marginLeft="@dimen/activity_wearatlas_goods_show_detail_marginLeft"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/goods_detail_textSize" />
 
@@ -35,15 +36,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
-            android:layout_marginLeft="40px"
-            android:layout_marginBottom="40px"
+            android:id="@+id/activity_wearatlas_back_iv"
+            android:layout_marginLeft="@dimen/activity_wearatlas_back_iv_marginLeft"
+            android:layout_marginBottom="@dimen/activity_wearatlas_back_iv_marginBottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/back_btn"/>
         <ImageView
+            android:id="@+id/activity_wearatlas_purchase_iv"
             android:layout_gravity="right"
-            android:layout_marginRight="40px"
-            android:layout_marginBottom="40px"
+            android:layout_marginRight="@dimen/activity_wearatlas_purchase_iv_marginRight"
+            android:layout_marginBottom="@dimen/activity_wearatlas_purchase_iv_marginBottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/purchase_button"/>

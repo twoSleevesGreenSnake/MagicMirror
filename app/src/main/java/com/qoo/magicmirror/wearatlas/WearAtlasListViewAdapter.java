@@ -2,6 +2,7 @@ package com.qoo.magicmirror.wearatlas;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,22 +14,24 @@ import com.qoo.magicmirror.homepage.GoodsListBean;
 import com.qoo.magicmirror.net.NetHelper;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Giraffe on 16/4/6.
  */
 public class WearAtlasListViewAdapter extends BaseAdapter {
-    private ArrayList<GoodsListBean.DataEntity.ListEntity> data;
+    private List<GoodsListBean.DataEntity.ListEntity.WearVideoEntity> data;
     private Context context;
 
-    public WearAtlasListViewAdapter(ArrayList<GoodsListBean.DataEntity.ListEntity> data, Context context) {
+    public WearAtlasListViewAdapter(List<GoodsListBean.DataEntity.ListEntity.WearVideoEntity> data, Context context) {
         this.data = data;
+//        Log.d("131313","Ss"+data.size());
         this.context = context;
     }
 
     @Override
     public int getCount() {
-        return data.size();
+        return data != null && data.size() > 0 ? data.size() - 1 : 0;
     }
 
     @Override
@@ -44,23 +47,24 @@ public class WearAtlasListViewAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder = null;
-        if (convertView == null){
+        if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_wear_atlas_rv,null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_wear_atlas_rv, null);
             viewHolder.imageView = (ImageView) convertView.findViewById(R.id.item_wear_atlas_rv_iv);
             convertView.setTag(viewHolder);
-        }else {
+        } else {
             viewHolder = (ViewHolder) convertView.getTag();
-    }
-        GoodsListBean.DataEntity.ListEntity.WearVideoEntity wearVideoEntity= (GoodsListBean.DataEntity.ListEntity.WearVideoEntity) getItem(position);
-        if (wearVideoEntity!= null){
-           new NetHelper<GoodsListBean.DataEntity.ListEntity.WearVideoEntity>(context).setImage(viewHolder.imageView,wearVideoEntity.getData());
+        }
+        GoodsListBean.DataEntity.ListEntity.WearVideoEntity wearVideoEntity = data.get(position + 1);
+        if (wearVideoEntity != null) {
+            new NetHelper<GoodsListBean.DataEntity.ListEntity.WearVideoEntity>(context).setImage(viewHolder.imageView, wearVideoEntity.getData());
+
         }
         return convertView;
     }
 
 
-    public class ViewHolder{
+    public class ViewHolder {
         ImageView imageView;
     }
 }
