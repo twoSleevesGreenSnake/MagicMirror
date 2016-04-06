@@ -24,15 +24,12 @@ public class WearAtlasActivity extends BaseActivity {
     private Context context;
     private ListView listView;
     private WearAtlasListViewAdapter wearAtlasListViewAdapter;
-<<<<<<< HEAD
-=======
     private static ArrayList<GoodsListBean.DataEntity.ListEntity.WearVideoEntity> data;
     private VideoView vv;
 
     public static void setData (GoodsListBean.DataEntity.ListEntity data){
         WearAtlasActivity.data = (ArrayList<GoodsListBean.DataEntity.ListEntity.WearVideoEntity>) data.getWear_video();
     }
->>>>>>> feature/佩戴图集阶段二
     @Override
     protected int setLayout() {
         return R.layout.activity_wearatlas;
@@ -97,13 +94,10 @@ public class WearAtlasActivity extends BaseActivity {
     @Override
     protected void initView() {
         listView = (ListView) findViewById(R.id.activity_wearatlas_listview);
-<<<<<<< HEAD
-=======
         View view = LayoutInflater.from(context).inflate(R.layout.head_layout_of_wear_atlas,null);
         listView.addHeaderView(view);
         vv = (VideoView) view.findViewById(R.id.head_layout_of_atlas_vv);
         listView.setDivider(null);
 
->>>>>>> feature/佩戴图集阶段二
     }
 }

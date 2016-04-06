@@ -24,37 +24,32 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-<<<<<<< HEAD
         <activity android:name=".loginandregister.RegisterActivity" />
-        <activity android:name=".loginandregister.LoginActivity">
+        <activity android:name=".homepage.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-=======
-        <activity android:name=".loginandregister.LoginActivity" />
-        <activity android:name=".homepage.HomeActivity">
+        </activity>
+
+        <activity android:name=".loginandregister.LoginActivity">
             <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
->>>>>>> feature/佩戴图集阶段二
         </activity>
         <activity
             android:name=".homepage.WelcomeActivity"
             android:theme="@style/WelcomeBackTheme" />
         <activity android:name=".detail.BrowseGlassesActivity" />
 
-        <activity android:name=".detail.SpecialTopicDetailActivity"/>
-<activity android:name=".wearatlas.WearAtlasActivity">
-    <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-        <category android:name="android.intent.category.LAUNCHER" />
-    </intent-filter>
-</activity>
-
-
-
+        <activity android:name=".detail.SpecialTopicDetailActivity" />
+        <activity android:name=".wearatlas.WearAtlasActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
 
         <activity
