@@ -198,18 +198,11 @@ public class NetHelper<T> {
      * @param url
      * @param data
      */
-<<<<<<< HEAD
     public void setImage(ImageView imageView, String url,GoodsListBean.DataEntity.ListEntity data,String type) {
         setImage(imageView, url);
         MainPageHelper.newHelper(context).addData(url, data.getGoods_name(), data.getProduct_area(), data.getGoods_price(), data.getBrand(), type);
-=======
-    public void setImage(ImageView imageView, String url, GoodsListBean.DataEntity.ListEntity data) {
-        Log.i("path", imageLoader.getDiskCache().get(url).getPath());
-        setImage(imageView, url);
-        MainPageHelper.newHelper(context).addData(imageLoader.getDiskCache().get(url).getPath(), data.getGoods_name(), data.getProduct_area(), data.getGoods_price(), data.getBrand());
->>>>>>> feature/注册界面继续
-
     }
+
 
     /**
      * @param url      需要拼接的网址

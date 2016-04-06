@@ -171,16 +171,12 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
 
             @Override
             public void onSuccess(CategoryListBean categoryListBean) {
-<<<<<<< HEAD
-
                 SharedPreferences sp = getSharedPreferences("categoryId",MODE_PRIVATE);
                 SharedPreferences.Editor editor = sp.edit();
                 editor.clear();
                 editor.commit();
-=======
                 categoryId = new ArrayList<>();
                 Log.d("HomeActivity", "categoryListBean:" + categoryListBean.toString());
->>>>>>> feature/注册界面继续
                 for (int i = 0; i < categoryListBean.getData().size(); i++) {
                     categoryId.add(categoryListBean.getData().get(i).getCategory_id());
                     editor.putString(String.valueOf(i), categoryId.get(i));
