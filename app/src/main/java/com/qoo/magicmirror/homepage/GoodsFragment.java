@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.constants.NetConstants;
+import com.qoo.magicmirror.db.MainPageHelper;
 import com.qoo.magicmirror.net.NetHelper;
 
 import java.util.ArrayList;
@@ -40,6 +41,8 @@ public class GoodsFragment extends Fragment {
     private TextView titleTv;
     private MenuListener menuListener;
     private ArrayList<String> categoryId;
+    private String type;
+    private boolean hasNet;
 
     /**
      * 相当于初始化
@@ -56,10 +59,11 @@ public class GoodsFragment extends Fragment {
      *
      * @return 新的Fragment
      */
-    public static Fragment getInstance(int position, ArrayList<String> popTitles,ArrayList<String> categoryId) {
+    public static Fragment getInstance(int position, ArrayList<String> popTitles,ArrayList<String> categoryId,boolean hasNet) {
         Fragment instance = new GoodsFragment();
         Bundle bundle = new Bundle();
         bundle.putStringArrayList("categoryId", categoryId);
+        bundle.putBoolean("hasNet",hasNet);
         bundle.putInt(Value.putPosition, position);
         bundle.putStringArrayList(Value.putPopTitles, popTitles);
         instance.setArguments(bundle);
@@ -76,18 +80,17 @@ public class GoodsFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView = (RecyclerView) view.findViewById(R.id.fragment_goods_rv);
-        titleFl = (FrameLayout) view.findViewById(R.id.fragment_goods_title_fl);
-        titleTv = (TextView) view.findViewById(R.id.fragment_title_tv);
-        datas = new ArrayList<>();
+        initView(view);// 初始化组件
+
+
     }
 
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         initData();// 接收静态方法传来的值，设置标题，标题点击事件
-        initView();// 解析数据
 
     }
 
@@ -97,48 +100,70 @@ public class GoodsFragment extends Fragment {
         categoryId = bundle.getStringArrayList("categoryId");
         position = bundle.getInt(Value.putPosition);
         popTitles = bundle.getStringArrayList(Value.putPopTitles);
+        hasNet = bundle.getBoolean("hasNet");
+        type = categoryId.get(position);
         Log.d("GoodsFragment", "+++++" + categoryId);
         titleTv.setText(popTitles.get(position));
+
         titleFl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 menuListener.clickMenu();
             }
         });
+         //有网的情况下 取网络解析
+        if (hasNet) {
+            MainPageHelper.newHelper(getActivity()).deleteAll();
+            ArrayList<String> token = new ArrayList<>();
+            token.add(getString(R.string.token));
+            token.add(getString(R.string.device_type));
+            token.add(getString(R.string.page));
+            token.add(getString(R.string.last_time));
+            token.add(getString(R.string.category_id));
+            token.add(getString(R.string.version));
+            ArrayList<String> value = new ArrayList<>();
+            value.add("");
+            value.add(getString(R.string.one));
+            value.add("");
+            value.add("");
+            value.add(categoryId.get(position));
+            value.add(getString(R.string.one_point_zero_point_one));
+            NetHelper netHelper = new NetHelper(getContext());
+            netHelper.getPostInfo(NetConstants.GOODS_TYPE, token, value, GoodsListBean.class, new NetHelper.NetListener<GoodsListBean>() {
+                        @Override
+                        public void onSuccess(GoodsListBean goodsListBean) {
+                            datas = (ArrayList<GoodsListBean.DataEntity.ListEntity>) goodsListBean.getData().getList();
+                            adapter = new GoodsRecycleViewAdapter(datas, getActivity(), categoryId.get(position));
+                            GridLayoutManager gm = new GridLayoutManager(getActivity(), 1);
+                            gm.setOrientation(GridLayoutManager.HORIZONTAL);
+                            recyclerView.setLayoutManager(gm);
+                            recyclerView.setAdapter(adapter);
+                        }
+
+                        @Override
+                        public void onFailure() {
+
+                        }
+                    }
+            );
+        }
+        //没网的情况下去数据库请求
+        else {
+            Log.i("type",type);
+            Log.i("typessssssss",MainPageHelper.newHelper(getActivity()).show(type).toString());
+
+            adapter = new GoodsRecycleViewAdapter(MainPageHelper.newHelper(getActivity()).show(type),type,getActivity());
+            GridLayoutManager gm = new GridLayoutManager(getActivity(), 1);
+            gm.setOrientation(GridLayoutManager.HORIZONTAL);
+            recyclerView.setLayoutManager(gm);
+            recyclerView.setAdapter(adapter);
+        }
     }
 
-    private void initView() {
-        ArrayList<String> token = new ArrayList<>();
-        token.add(getString(R.string.token));
-        token.add(getString(R.string.device_type));
-        token.add(getString(R.string.page));
-        token.add(getString(R.string.last_time));
-        token.add(getString(R.string.category_id));
-        token.add(getString(R.string.version));
-        ArrayList<String> value = new ArrayList<>();
-        value.add("");
-        value.add(getString(R.string.one));
-        value.add("");
-        value.add("");
-        value.add(categoryId.get(position));
-        value.add(getString(R.string.one_point_zero_point_one));
-        NetHelper netHelper = new NetHelper(getContext());
-        netHelper.getPostInfo(NetConstants.GOODS_TYPE, token, value, GoodsListBean.class, new NetHelper.NetListener<GoodsListBean>() {
-                    @Override
-                    public void onSuccess(GoodsListBean goodsListBean) {
-                        datas = (ArrayList<GoodsListBean.DataEntity.ListEntity>) goodsListBean.getData().getList();
-                        adapter = new GoodsRecycleViewAdapter(datas, getActivity());
-                        GridLayoutManager gm = new GridLayoutManager(getActivity(), 1);
-                        gm.setOrientation(GridLayoutManager.HORIZONTAL);
-                        recyclerView.setLayoutManager(gm);
-                        recyclerView.setAdapter(adapter);
-                    }
-
-                    @Override
-                    public void onFailure() {
-
-                    }
-                }
-        );
+    private void initView(View view) {
+        recyclerView = (RecyclerView) view.findViewById(R.id.fragment_goods_rv);
+        titleFl = (FrameLayout) view.findViewById(R.id.fragment_goods_title_fl);
+        titleTv = (TextView) view.findViewById(R.id.fragment_title_tv);
+        datas = new ArrayList<>();
     }
 }

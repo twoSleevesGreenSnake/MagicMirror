@@ -24,6 +24,7 @@ import com.qoo.magicmirror.constants.NetConstants;
 import com.qoo.magicmirror.homepage.GoodsListBean;
 import com.qoo.magicmirror.homepage.Value;
 import com.qoo.magicmirror.net.NetHelper;
+import com.qoo.magicmirror.wearatlas.WearAtlasActivity;
 
 import java.util.ArrayList;
 
@@ -34,13 +35,14 @@ public class BrowseGlassesActivity extends BaseActivity {
     private RecyclerView recyclerView;
     private ArrayList<String> strings;
     private NetHelper netHelper;
-    private static GoodsListBean.DataEntity.ListEntity data;
     private int screenHeight;
     private boolean btnNotShow = true;
     private ImageView backIv,buyIv,pircturesIv;
     private LinearLayout btnLayout;
     private ObjectAnimator animation;
     private ObjectAnimator animationBack;
+    private TextView picturesTv;
+    private static GoodsListBean.DataEntity.ListEntity data;
     public static void setData (GoodsListBean.DataEntity.ListEntity data){
         BrowseGlassesActivity.data = data;
     }
@@ -58,6 +60,7 @@ public class BrowseGlassesActivity extends BaseActivity {
     @Override
     protected void initView() {
         recyclerView = bindView(R.id.activity_detail_browse_glasses_rv);
+        picturesTv = bindView(R.id.activity_detail_browse_glasses_pictures_tv);
         netHelper = new NetHelper(this);
         screenHeight = getWindowManager().getDefaultDisplay().getHeight();
         btnLayout = bindView(R.id.activity_detail_browse_glasses_pictures_bottom_layout);
@@ -95,9 +98,14 @@ public class BrowseGlassesActivity extends BaseActivity {
     protected void initData() {
 //        Intent intent = getIntent();
 //        data = intent.getParcelableExtra("GoodsListBean.DataEntity.ListEntity");
-
+        picturesTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BrowseGlassesActivity.this, WearAtlasActivity.class);
+                startActivity(intent);
+            }
+        });
         final NetHelper helper = new NetHelper(this);
-        Log.i("img",data.getGoods_data().toString());
         helper.setBackGround(bindView(R.id.activity_detail_browse_layout), data.getGoods_img());
 
         recyclerView.setAdapter(new BrowseGlassesAdapter());
@@ -173,7 +181,7 @@ public class BrowseGlassesActivity extends BaseActivity {
                     netHelper.setDrawable(((BrowseGlassesHolder) holder).backImg, data.getDesign_des().get(position - 3).getImg(), 150);
                 } else {
                     RelativeLayout.LayoutParams params= (RelativeLayout.LayoutParams) ((BrowseGlassesHolder) holder).backImg.getLayoutParams();
-                    params.setMargins(0,0,0,500);
+                    params.setMargins(0, 0, 0, 500);
                     ((BrowseGlassesHolder) holder).backImg.setLayoutParams(params);
                     netHelper.setImage(((BrowseGlassesHolder) holder).backImg, data.getDesign_des().get(position - 3).getImg());
                 }

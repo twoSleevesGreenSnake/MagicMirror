@@ -16,10 +16,14 @@
         android:layout_alignParentBottom="true"
         android:id="@+id/activity_detail_browse_glasses_pictures_bottom_layout"
         >
-        <ImageView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/activity_detail_browse_glasses_pictures_iv"/>
+            android:id="@+id/activity_detail_browse_glasses_pictures_tv"
+            android:background="@mipmap/wear_picture"
+            android:gravity="center"
+            android:text="@string/activity_detail_browse_glasses_pictures_tv_text"
+            android:textColor="@color/colorWhite"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

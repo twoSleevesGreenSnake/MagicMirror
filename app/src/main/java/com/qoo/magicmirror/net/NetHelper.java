@@ -19,6 +19,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.cache.disc.impl.BaseDiscCache;
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -74,9 +75,21 @@ public class NetHelper<T> {
      */
     public NetHelper(Context context) {
         super();
+
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            File file = Environment.getExternalStorageDirectory();
+            diskPath = file.getAbsolutePath();
+        } else {
+            File file = context.getFilesDir();
+            diskPath = file.getAbsolutePath();
+        }
+        File file = new File(diskPath + "/img");
+        if (file.exists()) {
+            diskPath = file.getAbsolutePath();
+        }
         this.context = context;
         mOkHttpClient = new OkHttpClient();
-        configuration = new ImageLoaderConfiguration.Builder(context).diskCacheFileNameGenerator(new Md5FileNameGenerator()).build();
+        configuration = new ImageLoaderConfiguration.Builder(context).diskCache(new UnlimitedDiscCache(file)).diskCacheFileNameGenerator(new Md5FileNameGenerator()).build();
         ImageLoader.getInstance().init(configuration);
         imageLoader = ImageLoader.getInstance();
 
@@ -96,17 +109,6 @@ public class NetHelper<T> {
                 .build();
 
 //
-        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            File file = Environment.getExternalStorageDirectory();
-            diskPath = file.getAbsolutePath();
-        } else {
-            File file = context.getFilesDir();
-            diskPath = file.getAbsolutePath();
-        }
-        File file = new File(diskPath + "/img");
-        if (file.exists()) {
-            diskPath = file.getAbsolutePath();
-        }
         //handler回调之后的方法,用来刷新UI主线程
         handler = new Handler(new Handler.Callback() {
             @Override
@@ -191,10 +193,9 @@ public class NetHelper<T> {
      * @param url
      * @param data
      */
-    public void setImage(ImageView imageView, String url,GoodsListBean.DataEntity.ListEntity data) {
-        Log.i("path",imageLoader.getDiskCache().get(url).getPath());
-        setImage(imageView,url);
-        MainPageHelper.newHelper(context).addData(imageLoader.getDiskCache().get(url).getPath(),data.getGoods_name(),data.getProduct_area(),data.getGoods_price(),data.getBrand());
+    public void setImage(ImageView imageView, String url,GoodsListBean.DataEntity.ListEntity data,String type) {
+        setImage(imageView, url);
+        MainPageHelper.newHelper(context).addData(url, data.getGoods_name(), data.getProduct_area(), data.getGoods_price(), data.getBrand(), type);
 
     }
 

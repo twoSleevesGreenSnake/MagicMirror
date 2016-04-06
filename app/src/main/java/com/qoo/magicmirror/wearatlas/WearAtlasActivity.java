@@ -11,7 +11,7 @@ import com.qoo.magicmirror.base.BaseActivity;
 public class WearAtlasActivity extends BaseActivity {
     private ListView listView;
     private WearAtlasListViewAdapter wearAtlasListViewAdapter;
-    private
+//    private
     @Override
     protected int setLayout() {
         return R.layout.activity_wearatlas;
@@ -25,6 +25,6 @@ public class WearAtlasActivity extends BaseActivity {
     @Override
     protected void initView() {
         listView = (ListView) findViewById(R.id.activity_wearatlas_listview);
-        wearAtlasListViewAdapter = new WearAtlasListViewAdapter();
+//        wearAtlasListViewAdapter = new WearAtlasListViewAdapter();
     }
 }

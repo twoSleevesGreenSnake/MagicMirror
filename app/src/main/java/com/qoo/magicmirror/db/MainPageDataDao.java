@@ -29,7 +29,7 @@ public class MainPageDataDao extends AbstractDao<MainPageData, Long> {
         public final static Property Area = new Property(3, String.class, "area", false, "AREA");
         public final static Property Price = new Property(4, String.class, "price", false, "PRICE");
         public final static Property Brand = new Property(5, String.class, "brand", false, "BRAND");
-        public final static Property Type = new Property(6, Integer.class, "type", false, "TYPE");
+        public final static Property Type = new Property(6, String.class, "type", false, "TYPE");
     };
 
 
@@ -51,7 +51,7 @@ public class MainPageDataDao extends AbstractDao<MainPageData, Long> {
                 "\"AREA\" TEXT," + // 3: area
                 "\"PRICE\" TEXT," + // 4: price
                 "\"BRAND\" TEXT," + // 5: brand
-                "\"TYPE\" INTEGER);"); // 6: type
+                "\"TYPE\" TEXT);"); // 6: type
     }
 
     /** Drops the underlying database table. */
@@ -95,9 +95,9 @@ public class MainPageDataDao extends AbstractDao<MainPageData, Long> {
             stmt.bindString(6, brand);
         }
  
-        Integer type = entity.getType();
+        String type = entity.getType();
         if (type != null) {
-            stmt.bindLong(7, type);
+            stmt.bindString(7, type);
         }
     }
 
@@ -117,7 +117,7 @@ public class MainPageDataDao extends AbstractDao<MainPageData, Long> {
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // area
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // price
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // brand
-            cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6) // type
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // type
         );
         return entity;
     }
@@ -131,7 +131,7 @@ public class MainPageDataDao extends AbstractDao<MainPageData, Long> {
         entity.setArea(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setPrice(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setBrand(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setType(cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6));
+        entity.setType(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
      }
     
     /** @inheritdoc */

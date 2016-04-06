@@ -12,7 +12,7 @@ public class MainPageData {
     private String area;
     private String price;
     private String brand;
-    private Integer type;
+    private String type;
 
     public MainPageData() {
     }
@@ -21,7 +21,7 @@ public class MainPageData {
         this.id = id;
     }
 
-    public MainPageData(Long id, String path, String name, String area, String price, String brand, Integer type) {
+    public MainPageData(Long id, String path, String name, String area, String price, String brand, String type) {
         this.id = id;
         this.path = path;
         this.name = name;
@@ -79,11 +79,11 @@ public class MainPageData {
         this.brand = brand;
     }
 
-    public Integer getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(String type) {
         this.type = type;
     }
 

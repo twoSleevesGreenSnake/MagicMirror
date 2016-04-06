@@ -14,7 +14,7 @@ public class DbCreater {
         entity.addStringProperty("area");
         entity.addStringProperty("price");
         entity.addStringProperty("brand");
-        entity.addIntProperty("type");
+        entity.addStringProperty("type");
 
         try {
             new DaoGenerator().generateAll(schama,"./app/src/main/java");

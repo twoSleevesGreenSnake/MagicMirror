@@ -22,24 +22,26 @@ public class VerticalViewPagerAdapter extends FragmentPagerAdapter {
     private Context context;
     private FragmentManager fm;
     private ArrayList<String> categoryId;
+    private boolean hasNet;
 
-    public VerticalViewPagerAdapter(FragmentManager fm, ArrayList<Fragment> fragments, ArrayList<String> titles, Context context,ArrayList<String> categoryId) {
+    public VerticalViewPagerAdapter(FragmentManager fm, ArrayList<Fragment> fragments, ArrayList<String> titles, Context context,ArrayList<String> categoryId,boolean hasNet) {
         super(fm);
         this.fm = fm;
         this.fragments = fragments;
         this.titles = titles;
         this.context = context;
         this.categoryId = categoryId;
+        this.hasNet  = hasNet;
     }
 
     @Override
     public Fragment getItem(int position) {
         if (position < 3) {
-            final GoodsFragment fragment = (GoodsFragment) GoodsFragment.getInstance(position, (ArrayList<String>) titles,categoryId);
+            final GoodsFragment fragment = (GoodsFragment) GoodsFragment.getInstance(position, (ArrayList<String>) titles,categoryId,hasNet);
             fragment.setMenuListener(new MenuListener() {
                 @Override
                 public void clickMenu() {
-                    fm.beginTransaction().setTransitionStyle(R.anim.fragment_menu_anim).show(VerticalViewPagerAdapter.this.fm.findFragmentByTag("menu")).commit();
+                    fm.beginTransaction().show(VerticalViewPagerAdapter.this.fm.findFragmentByTag("menu")).commit();
                 }
             });
             return fragment;

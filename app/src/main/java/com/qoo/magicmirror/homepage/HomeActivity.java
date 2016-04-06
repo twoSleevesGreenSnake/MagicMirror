@@ -3,6 +3,7 @@ package com.qoo.magicmirror.homepage;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -19,6 +20,8 @@ import com.qoo.magicmirror.constants.NetConstants;
 import com.qoo.magicmirror.net.NetHelper;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * App首页
@@ -49,7 +52,7 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
 
     @Override
     protected void initData() {
-
+        categoryId = new ArrayList<String>();
         titles.add(getString(R.string.fragment_goods_title_tv));
         titles.add(getString(R.string.fragment_palingglasses_title_tv));
         titles.add(getString(R.string.fragment_sunglasses_title_tv));
@@ -157,18 +160,37 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
 
             @Override
             public void onSuccess(CategoryListBean categoryListBean) {
-                categoryId = new ArrayList<String>();
-                Log.d("HomeActivity", "categoryListBean:" + categoryListBean.toString());
+
+                SharedPreferences sp = getSharedPreferences("categoryId",MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.clear();
+                editor.commit();
                 for (int i = 0; i < categoryListBean.getData().size(); i++) {
                     categoryId.add(categoryListBean.getData().get(i).getCategory_id());
+                    editor.putString(String.valueOf(i), categoryId.get(i));
+                    editor.commit();
                 }
-                Log.d("HomeActivity", "categoryId:" + categoryId);
-                adapter = new VerticalViewPagerAdapter(getSupportFragmentManager(), fragments, titles, HomeActivity.this, categoryId);
+
+                adapter = new VerticalViewPagerAdapter(getSupportFragmentManager(), fragments, titles, HomeActivity.this, categoryId,true);
                 verticalViewPager.setAdapter(adapter);
             }
 
             @Override
             public void onFailure() {
+               SharedPreferences sp = getSharedPreferences("categoryId", Context.MODE_PRIVATE);
+                Iterator ir = sp.getAll().entrySet().iterator();
+                ArrayList<String> count  = new ArrayList<String>();
+                while (ir.hasNext()) {
+                    Map.Entry en = (Map.Entry) ir.next();
+                    String Id = sp.getString(String.valueOf(en.getKey()), "");
+                    count.add(Id);
+                }
+                for (int i = 0; i <count.size() ; i++) {
+                   categoryId.add(sp.getString(String.valueOf(i),""));
+                }
+                Log.i("cateid",categoryId.toString());
+                adapter = new VerticalViewPagerAdapter(getSupportFragmentManager(), fragments, titles, HomeActivity.this, categoryId,false);
+                verticalViewPager.setAdapter(adapter);
 
             }
         });
