@@ -38,6 +38,7 @@
             android:layout_marginRight="@dimen/activity_main_login_rl_marginRight">
 
             <TextView
+                android:id="@+id/activity_login_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"

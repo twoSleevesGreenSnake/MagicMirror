@@ -11,21 +11,21 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20px"
-            android:layout_marginLeft="50px"
-            android:layout_marginTop="30px"
-            android:text="创建账号"
+            android:layout_marginBottom="@dimen/activity_register_tv_marginBottom"
+            android:layout_marginLeft="@dimen/activity_register_tv_marginLeft"
+            android:layout_marginTop="@dimen/activity_register_tv_marginTop"
+            android:text="@string/activity_register_tv"
             android:textColor="@color/colorLight_Black"
-            android:textSize="34px" />
+            android:textSize="@dimen/activity_register_tv_textSize" />
 
         <ImageView
             android:id="@+id/activity_register_close_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginBottom="16px"
-            android:layout_marginRight="66px"
-            android:layout_marginTop="30px"
+            android:layout_marginBottom="@dimen/activity_register_close_iv_marginBottom"
+            android:layout_marginRight="@dimen/activity_register_close_iv_marginRight"
+            android:layout_marginTop="@dimen/activity_register_close_iv_marginTop"
             android:src="@mipmap/close" />
     </RelativeLayout>
 
@@ -33,76 +33,93 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/activity_register_close_iv"
+        android:layout_marginLeft="@dimen/activity_register_black_line_iv_marginLeft"
+        android:layout_marginRight="@dimen/activity_register_black_line_iv_marginRight"
+        android:scaleType="fitXY"
         android:src="@mipmap/line_of_create_account" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50px"
-        android:layout_marginRight="50px"
+        android:layout_marginLeft="@dimen/activity_register_ll_marginLeft"
+        android:layout_marginRight="@dimen/activity_register_ll_marginRight"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40px"
-            android:text="手机号"
+            android:layout_marginTop="@dimen/activity_register_phonenumber_tv_marginTop"
+            android:text="@string/activity_register_phonenumber_tv"
             android:textColor="@color/colorLight_Black"
-            android:textSize="24px" />
+            android:textSize="@dimen/activity_register_phonenumber_tv_textSize" />
 
         <EditText
+            android:id="@+id/activity_register_phone_number_et"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginTop="20px"
+            android:layout_height="@dimen/activity_register_phonenumber_et_height"
+            android:layout_marginTop="@dimen/activity_register_phonenumber_et_marginTop"
+            android:inputType="number"
             android:background="@drawable/shape_login_edittext" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30px"
-            android:text="验证码"
+            android:layout_marginTop="@dimen/activity_register_sendcode_tv_marginTop"
+            android:text="@string/activity_register_sendcode_tv"
             android:textColor="@color/colorLight_Black"
-            android:textSize="24px" />
+            android:textSize="@dimen/activity_register_sendcode_tv_textSize" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="20px"
-            >
+            android:layout_height="@dimen/activity_register_sendcode_ll_height"
+            android:layout_marginTop="@dimen/activity_register_sendcode_ll_marginTop"
+            android:orientation="horizontal">
 
             <EditText
+                android:id="@+id/activity_register_code_et"
                 android:layout_width="@dimen/layout_width_zero"
-                android:layout_weight="5"
                 android:layout_height="match_parent"
-                android:inputType="number"
-                android:background="@drawable/shape_login_edittext" />
+                android:layout_weight="5"
+                android:background="@drawable/shape_login_edittext"
+                android:inputType="number" />
 
-            <TextView
+            <Button
+                android:id="@+id/activity_register_send_code_btn"
                 android:layout_width="@dimen/layout_width_zero"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:background="@mipmap/create_account"
+                android:gravity="center"
                 android:inputType="number"
-                android:text="发送验证码"
-                android:textColor="@color/colorWhite"
-                android:gravity="center"/>
+                android:text="@string/activity_register_sendcode_btn_tv"
+                android:textColor="@color/colorWhite" />
 
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="设置密码"
-            android:layout_marginTop="30px"
-            android:textSize="24px"
-            android:textColor="@color/colorLight_Black" />
-        
+            android:layout_marginTop="@dimen/activity_register_setpassword_tv_marginTop"
+            android:text="@string/activity_register_setpassword_tv"
+            android:textColor="@color/colorLight_Black"
+            android:textSize="@dimen/activity_register_setpassword_tv_textSize" />
+
         <EditText
+            android:id="@+id/activity_register_password_et"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:background="@drawable/shape_login_edittext"
-            android:layout_marginTop="20px"
-            />
+            android:layout_height="@dimen/activity_register_setpassword_et_height"
+            android:layout_marginTop="@dimen/activity_register_setpassword_et_marginTop"
+            android:inputType="numberPassword"
+            android:background="@drawable/shape_login_edittext" />
+
+        <Button
+            android:id="@+id/activity_register_create_account_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/activity_register_setpassword_btn_tv_marginTop"
+            android:background="@mipmap/create_account"
+            android:text="@string/activity_register_setpassword_btn_tv"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/activity_register_setpassword_btn_tv_textSize" />
     </LinearLayout>
 </LinearLayout>
