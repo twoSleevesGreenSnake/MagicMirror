@@ -35,10 +35,10 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
         this.data = data;
         this.context = context;
     }
-    public GoodsRecycleViewAdapter(List<MainPageData>data, Context context, int mainPosition) {
+    public GoodsRecycleViewAdapter(List<MainPageData>data, Context context) {
         noNetData = data;
         this.context = context;
-        this.mainPosition = mainPosition;
+
     }
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -46,21 +46,13 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
     }
 
     @Override
-<<<<<<< HEAD
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.nameTv.setText(data.get(mainPosition).getGoods_name());
-        holder.originTv.setText(data.get(mainPosition).getProduct_area());
-        holder.pirceTv.setText(data.get(mainPosition).getGoods_price());
-        holder.describeTv.setText(data.get(mainPosition).getBrand());
-        new NetHelper(context).setImage(holder.goodPic, data.get(mainPosition).getGoods_img(),data.get(position));
-=======
+
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.nameTv.setText(data.get(position).getGoods_name());
         holder.originTv.setText(data.get(position).getProduct_area());
         holder.pirceTv.setText(data.get(position).getGoods_price());
         holder.describeTv.setText(data.get(position).getBrand());
         new NetHelper(context).setImage(holder.goodPic, data.get(position).getGoods_img());
->>>>>>> feature/注册界面开始
         holder.itemLl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
