@@ -3,7 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 <VideoView
-    android:layout_marginTop="20px"
-    android:layout_width="660px"
-    android:layout_height="330px" />
+    android:id="@+id/head_layout_of_atlas_vv"
+    android:layout_marginTop="@dimen/head_layout_of_atlas_vv_marginTop"
+    android:layout_width="@dimen/head_layout_of_atlas_vv_width"
+    android:layout_height="@dimen/head_layout_of_atlas_vv_height" />
 </LinearLayout>

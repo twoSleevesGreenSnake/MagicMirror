@@ -192,4 +192,15 @@
     <dimen name="goods_detail_textSize">34px</dimen>
     <dimen name="activity_wearatlas_iv_marginTop">20px</dimen>
     <dimen name="activity_wearatlas_tv_marginTop">30px</dimen>
+    <dimen name="activity_wearatlas_back_iv_marginLeft">40px</dimen>
+    <dimen name="activity_wearatlas_back_iv_marginBottom">40px</dimen>
+    <dimen name="activity_wearatlas_purchase_iv_marginRight">40px</dimen>
+    <dimen name="activity_wearatlas_purchase_iv_marginBottom">40px</dimen>
+    <dimen name="activity_wearatlas_goods_show_detail_marginLeft">40px</dimen>
+    <dimen name="item_wear_atlas_rv_iv_marginLeft">39px</dimen>
+    <dimen name="item_wear_atlas_rv_iv_marginTop">20px</dimen>
+    <dimen name="item_wear_atlas_rv_iv_marginRight">39px</dimen>
+    <dimen name="head_layout_of_atlas_vv_marginTop">20px</dimen>
+    <dimen name="head_layout_of_atlas_vv_width">660px</dimen>
+    <dimen name="head_layout_of_atlas_vv_height">330px</dimen>
 </resources>
