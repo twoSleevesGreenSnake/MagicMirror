@@ -191,4 +191,5 @@
     <dimen name="activity_login_use_social_contact_textSize">30px</dimen>
     <dimen name="goods_detail_textSize">34px</dimen>
     <dimen name="activity_wearatlas_iv_marginTop">20px</dimen>
+    <dimen name="activity_wearatlas_tv_marginTop">30px</dimen>
 </resources>

@@ -3,5 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
+<ImageView
+    android:id="@+id/item_wear_atlas_rv_iv"
+    android:layout_marginTop="20px"
+    android:src="@mipmap/ic_launcher"
+    android:layout_marginRight="9px"
+    android:layout_marginLeft="9px"
+    android:layout_width="660px"
+    android:layout_height="400px" />
 </LinearLayout>
