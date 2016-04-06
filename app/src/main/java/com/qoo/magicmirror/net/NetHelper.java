@@ -35,6 +35,7 @@ import com.qoo.magicmirror.db.MainPageHelper;
 import com.qoo.magicmirror.detail.SpecialTopicDetailBean;
 import com.qoo.magicmirror.homepage.GoodsListBean;
 import com.qoo.magicmirror.homepage.ThematicBean;
+import com.qoo.magicmirror.loginandregister.CreateCountBean;
 import com.qoo.magicmirror.tools.CutBitmap;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.FormEncodingBuilder;
@@ -129,16 +130,17 @@ public class NetHelper<T> {
 
     /**
      * 切图的方法
+     *
      * @param imageView 组件
-     * @param url   网址
-     * @param cutLenth 切掉的高度,取下部分
+     * @param url       网址
+     * @param cutLenth  切掉的高度,取下部分
      */
 
     public void setDrawable(final ImageView imageView, final String url, final int cutLenth) {
         final Handler imageHandler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
-                if (msg.what==3){
+                if (msg.what == 3) {
                     Bitmap bitmap = (Bitmap) msg.obj;
                     if (bitmap == null) {
                         return false;
@@ -158,7 +160,7 @@ public class NetHelper<T> {
             public void run() {
                 Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url);
                 Message message = new Message();
-                message.what=3;
+                message.what = 3;
                 message.obj = bitmap;
                 imageHandler.sendMessage(message);
             }
@@ -168,10 +170,11 @@ public class NetHelper<T> {
 
     /**
      * 给view 网络拉取背景的方法
-     * @param v 组件
+     *
+     * @param v   组件
      * @param url 网址
      */
-    public void setBackGround(View v,String url){
+    public void setBackGround(View v, String url) {
         Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url);
 
         v.setBackground(new BitmapDrawable(context.getResources(), bitmap));
@@ -179,23 +182,32 @@ public class NetHelper<T> {
 
     /**
      * 给imageview 拉取图片并显示的方法
+     *
      * @param imageView 组件
-     * @param url 网址
+     * @param url       网址
      */
     public void setImage(ImageView imageView, String url) {
-        Log.i("path",imageLoader.getDiskCache().get(url).getPath());
+        Log.i("path", imageLoader.getDiskCache().get(url).getPath());
         imageLoader.displayImage(url, imageView, options);
     }
 
     /**
      * 加载图片并存入数据库的方法
+     *
      * @param imageView
      * @param url
      * @param data
      */
+<<<<<<< HEAD
     public void setImage(ImageView imageView, String url,GoodsListBean.DataEntity.ListEntity data,String type) {
         setImage(imageView, url);
         MainPageHelper.newHelper(context).addData(url, data.getGoods_name(), data.getProduct_area(), data.getGoods_price(), data.getBrand(), type);
+=======
+    public void setImage(ImageView imageView, String url, GoodsListBean.DataEntity.ListEntity data) {
+        Log.i("path", imageLoader.getDiskCache().get(url).getPath());
+        setImage(imageView, url);
+        MainPageHelper.newHelper(context).addData(imageLoader.getDiskCache().get(url).getPath(), data.getGoods_name(), data.getProduct_area(), data.getGoods_price(), data.getBrand());
+>>>>>>> feature/注册界面继续
 
     }
 
@@ -238,8 +250,48 @@ public class NetHelper<T> {
         });
     }
 
+    public void getPostInfoForRegister(String url, ArrayList<String> keys, ArrayList<String> values, final Class<T> cls, final NetListener<T> listener) {
+        FormEncodingBuilder builder = new FormEncodingBuilder();
+        this.cls = cls;
+        this.listener = listener;
+        for (int i = 0; i < keys.size(); i++) {
+            builder.add(keys.get(i), values.get(i));
+        }
+        RequestBody formBody = builder.build();
+
+        Request request = new Request.Builder()
+
+                .url(NetConstants.SERVIE_ADRESS + url)
+
+                .post(formBody)
+
+                .build();
+        mOkHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                handler.sendEmptyMessage(2);
+            }
+
+            @Override
+            public void onResponse(com.squareup.okhttp.Response response) throws IOException {
+                String body = response.body().string();
+                if (body.contains("此手机号已被注册")) {
+                    listener.onFailure();
+                    return;
+                } else if (body.contains("验证码错误")){
+                    listener.onFailure();
+                    return;
+                }
+                Message message = new Message();
+                message.what = 1;
+                message.obj = body;
+                handler.sendMessage(message);
+            }
+        });
+    }
+
     // get
-    public void getGetInfo(String url,final Class<T> clazz, final NetListener listener) {
+    public void getGetInfo(String url, final Class<T> clazz, final NetListener listener) {
         Request request = new Request.Builder()
                 .url(NetConstants.SERVIE_ADRESS + url)
                 .build();
@@ -248,6 +300,7 @@ public class NetHelper<T> {
             public void onFailure(Request request, IOException e) {
                 listener.onFailure();
             }
+
             @Override
             public void onResponse(Response response) throws IOException {
                 Log.d("NetHelper", "NetHelper+" + response.toString());
@@ -259,6 +312,7 @@ public class NetHelper<T> {
 
     /**
      * 用来区分拉取结果不同的 回调接口
+     *
      * @param <T>
      */
     public interface NetListener<T> {
@@ -364,7 +418,6 @@ public class NetHelper<T> {
 //            diskCache.putBitmap(url, bitmap);
 //        }
 //    }
-
 
 
 }

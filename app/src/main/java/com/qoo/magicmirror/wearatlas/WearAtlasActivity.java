@@ -11,7 +11,10 @@ import com.qoo.magicmirror.base.BaseActivity;
 public class WearAtlasActivity extends BaseActivity {
     private ListView listView;
     private WearAtlasListViewAdapter wearAtlasListViewAdapter;
+<<<<<<< HEAD
 //    private
+=======
+>>>>>>> feature/注册界面继续
     @Override
     protected int setLayout() {
         return R.layout.activity_wearatlas;

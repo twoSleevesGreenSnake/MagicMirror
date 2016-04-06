@@ -12,11 +12,13 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.base.BaseActivity;
 import com.qoo.magicmirror.constants.NetConstants;
+import com.qoo.magicmirror.loginandregister.LoginActivity;
 import com.qoo.magicmirror.net.NetHelper;
 
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
     private ImageView logoIv;
     private MenuFragment menuFragment;
     private ArrayList<String> categoryId;
+    private TextView loginTv;
 
     @Override
     protected int setLayout() {
@@ -48,6 +51,7 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
         verticalViewPager = bindView(R.id.homepage_verticalviewpager);
         logoIv = bindView(R.id.main_activity_logo_img);
         titles = new ArrayList<>();
+        loginTv = bindView(R.id.activity_login_tv);
     }
 
     @Override
@@ -133,6 +137,13 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
         startActivity(new Intent(this, WelcomeActivity.class));
 
         getNetInfo();
+
+        loginTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+            }
+        });
     }
 
 
@@ -160,11 +171,16 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
 
             @Override
             public void onSuccess(CategoryListBean categoryListBean) {
+<<<<<<< HEAD
 
                 SharedPreferences sp = getSharedPreferences("categoryId",MODE_PRIVATE);
                 SharedPreferences.Editor editor = sp.edit();
                 editor.clear();
                 editor.commit();
+=======
+                categoryId = new ArrayList<>();
+                Log.d("HomeActivity", "categoryListBean:" + categoryListBean.toString());
+>>>>>>> feature/注册界面继续
                 for (int i = 0; i < categoryListBean.getData().size(); i++) {
                     categoryId.add(categoryListBean.getData().get(i).getCategory_id());
                     editor.putString(String.valueOf(i), categoryId.get(i));

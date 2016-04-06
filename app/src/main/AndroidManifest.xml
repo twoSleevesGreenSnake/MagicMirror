@@ -24,8 +24,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".loginandregister.LoginActivity" />
-        <activity android:name=".homepage.HomeActivity">
+        <activity android:name=".loginandregister.RegisterActivity" />
+        <activity android:name=".loginandregister.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

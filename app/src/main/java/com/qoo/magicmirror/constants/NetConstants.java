@@ -16,9 +16,9 @@ public final class NetConstants {
     public static final String THEMATIC_TYPE = "index.php/story/story_list";
     // 故事信息
     public static final String STORY_INFO = "index.php/story/info";
-    // 用户登录
-    public static final String USER_SIGN_UP = "index.php/user/reg";
     // 用户注册
+    public static final String USER_SIGN_UP = "index.php/user/reg";
+    // 用户登录
     public static final String USER_LOGIN_IN = "index.php/user/login";
     // 绑定头像
     public static final String BUNDLING_HEAD_PIC = "index.php/user/bundling";
