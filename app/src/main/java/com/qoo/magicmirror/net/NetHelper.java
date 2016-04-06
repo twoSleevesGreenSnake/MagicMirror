@@ -30,7 +30,10 @@ import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.constants.NetConstants;
+import com.qoo.magicmirror.db.MainPageHelper;
 import com.qoo.magicmirror.detail.SpecialTopicDetailBean;
+import com.qoo.magicmirror.homepage.GoodsListBean;
+import com.qoo.magicmirror.homepage.ThematicBean;
 import com.qoo.magicmirror.tools.CutBitmap;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.FormEncodingBuilder;
@@ -169,7 +172,7 @@ public class NetHelper<T> {
     public void setBackGround(View v,String url){
         Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url);
 
-        v.setBackground(new BitmapDrawable(context.getResources(),bitmap));
+        v.setBackground(new BitmapDrawable(context.getResources(), bitmap));
     }
 
     /**
@@ -180,6 +183,19 @@ public class NetHelper<T> {
     public void setImage(ImageView imageView, String url) {
         Log.i("path",imageLoader.getDiskCache().get(url).getPath());
         imageLoader.displayImage(url, imageView, options);
+    }
+
+    /**
+     * 加载图片并存入数据库的方法
+     * @param imageView
+     * @param url
+     * @param data
+     */
+    public void setImage(ImageView imageView, String url,GoodsListBean.DataEntity.ListEntity data) {
+        Log.i("path",imageLoader.getDiskCache().get(url).getPath());
+        setImage(imageView,url);
+        MainPageHelper.newHelper(context).addData(imageLoader.getDiskCache().get(url).getPath(),data.getGoods_name(),data.getProduct_area(),data.getGoods_price(),data.getBrand());
+
     }
 
     /**

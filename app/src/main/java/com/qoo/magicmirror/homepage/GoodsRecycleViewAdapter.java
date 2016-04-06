@@ -12,10 +12,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.qoo.magicmirror.R;
+import com.qoo.magicmirror.db.MainPageData;
 import com.qoo.magicmirror.detail.BrowseGlassesActivity;
 import com.qoo.magicmirror.net.NetHelper;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by dllo on 16/3/29.
@@ -25,6 +27,7 @@ import java.util.ArrayList;
 public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleViewAdapter.MyViewHolder> {
 
     private ArrayList<GoodsListBean.DataEntity.ListEntity> data;
+    private List<MainPageData> noNetData;
     private Context context;
     // MainActivity传递过来的ViewPager的位置
     private int mainPosition;
@@ -34,7 +37,11 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
         this.context = context;
         this.mainPosition = mainPosition;
     }
-
+    public GoodsRecycleViewAdapter(List<MainPageData>data, Context context, int mainPosition) {
+        noNetData = data;
+        this.context = context;
+        this.mainPosition = mainPosition;
+    }
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.item_fragment_goods, parent, false));
@@ -46,7 +53,7 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
         holder.originTv.setText(data.get(mainPosition).getProduct_area());
         holder.pirceTv.setText(data.get(mainPosition).getGoods_price());
         holder.describeTv.setText(data.get(mainPosition).getBrand());
-        new NetHelper(context).setImage(holder.goodPic, data.get(mainPosition).getGoods_img());
+        new NetHelper(context).setImage(holder.goodPic, data.get(mainPosition).getGoods_img(),data.get(position));
         holder.itemLl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
