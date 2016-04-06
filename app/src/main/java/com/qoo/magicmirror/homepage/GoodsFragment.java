@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public class GoodsFragment extends Fragment {
     // 标题
     private TextView titleTv;
     private MenuListener menuListener;
+    private ArrayList<String> categoryId;
 
     /**
      * 相当于初始化
@@ -52,12 +54,12 @@ public class GoodsFragment extends Fragment {
      * 提供静态方法，添加fragment
      * 静态方法，返回新的Fragment
      *
-     * @param position viewpager的位置
      * @return 新的Fragment
      */
-    public static Fragment getInstance(int position, ArrayList<String> popTitles) {
+    public static Fragment getInstance(int position, ArrayList<String> popTitles,ArrayList<String> categoryId) {
         Fragment instance = new GoodsFragment();
         Bundle bundle = new Bundle();
+        bundle.putStringArrayList("categoryId", categoryId);
         bundle.putInt(Value.putPosition, position);
         bundle.putStringArrayList(Value.putPopTitles, popTitles);
         instance.setArguments(bundle);
@@ -92,8 +94,10 @@ public class GoodsFragment extends Fragment {
 
     private void initData() {
         Bundle bundle = getArguments();
+        categoryId = bundle.getStringArrayList("categoryId");
         position = bundle.getInt(Value.putPosition);
         popTitles = bundle.getStringArrayList(Value.putPopTitles);
+        Log.d("GoodsFragment", "+++++" + categoryId);
         titleTv.setText(popTitles.get(position));
         titleFl.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,14 +120,14 @@ public class GoodsFragment extends Fragment {
         value.add(getString(R.string.one));
         value.add("");
         value.add("");
-        value.add("");
+        value.add(categoryId.get(position));
         value.add(getString(R.string.one_point_zero_point_one));
         NetHelper netHelper = new NetHelper(getContext());
         netHelper.getPostInfo(NetConstants.GOODS_TYPE, token, value, GoodsListBean.class, new NetHelper.NetListener<GoodsListBean>() {
                     @Override
                     public void onSuccess(GoodsListBean goodsListBean) {
                         datas = (ArrayList<GoodsListBean.DataEntity.ListEntity>) goodsListBean.getData().getList();
-                        adapter = new GoodsRecycleViewAdapter(datas, getActivity(), position);
+                        adapter = new GoodsRecycleViewAdapter(datas, getActivity());
                         GridLayoutManager gm = new GridLayoutManager(getActivity(), 1);
                         gm.setOrientation(GridLayoutManager.HORIZONTAL);
                         recyclerView.setLayoutManager(gm);
