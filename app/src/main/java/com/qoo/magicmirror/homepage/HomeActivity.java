@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.base.BaseActivity;
+import com.qoo.magicmirror.constants.NetConstants;
+import com.qoo.magicmirror.net.NetHelper;
 
 import java.util.ArrayList;
 
@@ -29,6 +31,7 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
     private ArrayList<String> titles;
     private ImageView logoIv;
     private MenuFragment menuFragment;
+    private ArrayList<String> categoryId;
 
     @Override
     protected int setLayout() {
@@ -107,8 +110,6 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
         getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_menu_fl, menuFragment, getString(R.string.MENU)).hide(menuFragment).commit();
 
         // 绑定纵向滑动的Viewpager的适配器
-        adapter = new VerticalViewPagerAdapter(getSupportFragmentManager(), fragments, titles, HomeActivity.this);
-        verticalViewPager.setAdapter(adapter);
 
         // 点击logo的动画效果
         logoIv.setOnClickListener(new View.OnClickListener() {
@@ -127,6 +128,8 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
 
         // 启动闪屏页
         startActivity(new Intent(this, WelcomeActivity.class));
+
+        getNetInfo();
     }
 
 
@@ -142,5 +145,34 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
         } else if (menuPosition == 5) {
             verticalViewPager.setCurrentItem(0);
         }
+    }
+
+    public void getNetInfo() {
+        NetHelper netHelper = new NetHelper(this);
+        ArrayList<String> token = new ArrayList<>();
+        token.add(getString(R.string.token));
+        ArrayList<String> value = new ArrayList<>();
+        value.add("");
+        netHelper.getPostInfo(NetConstants.CATEGORY_LIST, token, value, CategoryListBean.class, new NetHelper.NetListener<CategoryListBean>() {
+
+            @Override
+            public void onSuccess(CategoryListBean categoryListBean) {
+                categoryId = new ArrayList<String>();
+                Log.d("HomeActivity", "categoryListBean:" + categoryListBean.toString());
+                for (int i = 0; i < categoryListBean.getData().size(); i++) {
+                    categoryId.add(categoryListBean.getData().get(i).getCategory_id());
+                }
+                Log.d("HomeActivity", "categoryId:" + categoryId);
+                adapter = new VerticalViewPagerAdapter(getSupportFragmentManager(), fragments, titles, HomeActivity.this, categoryId);
+                verticalViewPager.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
+
+
     }
 }

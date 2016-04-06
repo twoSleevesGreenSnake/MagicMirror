@@ -21,19 +21,21 @@ public class VerticalViewPagerAdapter extends FragmentPagerAdapter {
     private List<String> titles;
     private Context context;
     private FragmentManager fm;
+    private ArrayList<String> categoryId;
 
-    public VerticalViewPagerAdapter(FragmentManager fm, ArrayList<Fragment> fragments, ArrayList<String> titles, Context context) {
+    public VerticalViewPagerAdapter(FragmentManager fm, ArrayList<Fragment> fragments, ArrayList<String> titles, Context context,ArrayList<String> categoryId) {
         super(fm);
         this.fm = fm;
         this.fragments = fragments;
         this.titles = titles;
         this.context = context;
+        this.categoryId = categoryId;
     }
 
     @Override
     public Fragment getItem(int position) {
         if (position < 3) {
-            final GoodsFragment fragment = (GoodsFragment) GoodsFragment.getInstance(position, (ArrayList<String>) titles);
+            final GoodsFragment fragment = (GoodsFragment) GoodsFragment.getInstance(position, (ArrayList<String>) titles,categoryId);
             fragment.setMenuListener(new MenuListener() {
                 @Override
                 public void clickMenu() {
