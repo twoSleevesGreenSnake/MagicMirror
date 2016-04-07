@@ -61,9 +61,7 @@
     <string name="uid">uid</string>
     <string name="intent_phonenumber">phonenumber</string>
     <string name="was_registered">此号码已被注册</string>
-<<<<<<< HEAD
     <string name="item_detail_brose_glasses_rv_head_first_down_pull_tv_content">下拉浏览详情</string>
-=======
     <string name="shopping_cart">購物車</string>
     <string name="shoppingcart">購物車</string>
     <string name="please_write_your_username_and_password">請輸入用戶名和密碼</string>
@@ -75,6 +73,5 @@
     <string name="cancle">取消</string>
     <string name="please_login">请先登录</string>
     <string name="activity_orderdetail_tv">購買詳情</string>
->>>>>>> feature/各种修改
 
 </resources>

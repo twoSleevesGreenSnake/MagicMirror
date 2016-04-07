@@ -229,12 +229,11 @@
     <dimen name="head_layout_of_atlas_vv_marginTop">20px</dimen>
     <dimen name="head_layout_of_atlas_vv_width">660px</dimen>
     <dimen name="head_layout_of_atlas_vv_height">330px</dimen>
-<<<<<<< HEAD
     <dimen name="item_detail_brose_glasses_rv_content_etitle_tv">24px</dimen>
     <dimen name="item_detail_brose_glasses_rv_head_first_down_pull_tv_marginTop">48px</dimen>
     <dimen name="item_detail_brose_glasses_rv_head_first_down_pull_iv_marginTop">14px</dimen>
     <dimen name="activity_detail_browse_glasses_pictures_tv">50px</dimen>
-=======
+
     <dimen name="activity_login_rl_marginLeft">35px</dimen>
     <dimen name="activity_login_rl_marginRight">35px</dimen>
     <dimen name="activity_login_line_iv_marginLeft">35px</dimen>
@@ -247,5 +246,4 @@
     <dimen name="activity_orderdetail_black_line_iv_marginRight">35px</dimen>
     <dimen name="activity_orderdetail_black_line_iv_marginLeft">35px</dimen>
     <dimen name="activity_orderdetail_black_line_iv_marginTop">20px</dimen>
->>>>>>> feature/各种修改
 </resources>
