@@ -243,6 +243,14 @@ public class NetHelper<T> {
         });
     }
 
+    /**
+     * 注册界面注册
+     * @param url
+     * @param keys
+     * @param values
+     * @param cls
+     * @param listener
+     */
     public void getPostInfoForRegister(String url, ArrayList<String> keys, ArrayList<String> values, final Class<T> cls, final NetListener<T> listener) {
         FormEncodingBuilder builder = new FormEncodingBuilder();
         this.cls = cls;
@@ -283,6 +291,53 @@ public class NetHelper<T> {
         });
     }
 
+    /**
+     * 登陆界面登陆
+     * @param url
+     * @param keys
+     * @param values
+     * @param cls
+     * @param listener
+     */
+    public void getPostInfoForLogin(String url, ArrayList<String> keys, ArrayList<String> values, final Class<T> cls, final NetListener<T> listener) {
+        FormEncodingBuilder builder = new FormEncodingBuilder();
+        this.cls = cls;
+        this.listener = listener;
+        for (int i = 0; i < keys.size(); i++) {
+            builder.add(keys.get(i), values.get(i));
+        }
+        RequestBody formBody = builder.build();
+
+        Request request = new Request.Builder()
+
+                .url(NetConstants.SERVIE_ADRESS + url)
+
+                .post(formBody)
+
+                .build();
+        mOkHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                handler.sendEmptyMessage(2);
+            }
+
+            @Override
+            public void onResponse(com.squareup.okhttp.Response response) throws IOException {
+                String body = response.body().string();
+                Log.d("NetHelper", body);
+                if (body.contains("此手机号未注册")) {
+                    listener.onFailure();
+                    return;
+                }
+                Message message = new Message();
+                message.what = 1;
+                message.obj = body;
+                handler.sendMessage(message);
+            }
+        });
+    }
+
+
     // get
     public void getGetInfo(String url, final Class<T> clazz, final NetListener listener) {
         Request request = new Request.Builder()
@@ -296,7 +351,6 @@ public class NetHelper<T> {
 
             @Override
             public void onResponse(Response response) throws IOException {
-                Log.d("NetHelper", "NetHelper+" + response.toString());
                 T t = new Gson().fromJson(response.body().string(), clazz);
                 listener.onSuccess(t);
             }

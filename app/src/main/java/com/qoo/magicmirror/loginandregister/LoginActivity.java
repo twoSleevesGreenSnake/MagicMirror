@@ -9,9 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.base.BaseActivity;
+import com.qoo.magicmirror.constants.NetConstants;
+import com.qoo.magicmirror.net.NetHelper;
+
+import java.util.ArrayList;
 
 /**
  * Created by dllo on 16/3/29.
@@ -22,6 +27,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private EditText etPhontNumber, etPassword;
     private int request = 101;
     private ImageView closeIv;
+    private String phoneNumber;
+    private String uid;
+    private NetHelper netHelper;
+    private String password;
+    private String phone;
 
 
     @Override
@@ -32,6 +42,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void initData() {
         listenEditText();
+
+
     }
 
     @Override
@@ -42,8 +54,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         etPhontNumber = bindView(R.id.activity_login_phone_number_et);
         etPassword = bindView(R.id.activity_login_password_et);
         closeIv = bindView(R.id.activity_login_close_iv);
+        btnLogin = bindView(R.id.activity_login_btn);
         closeIv.setOnClickListener(this);
+        btnLogin.setOnClickListener(this);
         btnCreateAccount.setOnClickListener(this);
+        netHelper = new NetHelper(this);
     }
 
     private void listenEditText() {
@@ -71,7 +86,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         etPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -80,9 +94,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     btnLogin.setBackgroundResource(R.drawable.selector_login_btn);
                 } else if (etPhontNumber.length() == 0 || etPassword.length() == 0) {
                     btnLogin.setBackgroundResource(R.mipmap.enable_state_button);
-//                   if (btnLogin.isPressed() == true){
-//                       btnLogin.setBackgroundResource(R.mipmap.login_button_pressed);
-//                   }
                 }
             }
 
@@ -99,22 +110,58 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.activity_login_create_account:
                 Intent intent = new Intent(this, RegisterActivity.class);
-                startActivityForResult(intent,request);
+                startActivityForResult(intent, request);// 创建账号按钮
                 break;
             case R.id.activity_login_close_iv:
                 finish();
                 break;
+            case R.id.activity_login_btn:
+                login();
+                break;
+            default:
+                break;
         }
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
-            String phoneNumber = data.getStringExtra("phonenumber");
-            String uid = data.getStringExtra("uid");
+            phoneNumber = data.getStringExtra(getString(R.string.phonenumber));
+            uid = data.getStringExtra(getString(R.string.uid));
             etPhontNumber.setText(phoneNumber);
+        }
+    }
+
+    private void login() {
+        phone = etPhontNumber.getText().toString();
+        password = etPassword.getText().toString();
+        if (phone.length() != 0) {
+            if (password.length() != 0) {
+                final ArrayList<String> token = new ArrayList<>();
+                token.add(getString(R.string.phone_number));
+                token.add(getString(R.string.password));
+                token.add("");
+                ArrayList<String> value = new ArrayList<>();
+                value.add(phone);
+                value.add(password);
+                value.add("");
+                netHelper.getPostInfoForLogin(NetConstants.USER_LOGIN_IN, token, value, LoginSuccessBean.class, new NetHelper.NetListener<LoginSuccessBean>() {
+
+                    @Override
+                    public void onSuccess(LoginSuccessBean loginSuccessBean) {
+                        BaseActivity.setToken(loginSuccessBean.getData().getToken());
+                        finish();
+                    }
+                    @Override
+                    public void onFailure() {
+                    }
+                });
+            } else {
+                Toast.makeText(LoginActivity.this, R.string.please_write_yourpassword, Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(LoginActivity.this, R.string.please_write_your_username_and_password, Toast.LENGTH_SHORT).show();
         }
     }
 }

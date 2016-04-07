@@ -1,15 +1,15 @@
 package com.qoo.magicmirror.homepage;
 
 import android.animation.ObjectAnimator;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,7 +41,7 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
 
     @Override
     protected int setLayout() {
-        return R.layout.activity_main;
+        return R.layout.activity_home;
     }
 
     // 初始化数据，绑定组件
@@ -137,13 +137,6 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
         startActivity(new Intent(this, WelcomeActivity.class));
 
         getNetInfo();
-
-        loginTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-            }
-        });
     }
 
 
@@ -158,7 +151,32 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
             verticalViewPager.setCurrentItem(menuPosition);
         } else if (menuPosition == 5) {
             verticalViewPager.setCurrentItem(0);
+        } else if (menuPosition == 6) {
+            if (BaseActivity.token == "") {
+                showDialog();// 退出登录的PopupWindow
+            } else {
+                Toast.makeText(HomeActivity.this, R.string.please_login, Toast.LENGTH_SHORT).show();
+            }
         }
+    }
+
+    private void showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.is_login_out_magic_mirror);
+        builder.setPositiveButton(R.string.sure, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                BaseActivity.token = "";
+                shoppingcartAndLogin();
+            }
+        });
+        builder.setNegativeButton(R.string.cancle, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
     }
 
     public void getNetInfo() {
@@ -206,7 +224,34 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
 
             }
         });
+    }
 
+    /**
+     * "购物车"和"登陆"
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        shoppingcartAndLogin();
+    }
 
+    public void shoppingcartAndLogin() {
+        if (BaseActivity.token != "") {
+            loginTv.setText(R.string.shoppingcart);
+            loginTv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    verticalViewPager.setCurrentItem(4);
+                }
+            });
+        } else {
+            loginTv.setText(R.string.activity_main_login_tv);
+            loginTv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                }
+            });
+        }
     }
 }

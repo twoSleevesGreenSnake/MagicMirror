@@ -6,12 +6,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_login_rl_marginLeft"
+        android:layout_marginRight="@dimen/activity_login_rl_marginRight">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_login_close_iv_marginLeft"
             android:layout_marginTop="@dimen/activity_login_close_iv_marginTop"
             android:text="@string/activity_login_account_login"
             android:textColor="@color/colorBlack"
@@ -22,7 +23,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/activity_login_close_iv_marginLeft"
             android:layout_marginTop="@dimen/activity_login_close_iv_marginTop"
             android:src="@mipmap/close" />
     </RelativeLayout>
@@ -31,7 +31,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_login_black_line_iv_marginTop"
-        android:src="@mipmap/line_of_create_account" />
+        android:src="@mipmap/line_of_create_account"
+        android:scaleType="fitXY"
+        android:layout_marginLeft="@dimen/activity_login_line_iv_marginLeft"
+        android:layout_marginRight="@dimen/activity_login_line_iv_marginRight"/>
 
     <TextView
         android:layout_width="wrap_content"
