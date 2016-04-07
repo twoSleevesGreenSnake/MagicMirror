@@ -146,6 +146,7 @@ public class MenuFragment extends Fragment {
                 myViewholder = (MyViewholder) convertView.getTag();
             }
             myViewholder.titleTv.setText(titles.get(position));
+            // 隐藏fragment
             myViewholder.menuLl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
