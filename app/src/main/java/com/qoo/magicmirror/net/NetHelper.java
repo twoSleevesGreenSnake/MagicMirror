@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceActivity;
 import android.support.v4.util.LruCache;
 import android.util.Log;
 import android.view.View;
@@ -67,13 +68,28 @@ public class NetHelper<T> {
     private ImageLoader imageLoader;
     private final DisplayImageOptions options;
     private Class<T> cls;
+    private static NetHelper helper;
 
     /**
      * 此构造方法并有没有彻底整完 有很大的问题 因为并没有了解okhttp的用法,只是强行使用而已
      * todo 优化代码
      *
      * @param context
+     *
      */
+
+    public static NetHelper newNetHelper(Context context){
+        if (helper==null) {
+            synchronized (SingleQueue.class) {
+                if (helper == null) {
+                    helper = new NetHelper(context);
+
+                }
+            }
+        }
+        return helper;
+    }
+
     public NetHelper(Context context) {
         super();
 

@@ -7,7 +7,6 @@
     android:layout_height="wrap_content"
     android:id="@+id/item_detail_browse_glasses_rv_title_second_tv"
     android:layout_marginLeft="@dimen/item_detail_brose_glasses_rv_title_tv_marginLeft"
-    android:text="@string/item_detail_brose_glasses_rv_title_tv_content"
     android:layout_marginTop="@dimen/item_detail_brose_glasses_rv_title_tv_marginTop"
     android:textColor="@color/colorLight_Black"/>
     <ImageView
@@ -17,6 +16,7 @@
         android:layout_below="@id/item_detail_browse_glasses_rv_title_second_tv"
         android:layout_marginTop="@dimen/item_detail_brose_glasses_rv_line_marginTop"
         android:layout_marginLeft="@dimen/item_detail_brose_glasses_rv_line_marginLeft"
-        android:layout_marginRight="@dimen/item_detail_brose_glasses_rv_line_marginRight"/>
+        android:layout_marginRight="@dimen/item_detail_brose_glasses_rv_line_marginRight"
+        android:id="@+id/item_detail_browse_glasses_rv_title_second_line"/>
 
 </com.zhy.autolayout.AutoRelativeLayout>

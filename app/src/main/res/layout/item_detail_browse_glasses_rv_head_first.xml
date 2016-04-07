@@ -2,10 +2,12 @@
 <com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#BFBFBF"
-    android:alpha="0.5">
+    android:background="@color/colorBlack"
+    android:alpha="0.5"
+    android:id="@+id/item_detail_browse_glasses_rv_head_first_layout">
 
     <LinearLayout
+        android:id="@+id/item_detail_browse_glasses_rv_head_first_content_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -41,7 +43,6 @@
             android:layout_above="@id/item_detail_brose_glasses_rv_content_top_title_view"
             android:textSize="@dimen/item_detail_brose_glasses_rv_head_first_etitle_text_size"
             android:textColor="@color/colorWhite"
-            android:text="@string/item_detail_brose_glasses_rv_head_first_etitle_content"
             android:layout_centerInParent="true"/>
           <View
               android:layout_width="@dimen/item_detail_browse_glasses_rv_head_first_bottom_vew_width"
@@ -56,7 +57,6 @@
             android:width="@dimen/item_detail_brose_glasses_rv_head_first_content_tv_width"
             android:layout_marginTop="@dimen/item_detail_brose_glasses_rv_head_first_content_tv_marginTop"
             android:textSize="@dimen/item_detail_brose_glasses_rv_head_first_content_tv_textSize"
-            android:text="@string/item_detail_brose_glasses_rv_head_first_content_tv_content"
             android:layout_gravity="center_horizontal"
             android:id="@+id/item_detail_brose_glasses_rv_head_first_content_tv"
             android:textColor="@color/colorWhite"/>
@@ -68,6 +68,28 @@
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/item_detail_brose_glasses_rv_head_first_price_tv_textSize"
             android:id="@+id/item_detail_brose_glasses_rv_head_first_price_tv"
-            android:text="99999"/>
+            />
+
+
+
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/item_detail_brose_glasses_rv_head_first_down_pull_tv_content"
+        android:textColor="@color/colorWhite"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/item_detail_brose_glasses_rv_head_first_down_pull_tv"
+        android:layout_below="@id/item_detail_browse_glasses_rv_head_first_content_layout"
+        android:layout_marginTop="@dimen/item_detail_brose_glasses_rv_head_first_down_pull_tv_marginTop"
+    />
+    <ImageView
+        android:layout_below="@id/item_detail_brose_glasses_rv_head_first_down_pull_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/item_detail_brose_glasses_rv_head_first_down_pull_iv_marginTop"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/small_pull_down"
+        />
 </com.zhy.autolayout.AutoRelativeLayout>
