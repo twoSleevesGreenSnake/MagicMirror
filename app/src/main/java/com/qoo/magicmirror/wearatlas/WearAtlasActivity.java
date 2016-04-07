@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.MediaController;
 import android.widget.VideoView;
@@ -17,6 +18,9 @@ import com.qoo.magicmirror.net.NetHelper;
 
 import java.util.ArrayList;
 
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
+
+
 /**
  * Created by Giraffe on 16/4/5.
  */
@@ -26,6 +30,8 @@ public class WearAtlasActivity extends BaseActivity {
     private WearAtlasListViewAdapter wearAtlasListViewAdapter;
     private static ArrayList<GoodsListBean.DataEntity.ListEntity.WearVideoEntity> data;
     private VideoView vv;
+    private ImageView ivThumbnail;
+    private JCVideoPlayer vp;
 
     public static void setData (GoodsListBean.DataEntity.ListEntity data){
         WearAtlasActivity.data = (ArrayList<GoodsListBean.DataEntity.ListEntity.WearVideoEntity>) data.getWear_video();
@@ -77,8 +83,8 @@ public class WearAtlasActivity extends BaseActivity {
                 Log.d("11111", "onSuccess: " + goodsListBean.toString());
                 data = (ArrayList<GoodsListBean.DataEntity.ListEntity.WearVideoEntity>) goodsListBean.getData().getList().get(0).getWear_video();
                 MediaController mc = new MediaController(context);
-                vv.setVideoURI(Uri.parse(goodsListBean.getData().getList().get(0).getWear_video().get(0).getData()));
-                vv.setMediaController(mc);
+                vp.setUp(goodsListBean.getData().getList().get(0).getWear_video().get(0).getData(),null);
+
                 wearAtlasListViewAdapter = new WearAtlasListViewAdapter(data, context);
                 listView.setAdapter(wearAtlasListViewAdapter);
 //
@@ -94,9 +100,10 @@ public class WearAtlasActivity extends BaseActivity {
     @Override
     protected void initView() {
         listView = (ListView) findViewById(R.id.activity_wearatlas_listview);
-        View view = LayoutInflater.from(context).inflate(R.layout.head_layout_of_wear_atlas,null);
+        View view = LayoutInflater.from(WearAtlasActivity.this).inflate(R.layout.head_layout_of_wear_atlas, null);
         listView.addHeaderView(view);
-        vv = (VideoView) view.findViewById(R.id.head_layout_of_atlas_vv);
+        vp = (JCVideoPlayer) view.findViewById(R.id.head_layout_of_wear_atlas_vp);
+        ivThumbnail = (ImageView) view.findViewById(R.id.head_layout_of_wear_atlas_thumbnail);
         listView.setDivider(null);
 
     }

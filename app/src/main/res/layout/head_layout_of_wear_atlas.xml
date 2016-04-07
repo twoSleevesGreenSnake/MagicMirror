@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<VideoView
-    android:id="@+id/head_layout_of_atlas_vv"
-    android:layout_marginTop="@dimen/head_layout_of_atlas_vv_marginTop"
-    android:layout_width="@dimen/head_layout_of_atlas_vv_width"
-    android:layout_height="@dimen/head_layout_of_atlas_vv_height" />
-</LinearLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+   <fm.jiecao.jcvideoplayer_lib.JCVideoPlayer
+       android:id="@+id/head_layout_of_wear_atlas_vp"
+       android:layout_width="match_parent"
+       android:layout_height="200dp"/>
+    <ImageView
+        android:id="@+id/head_layout_of_wear_atlas_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+</RelativeLayout>
