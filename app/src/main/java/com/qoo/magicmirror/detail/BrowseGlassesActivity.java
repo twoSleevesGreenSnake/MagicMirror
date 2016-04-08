@@ -36,6 +36,7 @@ import com.qoo.magicmirror.homepage.GoodsListBean;
 import com.qoo.magicmirror.homepage.Value;
 import com.qoo.magicmirror.net.NetHelper;
 import com.qoo.magicmirror.order.AliPayData;
+import com.qoo.magicmirror.order.OrderDetailActivity;
 import com.qoo.magicmirror.order.PullOrderBean;
 import com.qoo.magicmirror.wearatlas.WearAtlasActivity;
 
@@ -71,7 +72,7 @@ public class BrowseGlassesActivity extends BaseActivity {
     public static String RSA_PRIVATE = "";
     // 支付宝公钥
     public static String RSA_PUBLIC = "";
-    private final static int SDK_PAY_FLAG = 1;
+
 
     private boolean locationNotFinshed = true;
 
@@ -81,52 +82,7 @@ public class BrowseGlassesActivity extends BaseActivity {
      */
 
 
-    @SuppressLint("HandlerLeak")
-    private Handler mHandler = new Handler() {
-        @SuppressWarnings("unused")
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case SDK_PAY_FLAG: {
-                    PayResult payResult = new PayResult((String) msg.obj);
-                    /**
-                     * 同步返回的结果必须放置到服务端进行验证（验证的规则请看https://doc.open.alipay.com/doc2/
-                     * detail.htm?spm=0.0.0.0.xdvAU6&treeId=59&articleId=103665&
-                     * docType=1) 建议商户依赖异步通知
-                     */
-                    String resultInfo = payResult.getResult();// 同步返回需要验证的信息
 
-                    String resultStatus = payResult.getResultStatus();
-                    // 判断resultStatus 为“9000”则代表支付成功，具体状态码代表含义可参考接口文档
-                    if (TextUtils.equals(resultStatus, "9000")) {
-                        Toast.makeText(BrowseGlassesActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
-                    } else {
-                        // 判断resultStatus 为非"9000"则代表可能支付失败
-                        // "8000"代表支付结果因为支付渠道原因或者系统原因还在等待支付结果确认，最终交易是否成功以服务端异步通知为准（小概率状态）
-                        if (TextUtils.equals(resultStatus, "8000")) {
-                            Toast.makeText(BrowseGlassesActivity.this, "支付结果确认中", Toast.LENGTH_SHORT).show();
-
-                        } else {
-                            // 其他值就可以判断为支付失败，包括用户主动取消支付，或者系统返回的错误
-                            Toast.makeText(BrowseGlassesActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-                    break;
-                }
-                default:
-                    break;
-            }
-        }
-
-        ;
-    };
-
-
-    private String getOrderInfo(String subject, String body, String price) {
-
-
-        return orderinfo;
-    }
 
 
     //序列化传不了 不知道为了点啥
@@ -150,66 +106,40 @@ public class BrowseGlassesActivity extends BaseActivity {
         buyIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BrowseGlassesActivity.this, DetialActivity.class);
-                intent.putExtra("token", "f7d565803fbdb8f9c0bc64122895eea3");
+                Intent intent = new Intent(BrowseGlassesActivity.this, OrderDetailActivity.class);
                 intent.putExtra("goodsId", data.getGoods_id());
                 intent.putExtra("price", data.getGoods_price());
-                ArrayList<String> keys = new ArrayList<String>();
-                ArrayList<String> values = new ArrayList<String>();
-                keys.add("token");
-                keys.add("goods_id");
-                keys.add("goods_num");
-                keys.add("price");
-                keys.add("discout_id");
-                keys.add("device_type");
-                values.add("f7d565803fbdb8f9c0bc64122895eea3");
-                values.add(data.getGoods_id());
-                values.add("1");
-                values.add(data.getGoods_price());
-                values.add("");
-                values.add("1");
-                NetHelper.newNetHelper(BrowseGlassesActivity.this).getPostInfo(NetConstants.SUB_ORDER, keys, values, PullOrderBean.class, new NetHelper.NetListener<PullOrderBean>() {
-
-
-                    @Override
-                    public void onSuccess(PullOrderBean pullOrderBean) {
-                        Log.i("response", pullOrderBean.toString());
-                        ArrayList<String> keys = new ArrayList<String>();
-                        ArrayList<String> values = new ArrayList<String>();
-                        keys.add("token");
-
-                        values.add("f7d565803fbdb8f9c0bc64122895eea3");
-                        keys.add("order_no");
-                        values.add(pullOrderBean.getData().getOrder_id());
-                        keys.add("addr_id");
-                        values.add(pullOrderBean.getData().getAddress().getAddr_id());
-                        keys.add("goodsname");
-                        values.add(pullOrderBean.getData().getGoods().getGoods_name());
-
-                        NetHelper.newNetHelper(BrowseGlassesActivity.this).getPostInfo(NetConstants.ALI_PAY_SUB, keys, values, AliPayData.class, new NetHelper.NetListener<AliPayData>() {
-
-
-                            @Override
-                            public void onSuccess(AliPayData aliPayData) {
-                                orderinfo = aliPayData.getData().getStr();
-                                pay(buyIv);
-
-                            }
-
-                            @Override
-                            public void onFailure() {
-
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onFailure() {
-
-                    }
-                });
-
-
+                startActivity(intent);
+//                ArrayList<String> keys = new ArrayList<String>();
+//                ArrayList<String> values = new ArrayList<String>();
+//                keys.add("token");
+//                keys.add("goods_id");
+//                keys.add("goods_num");
+//                keys.add("price");
+//                keys.add("discout_id");
+//                keys.add("device_type");
+//                values.add("f7d565803fbdb8f9c0bc64122895eea3");
+//                values.add(data.getGoods_id());
+//                values.add("1");
+//                values.add(data.getGoods_price());
+//                values.add("");
+//                values.add("1");
+//                NetHelper.newNetHelper(BrowseGlassesActivity.this).getPostInfo(NetConstants.SUB_ORDER, keys, values, PullOrderBean.class, new NetHelper.NetListener<PullOrderBean>() {
+//
+//
+//                    @Override
+//                    public void onSuccess(PullOrderBean pullOrderBean) {
+//                        Log.i("response", pullOrderBean.toString());
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure() {
+//
+//                    }
+//                });
+//
+//
             }
         });
         recyclerView = bindView(R.id.activity_detail_browse_glasses_rv);
@@ -513,117 +443,6 @@ public class BrowseGlassesActivity extends BaseActivity {
     /**
      * call alipay sdk pay. 调用SDK支付
      */
-    public void pay(View v) {
-//		if (TextUtils.isEmpty(PARTNER) || TextUtils.isEmpty(RSA_PRIVATE) || TextUtils.isEmpty(SELLER)) {
-//			new AlertDialog.Builder(this).setTitle("警告").setMessage("需要配置PARTNER | RSA_PRIVATE| SELLER")
-//					.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//						public void onClick(DialogInterface dialoginterface, int i) {
-//							//
-//							finish();
-//						}
-//					}).show();
-//			return;
-//		}
-        String orderInfo = getOrderInfo("测试的商品", "该测试商品的详细描述", "0.01");
 
-//		/**
-//		 * 特别注意，这里的签名逻辑需要放在服务端，切勿将私钥泄露在代码中！
-//		 */
-        String sign = sign(orderInfo);
-//		try {
-//			/**
-//			 * 仅需对sign 做URL编码
-//			 */
-//			sign = URLEncoder.encode(sign, "UTF-8");
-//		} catch (UnsupportedEncodingException e) {
-//			e.printStackTrace();
-//		}
-//
-        /**
-         * 完整的符合支付宝参数规范的订单信息
-         */
-        final String payInfo = orderInfo + "&sign=\"" + sign + "\"&" + getSignType();
-
-        Runnable payRunnable = new Runnable() {
-
-            @Override
-            public void run() {
-                // 构造PayTask 对象
-                PayTask alipay = new PayTask(BrowseGlassesActivity.this);
-                // 调用支付接口，获取支付结果
-                String result = alipay.pay(payInfo, true);
-
-                Message msg = new Message();
-                msg.what = SDK_PAY_FLAG;
-                msg.obj = result;
-                mHandler.sendMessage(msg);
-            }
-        };
-
-        // 必须异步调用
-        Thread payThread = new Thread(payRunnable);
-        payThread.start();
-    }
-
-    /**
-     * get the sdk version. 获取SDK版本号
-     */
-    public void getSDKVersion() {
-        PayTask payTask = new PayTask(this);
-        String version = payTask.getVersion();
-        Toast.makeText(this, version, Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * 原生的H5（手机网页版支付切natvie支付） 【对应页面网页支付按钮】
-     *
-     * @param v
-     */
-    public void h5Pay(View v) {
-        Intent intent = new Intent(this, H5PayDemoActivity.class);
-        Bundle extras = new Bundle();
-        /**
-         * url是测试的网站，在app内部打开页面是基于webview打开的，demo中的webview是H5PayDemoActivity，
-         * demo中拦截url进行支付的逻辑是在H5PayDemoActivity中shouldOverrideUrlLoading方法实现，
-         * 商户可以根据自己的需求来实现
-         */
-        String url = "http://m.meituan.com";
-        // url可以是一号店或者美团等第三方的购物wap站点，在该网站的支付过程中，支付宝sdk完成拦截支付
-        extras.putString("url", url);
-        intent.putExtras(extras);
-        startActivity(intent);
-
-    }
-
-
-    /**
-     * get the out_trade_no for an order. 生成商户订单号，该值在商户端应保持唯一（可自定义格式规范）
-     */
-    private String getOutTradeNo() {
-        SimpleDateFormat format = new SimpleDateFormat("MMddHHmmss", Locale.getDefault());
-        Date date = new Date();
-        String key = format.format(date);
-
-        Random r = new Random();
-        key = key + r.nextInt();
-        key = key.substring(0, 15);
-        return key;
-    }
-
-    /**
-     * sign the order info. 对订单信息进行签名
-     *
-     * @param content 待签名订单信息
-     */
-    private String sign(String content) {
-        return SignUtils.sign(content, RSA_PRIVATE);
-    }
-
-    /**
-     * get the sign type we use. 获取签名方式
-     */
-    private String getSignType() {
-        return "sign_type=\"RSA\"";
-    }
 
 }
