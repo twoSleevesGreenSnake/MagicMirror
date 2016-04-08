@@ -32,22 +32,14 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".loginandregister.RegisterActivity" />
-<<<<<<< HEAD
-        <activity android:name=".homepage.HomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+
         <activity android:name=".order.OrderDetailActivity"/>
-=======
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
   <activity android:name=".order.DetailAddressActivity"/>
 
->>>>>>> feature/4.6_下午5点_买东西开始
         <activity android:name=".loginandregister.LoginActivity">
             <!--<intent-filter>-->
             <!--<action android:name="android.intent.action.MAIN" />-->
@@ -60,19 +52,16 @@
         <activity android:name=".detail.BrowseGlassesActivity" />
 
         <activity android:name=".detail.SpecialTopicDetailActivity" />
-<<<<<<< HEAD
-        <activity android:name=".wearatlas.WearAtlasActivity">
+        <activity android:name=".wearatlas.WearAtlasActivity"/>
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
-=======
         <activity android:name=".homepage.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
->>>>>>> feature/4.6_下午5点_买东西开始
         </activity>
   <activity android:name=".order.AddAddressActivity"/>
 <activity android:name=".order.EditAddressActivity"/>

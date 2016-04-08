@@ -73,7 +73,6 @@
     <string name="cancle">取消</string>
     <string name="please_login">请先登录</string>
     <string name="activity_orderdetail_tv">購買詳情</string>
-<<<<<<< HEAD
     <string name="activity_orderdetail_add_address_rl_tv">请填写收件人信息</string>
     <string name="activity_orderdetail_add_address_click_tv">填写地址</string>
     <string name="activity_orderdetail_btn_btn">确认下单</string>
@@ -81,9 +80,8 @@
     <string name="goods_num">goods_num</string>
     <string name="price">price</string>
     <string name="discout_id">discout_id</string>
-=======
+
     <string name="activity_address_detail_title_content">我的所有地址</string>
     <string name="activity_address_detail_add_tv_content">添加地址</string>
->>>>>>> feature/4.6_下午5点_买东西开始
 
 </resources>

@@ -246,7 +246,6 @@
     <dimen name="activity_orderdetail_black_line_iv_marginRight">30px</dimen>
     <dimen name="activity_orderdetail_black_line_iv_marginLeft">30px</dimen>
     <dimen name="activity_orderdetail_black_line_iv_marginTop">20px</dimen>
-<<<<<<< HEAD
     <dimen name="activity_orderdetail_add_address_rl_height">192px</dimen>
     <dimen name="activity_orderdetail_add_address_rl_marginLeft">30px</dimen>
     <dimen name="activity_orderdetail_add_address_rl_marginRight">30px</dimen>
@@ -272,7 +271,7 @@
     <dimen name="activity_orderdetail_btn_marginLeft">30px</dimen>
     <dimen name="activity_orderdetail_btn_marginRight">30px</dimen>
     <dimen name="activity_orderdetail_btn_marginTop">50px</dimen>
-=======
+
     <dimen name="item_address_detail_number_textSize">24px</dimen>
     <dimen name="item_address_detail_number_marginTop">20px</dimen>
     <dimen name="item_address_detail_number_marginLeft">24px</dimen>
@@ -300,5 +299,4 @@
     <dimen name="activity_address_detail_title_iv_bottom_marginRight">30px</dimen>
     <dimen name="activity_address_detail_add_tv_height">160px</dimen>
     <dimen name="activity_address_detail_title_textSize">34px</dimen>
->>>>>>> feature/4.6_下午5点_买东西开始
 </resources>

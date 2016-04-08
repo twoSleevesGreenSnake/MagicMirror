@@ -485,11 +485,6 @@ public class BrowseGlassesActivity extends BaseActivity {
                     @Override
                     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                         super.onScrolled(recyclerView, dx, dy);
-<<<<<<< HEAD
-                        Log.i("line",line.getY()+"");
-=======
-                        Log.i("line", line.getY() + "");
->>>>>>> feature/4.6_下午5点_买东西开始
                         if (btnNotShow && itemView.getY() <= 0) {
                             visibleLayout();
                             btnNotShow = false;
