@@ -12,4 +12,6 @@ public final class Value {
     public static String putThematicTitle = "themtaictitle";
     public static String putShoppingTitle = "shoppingTitle";
     public static String putStoryId = "storyId";
+
+
 }

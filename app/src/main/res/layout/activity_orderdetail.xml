@@ -18,34 +18,117 @@
             android:textSize="@dimen/activity_orderdetail_tv_textSize" />
 
         <ImageView
+            android:id="@+id/activity_orderdetail_close_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/close"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/activity_orderdetail_close_iv_marginRight"
             android:layout_marginTop="@dimen/activity_orderdetail_close_iv_marginTop"
-            android:layout_marginRight="@dimen/activity_orderdetail_close_iv_marginRight"/>
+            android:src="@mipmap/close" />
     </RelativeLayout>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@mipmap/line_of_create_account"
-        android:scaleType="fitXY"
-        android:layout_marginRight="@dimen/activity_orderdetail_black_line_iv_marginRight"
         android:layout_marginLeft="@dimen/activity_orderdetail_black_line_iv_marginLeft"
-        android:layout_marginTop="@dimen/activity_orderdetail_black_line_iv_marginTop" />
+        android:layout_marginRight="@dimen/activity_orderdetail_black_line_iv_marginRight"
+        android:layout_marginTop="@dimen/activity_orderdetail_black_line_iv_marginTop"
+        android:scaleType="fitXY"
+        android:src="@mipmap/line_of_create_account" />
 
-    <TextView
+    <RelativeLayout
+        android:id="@+id/activity_orderdetail_add_address_rl"
         android:layout_width="match_parent"
-        android:layout_height="192px"
-        android:layout_marginTop="40px"
-        android:layout_marginLeft="30px"
-        android:layout_marginRight="30px"
-        android:text="请填写收件人信息"
-        android:textSize="26px"
-        android:textColor="@color/colorLight_Black"
-        android:padding="24px"
-        />
+        android:layout_height="@dimen/activity_orderdetail_add_address_rl_height"
+        android:layout_marginLeft="@dimen/activity_orderdetail_add_address_rl_marginLeft"
+        android:layout_marginRight="@dimen/activity_orderdetail_add_address_rl_marginRight"
+        android:layout_marginTop="@dimen/activity_orderdetail_add_address_rl_marginTop"
+        android:background="@drawable/order_white_shape">
 
+        <TextView
+            android:id="@+id/activity_orderdetail_add_address_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_orderdetail_add_address_tv_margin"
+            android:background="@color/colorWhite"
+            android:text="@string/activity_orderdetail_add_address_rl_tv"
+            android:textColor="@color/colorLight_Black"
+            android:textSize="@dimen/activity_orderdetail_add_address_tv_textSize" />
+    </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/activity_orderdetail_add_address_click_tv_rl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_orderdetail_add_address_click_tv_rl_height"
+        android:layout_marginLeft="@dimen/activity_orderdetail_add_address_click_tv_rl_marginLeft"
+        android:layout_marginRight="@dimen/activity_orderdetail_add_address_click_tv_rl_marginRight"
+        android:background="@drawable/order_white_shape">
+
+        <TextView
+            android:id="@+id/activity_orderdetail_add_address_click_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/activity_orderdetail_add_address_click_tv"
+            android:textColor="@color/colorLight_Black"
+            android:textSize="@dimen/activity_orderdetail_add_address_click_tv_textSize" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/activity_orderdetail__goods_rl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_orderdetail_show_goods_rl_height"
+        android:layout_marginLeft="@dimen/activity_orderdetail_show_goods_rl_marginLeft"
+        android:layout_marginRight="@dimen/activity_orderdetail_show_goods_rl_marginRight"
+        android:layout_marginTop="@dimen/activity_orderdetail_show_goods_rl_marginTop"
+        android:background="@drawable/order_white_shape">
+
+        <ImageView
+            android:id="@+id/activity_orderdetail_goods_iv"
+            android:layout_width="@dimen/activity_orderdetail_goods_iv_width"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/activity_orderdetail_goods_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_orderdetail_goods_name_tv_marginTop"
+            android:layout_toRightOf="@id/activity_orderdetail_goods_iv"
+            android:textColor="@color/colorLight_Black"
+            android:textSize="@dimen/activity_orderdetail_goods_name_tv_textSize"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/activity_orderdetail_goods_content_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_orderdetail_goods_name_tv"
+            android:layout_marginRight="@dimen/activity_orderdetail_goods_content_tv_marginRight"
+            android:layout_marginTop="@dimen/activity_orderdetail_goods_content_tv_marginTop"
+            android:layout_toRightOf="@id/activity_orderdetail_goods_iv"
+            android:textColor="@color/colorLight_Black"
+            android:textSize="@dimen/activity_orderdetail_goods_content_tv_textSize" />
+
+        <TextView
+            android:id="@+id/activity_orderdetail_goods_price_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/activity_orderdetail_goods_content_tv"
+            android:layout_marginTop="@dimen/activity_orderdetail_goods_price_tv_marginTop"
+            android:layout_toRightOf="@+id/activity_orderdetail_goods_iv"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/activity_orderdetail_goods_price_tv_textSize" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/activity_orderdetail_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_orderdetail_btn_marginLeft"
+        android:layout_marginRight="@dimen/activity_orderdetail_btn_marginRight"
+        android:layout_marginTop="@dimen/activity_orderdetail_btn_marginTop"
+        android:background="@drawable/selector_login_btn"
+        android:text="@string/activity_orderdetail_btn_btn"
+        android:textColor="@color/colorWhite" />
 </LinearLayout>

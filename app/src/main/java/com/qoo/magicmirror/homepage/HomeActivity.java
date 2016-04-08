@@ -158,6 +158,8 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
                 Toast.makeText(HomeActivity.this, R.string.please_login, Toast.LENGTH_SHORT).show();
             }
         }
+
+
     }
 
     private void showDialog() {
@@ -236,6 +238,8 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
     }
 
     public void shoppingcartAndLogin() {
+        Log.d("HomeActivity", BaseActivity.token+ "       5245555555555555555555555555555555");
+
         if (BaseActivity.token != "") {
             loginTv.setText(R.string.shoppingcart);
             loginTv.setOnClickListener(new View.OnClickListener() {

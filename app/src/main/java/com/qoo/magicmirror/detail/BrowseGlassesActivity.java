@@ -340,12 +340,12 @@ public class BrowseGlassesActivity extends BaseActivity {
                     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                         super.onScrolled(recyclerView, dx, dy);
                         Log.i("line",line.getY()+"");
-                        if (btnNotShow && itemView.getY()+220 <= 0) {
+                        if (btnNotShow && itemView.getY() <= 0) {
                             visibleLayout();
                             btnNotShow = false;
 
                         }
-                        if (itemView.getY()+210 > 0 && !btnNotShow) {
+                        if (itemView.getY() > 0 && !btnNotShow) {
                             goneLayout();
                             btnNotShow = true;
                         }
