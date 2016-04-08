@@ -1,5 +1,6 @@
 package com.qoo.magicmirror.order;
 
+<<<<<<< HEAD
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +8,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
+=======
+import android.app.AlertDialog;
+import android.view.LayoutInflater;
+>>>>>>> feature/4.6_晚上购买界面彻底完成版
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -30,6 +35,8 @@ import java.util.Random;
 
 /**
  * Created by dllo on 16/4/7.
+ *
+ * 订单界面
  */
 public class OrderDetailActivity extends BaseActivity implements View.OnClickListener {
 
@@ -123,12 +130,32 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
             case R.id.activity_orderdetail_add_address_click_tv:
                 break;
             case R.id.activity_orderdetail_btn:
-                sureOrder();// 确认下单
+                showPayDialog();// 显示dialog
                 break;
             default:
                 break;
         }
     }
+
+    private void showPayDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.activity_orderdetail_sure_dialog,null);
+        builder.setView(view);
+        findViewById(R.id.activity_orderdetail_sure_dialog_wechat_rl).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        findViewById(R.id.activity_orderdetail_sure_dialog_zfb_rl).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        builder.show();
+    }
+
 
     private void sureOrder() {
         ArrayList<String> token = new ArrayList<>();
@@ -139,6 +166,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
         token.add(getString(R.string.discout_id));
         token.add(getString(R.string.device_type));
         ArrayList<String> value = new ArrayList<>();
+<<<<<<< HEAD
         // TODO 等待传值
         value.add("f7d565803fbdb8f9c0bc64122895eea3");
         value.add(goodsId);
@@ -148,6 +176,15 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
         value.add("1");
 
         netHelper.getPostInfo(NetConstants.SUB_ORDER, token, value, PullOrderBean.class, new NetHelper.NetListener<PullOrderBean>() {
+=======
+        value.add(BaseActivity.token);
+//        value.add("2");
+//        value.add("1");
+//        value.add("3850");
+//        value.add("");
+//        value.add("1");
+        netHelper.getPostInfo(NetConstants.SUB_ORDER, token, value, SureOrderBean.class, new NetHelper.NetListener<SureOrderBean>() {
+>>>>>>> feature/4.6_晚上购买界面彻底完成版
             @Override
             public void onSuccess(PullOrderBean pullOrderBean) {
                 ArrayList<String> keys = new ArrayList<String>();
@@ -185,6 +222,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
 
             }
         });
+<<<<<<< HEAD
     }
 
 
@@ -314,5 +352,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
      */
     private String getSignType() {
         return "sign_type=\"RSA\"";
+=======
+>>>>>>> feature/4.6_晚上购买界面彻底完成版
     }
 }
