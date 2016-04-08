@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/activity_address_detail_title_content"
+        android:layout_marginLeft="@dimen/activity_address_detail_title_marginLeft"
+        android:id="@+id/activity_address_detail_title"
+        android:layout_marginTop="@dimen/activity_address_detail_title_marginTop"
+        android:textColor="@color/colorLight_Black"
+        android:textSize="@dimen/activity_address_detail_title_textSize"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/close"
+        android:layout_marginRight="@dimen/activity_address_detail_title_iv_marginRight"
+        android:layout_marginTop="@dimen/activity_address_detail_title_iv_marginTop"
+        />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_address_detail_title_iv_bottom_marginTop"
+        android:src="@mipmap/line_of_create_account"
+        android:layout_marginLeft="@dimen/activity_address_detail_title_iv_bottom_marginLeft"
+        android:layout_marginRight="@dimen/activity_address_detail_title_iv_bottom_marginRight"
+        android:layout_below="@id/activity_address_detail_title"
+        android:scaleType="fitXY"/>
+</RelativeLayout>
+    <TextView
+        android:id="@+id/activity_address_detail_add_tv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_address_detail_add_tv_height"
+        android:text="@string/activity_address_detail_add_tv_content"
+        android:layout_marginTop="@dimen/activity_address_detail_add_tv_marginTop"
+        android:layout_marginLeft="@dimen/activity_address_detail_add_tv_marginLeft"
+        android:layout_marginRight="@dimen/activity_address_detail_add_tv_marginRight"
+        android:textSize="@dimen/activity_address_detail_add_textSize"
+        android:gravity="center"
+        android:textColor="@color/colorLight_Black"
+        android:background="@mipmap/edit_address"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="@dimen/activity_address_detail_rv_marginTop"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_width_zero"
+        android:layout_weight="1"
+        android:layout_marginRight="@dimen/activity_address_detail_rv_marginRight"
+        android:layout_marginLeft="@dimen/activity_address_detail_rv_marginLeft"
+        android:id="@+id/activity_address_detail_rv"
+        />
+
+</com.zhy.autolayout.AutoLinearLayout>

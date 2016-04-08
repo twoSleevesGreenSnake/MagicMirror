@@ -43,7 +43,5 @@ dependencies {
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'
     compile 'de.greenrobot:greendao:2.1.0'
     compile 'fm.jiecao:jiecaovideoplayer:2.0_preview'
-
-
-
+    compile files('libs/alipaySdk-20160223.jar')
 }
