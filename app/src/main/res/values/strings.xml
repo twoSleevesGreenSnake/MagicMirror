@@ -73,5 +73,7 @@
     <string name="cancle">取消</string>
     <string name="please_login">请先登录</string>
     <string name="activity_orderdetail_tv">購買詳情</string>
+    <string name="activity_address_detail_title_content">我的所有地址</string>
+    <string name="activity_address_detail_add_tv_content">添加地址</string>
 
 </resources>

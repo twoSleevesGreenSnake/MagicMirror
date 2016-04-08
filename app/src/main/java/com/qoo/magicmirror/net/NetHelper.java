@@ -132,6 +132,7 @@ public class NetHelper<T> {
             public boolean handleMessage(Message msg) {
                 if (msg.what == 1) {
                     String result = (String) msg.obj;
+                    Log.i("result",result);
                     T t = new Gson().fromJson(result, cls);
                     listener.onSuccess(t);
                 }
@@ -229,7 +230,9 @@ public class NetHelper<T> {
      */
     public void getPostInfo(String url, ArrayList<String> keys, ArrayList<String> values, final Class<T> cls, final NetListener<T> listener) {
         FormEncodingBuilder builder = new FormEncodingBuilder();
+
         this.cls = cls;
+
         this.listener = listener;
         for (int i = 0; i < keys.size(); i++) {
             builder.add(keys.get(i), values.get(i));
@@ -253,6 +256,10 @@ public class NetHelper<T> {
             public void onResponse(com.squareup.okhttp.Response response) throws IOException {
                 Message message = new Message();
                 message.what = 1;
+                if (cls==null){
+                    listener.onSuccess((T) response.body().string());
+                    return;
+                }
                 message.obj = response.body().string();
                 handler.sendMessage(message);
             }
