@@ -83,5 +83,8 @@
 
     <string name="activity_address_detail_title_content">我的所有地址</string>
     <string name="activity_address_detail_add_tv_content">添加地址</string>
+    <string name="activity_orderdetail_sure_dialog_choose_tv">选择支付方式</string>
+    <string name="activity_orderdetail_sure_dialog_wechat_tv">微信支付</string>
+    <string name="activity_orderdetail_sure_dialog_zfb_tv">支付宝支付</string>
 
 </resources>

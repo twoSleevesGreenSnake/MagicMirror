@@ -299,4 +299,16 @@
     <dimen name="activity_address_detail_title_iv_bottom_marginRight">30px</dimen>
     <dimen name="activity_address_detail_add_tv_height">160px</dimen>
     <dimen name="activity_address_detail_title_textSize">34px</dimen>
+    <dimen name="activity_orderdetail_sure_dialog_choose_tv_textSize">30px</dimen>
+    <dimen name="activity_orderdetail_sure_dialog_title_rl">86px</dimen>
+    <dimen name="activity_orderdetail_sure_dialog_line">1px</dimen>
+    <dimen name="activity_orderdetail_sure_dialog_choose_btn_rl">302px</dimen>
+    <dimen name="activity_orderdetail_sure_dialog_wechat_rl_width">400px</dimen>
+    <dimen name="activity_orderdetail_sure_dialog_wechat_rl_marginTop">50px</dimen>
+    <dimen name="activity_orderdetail_sure_dialog_wechat_tv_textSize">30px</dimen>
+    <dimen name="activity_orderdetail_sure_dialog_wechat_iv_marginRight">24px</dimen>
+    <dimen name="activity_orderdetail_sure_dialog_zfb_rl_width">400px</dimen>
+    <dimen name="activity_orderdetail_sure_dialog_zfb_rl_marginTop">50px</dimen>
+    <dimen name="activity_orderdetail_sure_dialog_zfb_tv_textSize">30px</dimen>
+    <dimen name="activity_orderdetail_sure_dialog_zfb_iv_marginRight">24px</dimen>
 </resources>

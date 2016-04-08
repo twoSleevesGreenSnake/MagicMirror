@@ -1,7 +1,7 @@
 package com.qoo.magicmirror.order;
 
-import android.content.Intent;
-import android.util.Log;
+import android.app.AlertDialog;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,6 +16,8 @@ import java.util.ArrayList;
 
 /**
  * Created by dllo on 16/4/7.
+ *
+ * 订单界面
  */
 public class OrderDetailActivity extends BaseActivity implements View.OnClickListener {
 
@@ -55,12 +57,32 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
             case R.id.activity_orderdetail_add_address_click_tv:
                 break;
             case R.id.activity_orderdetail_btn:
-                sureOrder();// 确认下单
+                showPayDialog();// 显示dialog
                 break;
             default:
                 break;
         }
     }
+
+    private void showPayDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.activity_orderdetail_sure_dialog,null);
+        builder.setView(view);
+        findViewById(R.id.activity_orderdetail_sure_dialog_wechat_rl).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        findViewById(R.id.activity_orderdetail_sure_dialog_zfb_rl).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        builder.show();
+    }
+
 
     private void sureOrder() {
         ArrayList<String> token = new ArrayList<>();
@@ -72,7 +94,6 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
         token.add(getString(R.string.device_type));
         ArrayList<String> value = new ArrayList<>();
         value.add(BaseActivity.token);
-        // TODO 等待传值
 //        value.add("2");
 //        value.add("1");
 //        value.add("3850");
@@ -89,6 +110,5 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
 
             }
         });
-
     }
 }
