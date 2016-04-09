@@ -14,7 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qoo.magicmirror.R;
+<<<<<<< HEAD
 import com.qoo.magicmirror.loginandregister.LoginActivity;
+=======
+>>>>>>> feature/4.6_晚上购买界面彻底完成版
 import com.qoo.magicmirror.net.NetHelper;
 import com.zhy.autolayout.AutoLayoutActivity;
 
@@ -43,7 +46,6 @@ public abstract class BaseActivity extends AutoLayoutActivity {
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
-
 //        get
         activities = new HashMap<>();
         activities.put(getClass(),this);
@@ -106,5 +108,14 @@ public abstract class BaseActivity extends AutoLayoutActivity {
     }
     protected void t(String content){
         Toast.makeText(this, content, Toast.LENGTH_SHORT).show();
+    }
+
+    // Log
+    protected void l(String content) {
+        String className = getClass().getName();
+        int index = className.lastIndexOf(".");
+        String result = className.substring(index + 1, className.length());
+        Log.d(result + getString(R.string.log_class) + new Throwable().getStackTrace()[1].getMethodName()
+                + getString(R.string.log_method), content);
     }
 }

@@ -57,6 +57,7 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
 
     @Override
     protected void initData() {
+        l(" 给fragment传递titles，并设置点击替换的MenuFragment 给fragment传递titles，并设置点击替换的MenuFragment 给fragment传递titles，并设置点击替换的MenuFragment 给fragment传递titles，并设置点击替换的MenuFragment 给fragment传递titles，并设置点击替换的MenuFragment 给fragment传递titles，并设置点击替换的MenuFragment 给fragment传递titles，并设置点击替换的MenuFragment");
         categoryId = new ArrayList<String>();
         titles.add(getString(R.string.fragment_goods_title_tv));
         titles.add(getString(R.string.fragment_palingglasses_title_tv));
