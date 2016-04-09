@@ -79,41 +79,22 @@ public class BrowseGlassesActivity extends BaseActivity {
         buyIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                judgeToken();//判断有没有token的方法
-                Intent intent = new Intent(BrowseGlassesActivity.this, OrderDetailActivity.class);
-                intent.putExtra("goodsId", data.getGoods_id());
-                intent.putExtra("price", data.getGoods_price());
-                startActivity(intent);
-//                ArrayList<String> keys = new ArrayList<String>();
-//                ArrayList<String> values = new ArrayList<String>();
-//                keys.add("token");
-//                keys.add("goods_id");
-//                keys.add("goods_num");
-//                keys.add("price");
-//                keys.add("discout_id");
-//                keys.add("device_type");
-//                values.add("f7d565803fbdb8f9c0bc64122895eea3");
-//                values.add(data.getGoods_id());
-//                values.add("1");
-//                values.add(data.getGoods_price());
-//                values.add("");
-//                values.add("1");
-//                NetHelper.newNetHelper(BrowseGlassesActivity.this).getPostInfo(NetConstants.SUB_ORDER, keys, values, PullOrderBean.class, new NetHelper.NetListener<PullOrderBean>() {
-//
-//
-//                    @Override
-//                    public void onSuccess(PullOrderBean pullOrderBean) {
-//                        Log.i("response", pullOrderBean.toString());
-//
-//                    }
-//
-//                    @Override
-//                    public void onFailure() {
-//
-//                    }
-//                });
-//
-//
+                judgeToken(new TokenListener() {
+                    @Override
+                    public void tokenIsNothing() {
+
+                    }
+
+                    @Override
+                    public void logInSuccess() {
+                        Intent intent = new Intent(BrowseGlassesActivity.this, OrderDetailActivity.class);
+                        intent.putExtra("goodsId", data.getGoods_id());
+                        intent.putExtra("price", data.getGoods_price());
+                        startActivity(intent);
+                    }
+                });//判断有没有token的方法
+
+
             }
         });
         recyclerView = bindView(R.id.activity_detail_browse_glasses_rv);

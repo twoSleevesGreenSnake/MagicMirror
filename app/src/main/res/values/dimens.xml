@@ -246,7 +246,7 @@
     <dimen name="activity_orderdetail_black_line_iv_marginRight">30px</dimen>
     <dimen name="activity_orderdetail_black_line_iv_marginLeft">30px</dimen>
     <dimen name="activity_orderdetail_black_line_iv_marginTop">20px</dimen>
-    <dimen name="activity_orderdetail_add_address_rl_height">192px</dimen>
+    <dimen name="activity_orderdetail_add_address_rl_height">200px</dimen>
     <dimen name="activity_orderdetail_add_address_rl_marginLeft">30px</dimen>
     <dimen name="activity_orderdetail_add_address_rl_marginRight">30px</dimen>
     <dimen name="activity_orderdetail_add_address_rl_marginTop">80px</dimen>

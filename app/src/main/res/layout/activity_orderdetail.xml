@@ -36,25 +36,48 @@
         android:scaleType="fitXY"
         android:src="@mipmap/line_of_create_account" />
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/activity_orderdetail_add_address_rl"
         android:layout_width="match_parent"
         android:layout_height="@dimen/activity_orderdetail_add_address_rl_height"
         android:layout_marginLeft="@dimen/activity_orderdetail_add_address_rl_marginLeft"
         android:layout_marginRight="@dimen/activity_orderdetail_add_address_rl_marginRight"
         android:layout_marginTop="@dimen/activity_orderdetail_add_address_rl_marginTop"
-        android:background="@drawable/order_white_shape">
+        android:background="@drawable/order_white_shape"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/activity_orderdetail_add_address_tv"
+            android:id="@+id/activity_orderdetail_name_tv"
+            android:layout_marginTop="@dimen/activity_orderdetail_add_address_tv_margin"
+            android:layout_marginLeft="@dimen/activity_orderdetail_add_address_tv_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_orderdetail_add_address_tv_margin"
             android:background="@color/colorWhite"
             android:text="@string/activity_orderdetail_add_address_rl_tv"
             android:textColor="@color/colorLight_Black"
             android:textSize="@dimen/activity_orderdetail_add_address_tv_textSize" />
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/activity_orderdetail_address_tv"
+            android:layout_marginTop="@dimen/activity_orderdetail_add_address_tv_margin"
+            android:layout_marginLeft="@dimen/activity_orderdetail_add_address_tv_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:textColor="@color/colorLight_Black"
+            android:textSize="@dimen/activity_orderdetail_add_address_tv_textSize" />
+        <TextView
+            android:id="@+id/activity_orderdetail_number_tv"
+            android:layout_marginTop="@dimen/activity_orderdetail_add_address_tv_margin"
+            android:layout_marginLeft="@dimen/activity_orderdetail_add_address_tv_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:textColor="@color/colorLight_Black"
+            android:textSize="@dimen/activity_orderdetail_add_address_tv_textSize"
+            android:textStyle="bold"/>
+
+
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/activity_orderdetail_add_address_click_tv_rl"

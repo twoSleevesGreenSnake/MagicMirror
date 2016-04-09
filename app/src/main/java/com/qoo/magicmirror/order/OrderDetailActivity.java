@@ -37,8 +37,8 @@ import java.util.Random;
  */
 public class OrderDetailActivity extends BaseActivity implements View.OnClickListener {
 
-    private ImageView closeIv;
-    private TextView showAddressTv, addAddressTv;
+    private ImageView closeIv, goodsIv;
+    private TextView showNameTv,showAddressTv, showNumberTv, addAddressTv, goodsNameTv, goodsDesTv, goodsPriceTv;
     private Button sureBtn;
     private NetHelper netHelper;
     private String price;
@@ -109,7 +109,13 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     protected void initView() {
         netHelper = NetHelper.newNetHelper(this);
         closeIv = bindView(R.id.activity_orderdetail_close_iv);
-        showAddressTv = bindView(R.id.activity_orderdetail_add_address_tv);
+        showNameTv = bindView(R.id.activity_orderdetail_name_tv);
+        showAddressTv = bindView(R.id.activity_orderdetail_address_tv);
+        showNumberTv = bindView(R.id.activity_orderdetail_number_tv);
+        goodsIv = bindView(R.id.activity_orderdetail_goods_iv);
+        goodsNameTv = bindView(R.id.activity_orderdetail_goods_name_tv);
+        goodsDesTv = bindView(R.id.activity_orderdetail_goods_content_tv);
+        goodsPriceTv = bindView(R.id.activity_orderdetail_goods_price_tv);
         addAddressTv = bindView(R.id.activity_orderdetail_add_address_click_tv);
         sureBtn = bindView(R.id.activity_orderdetail_btn);
         closeIv.setOnClickListener(this);
@@ -122,13 +128,12 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
      */
     @Override
     protected void initData() {
-
-
         Intent intent = getIntent();
         price = intent.getStringExtra("price");
         Log.i("price", price + goodsId);
         goodsId = intent.getStringExtra("goodsId");
-        showAddressTv.setOnClickListener(new View.OnClickListener() {
+        sureOrder();
+        addAddressTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivityForResult(new Intent(OrderDetailActivity.this, DetailAddressActivity.class), 299);
@@ -140,9 +145,23 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        DetailAddressBean.DataBean.ListBean detailAddressBean = data.getParcelableExtra("addressData");
-        showAddressTv.setText(detailAddressBean.getAddr_info());
+        if (data == null) {
+            return;
+        }
+            DetailAddressBean.DataBean.ListBean detailAddressBean = data.getParcelableExtra("addressData");
+            showNameTv.setText(getString(R.string.name) + detailAddressBean.getUsername());
+            showAddressTv.setText(getString(R.string.adress) + detailAddressBean.getAddr_info());
+            showNumberTv.setText(getString(R.string.cellnumber) + detailAddressBean.getCellphone());
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (showNumberTv.length() != 0) {
+            addAddressTv.setText(R.string.change_address);
+        } else {
+            addAddressTv.setText(R.string.add_address);
+        }
     }
 
     @Override
@@ -162,7 +181,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void showPayDialog() {
-        sureOrder();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.activity_orderdetail_sure_dialog, null);
         builder.setView(view);
@@ -233,7 +252,13 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
             public void onSuccess(PullOrderBean pullOrderBean) {
                 orderHasSure = true;
                 OrderDetailActivity.this.pullOrderBean = pullOrderBean;
-
+                showNameTv.setText(getString(R.string.name) + pullOrderBean.getData().getAddress().getUsername());
+                showAddressTv.setText(getString(R.string.adress) + pullOrderBean.getData().getAddress().getAddr_info());
+                showNumberTv.setText(getString(R.string.cellnumber) + pullOrderBean.getData().getAddress().getCellphone());
+                netHelper.setImage(goodsIv, pullOrderBean.getData().getGoods().getPic());
+                goodsNameTv.setText(pullOrderBean.getData().getGoods().getGoods_name());
+                goodsDesTv.setText(pullOrderBean.getData().getGoods().getDes());
+                goodsPriceTv.setText(pullOrderBean.getData().getGoods().getPrice());
             }
 
             @Override

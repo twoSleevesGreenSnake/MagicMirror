@@ -94,10 +94,14 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         deleteSelf();
     }
 
-    protected void judgeToken(){
+    protected void judgeToken(TokenListener tokenListener){
         if (token==null||token.equals("")){
+            l("token的值");
             startActivity(new Intent(this, LoginActivity.class));
-            return;
+            tokenListener.tokenIsNothing();
+        }
+        else {
+            tokenListener.logInSuccess();
         }
     }
     protected void netFailed(){
@@ -114,5 +118,17 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         String result = className.substring(index + 1, className.length());
         Log.d(result + getString(R.string.log_class) + new Throwable().getStackTrace()[1].getMethodName()
                 + getString(R.string.log_method), content);
+    }
+    public interface TokenListener{
+        void tokenIsNothing();
+        void logInSuccess();
+    }
+    protected void clickColse(View v){
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }

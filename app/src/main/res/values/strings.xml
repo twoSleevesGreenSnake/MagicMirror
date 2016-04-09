@@ -74,7 +74,7 @@
     <string name="please_login">请先登录</string>
     <string name="activity_orderdetail_tv">購買詳情</string>
     <string name="activity_orderdetail_add_address_rl_tv">请填写收件人信息</string>
-    <string name="activity_orderdetail_add_address_click_tv">填写地址</string>
+    <string name="activity_orderdetail_add_address_click_tv">更改地址</string>
     <string name="activity_orderdetail_btn_btn">确认下单</string>
     <string name="goods_id">goods_id</string>
     <string name="goods_num">goods_num</string>
@@ -97,5 +97,7 @@
 
     <string name="log_class">类</string>
     <string name="log_method">的方法中执行：</string>
+    <string name="change_address">更改地址</string>
+    <string name="add_address">请添加收货地址</string>
 
 </resources>

@@ -254,13 +254,14 @@ public class NetHelper<T> {
 
             @Override
             public void onResponse(com.squareup.okhttp.Response response) throws IOException {
+                String body = response.body().string();
                 Message message = new Message();
                 message.what = 1;
                 if (cls==null){
-                    listener.onSuccess((T) response.body().string());
+                    listener.onSuccess((T) body);
                     return;
                 }
-                message.obj = response.body().string();
+                message.obj = body;
                 handler.sendMessage(message);
             }
         });
