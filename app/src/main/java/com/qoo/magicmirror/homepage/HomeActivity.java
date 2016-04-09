@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.base.BaseActivity;
 import com.qoo.magicmirror.constants.NetConstants;
+import com.qoo.magicmirror.constants.Value;
 import com.qoo.magicmirror.loginandregister.LoginActivity;
 import com.qoo.magicmirror.net.NetHelper;
 

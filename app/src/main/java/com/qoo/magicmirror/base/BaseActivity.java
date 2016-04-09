@@ -1,6 +1,7 @@
 package com.qoo.magicmirror.base;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +11,10 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.qoo.magicmirror.R;
+import com.qoo.magicmirror.loginandregister.LoginActivity;
 import com.qoo.magicmirror.net.NetHelper;
 import com.zhy.autolayout.AutoLayoutActivity;
 
@@ -90,7 +94,17 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         super.onDestroy();
         deleteSelf();
     }
-    protected void removeWaitView(){
-//        textView.setVisibility(View.GONE);
+
+    protected void judgeToken(){
+        if (token==null||token.equals("")){
+            startActivity(new Intent(this, LoginActivity.class));
+            return;
+        }
+    }
+    protected void netFailed(){
+        t(getString(R.string.netFailedToast));
+    }
+    protected void t(String content){
+        Toast.makeText(this, content, Toast.LENGTH_SHORT).show();
     }
 }

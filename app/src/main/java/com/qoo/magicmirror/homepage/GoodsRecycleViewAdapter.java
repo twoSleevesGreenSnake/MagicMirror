@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.qoo.magicmirror.R;
+import com.qoo.magicmirror.constants.Value;
 import com.qoo.magicmirror.db.MainPageData;
 import com.qoo.magicmirror.detail.BrowseGlassesActivity;
 import com.qoo.magicmirror.net.NetHelper;

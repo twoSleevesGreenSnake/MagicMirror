@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.base.BaseActivity;
 import com.qoo.magicmirror.constants.NetConstants;
-import com.qoo.magicmirror.detail.DetialActivity;
+import com.qoo.magicmirror.constants.Value;
 import com.qoo.magicmirror.net.NetHelper;
 
 import java.util.ArrayList;
@@ -58,9 +58,9 @@ public class DetailAddressActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(DetailAddressHolder holder, int position) {
-            holder.address.setText("地址:  "+data.getData().getList().get(position).getAddr_info());
-            holder.name.setText("收件人:  "+data.getData().getList().get(position).getUsername());
-            holder.number.setText("电话:  "+data.getData().getList().get(position).getCellphone());
+            holder.address.setText(getString(R.string.adress)+data.getData().getList().get(position).getAddr_info());
+            holder.name.setText(getString(R.string.name)+data.getData().getList().get(position).getUsername());
+            holder.number.setText(getString(R.string.cellnumber)+data.getData().getList().get(position).getCellphone());
             holder.adrId = data.getData().getList().get(position).getAddr_id();
             holder.position = position;
         }
@@ -88,14 +88,34 @@ public class DetailAddressActivity extends BaseActivity {
                     public void onClick(View v) {
                         clickPosition = position;
                         Intent intent = new Intent(DetailAddressActivity.this,EditAddressActivity.class);
-                        intent.putExtra("oldAddress",data.getData().getList().get(position));
+                        intent.putExtra(Value.PUT_OLD_ADDRESS,data.getData().getList().get(position));
                         DetailAddressActivity.this.startActivityForResult(intent,301);
                     }
                 });
                 linearLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        finish();
+                        ArrayList<String> keys = new ArrayList<String>();
+                        ArrayList<String> values = new ArrayList<String>();
+                        keys.add(getString(R.string.token));
+                        values.add(token);
+                        keys.add(getString(R.string.addr_id));
+                        values.add(data.getData().getList().get(position).getAddr_id());
+                        NetHelper.newNetHelper(DetailAddressActivity.this).getPostInfo(NetConstants.DEFAULT_ADDRESS, keys, values, null, new NetHelper.NetListener() {
+                            @Override
+                            public void onSuccess(Object o) {
+                                Intent intent = new Intent();
+                                intent.putExtra(Value.PUT_ADDRESS_DATA,data.getData().getList().get(position));
+                                setResult(298, intent);
+                                finish();
+                            }
+
+                            @Override
+                            public void onFailure() {
+                               netFailed();
+                            }
+                        });
+
                     }
                 });
             }
@@ -105,22 +125,20 @@ public class DetailAddressActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        this.data.getData().getList().remove(clickPosition);
-//        this.data.getData().getList().add(clickPosition, (DetailAddressBean.DataBean.ListBean) data.getParcelableExtra("newAddress"));
-//        adapter.notifyItemInserted(clickPosition);
+
         startNet();
     }
     private void startNet(){
         ArrayList<String> keys = new ArrayList<>();
         ArrayList<String> valves = new ArrayList<>();
-        keys.add("token");
-        keys.add("device_type");
-        keys.add("page");
-        keys.add("last_time");
-        valves.add("f7d565803fbdb8f9c0bc64122895eea3");
+        keys.add(getString(R.string.token));
+        keys.add(getString(R.string.device_type));
+        keys.add(getString(R.string.page));
+        keys.add(getString(R.string.last_time));
+        valves.add(token);
         valves.add("1");
-        valves.add("");
-        valves.add("");
+        valves.add(Value.NOTHING);
+        valves.add(Value.NOTHING);
 
 
         NetHelper.newNetHelper(this).getPostInfo(NetConstants.ADDRESS_LIST, keys, valves, DetailAddressBean.class, new NetHelper.NetListener<DetailAddressBean>() {

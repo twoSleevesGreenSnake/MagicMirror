@@ -1,52 +1,25 @@
 package com.qoo.magicmirror.detail;
 
 import android.animation.ObjectAnimator;
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.alipay.sdk.app.PayTask;
 import com.qoo.magicmirror.R;
-import com.qoo.magicmirror.alipay.H5PayDemoActivity;
-import com.qoo.magicmirror.alipay.PayDemoActivity;
-import com.qoo.magicmirror.alipay.PayResult;
-import com.qoo.magicmirror.alipay.SignUtils;
 import com.qoo.magicmirror.base.BaseActivity;
 import com.qoo.magicmirror.base.BaseAdapter;
-import com.qoo.magicmirror.constants.NetConstants;
 import com.qoo.magicmirror.homepage.GoodsListBean;
-import com.qoo.magicmirror.homepage.Value;
 import com.qoo.magicmirror.net.NetHelper;
-import com.qoo.magicmirror.order.AliPayData;
 import com.qoo.magicmirror.order.OrderDetailActivity;
-import com.qoo.magicmirror.order.PullOrderBean;
 import com.qoo.magicmirror.wearatlas.WearAtlasActivity;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Random;
 
 /**
  * Created by dllo on 16/3/29.
@@ -106,6 +79,7 @@ public class BrowseGlassesActivity extends BaseActivity {
         buyIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                judgeToken();//判断有没有token的方法
                 Intent intent = new Intent(BrowseGlassesActivity.this, OrderDetailActivity.class);
                 intent.putExtra("goodsId", data.getGoods_id());
                 intent.putExtra("price", data.getGoods_price());
@@ -440,9 +414,7 @@ public class BrowseGlassesActivity extends BaseActivity {
         }
     }
 
-    /**
-     * call alipay sdk pay. 调用SDK支付
-     */
+
 
 
 }

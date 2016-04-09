@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.base.BaseActivity;
 import com.qoo.magicmirror.constants.NetConstants;
-import com.qoo.magicmirror.homepage.Value;
+import com.qoo.magicmirror.constants.Value;
 import com.qoo.magicmirror.net.NetHelper;
 
 import java.util.ArrayList;

@@ -1,6 +1,5 @@
 package com.qoo.magicmirror.order;
 
-<<<<<<< HEAD
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,10 +7,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
-=======
 import android.app.AlertDialog;
 import android.view.LayoutInflater;
->>>>>>> feature/4.6_晚上购买界面彻底完成版
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -35,7 +32,7 @@ import java.util.Random;
 
 /**
  * Created by dllo on 16/4/7.
- *
+ * <p/>
  * 订单界面
  */
 public class OrderDetailActivity extends BaseActivity implements View.OnClickListener {
@@ -46,9 +43,15 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     private NetHelper netHelper;
     private String price;
     private String goodsId;
+    private PullOrderBean pullOrderBean;
     private final static int SDK_PAY_FLAG = 1;
     private String orderInfo;
     public static String RSA_PRIVATE = "";
+    private boolean orderHasSure = false;
+
+
+    //支付宝之后的回调 判断是否支付成功
+
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @SuppressWarnings("unused")
@@ -66,16 +69,17 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
                     String resultStatus = payResult.getResultStatus();
                     // 判断resultStatus 为“9000”则代表支付成功，具体状态码代表含义可参考接口文档
                     if (TextUtils.equals(resultStatus, "9000")) {
-                        Toast.makeText(OrderDetailActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(OrderDetailActivity.this, R.string.pay_success, Toast.LENGTH_SHORT).show();
                     } else {
                         // 判断resultStatus 为非"9000"则代表可能支付失败
                         // "8000"代表支付结果因为支付渠道原因或者系统原因还在等待支付结果确认，最终交易是否成功以服务端异步通知为准（小概率状态）
                         if (TextUtils.equals(resultStatus, "8000")) {
-                            Toast.makeText(OrderDetailActivity.this, "支付结果确认中", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(OrderDetailActivity.this, R.string.pay_wait, Toast.LENGTH_SHORT).show();
 
                         } else {
                             // 其他值就可以判断为支付失败，包括用户主动取消支付，或者系统返回的错误
                             Toast.makeText(OrderDetailActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
+
 
                         }
                     }
@@ -90,11 +94,12 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     };
 
 
-    private String getOrderInfo(String subject, String body, String price) {
+    private String getOrderInfo() {
 
 
         return orderInfo;
     }
+
     @Override
     protected int setLayout() {
         return R.layout.activity_orderdetail;
@@ -112,12 +117,31 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
         sureBtn.setOnClickListener(this);
     }
 
+    /**
+     * 获取intent里面的值并设置监听
+     */
     @Override
     protected void initData() {
-     Intent intent = getIntent();
+
+
+        Intent intent = getIntent();
         price = intent.getStringExtra("price");
-        Log.i("price",price+goodsId);
+        Log.i("price", price + goodsId);
         goodsId = intent.getStringExtra("goodsId");
+        showAddressTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(new Intent(OrderDetailActivity.this, DetailAddressActivity.class), 299);
+            }
+        });
+    }
+
+    // 点击 地址跳转编辑完成回来改变地址内容
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        DetailAddressBean.DataBean.ListBean detailAddressBean = data.getParcelableExtra("addressData");
+        showAddressTv.setText(detailAddressBean.getAddr_info());
 
     }
 
@@ -138,18 +162,47 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void showPayDialog() {
+        sureOrder();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View view = LayoutInflater.from(this).inflate(R.layout.activity_orderdetail_sure_dialog,null);
+        View view = LayoutInflater.from(this).inflate(R.layout.activity_orderdetail_sure_dialog, null);
         builder.setView(view);
-        findViewById(R.id.activity_orderdetail_sure_dialog_wechat_rl).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.activity_orderdetail_sure_dialog_wechat_rl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
-        findViewById(R.id.activity_orderdetail_sure_dialog_zfb_rl).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.activity_orderdetail_sure_dialog_zfb_rl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (orderHasSure == false) {
+                    netFailed();
+                    return;
+                }
+                ArrayList<String> keys = new ArrayList<String>();
+                ArrayList<String> values = new ArrayList<String>();
+
+                keys.add(getString(R.string.token));
+                values.add(token);
+                keys.add(getString(R.string.order_no));
+                values.add(pullOrderBean.getData().getOrder_id());
+                keys.add(getString(R.string.addr_id));
+                values.add(pullOrderBean.getData().getAddress().getAddr_id());
+                keys.add(getString(R.string.goods_name));
+                values.add(pullOrderBean.getData().getGoods().getGoods_name());
+                NetHelper.newNetHelper(OrderDetailActivity.this).getPostInfo(NetConstants.ALI_PAY_SUB, keys, values, AliPayData.class, new NetHelper.NetListener<AliPayData>() {
+                    @Override
+                    public void onSuccess(AliPayData aliPayData) {
+                        orderInfo = aliPayData.getData().getStr();
+                        pay(sureBtn);
+                    }
+
+                    @Override
+                    public void onFailure() {
+
+                    }
+                });
 
             }
         });
@@ -166,9 +219,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
         token.add(getString(R.string.discout_id));
         token.add(getString(R.string.device_type));
         ArrayList<String> value = new ArrayList<>();
-<<<<<<< HEAD
-        // TODO 等待传值
-        value.add("f7d565803fbdb8f9c0bc64122895eea3");
+        value.add(BaseActivity.token);
         value.add(goodsId);
         value.add("1");
         value.add(price);
@@ -176,45 +227,13 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
         value.add("1");
 
         netHelper.getPostInfo(NetConstants.SUB_ORDER, token, value, PullOrderBean.class, new NetHelper.NetListener<PullOrderBean>() {
-=======
-        value.add(BaseActivity.token);
-//        value.add("2");
-//        value.add("1");
-//        value.add("3850");
-//        value.add("");
-//        value.add("1");
-        netHelper.getPostInfo(NetConstants.SUB_ORDER, token, value, SureOrderBean.class, new NetHelper.NetListener<SureOrderBean>() {
->>>>>>> feature/4.6_晚上购买界面彻底完成版
+
+
             @Override
             public void onSuccess(PullOrderBean pullOrderBean) {
-                ArrayList<String> keys = new ArrayList<String>();
-                ArrayList<String> values = new ArrayList<String>();
-                keys.add("token");
+                orderHasSure = true;
+                OrderDetailActivity.this.pullOrderBean = pullOrderBean;
 
-                values.add("f7d565803fbdb8f9c0bc64122895eea3");
-                keys.add("order_no");
-                values.add(pullOrderBean.getData().getOrder_id());
-                keys.add("addr_id");
-                values.add(pullOrderBean.getData().getAddress().getAddr_id());
-                keys.add("goodsname");
-                values.add(pullOrderBean.getData().getGoods().getGoods_name());
-
-                NetHelper.newNetHelper(OrderDetailActivity.this).getPostInfo(NetConstants.ALI_PAY_SUB, keys, values, AliPayData.class, new NetHelper.NetListener<AliPayData>() {
-
-
-                    @Override
-                    public void onSuccess(AliPayData aliPayData) {
-                        orderInfo = aliPayData.getData().getStr();
-                        pay(sureBtn);
-
-
-                    }
-
-                    @Override
-                    public void onFailure() {
-
-                    }
-                });
             }
 
             @Override
@@ -222,23 +241,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
 
             }
         });
-<<<<<<< HEAD
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public void pay(View v) {
@@ -252,13 +255,13 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
 //					}).show();
 //			return;
 //		}
-        String orderInfo = getOrderInfo("测试的商品", "该测试商品的详细描述", "0.01");
+        String orderInfo = getOrderInfo();
 
 //		/**
 //		 * 特别注意，这里的签名逻辑需要放在服务端，切勿将私钥泄露在代码中！
 //		 */
         String sign = sign(orderInfo);
-//		try {
+        //		try {
 //			/**
 //			 * 仅需对sign 做URL编码
 //			 */
@@ -266,6 +269,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
 //		} catch (UnsupportedEncodingException e) {
 //			e.printStackTrace();
 //		}
+
 //
         /**
          * 完整的符合支付宝参数规范的订单信息
@@ -352,7 +356,5 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
      */
     private String getSignType() {
         return "sign_type=\"RSA\"";
-=======
->>>>>>> feature/4.6_晚上购买界面彻底完成版
     }
 }

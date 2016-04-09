@@ -3,7 +3,6 @@ package com.qoo.magicmirror.homepage;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.qoo.magicmirror.R;
+import com.qoo.magicmirror.constants.Value;
 import com.qoo.magicmirror.detail.SpecialTopicDetailActivity;
 import com.qoo.magicmirror.net.NetHelper;
 

@@ -1,7 +1,6 @@
 package com.qoo.magicmirror.homepage;
 
 
-import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 
 import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.constants.NetConstants;
+import com.qoo.magicmirror.constants.Value;
 import com.qoo.magicmirror.db.MainPageHelper;
 import com.qoo.magicmirror.net.NetHelper;
 
