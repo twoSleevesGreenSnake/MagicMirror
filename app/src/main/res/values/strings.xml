@@ -80,13 +80,11 @@
     <string name="goods_num">goods_num</string>
     <string name="price">price</string>
     <string name="discout_id">discout_id</string>
-
     <string name="activity_address_detail_title_content">我的所有地址</string>
     <string name="activity_address_detail_add_tv_content">添加地址</string>
     <string name="activity_orderdetail_sure_dialog_choose_tv">选择支付方式</string>
     <string name="activity_orderdetail_sure_dialog_wechat_tv">微信支付</string>
     <string name="activity_orderdetail_sure_dialog_zfb_tv">支付宝支付</string>
-<<<<<<< HEAD
     <string name="addr_id">addr_id</string>
     <string name="netFailedToast">网络不好请稍等</string>
     <string name="goods_name">goodsname</string>
@@ -96,9 +94,8 @@
     <string name="adress">"地址:  "</string>
     <string name="name">"收件人:  "</string>
     <string name="cellnumber">"电话:  "</string>
-=======
+
     <string name="log_class">类</string>
     <string name="log_method">的方法中执行：</string>
->>>>>>> feature/4.6_晚上购买界面彻底完成版
 
 </resources>

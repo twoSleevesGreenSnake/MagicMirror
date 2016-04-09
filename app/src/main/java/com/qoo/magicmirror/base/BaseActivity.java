@@ -14,10 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qoo.magicmirror.R;
-<<<<<<< HEAD
 import com.qoo.magicmirror.loginandregister.LoginActivity;
-=======
->>>>>>> feature/4.6_晚上购买界面彻底完成版
 import com.qoo.magicmirror.net.NetHelper;
 import com.zhy.autolayout.AutoLayoutActivity;
 
