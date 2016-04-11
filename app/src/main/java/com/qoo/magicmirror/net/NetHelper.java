@@ -1,5 +1,7 @@
 package com.qoo.magicmirror.net;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -13,6 +15,7 @@ import android.support.v4.util.LruCache;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.android.volley.RequestQueue;
 
@@ -75,11 +78,10 @@ public class NetHelper<T> {
      * todo 优化代码
      *
      * @param context
-     *
      */
 
-    public static NetHelper newNetHelper(Context context){
-        if (helper==null) {
+    public static NetHelper newNetHelper(Context context) {
+        if (helper == null) {
             synchronized (SingleQueue.class) {
                 if (helper == null) {
                     helper = new NetHelper(context);
@@ -132,7 +134,7 @@ public class NetHelper<T> {
             public boolean handleMessage(Message msg) {
                 if (msg.what == 1) {
                     String result = (String) msg.obj;
-                    Log.i("result",result);
+                    Log.i("result", result);
                     T t = new Gson().fromJson(result, cls);
                     listener.onSuccess(t);
                 }
@@ -185,6 +187,27 @@ public class NetHelper<T> {
 
     }
 
+    public Bitmap setCutBitmap(final ImageView imageView, final String url, int screenWidth) {
+
+        Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url);
+        if (bitmap == null) {
+            return null;
+        }
+        float ratio = (float) screenWidth / (float) bitmap.getWidth();
+        Bitmap newBitmap = Bitmap.createBitmap(bitmap, 39, 0, bitmap.getWidth() - 78, bitmap.getHeight());
+        imageView.setImageBitmap(newBitmap);
+//        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) imageView.getLayoutParams();
+//        params.topMargin = (int) (20 + bitmap.getHeight() * (ratio - 1));
+//        imageView.setLayoutParams(params);
+//        AnimatorSet set = new AnimatorSet();
+//        set.playTogether(
+//                ObjectAnimator.ofFloat(imageView, "scaleX", 1, ratio),
+//                ObjectAnimator.ofFloat(imageView, "scaleY", 1, ratio)
+//        );
+//        set.setDuration(1).start();
+        return bitmap;
+    }
+
     /**
      * 给view 网络拉取背景的方法
      *
@@ -215,7 +238,7 @@ public class NetHelper<T> {
      * @param url
      * @param data
      */
-    public void setImage(ImageView imageView, String url,GoodsListBean.DataEntity.ListEntity data,String type) {
+    public void setImage(ImageView imageView, String url, GoodsListBean.DataEntity.ListEntity data, String type) {
         setImage(imageView, url);
         MainPageHelper.newHelper(context).addData(url, data.getGoods_name(), data.getProduct_area(), data.getGoods_price(), data.getBrand(), type);
     }
@@ -257,7 +280,7 @@ public class NetHelper<T> {
                 String body = response.body().string();
                 Message message = new Message();
                 message.what = 1;
-                if (cls==null){
+                if (cls == null) {
                     listener.onSuccess((T) body);
                     return;
                 }
@@ -269,6 +292,7 @@ public class NetHelper<T> {
 
     /**
      * 注册界面注册
+     *
      * @param url
      * @param keys
      * @param values
@@ -303,7 +327,7 @@ public class NetHelper<T> {
                 if (body.contains("此手机号已被注册")) {
                     listener.onFailure();
                     return;
-                } else if (body.contains("验证码错误")){
+                } else if (body.contains("验证码错误")) {
                     listener.onFailure();
                     return;
                 }
@@ -317,6 +341,7 @@ public class NetHelper<T> {
 
     /**
      * 登陆界面登陆
+     *
      * @param url
      * @param keys
      * @param values
@@ -391,7 +416,6 @@ public class NetHelper<T> {
 
         void onFailure();
     }
-
 
 
 }

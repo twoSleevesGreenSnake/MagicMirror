@@ -127,7 +127,7 @@ public class GoodsFragment extends Fragment {
             value.add("");
             value.add("");
             value.add(categoryId.get(position));
-            value.add(getString(R.string.one_point_zero_point_one));
+            value.add("1.0.1");
             NetHelper netHelper = new NetHelper(getContext());
             netHelper.getPostInfo(NetConstants.GOODS_TYPE, token, value, GoodsListBean.class, new NetHelper.NetListener<GoodsListBean>() {
                         @Override

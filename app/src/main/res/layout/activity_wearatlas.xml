@@ -2,11 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    >
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/activity_wearatlas_layout">
 
         <TextView
             android:id="@+id/activity_wearatlas_tv"
@@ -55,4 +56,20 @@
             android:layout_marginRight="@dimen/activity_wearatlas_purchase_iv_marginRight"
             android:src="@mipmap/purchase_button" />
     </FrameLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/show_big_layout"
+        android:background="@color/colorBlack"
+        android:visibility="gone"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:id="@+id/show_big_img"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+
 </RelativeLayout>

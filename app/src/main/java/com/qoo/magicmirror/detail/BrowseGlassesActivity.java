@@ -144,13 +144,13 @@ public class BrowseGlassesActivity extends BaseActivity {
         picturesTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                WearAtlasActivity.setData(data);
                 Intent intent = new Intent(BrowseGlassesActivity.this, WearAtlasActivity.class);
                 startActivity(intent);
             }
         });
 
         netHelper.setBackGround(bindView(R.id.activity_detail_browse_layout), data.getGoods_img());
-
         recyclerView.setAdapter(new BrowseGlassesAdapter());
         recyclerView.setLayoutManager(new LinearLayoutManager(BrowseGlassesActivity.this));
 

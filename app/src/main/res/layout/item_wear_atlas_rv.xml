@@ -9,8 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/item_wear_atlas_rv_iv_marginLeft"
-        android:scaleType="fitXY"
         android:layout_marginTop="@dimen/item_wear_atlas_rv_iv_marginTop"
         android:layout_marginRight="@dimen/item_wear_atlas_rv_iv_marginRight"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher" />
 </LinearLayout>
