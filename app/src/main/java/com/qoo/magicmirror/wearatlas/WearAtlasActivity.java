@@ -22,6 +22,7 @@ import android.widget.MediaController;
 import android.widget.RelativeLayout;
 import android.widget.VideoView;
 
+import com.android.volley.toolbox.ImageLoader;
 import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.base.BaseActivity;
 import com.qoo.magicmirror.constants.NetConstants;
@@ -43,7 +44,7 @@ public class WearAtlasActivity extends BaseActivity {
     private WearAtlasListViewAdapter wearAtlasListViewAdapter;
     private static ArrayList<GoodsListBean.DataEntity.ListEntity.WearVideoEntity> data;
     private VideoView vv;
-    private ImageView ivThumbnail,showBigImg;
+    private ImageView ivThumbnail, showBigImg;
     private JCVideoPlayer vp;
     private RelativeLayout showBigLayout;
     private int screenHeight;
@@ -55,9 +56,10 @@ public class WearAtlasActivity extends BaseActivity {
     int endY;
     float a;
 
-    public static void setData (GoodsListBean.DataEntity.ListEntity data){
+    public static void setData(GoodsListBean.DataEntity.ListEntity data) {
         WearAtlasActivity.data = (ArrayList<GoodsListBean.DataEntity.ListEntity.WearVideoEntity>) data.getWear_video();
     }
+
     @Override
     protected int setLayout() {
         return R.layout.activity_wearatlas;
@@ -66,14 +68,15 @@ public class WearAtlasActivity extends BaseActivity {
     @Override
     protected void initData() {
         MediaController mc = new MediaController(this);
-        vp.setUp(data.get(0).getData(),null);
+        vp.setUp(data.get(0).getData(), null);
+
         wearAtlasListViewAdapter = new WearAtlasListViewAdapter(data, context);
         listView.setAdapter(wearAtlasListViewAdapter);
         context = this;
-        showBigLayout .setOnClickListener(new View.OnClickListener() {
+        showBigLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                backAnimation(endY, startY, 1/a);
+                backAnimation(endY, startY, 1 / a);
                 new Handler(new Handler.Callback() {
                     @Override
                     public boolean handleMessage(Message msg) {
@@ -135,13 +138,12 @@ public class WearAtlasActivity extends BaseActivity {
     }
 
 
-
-    private void initAnimation(int startY,int endY,float scale){
+    private void initAnimation(int startY, int endY, float scale) {
         set.playTogether(
-                ObjectAnimator.ofFloat(showBigImg,"translationY",startY,endY),
-                ObjectAnimator.ofFloat(showBigImg,"scaleX",1,scale),
-                ObjectAnimator.ofFloat(showBigImg,"scaleY",1,scale),
-                ObjectAnimator.ofFloat(showBigLayout,"alpha",0.5f,1)
+                ObjectAnimator.ofFloat(showBigImg, "translationY", startY, endY),
+                ObjectAnimator.ofFloat(showBigImg, "scaleX", 1, scale),
+                ObjectAnimator.ofFloat(showBigImg, "scaleY", 1, scale),
+                ObjectAnimator.ofFloat(showBigLayout, "alpha", 0.5f, 1)
 
 
         );
@@ -150,8 +152,7 @@ public class WearAtlasActivity extends BaseActivity {
     }
 
 
-
-    private void backAnimation(int startY,int endY,float scale){
+    private void backAnimation(int startY, int endY, float scale) {
         set.playTogether(
                 ObjectAnimator.ofFloat(showBigImg, "translationY", startY, endY),
                 ObjectAnimator.ofFloat(showBigImg, "scaleX", 1, scale),
@@ -163,10 +164,6 @@ public class WearAtlasActivity extends BaseActivity {
         set.setDuration(200).start();
 
     }
-
-
-
-
 
 
     public class WearAtlasListViewAdapter extends BaseAdapter {
@@ -206,14 +203,14 @@ public class WearAtlasActivity extends BaseActivity {
             }
             GoodsListBean.DataEntity.ListEntity.WearVideoEntity wearVideoEntity = data.get(position + 1);
             if (wearVideoEntity != null) {
-                if (wearVideoEntity.getData()==null||wearVideoEntity.getData()==""){
+                if (wearVideoEntity.getData() == null || wearVideoEntity.getData() == "") {
                     return convertView;
                 }
-                ratio = (float)screenWidth/(float)screenHeight;
+                ratio = (float) screenWidth / (float) screenHeight;
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewHolder.imageView.getLayoutParams();
-                params.topMargin =  (100);
-               viewHolder.imageView.setLayoutParams(params);
-              viewHolder.bitmap =  new NetHelper<GoodsListBean.DataEntity.ListEntity.WearVideoEntity>(parent.getContext()).setCutBitmap(viewHolder.imageView, wearVideoEntity.getData(),screenWidth-78);
+                params.topMargin = (100);
+                viewHolder.imageView.setLayoutParams(params);
+                viewHolder.bitmap = new NetHelper<GoodsListBean.DataEntity.ListEntity.WearVideoEntity>(parent.getContext()).setCutBitmap(viewHolder.imageView, wearVideoEntity.getData(), screenWidth - 78);
 
             }
             return convertView;
@@ -225,20 +222,20 @@ public class WearAtlasActivity extends BaseActivity {
             Bitmap bitmap;
 
             public ViewHolder(final View convertView) {
-                imageView =  (ImageView) convertView.findViewById(R.id.item_wear_atlas_rv_iv);
+                imageView = (ImageView) convertView.findViewById(R.id.item_wear_atlas_rv_iv);
 
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                         a = (float) (1.0+39.0/(float)bitmap.getWidth());
+                        a = (float) (1.0 + 39.0 / (float) bitmap.getWidth());
                         WearAtlasActivity.this.l(String.valueOf(a));
                         showBigImg.setImageBitmap(bitmap);
                         showBigLayout.setVisibility(View.VISIBLE);
                         WearAtlasActivity.this.l(String.valueOf(layout.getBottom()));
-                        WearAtlasActivity.this.l(String.valueOf(imageView.getHeight()*a));
-                        endY = (int) ((layout.getBottom()-imageView.getHeight()*a)/50);
-                        startY = (int) (convertView.getY()-listView.getY());
-                        initAnimation(startY,endY,a);
+                        WearAtlasActivity.this.l(String.valueOf(imageView.getHeight() * a));
+                        endY = (int) ((layout.getBottom() - imageView.getHeight() * a) / 50);
+                        startY = (int) (convertView.getY() - listView.getY());
+                        initAnimation(startY, endY, a);
                         layout.setVisibility(View.GONE);
                     }
                 });
