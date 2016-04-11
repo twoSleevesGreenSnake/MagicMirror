@@ -2,10 +2,12 @@ package com.qoo.magicmirror.detail;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -30,7 +32,7 @@ public class BrowseGlassesActivity extends BaseActivity {
     private int screenHeight;
     private boolean btnNotShow = true;
     private ImageView backIv, buyIv, pircturesIv;
-    private LinearLayout btnLayout;
+    private RelativeLayout btnLayout;
     private ObjectAnimator animation;
     private ObjectAnimator animationBack;
     private TextView picturesTv;
@@ -38,25 +40,7 @@ public class BrowseGlassesActivity extends BaseActivity {
     private int screenWidth;
     private String orderinfo;
 
-    public static String PARTNER = "";
-    // 商户收款账号
-    public static String SELLER = "";
-    // 商户私钥，pkcs8格式
-    public static String RSA_PRIVATE = "";
-    // 支付宝公钥
-    public static String RSA_PUBLIC = "";
-
-
     private boolean locationNotFinshed = true;
-
-
-    /**
-     * create the order info. 创建订单信息
-     */
-
-
-
-
 
     //序列化传不了 不知道为了点啥
     public static void setData(GoodsListBean.DataEntity.ListEntity data) {
@@ -97,26 +81,30 @@ public class BrowseGlassesActivity extends BaseActivity {
 
             }
         });
+        backIv = bindView(R.id.activity_detail_browse_glasses_pictures_tv_back_iv);
         recyclerView = bindView(R.id.activity_detail_browse_glasses_rv);
         picturesTv = bindView(R.id.activity_detail_browse_glasses_pictures_tv);
         netHelper = NetHelper.newNetHelper(this);
-        screenHeight = getWindowManager().getDefaultDisplay().getHeight();
+        Point size  = new Point();
+        Display display = getWindowManager().getDefaultDisplay();
+        display.getRealSize(size);
+
+
+        screenHeight = size.y;
+        screenWidth = size.x;
         btnLayout = bindView(R.id.activity_detail_browse_glasses_pictures_bottom_layout);
         //开始的时候先移出屏幕,好看不少
         screenWidth = getWindowManager().getDefaultDisplay().getWidth();
-        ObjectAnimator animator = ObjectAnimator.ofFloat(btnLayout, "translationX", -1000);
+        ObjectAnimator animator = ObjectAnimator.ofFloat(btnLayout, "translationX", -1500);
         animator.setDuration(1);
         animator.start();
-        //进场动画
-
-        //出厂动画
 
 
     }
 
     private void visibleLayout() {
         if (locationNotFinshed) {
-            animation = ObjectAnimator.ofFloat(btnLayout, "translationX", (screenWidth - btnLayout.getWidth()) / 2);
+            animation = ObjectAnimator.ofFloat(btnLayout, "translationX", (screenWidth - btnLayout.getWidth())/2-39);
             animation.setDuration(500);
             locationNotFinshed = false;
         }
@@ -124,7 +112,7 @@ public class BrowseGlassesActivity extends BaseActivity {
     }
 
     private void goneLayout() {
-        animationBack = ObjectAnimator.ofFloat(btnLayout, "translationX", -1000);
+        animationBack = ObjectAnimator.ofFloat(btnLayout, "translationX", -1500);
         animationBack.setDuration(500);
         animationBack.start();
         new Handler(new Handler.Callback() {
@@ -141,6 +129,12 @@ public class BrowseGlassesActivity extends BaseActivity {
     protected void initData() {
 //        Intent intent = getIntent();
 //        data = intent.getParcelableExtra("GoodsListBean.DataEntity.ListEntity");
+        backIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         picturesTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
