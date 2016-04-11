@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/fragment_menu_lv_marginTop"
         android:layout_weight="1"
+        android:layout_marginLeft="@dimen/fragment_menu_lv_marginLeft"
         android:divider="@android:color/transparent" />
 
     <LinearLayout

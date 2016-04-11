@@ -41,7 +41,8 @@ public class VerticalViewPagerAdapter extends FragmentPagerAdapter {
             fragment.setMenuListener(new MenuListener() {
                 @Override
                 public void clickMenu() {
-                    fm.beginTransaction().show(VerticalViewPagerAdapter.this.fm.findFragmentByTag("menu")).commit();
+                    fm.beginTransaction().setCustomAnimations(R.anim.fragment_menu_anim, R.anim.fragment_menu_anim)
+                            .show(VerticalViewPagerAdapter.this.fm.findFragmentByTag("menu")).addToBackStack(null).commit();
                 }
             });
             return fragment;
