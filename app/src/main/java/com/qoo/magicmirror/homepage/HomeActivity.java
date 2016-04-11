@@ -76,7 +76,11 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
         thematicFragment.setMenuListener(new MenuListener() {
             @Override
             public void clickMenu() {
-                getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager().findFragmentByTag("menu")).commit();
+                getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.fragment_menu_anim, R.anim.fragment_menu_anim)
+                        .show(getSupportFragmentManager().findFragmentByTag("menu"))
+                        .addToBackStack(null)
+                        .commit();
             }
         });
         // 给fragment传递titles，并设置点击替换的MenuFragment
@@ -88,7 +92,11 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
         shoppingCartFragment.setMenuListener(new MenuListener() {
             @Override
             public void clickMenu() {
-                getSupportFragmentManager().beginTransaction().show(getSupportFragmentManager().findFragmentByTag(getString(R.string.MENU))).commit();
+                getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.fragment_menu_anim, R.anim.fragment_menu_anim)
+                        .show(getSupportFragmentManager().findFragmentByTag(getString(R.string.MENU)))
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
@@ -116,7 +124,12 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
 
 
         // menufragment占位布局的替换
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_menu_fl, menuFragment, getString(R.string.MENU)).hide(menuFragment).commit();
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.fragment_menu_anim, R.anim.fragment_menu_anim)
+                .replace(R.id.activity_main_menu_fl, menuFragment, getString(R.string.MENU))
+                .hide(menuFragment)
+                .addToBackStack(null)
+                .commit();
 
         // 绑定纵向滑动的Viewpager的适配器
 
@@ -154,14 +167,12 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
         } else if (menuPosition == 5) {
             verticalViewPager.setCurrentItem(0);
         } else if (menuPosition == 6) {
-            if (BaseActivity.token == "") {
+            if (BaseActivity.token.length() != 0) {
                 showDialog();// 退出登录的PopupWindow
             } else {
                 Toast.makeText(HomeActivity.this, R.string.please_login, Toast.LENGTH_SHORT).show();
             }
         }
-
-
     }
 
     private void showDialog() {
