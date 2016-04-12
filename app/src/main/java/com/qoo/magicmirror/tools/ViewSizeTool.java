@@ -43,7 +43,6 @@ public class ViewSizeTool {
                 return false;
             }
         };
-        Log.i("obobobobo","ssssss");
         viewTreeObserver.addOnPreDrawListener(listener) ;
         return point;
     }
