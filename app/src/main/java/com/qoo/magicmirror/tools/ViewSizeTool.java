@@ -15,9 +15,9 @@ public class ViewSizeTool {
 
     private ViewSizeTool() {
     }
-   public static ViewSizeTool newViewTool(){
-//       if ()
-   }
+//   public static ViewSizeTool newViewTool(){
+////       if ()
+//   }
     public Point getViewSize(final View view){
         ViewTreeObserver viewTreeObserver = view.getViewTreeObserver();
         final Point point = new Point();

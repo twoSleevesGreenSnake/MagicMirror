@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Handler;
@@ -28,6 +29,7 @@ import com.qoo.magicmirror.base.BaseActivity;
 import com.qoo.magicmirror.constants.NetConstants;
 import com.qoo.magicmirror.homepage.GoodsListBean;
 import com.qoo.magicmirror.net.NetHelper;
+import com.qoo.magicmirror.order.OrderDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +45,8 @@ public class WearAtlasActivity extends BaseActivity {
     private ListView listView;
     private WearAtlasListViewAdapter wearAtlasListViewAdapter;
     private static ArrayList<GoodsListBean.DataEntity.ListEntity.WearVideoEntity> data;
-    private VideoView vv;
-    private ImageView ivThumbnail, showBigImg;
+    private static GoodsListBean.DataEntity.ListEntity datas;
+    private ImageView  showBigImg,ivBack,ivPurchase;
     private JCVideoPlayer vp;
     private RelativeLayout showBigLayout;
     private int screenHeight;
@@ -52,6 +54,7 @@ public class WearAtlasActivity extends BaseActivity {
     private AnimatorSet set = new AnimatorSet();
     private RelativeLayout layout;
     private float ratio;
+    private float alpha = 0.8f;
     int startY;
     int endY;
     float a;
@@ -67,9 +70,10 @@ public class WearAtlasActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        MediaController mc = new MediaController(this);
         vp.setUp(data.get(0).getData(), null);
-
+        NetHelper netHelper = new NetHelper(WearAtlasActivity.this);
+        netHelper.setImage(vp.ivThumb, data.get(0).getData());
+        vp.ivThumb.setAlpha(alpha);
         wearAtlasListViewAdapter = new WearAtlasListViewAdapter(data, context);
         listView.setAdapter(wearAtlasListViewAdapter);
         context = this;
@@ -88,37 +92,33 @@ public class WearAtlasActivity extends BaseActivity {
 
             }
         });
-//        ArrayList<String> token = new ArrayList<>();
-//        token.add(getString(R.string.token));
-//        token.add(getString(R.string.device_type));
-//        token.add(getString(R.string.page));
-//        token.add(getString(R.string.last_time));
-//        token.add(getString(R.string.category_id));
-//        token.add(getString(R.string.version));
-//        ArrayList<String> value = new ArrayList<>();
-//        value.add("");
-//        value.add("1");
-//        value.add("");
-//        value.add("");
-//        value.add("");
-//        value.add("1.0.1");
-//        NetHelper netHelper = new NetHelper(this);
-//
-//        netHelper.getPostInfo(NetConstants.GOODS_TYPE, token, value, GoodsListBean.class, new NetHelper.NetListener<GoodsListBean>() {
-//
-//            @Override
-//            public void onSuccess(GoodsListBean goodsListBean) {
-////
-//                Log.d("11111", "onSuccess: " + goodsListBean.toString());
-//
-////
-//            }
-//
-//            @Override
-//            public void onFailure() {
-//
-//            }
-//        });
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        ivPurchase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                judgeToken(new TokenListener() {
+                    @Override
+                    public void tokenIsNothing() {
+
+                    }
+
+                    @Override
+                    public void logInSuccess() {
+                        Intent intent = new Intent(WearAtlasActivity.this, OrderDetailActivity.class);
+                        intent.putExtra("goodsId", datas.getGoods_id());
+                        intent.putExtra("price", datas.getGoods_price());
+                        startActivity(intent);
+                    }
+                });//判断有没有token的方法
+            }
+        });
+
     }
 
     @Override
@@ -128,7 +128,8 @@ public class WearAtlasActivity extends BaseActivity {
         View view = LayoutInflater.from(WearAtlasActivity.this).inflate(R.layout.head_layout_of_wear_atlas, null);
         listView.addHeaderView(view);
         vp = (JCVideoPlayer) view.findViewById(R.id.head_layout_of_wear_atlas_vp);
-        ivThumbnail = (ImageView) view.findViewById(R.id.head_layout_of_wear_atlas_thumbnail);
+        ivBack = (ImageView) findViewById(R.id.activity_wearatlas_back_iv);
+        ivPurchase = (ImageView) findViewById(R.id.activity_wearatlas_purchase_iv);
         listView.setDivider(null);
         showBigImg = bindView(R.id.show_big_img);
         showBigLayout = bindView(R.id.show_big_layout);

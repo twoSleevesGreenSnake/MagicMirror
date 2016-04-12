@@ -313,4 +313,6 @@
     <dimen name="activity_orderdetail_sure_dialog_zfb_iv_marginRight">24px</dimen>
     <dimen name="fragment_menu_lv_marginLeft">40px</dimen>
     <dimen name="activity_detail_browse_glasses_pictures_bottom_layout_margin">39px</dimen>
+    <dimen name="head_layout_of_wear_atlas_jc_margin">20px</dimen>
+    <dimen name="head_layout_of_wear_atlas_jc_height">200dp</dimen>
 </resources>
