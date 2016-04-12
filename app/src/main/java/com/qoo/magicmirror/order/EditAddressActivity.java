@@ -36,7 +36,6 @@ public class EditAddressActivity extends BaseActivity{
 
 
        submitBtn.setOnClickListener(new View.OnClickListener() {
-
            @Override
            public void onClick(View v) {
                final ArrayList<String> keys = new ArrayList<>();

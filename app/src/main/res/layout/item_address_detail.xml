@@ -1,55 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<com.qoo.magicmirror.view.SYXDragViewGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/syxdragviewgroup"
+    android:layout_width="450dp"
     android:layout_height="@dimen/item_address_detail_height"
-    android:orientation="horizontal"
-    android:background="@mipmap/edit_address"
-    android:layout_marginTop="@dimen/item_address_detail_marginTop"
-    >
-<LinearLayout
-    android:layout_width="@dimen/layout_width_zero"
-    android:layout_height="wrap_content"
-    android:id="@+id/item_address_detail_layout"
-    android:layout_weight="1"
-    android:orientation="vertical">
-    <TextView
-        android:id="@+id/item_address_detail_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/item_address_detail_name_marginTop"
-        android:textSize="@dimen/item_address_detail_name_textSize"
-        android:layout_marginLeft="@dimen/item_address_detail_name_marginLeft"
-        android:textStyle="bold"
-        android:text="111111111111111"/>
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/item_address_detail_address_item_ll"
+            android:layout_width="353dp"
+            android:layout_height="@dimen/item_address_detail_height"
+            android:background="@mipmap/edit_address"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/item_address_detail_layout"
+                android:layout_width="@dimen/layout_width_zero"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/item_address_detail_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/item_address_detail_name_marginLeft"
+                    android:layout_marginTop="@dimen/item_address_detail_name_marginTop"
+                    android:text="111111111111111"
+                    android:textSize="@dimen/item_address_detail_name_textSize"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/item_address_detail_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/item_address_detail_address_marginLeft"
+                    android:layout_marginTop="@dimen/item_address_detail_address_marginTop"
+                    android:text="111111111111111"
+                    android:textSize="@dimen/item_address_detail_address_textSize" />
+
+
+                <TextView
+                    android:id="@+id/item_address_detail_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/item_address_detail_number_marginLeft"
+                    android:layout_marginTop="@dimen/item_address_detail_number_marginTop"
+                    android:textSize="@dimen/item_address_detail_number_textSize" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/item_address_detail_edit_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="60px"
+                android:src="@mipmap/edit" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/item_address_detail_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/item_address_detail_address_textSize"
-            android:layout_marginTop="@dimen/item_address_detail_address_marginTop"
-            android:layout_marginLeft="@dimen/item_address_detail_address_marginLeft"
-            android:text="111111111111111"
-            />
-
-
-
-    <TextView
-        android:id="@+id/item_address_detail_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/item_address_detail_number_marginLeft"
-        android:textSize="@dimen/item_address_detail_number_textSize"
-        android:layout_marginTop="@dimen/item_address_detail_number_marginTop"
-        android:text="111111111111111"
-        />
-</LinearLayout>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/close"
-        android:layout_marginRight="60px"
-        android:layout_gravity="center_vertical"
-        android:id="@+id/item_address_detail_edit_iv"
-       />
-</com.zhy.autolayout.AutoLinearLayout>
+            android:id="@+id/backview"
+            android:layout_width="100dp"
+            android:layout_height="200px"
+            android:layout_toRightOf="@+id/item_address_detail_address_item_ll"
+            android:background="@drawable/del_shape"
+            android:text="删除"
+            android:textColor="@color/colorWhite"
+            android:textSize="40px"
+            android:gravity="center"/>
+    </LinearLayout>
+</com.qoo.magicmirror.view.SYXDragViewGroup>

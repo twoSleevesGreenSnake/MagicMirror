@@ -45,7 +45,7 @@
         android:gravity="center"
         android:textColor="@color/colorLight_Black"
         android:background="@mipmap/edit_address"/>
-    <android.support.v7.widget.RecyclerView
+    <com.qoo.magicmirror.view.SYXRecycleView
         android:layout_marginTop="@dimen/activity_address_detail_rv_marginTop"
         android:layout_width="match_parent"
         android:layout_height="@dimen/layout_width_zero"
