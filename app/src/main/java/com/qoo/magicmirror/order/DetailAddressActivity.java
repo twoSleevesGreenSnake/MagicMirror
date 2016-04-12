@@ -15,6 +15,7 @@ import com.qoo.magicmirror.base.BaseActivity;
 import com.qoo.magicmirror.constants.NetConstants;
 import com.qoo.magicmirror.constants.Value;
 import com.qoo.magicmirror.net.NetHelper;
+import com.qoo.magicmirror.view.SYXDragViewGroup;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,7 @@ public class DetailAddressActivity extends BaseActivity {
     private DetailAddressBean data;
     private int clickPosition;
     private DetailAddressAdapter adapter;
+    private SYXDragViewGroup syxDragViewGroup;
     @Override
     protected int setLayout() {
         return R.layout.activity_address_detail;
@@ -41,6 +43,7 @@ public class DetailAddressActivity extends BaseActivity {
             }
         });
        startNet();
+        syxDragViewGroup = bindView(R.id.syxdragviewgroup);
     }
 
     @Override

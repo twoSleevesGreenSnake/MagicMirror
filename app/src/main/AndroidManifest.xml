@@ -47,7 +47,16 @@
         <activity android:name=".detail.BrowseGlassesActivity" />
 
         <activity android:name=".detail.SpecialTopicDetailActivity" />
+<<<<<<< HEAD
         <activity android:name=".wearatlas.WearAtlasActivity" />
+=======
+        <activity android:name=".wearatlas.WearAtlasActivity"/>
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+
+>>>>>>> feature/4.9_修改BUG及佩戴图集
         <activity android:name=".homepage.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
