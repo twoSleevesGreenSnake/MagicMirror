@@ -7,8 +7,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 
-
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -33,38 +31,32 @@
 
         <activity android:name=".loginandregister.RegisterActivity" />
 
-        <activity android:name=".order.OrderDetailActivity"/>
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-  <activity android:name=".order.DetailAddressActivity"/>
+        <activity android:name=".order.OrderDetailActivity" />
 
-        <activity android:name=".loginandregister.LoginActivity">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
+        <activity android:name=".order.DetailAddressActivity" />
+
+        <activity android:name=".loginandregister.LoginActivity"/>
         <activity
             android:name=".homepage.WelcomeActivity"
-            android:theme="@style/WelcomeBackTheme" />
+            android:launchMode="singleTop"
+            android:theme="@style/WelcomeBackTheme"
+
+            />
+
+
         <activity android:name=".detail.BrowseGlassesActivity" />
 
         <activity android:name=".detail.SpecialTopicDetailActivity" />
-        <activity android:name=".wearatlas.WearAtlasActivity"/>
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+        <activity android:name=".wearatlas.WearAtlasActivity" />
         <activity android:name=".homepage.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-  <activity android:name=".order.AddAddressActivity"/>
-<activity android:name=".order.EditAddressActivity"/>
+        <service android:name=".net.NetService"/>
+        <activity android:name=".order.AddAddressActivity" />
+        <activity android:name=".order.EditAddressActivity" />
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -96,11 +88,10 @@
             android:value="1319" />
 
 
-
         <activity
             android:name=".alipay.PayDemoActivity"
             android:icon="@drawable/msp_icon"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -111,16 +102,14 @@
             android:name=".alipay.H5PayDemoActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind" >
-        </activity>
+            android:screenOrientation="behind"></activity>
         <!-- alipay sdk begin -->
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
 
         <!-- alipay sdk end -->
 

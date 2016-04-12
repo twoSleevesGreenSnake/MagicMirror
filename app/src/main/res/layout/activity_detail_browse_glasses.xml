@@ -16,7 +16,8 @@
         android:layout_alignParentBottom="true"
         android:id="@+id/activity_detail_browse_glasses_pictures_bottom_layout"
         android:layout_marginLeft="@dimen/activity_detail_browse_glasses_pictures_bottom_layout_margin"
-        android:layout_marginRight="@dimen/activity_detail_browse_glasses_pictures_bottom_layout_margin"
+        android:layout_marginRight="@dimen/activity_detail_browse_glasses_pictures_bottom_layout_marginRight"
+        android:layout_marginBottom="@dimen/activity_detail_browse_glasses_pictures_bottom_layout_marginBottom"
         >
         <ImageView
             android:layout_width="wrap_content"
@@ -31,8 +32,9 @@
             android:gravity="center"
             android:text="@string/activity_detail_browse_glasses_pictures_tv_text"
             android:textColor="@color/colorWhite"
-            android:layout_centerHorizontal="true"
-            />
+            android:layout_toRightOf="@id/activity_detail_browse_glasses_pictures_tv_back_iv"
+            android:layout_marginLeft="@dimen/activity_detail_browse_glasses_pictures_tv_marginLeft"
+             />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

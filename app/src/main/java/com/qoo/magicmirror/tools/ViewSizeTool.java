@@ -2,6 +2,7 @@ package com.qoo.magicmirror.tools;
 
 import android.content.Context;
 import android.graphics.Point;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
@@ -10,25 +11,38 @@ import android.view.ViewTreeObserver;
  */
 public class ViewSizeTool {
 
-    private ViewSizeTool viewSizeTool;
+    private static ViewSizeTool viewSizeTool;
 
 
     private ViewSizeTool() {
     }
    public static ViewSizeTool newViewTool(){
-//       if ()
+       Log.i("obobobobo111111","ssssss");
+
+
+       if ( viewSizeTool==null){
+           viewSizeTool = new ViewSizeTool();
+       }
+       return newViewTool();
    }
-    public Point getViewSize(final View view){
-        ViewTreeObserver viewTreeObserver = view.getViewTreeObserver();
+    public static Point getViewSize(final View view){
         final Point point = new Point();
-        viewTreeObserver.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+
+        final ViewTreeObserver viewTreeObserver = view .getViewTreeObserver();
+
+        ViewTreeObserver.OnPreDrawListener listener = new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
-                point.set(view.getWidth(),view.getHeight());
-                view.getViewTreeObserver().removeOnPreDrawListener(this);
+                point.set(view.getWidth(), view.getHeight());
+                if (view.getWidth()!=0||view.getHeight()!=0){
+                    view.getViewTreeObserver().removeOnPreDrawListener(this);
+                }
+
                 return false;
             }
-        });
+        };
+        Log.i("obobobobo","ssssss");
+        viewTreeObserver.addOnPreDrawListener(listener) ;
         return point;
     }
 

@@ -21,6 +21,8 @@ import com.qoo.magicmirror.constants.NetConstants;
 import com.qoo.magicmirror.constants.Value;
 import com.qoo.magicmirror.loginandregister.LoginActivity;
 import com.qoo.magicmirror.net.NetHelper;
+import com.qoo.magicmirror.net.NetService;
+import com.qoo.magicmirror.tools.ViewSizeTool;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -57,7 +59,6 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
 
     @Override
     protected void initData() {
-        l(" 给fragment传递titles，并设置点击替换的MenuFragment 给fragment传递titles，并设置点击替换的MenuFragment 给fragment传递titles，并设置点击替换的MenuFragment 给fragment传递titles，并设置点击替换的MenuFragment 给fragment传递titles，并设置点击替换的MenuFragment 给fragment传递titles，并设置点击替换的MenuFragment 给fragment传递titles，并设置点击替换的MenuFragment");
         categoryId = new ArrayList<String>();
         titles.add(getString(R.string.fragment_goods_title_tv));
         titles.add(getString(R.string.fragment_palingglasses_title_tv));
@@ -149,7 +150,8 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
         });
 
         // 启动闪屏页
-        startActivity(new Intent(this, WelcomeActivity.class));
+
+        startActivityForResult(new Intent(this, WelcomeActivity.class),102);
 
         getNetInfo();
     }
@@ -204,43 +206,46 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
 
             @Override
             public void onSuccess(CategoryListBean categoryListBean) {
-                SharedPreferences sp = getSharedPreferences("categoryId",MODE_PRIVATE);
+                Intent intent = new Intent(HomeActivity.this,WelcomeActivity.class);
+                intent.putExtra("success",true);
+                startActivity(intent);
+                SharedPreferences sp = getSharedPreferences("categoryId", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sp.edit();
                 editor.clear();
                 editor.commit();
                 categoryId = new ArrayList<>();
-                Log.d("HomeActivity", "categoryListBean:" + categoryListBean.toString());
                 for (int i = 0; i < categoryListBean.getData().size(); i++) {
                     categoryId.add(categoryListBean.getData().get(i).getCategory_id());
                     editor.putString(String.valueOf(i), categoryId.get(i));
                     editor.commit();
                 }
 
-                adapter = new VerticalViewPagerAdapter(getSupportFragmentManager(), fragments, titles, HomeActivity.this, categoryId,true);
+                adapter = new VerticalViewPagerAdapter(getSupportFragmentManager(), fragments, titles, HomeActivity.this, categoryId, true);
                 verticalViewPager.setAdapter(adapter);
             }
 
             @Override
             public void onFailure() {
-               SharedPreferences sp = getSharedPreferences("categoryId", Context.MODE_PRIVATE);
-                Iterator ir = sp.getAll().entrySet().iterator();
-                ArrayList<String> count  = new ArrayList<String>();
-                while (ir.hasNext()) {
-                    Map.Entry en = (Map.Entry) ir.next();
-                    String Id = sp.getString(String.valueOf(en.getKey()), "");
-                    count.add(Id);
-                }
-                for (int i = 0; i <count.size() ; i++) {
-                   categoryId.add(sp.getString(String.valueOf(i),""));
-                }
-                Log.i("cateid",categoryId.toString());
-                adapter = new VerticalViewPagerAdapter(getSupportFragmentManager(), fragments, titles, HomeActivity.this, categoryId,false);
-                verticalViewPager.setAdapter(adapter);
+
 
             }
         });
     }
-
+  private void getInfoFromDb(){
+      SharedPreferences sp = getSharedPreferences("categoryId", Context.MODE_PRIVATE);
+      Iterator ir = sp.getAll().entrySet().iterator();
+      ArrayList<String> count = new ArrayList<String>();
+      while (ir.hasNext()) {
+          Map.Entry en = (Map.Entry) ir.next();
+          String Id = sp.getString(String.valueOf(en.getKey()), "");
+          count.add(Id);
+      }
+      for (int i = 0; i < count.size(); i++) {
+          categoryId.add(sp.getString(String.valueOf(i), ""));
+      }
+      adapter = new VerticalViewPagerAdapter(getSupportFragmentManager(), fragments, titles, HomeActivity.this, categoryId, false);
+      verticalViewPager.setAdapter(adapter);
+  }
     /**
      * "购物车"和"登陆"
      */
@@ -251,7 +256,6 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
     }
 
     public void shoppingcartAndLogin() {
-        Log.d("HomeActivity", BaseActivity.token+ "       5245555555555555555555555555555555");
 
         if (BaseActivity.token != "") {
             loginTv.setText(R.string.shoppingcart);
@@ -270,5 +274,19 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
                 }
             });
         }
+    }
+
+    @Override
+    protected void onNetCome() {
+        super.onNetCome();
+        Toast.makeText(HomeActivity.this, "网络来了", Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        getInfoFromDb();
     }
 }

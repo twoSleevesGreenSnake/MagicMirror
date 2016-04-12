@@ -1,7 +1,11 @@
 package com.qoo.magicmirror.base;
 
 import android.app.ActionBar;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
@@ -28,14 +32,15 @@ import java.util.Map;
  */
 
 /**
- * 所有acitivity的基类
+ * 所有activity的基类
  *
  */
 public abstract class BaseActivity extends AutoLayoutActivity {
 
     protected static String token = "";
     protected Map<Class<? extends BaseActivity>,BaseActivity> activities;
-    private ProgressBar progressBar;
+    private Point point;
+    private NetReceivier receivier = new NetReceivier();
 
 
 
@@ -43,17 +48,24 @@ public abstract class BaseActivity extends AutoLayoutActivity {
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
-//        get
         activities = new HashMap<>();
-        activities.put(getClass(),this);
+        activities.put(getClass(), this);
         setContentView(setLayout());// 绑定布局
+        point = new Point();
+        getWindowManager().getDefaultDisplay().getSize(point);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("com.qoo.magicmirror.NET_COMING");
+        registerReceiver(receivier,intentFilter);
         initView();// 初始化数据，绑定组件
-        progressBar = new ProgressBar(this);
-//        progressBar.setText("sdfsdfsdfsdfsdfsdfdsfsdfsdfsdfsdfsdfsdfdsfsdfsdfsdfsdfsdfsdfdsfsdfsdfsdfsdfsdfsdfdsfsdfsdfsdfsdfsdfsdfdsfsdfsdfsdfsdfsdfsdfdsfsdfsdfsdfsdfsdfsdfdsf");
-        int screenWidth = getWindowManager().getDefaultDisplay().getWidth();
-        int screenHeight = getWindowManager().getDefaultDisplay().getHeight();
-//        getWindow().addContentView(textView, new ViewGroup.LayoutParams(screenWidth, screenHeight));
         initData();// 其他操作
+    }
+
+    /**
+     * 获得屏幕尺寸的方法
+     * @return .x 或者.y直接获取宽高
+     */
+    public Point getScreenSize() {
+        return point;
     }
 
     public <T extends View> T bindView(int ResId) {
@@ -68,7 +80,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
     protected abstract int setLayout();
     protected abstract void initData();
     protected abstract void initView();
-//
+
 
     public Map<Class<? extends BaseActivity>, BaseActivity> getActivitys() {
         return activities;
@@ -90,10 +102,15 @@ public abstract class BaseActivity extends AutoLayoutActivity {
 
     @Override
     protected void onDestroy() {
+        unregisterReceiver(receivier);
         super.onDestroy();
         deleteSelf();
     }
 
+    /**
+     * 检测是否登录的方法
+     * @param tokenListener
+     */
     protected void judgeToken(TokenListener tokenListener){
         if (token==null||token.equals("")){
             l("token的值");
@@ -111,7 +128,10 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         Toast.makeText(this, content, Toast.LENGTH_SHORT).show();
     }
 
-    // Log
+    /**
+     * 简单的log
+     * @param content
+     */
     protected void l(String content) {
         String className = getClass().getName();
         int index = className.lastIndexOf(".");
@@ -119,10 +139,19 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         Log.d(result + getString(R.string.log_class) + new Throwable().getStackTrace()[1].getMethodName()
                 + getString(R.string.log_method), content);
     }
+
+    /**
+     * 检测是否登录的接口
+     */
     public interface TokenListener{
         void tokenIsNothing();
         void logInSuccess();
     }
+
+    /**
+     * 点击关闭页面的方法
+     * @param v
+     */
     protected void clickColse(View v){
         v.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,4 +160,15 @@ public abstract class BaseActivity extends AutoLayoutActivity {
             }
         });
     }
+    class NetReceivier extends BroadcastReceiver{
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            onNetCome();
+        }
+    }
+    protected void onNetCome(){
+
+    }
+
 }

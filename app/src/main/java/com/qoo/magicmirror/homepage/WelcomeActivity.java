@@ -10,6 +10,7 @@ import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.base.BaseActivity;
 import com.qoo.magicmirror.constants.NetConstants;
 import com.qoo.magicmirror.net.NetHelper;
+import com.qoo.magicmirror.net.NetService;
 
 import java.util.ArrayList;
 
@@ -22,6 +23,8 @@ public class WelcomeActivity extends BaseActivity {
     private Handler handler;
     private NetHelper netHelper;
     private WelcomeImgBean data;
+    private boolean requestSuccessed = false;
+    private int time  = 0;
 
     @Override
     protected int setLayout() {
@@ -36,15 +39,13 @@ public class WelcomeActivity extends BaseActivity {
 
             @Override
             public void onSuccess(WelcomeImgBean welcomeImgBean) {
-                Log.d("WelcomeActivity", "welcomeImgBean:" + welcomeImgBean);
                 data = welcomeImgBean;
-                Log.d("WelcomeActivity", "data:" + data);
                 handler.sendEmptyMessage(1);
             }
 
             @Override
             public void onFailure() {
-                finish();
+
             }
         });
 
@@ -63,16 +64,45 @@ public class WelcomeActivity extends BaseActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                while (true){
+
+                    if (requestSuccessed){
+                        try {
+                            Thread.sleep(3000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        finish();
+                        break;
+                    }
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Log.i("time",time+"");
+                    time++;
+                    if (time>8){
+                        startService(new Intent(WelcomeActivity.this, NetService.class));
+                        setResult(101);
+                        finish();
+                        break;
+
+                    }
                 }
-                finish();
+
             }
         }).start();
     }
-//    子线程通常执行耗时操作
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        requestSuccessed = intent.getBooleanExtra("success",true);
+
+    }
+
+    //    子线程通常执行耗时操作
 //    1. Message
 //    Message消息，理解为线程间交流的信息，处理数据后台线程需要更新UI，则发送Message内含一些数据给UI线程。
 }

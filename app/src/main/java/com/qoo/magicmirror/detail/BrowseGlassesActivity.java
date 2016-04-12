@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.qoo.magicmirror.base.BaseAdapter;
 import com.qoo.magicmirror.homepage.GoodsListBean;
 import com.qoo.magicmirror.net.NetHelper;
 import com.qoo.magicmirror.order.OrderDetailActivity;
+import com.qoo.magicmirror.tools.ViewSizeTool;
 import com.qoo.magicmirror.wearatlas.WearAtlasActivity;
 
 /**
@@ -38,9 +40,9 @@ public class BrowseGlassesActivity extends BaseActivity {
     private TextView picturesTv;
     private static GoodsListBean.DataEntity.ListEntity data;
     private int screenWidth;
-    private String orderinfo;
-
+    private float itemHeight= 0;
     private boolean locationNotFinshed = true;
+    private boolean notIsFirstItem = false;
 
     //序列化传不了 不知道为了点啥
     public static void setData(GoodsListBean.DataEntity.ListEntity data) {
@@ -88,7 +90,6 @@ public class BrowseGlassesActivity extends BaseActivity {
         Point size  = new Point();
         Display display = getWindowManager().getDefaultDisplay();
         display.getRealSize(size);
-
 
         screenHeight = size.y;
         screenWidth = size.x;
@@ -300,6 +301,7 @@ public class BrowseGlassesActivity extends BaseActivity {
             private RelativeLayout layout;
             private float height;
             private boolean isFirst = true;
+            private  int y;
 
             public FirstItemHolder(final View itemView) {
                 super(itemView);
@@ -321,6 +323,7 @@ public class BrowseGlassesActivity extends BaseActivity {
                         }
                         //改变透明的的方法
                         layout.setAlpha((float) ((0.5 / height) * itemView.getBottom()));
+
                     }
                 });
             }
@@ -364,15 +367,22 @@ public class BrowseGlassesActivity extends BaseActivity {
                     @Override
                     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                         super.onScrolled(recyclerView, dx, dy);
-                        if (btnNotShow && itemView.getY() <= 0) {
-                            visibleLayout();
-                            btnNotShow = false;
+//                         notIsFirstItem = true;
+                        if (btnNotShow && (itemView.getY() <= 0||(itemHeight==itemView.getY()&&itemView.getY()<300))) {
+
+                                visibleLayout();
+                                btnNotShow = false;
+
+
+
 
                         }
-                        if (itemView.getY() > 0 && !btnNotShow) {
+                        if (itemView.getY() > 0 && !btnNotShow&&(itemHeight!=itemView.getY())) {
                             goneLayout();
                             btnNotShow = true;
+
                         }
+                        itemHeight = itemView.getY();
                     }
                 });
                 titleTv = (TextView) itemView.findViewById(R.id.item_detail_browse_glasses_rv_title_second_tv);
