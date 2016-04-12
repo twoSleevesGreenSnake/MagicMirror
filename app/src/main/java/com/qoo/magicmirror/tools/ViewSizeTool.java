@@ -16,7 +16,6 @@ public class ViewSizeTool {
 
     private ViewSizeTool() {
     }
-<<<<<<< HEAD
    public static ViewSizeTool newViewTool(){
        Log.i("obobobobo111111","ssssss");
 
@@ -26,17 +25,12 @@ public class ViewSizeTool {
        }
        return newViewTool();
    }
-    public static Point getViewSize(final View view){
-=======
-//   public static ViewSizeTool newViewTool(){
-////       if ()
-//   }
+
+
     public Point getViewSize(final View view){
-        ViewTreeObserver viewTreeObserver = view.getViewTreeObserver();
->>>>>>> feature/佩戴图集第四阶段
         final Point point = new Point();
 
-        final ViewTreeObserver viewTreeObserver = view .getViewTreeObserver();
+        ViewTreeObserver viewTreeObserver = view .getViewTreeObserver();
 
         ViewTreeObserver.OnPreDrawListener listener = new ViewTreeObserver.OnPreDrawListener() {
             @Override
