@@ -5,11 +5,11 @@
     android:orientation="vertical">
 
    <fm.jiecao.jcvideoplayer_lib.JCVideoPlayer
+        android:layout_marginTop="@dimen/head_layout_of_wear_atlas_jc_margin"
        android:id="@+id/head_layout_of_wear_atlas_vp"
        android:layout_width="match_parent"
-       android:layout_height="200dp"/>
-    <ImageView
-        android:id="@+id/head_layout_of_wear_atlas_thumbnail"
-        android:layout_width="match_parent"
-        android:layout_height="200dp" />
+       android:layout_marginLeft="25px"
+       android:layout_marginRight="25px"
+       android:layout_height="@dimen/head_layout_of_wear_atlas_jc_height"/>
+
 </RelativeLayout>
