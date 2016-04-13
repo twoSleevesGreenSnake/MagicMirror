@@ -318,4 +318,10 @@
     <dimen name="activity_detail_browse_glasses_pictures_bottom_layout_marginBottom">60px</dimen>
     <dimen name="head_layout_of_wear_atlas_jc_margin">20px</dimen>
     <dimen name="head_layout_of_wear_atlas_jc_height">200dp</dimen>
+    <dimen name="item_address_detail_address_item_del_tv_width">100dp</dimen>
+    <dimen name="item_address_detail_address_item_del_tv_height">200px</dimen>
+    <dimen name="item_address_detail_address_item_del_tv_textSize">40px</dimen>
+    <dimen name="item_address_detail_address_item_edit_iv_marginRight">60px</dimen>
+    <dimen name="item_address_detail_address_item_width">450dp</dimen>
+    <dimen name="item_address_detail_address_item_ll_width">353dp</dimen>
 </resources>

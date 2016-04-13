@@ -99,5 +99,8 @@
     <string name="log_method">的方法中执行：</string>
     <string name="change_address">更改地址</string>
     <string name="add_address">请添加收货地址</string>
+    <string name="item_address_detail_address_item_del_tv">删除</string>
+    <string name="send_again">秒后重新发送</string>
+    <string name="send_code">重新发送</string>
 
 </resources>

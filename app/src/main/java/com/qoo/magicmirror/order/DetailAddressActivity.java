@@ -1,8 +1,11 @@
 package com.qoo.magicmirror.order;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +32,8 @@ public class DetailAddressActivity extends BaseActivity {
     private int clickPosition;
     private DetailAddressAdapter adapter;
     private SYXDragViewGroup syxDragViewGroup;
+    private Handler handler;
+
     @Override
     protected int setLayout() {
         return R.layout.activity_address_detail;
@@ -39,31 +44,42 @@ public class DetailAddressActivity extends BaseActivity {
         addAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(DetailAddressActivity.this,AddAddressActivity.class),303);
+                startActivityForResult(new Intent(DetailAddressActivity.this, AddAddressActivity.class), 303);
             }
         });
-       startNet();
+        startNet();
         syxDragViewGroup = bindView(R.id.syxdragviewgroup);
+
+        handler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                data.getData().getList().remove(msg.what);
+                adapter.notifyItemRemoved(msg.what);
+                return false;
+            }
+        });
     }
 
     @Override
     protected void initView() {
-        recyclerView  = bindView(R.id.activity_address_detail_rv);
+        recyclerView = bindView(R.id.activity_address_detail_rv);
         addAddress = bindView(R.id.activity_address_detail_add_tv);
 
     }
 
-    class DetailAddressAdapter extends RecyclerView.Adapter<DetailAddressAdapter.DetailAddressHolder>{
+    class DetailAddressAdapter extends RecyclerView.Adapter<DetailAddressAdapter.DetailAddressHolder> {
+
+
         @Override
         public DetailAddressHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new DetailAddressHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_address_detail,parent,false));
+            return new DetailAddressHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_address_detail, parent, false));
         }
 
         @Override
         public void onBindViewHolder(DetailAddressHolder holder, int position) {
-            holder.address.setText(getString(R.string.adress)+data.getData().getList().get(position).getAddr_info());
-            holder.name.setText(getString(R.string.name)+data.getData().getList().get(position).getUsername());
-            holder.number.setText(getString(R.string.cellnumber)+data.getData().getList().get(position).getCellphone());
+            holder.address.setText(getString(R.string.adress) + data.getData().getList().get(position).getAddr_info());
+            holder.name.setText(getString(R.string.name) + data.getData().getList().get(position).getUsername());
+            holder.number.setText(getString(R.string.cellnumber) + data.getData().getList().get(position).getCellphone());
             holder.adrId = data.getData().getList().get(position).getAddr_id();
             holder.position = position;
         }
@@ -73,33 +89,36 @@ public class DetailAddressActivity extends BaseActivity {
             return data.getData().getList().size();
         }
 
-        class DetailAddressHolder extends RecyclerView.ViewHolder{
-            TextView name,address,number;
+        class DetailAddressHolder extends RecyclerView.ViewHolder {
+            TextView name, address, number;
+            TextView delTv;
             LinearLayout linearLayout;
             String adrId;
             ImageView editIv;
             int position;
+
             public DetailAddressHolder(View itemView) {
                 super(itemView);
                 name = (TextView) itemView.findViewById(R.id.item_address_detail_name);
                 address = (TextView) itemView.findViewById(R.id.item_address_detail_address);
                 number = (TextView) itemView.findViewById(R.id.item_address_detail_number);
                 linearLayout = (LinearLayout) itemView.findViewById(R.id.item_address_detail_layout);
+                delTv = (TextView) itemView.findViewById(R.id.item_address_detail_del_tv);
                 editIv = (ImageView) itemView.findViewById(R.id.item_address_detail_edit_iv);
                 editIv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         clickPosition = position;
-                        Intent intent = new Intent(DetailAddressActivity.this,EditAddressActivity.class);
-                        intent.putExtra(Value.PUT_OLD_ADDRESS,data.getData().getList().get(position));
-                        DetailAddressActivity.this.startActivityForResult(intent,301);
+                        Intent intent = new Intent(DetailAddressActivity.this, EditAddressActivity.class);
+                        intent.putExtra(Value.PUT_OLD_ADDRESS, data.getData().getList().get(position));
+                        DetailAddressActivity.this.startActivityForResult(intent, 301);
                     }
                 });
                 linearLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ArrayList<String> keys = new ArrayList<String>();
-                        ArrayList<String> values = new ArrayList<String>();
+                        ArrayList<String> keys = new ArrayList<>();
+                        ArrayList<String> values = new ArrayList<>();
                         keys.add(getString(R.string.token));
                         values.add(token);
                         keys.add(getString(R.string.addr_id));
@@ -108,17 +127,40 @@ public class DetailAddressActivity extends BaseActivity {
                             @Override
                             public void onSuccess(Object o) {
                                 Intent intent = new Intent();
-                                intent.putExtra(Value.PUT_ADDRESS_DATA,data.getData().getList().get(position));
+                                intent.putExtra(Value.PUT_ADDRESS_DATA, data.getData().getList().get(position));
                                 setResult(298, intent);
                                 finish();
                             }
 
                             @Override
                             public void onFailure() {
-                               netFailed();
+                                netFailed();
                             }
                         });
 
+                    }
+                });
+
+                delTv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ArrayList<String> token = new ArrayList<>();
+                        ArrayList<String> value = new ArrayList<>();
+                        token.add(getString(R.string.token));
+                        token.add(getString(R.string.addr_id));
+                        value.add(BaseActivity.token);
+                        value.add(data.getData().getList().get(position).getAddr_id());
+                        NetHelper.newNetHelper(DetailAddressActivity.this).getPostInfo(NetConstants.DELETE_ADDRESS, token, value, null, new NetHelper.NetListener() {
+                            @Override
+                            public void onSuccess(Object o) {
+                                handler.sendEmptyMessage(position);
+                            }
+
+                            @Override
+                            public void onFailure() {
+
+                            }
+                        });
                     }
                 });
             }
@@ -131,7 +173,8 @@ public class DetailAddressActivity extends BaseActivity {
 
         startNet();
     }
-    private void startNet(){
+
+    private void startNet() {
         ArrayList<String> keys = new ArrayList<>();
         ArrayList<String> valves = new ArrayList<>();
         keys.add(getString(R.string.token));

@@ -24,7 +24,7 @@ public class WelcomeActivity extends BaseActivity {
     private NetHelper netHelper;
     private WelcomeImgBean data;
     private boolean requestSuccessed = false;
-    private int time  = 0;
+    private int time = 0;
 
     @Override
     protected int setLayout() {
@@ -64,9 +64,9 @@ public class WelcomeActivity extends BaseActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while (true){
+                while (true) {
 
-                    if (requestSuccessed){
+                    if (requestSuccessed) {
                         try {
                             Thread.sleep(3000);
                         } catch (InterruptedException e) {
@@ -80,9 +80,9 @@ public class WelcomeActivity extends BaseActivity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    Log.i("time",time+"");
+                    Log.i("time", time + "");
                     time++;
-                    if (time>8){
+                    if (time > 8) {
                         startService(new Intent(WelcomeActivity.this, NetService.class));
                         setResult(101);
                         finish();
@@ -98,7 +98,7 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        requestSuccessed = intent.getBooleanExtra("success",true);
+        requestSuccessed = intent.getBooleanExtra("success", true);
 
     }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.qoo.magicmirror.view.SYXDragViewGroup xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/syxdragviewgroup"
-    android:layout_width="450dp"
+    android:layout_width="@dimen/item_address_detail_address_item_width"
     android:layout_height="@dimen/item_address_detail_height"
     android:orientation="horizontal">
 
@@ -12,7 +12,7 @@
 
         <LinearLayout
             android:id="@+id/item_address_detail_address_item_ll"
-            android:layout_width="353dp"
+            android:layout_width="@dimen/item_address_detail_address_item_ll_width"
             android:layout_height="@dimen/item_address_detail_height"
             android:background="@mipmap/edit_address"
             android:orientation="horizontal">
@@ -30,7 +30,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/item_address_detail_name_marginLeft"
                     android:layout_marginTop="@dimen/item_address_detail_name_marginTop"
-                    android:text="111111111111111"
                     android:textSize="@dimen/item_address_detail_name_textSize"
                     android:textStyle="bold" />
 
@@ -40,7 +39,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/item_address_detail_address_marginLeft"
                     android:layout_marginTop="@dimen/item_address_detail_address_marginTop"
-                    android:text="111111111111111"
                     android:textSize="@dimen/item_address_detail_address_textSize" />
 
 
@@ -58,19 +56,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="60px"
+                android:layout_marginRight="@dimen/item_address_detail_address_item_edit_iv_marginRight"
                 android:src="@mipmap/edit" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/backview"
-            android:layout_width="100dp"
-            android:layout_height="200px"
+            android:id="@+id/item_address_detail_del_tv"
+            android:layout_width="@dimen/item_address_detail_address_item_del_tv_width"
+            android:layout_height="@dimen/item_address_detail_address_item_del_tv_height"
             android:layout_toRightOf="@+id/item_address_detail_address_item_ll"
             android:background="@drawable/del_shape"
-            android:text="删除"
+            android:text="@string/item_address_detail_address_item_del_tv"
             android:textColor="@color/colorWhite"
-            android:textSize="40px"
+            android:textSize="@dimen/item_address_detail_address_item_del_tv_textSize"
             android:gravity="center"/>
     </LinearLayout>
 </com.qoo.magicmirror.view.SYXDragViewGroup>

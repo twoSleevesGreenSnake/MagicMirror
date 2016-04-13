@@ -287,6 +287,6 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        getInfoFromDb();
+//        getInfoFromDb();
     }
 }
