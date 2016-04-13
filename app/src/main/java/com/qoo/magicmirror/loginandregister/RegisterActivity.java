@@ -32,6 +32,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private String phoneNumber;
     private Handler handler;
     private int result = 102;
+    private boolean flag;
 
     @Override
     protected int setLayout() {
@@ -50,7 +51,15 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         handler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
-                Toast.makeText(RegisterActivity.this, R.string.was_registered, Toast.LENGTH_SHORT).show();
+                if (msg.what == 1) {
+                    Toast.makeText(RegisterActivity.this, R.string.was_registered, Toast.LENGTH_SHORT).show();
+                }
+                if (msg.what == 2) {
+                    sendCodeBtn.setText(String.valueOf(msg.arg1) + getString(R.string.send_again));
+                }
+                if (msg.what == 3) {
+                    sendCodeBtn.setText(R.string.send_code);
+                }
                 return false;
             }
         });
@@ -134,7 +143,28 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
                 @Override
                 public void onSuccess(CodeBean codeBean) {
-
+                    flag = true;
+                    if (flag) {
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                for (int i = 60; i >= 0; i--) {
+                                    Message message = new Message();
+                                    message.arg1 = i;
+                                    message.what = 2;
+                                    handler.sendMessage(message);
+                                    try {
+                                        Thread.sleep(1000);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                    if (i == 0) {
+                                        handler.sendEmptyMessage(3);
+                                    }
+                                }
+                            }
+                        }).start();
+                    }
                 }
 
                 @Override
@@ -144,4 +174,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             });
         }
     }
+
+
 }

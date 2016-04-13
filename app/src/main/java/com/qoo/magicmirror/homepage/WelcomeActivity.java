@@ -27,7 +27,7 @@ public class WelcomeActivity extends BaseActivity {
     private NetHelper netHelper;
     private WelcomeImgBean data;
     private boolean requestSuccessed = false;
-    private int time  = 0;
+    private int time = 0;
 
     @Override
     protected int setLayout() {
@@ -78,8 +78,14 @@ public class WelcomeActivity extends BaseActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+<<<<<<< HEAD
                 while (true){
                     if (requestSuccessed){
+=======
+                while (true) {
+
+                    if (requestSuccessed) {
+>>>>>>> feature/4.12_登陆界面倒计时
                         try {
                             Thread.sleep(3000);
                         } catch (InterruptedException e) {
@@ -93,9 +99,16 @@ public class WelcomeActivity extends BaseActivity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+<<<<<<< HEAD
                     l(time+"");
                     time++;
                     if (time>8){
+=======
+                    Log.i("time", time + "");
+                    time++;
+                    if (time > 8) {
+                        startService(new Intent(WelcomeActivity.this, NetService.class));
+>>>>>>> feature/4.12_登陆界面倒计时
                         setResult(101);
                         finish();
                         break;
@@ -110,7 +123,7 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        requestSuccessed = intent.getBooleanExtra("success",true);
+        requestSuccessed = intent.getBooleanExtra("success", true);
 
     }
 
