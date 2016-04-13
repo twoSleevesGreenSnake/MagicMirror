@@ -178,7 +178,7 @@ public class WearAtlasActivity extends BaseActivity {
 
         @Override
         public int getCount() {
-            return data != null && data.size() > 0 ? data.size() - 2 : 0;
+            return data != null && data.size() > 0 ? data.size() - 3 : 0;
         }
 
         @Override
@@ -202,7 +202,7 @@ public class WearAtlasActivity extends BaseActivity {
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-            GoodsListBean.DataEntity.ListEntity.WearVideoEntity wearVideoEntity = data.get(position + 1);
+            GoodsListBean.DataEntity.ListEntity.WearVideoEntity wearVideoEntity = data.get(position + 2);
             if (wearVideoEntity != null) {
                 if (wearVideoEntity.getData() == null || wearVideoEntity.getData() == "") {
                     return convertView;
