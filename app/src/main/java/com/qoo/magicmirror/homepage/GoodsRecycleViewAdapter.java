@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.constants.Value;
@@ -35,15 +36,17 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
 
     // MainActivity传递过来的ViewPager的位置
 
-    public GoodsRecycleViewAdapter(ArrayList<GoodsListBean.DataEntity.ListEntity> data, Context context,String type) {
+    public GoodsRecycleViewAdapter(ArrayList<GoodsListBean.DataEntity.ListEntity> data, Context context,String type,boolean hasNet) {
         this.type = type;
         this.data = data;
         this.context = context;
+        this.hasNet = hasNet;
     }
-    public GoodsRecycleViewAdapter(List<MainPageData>data,String type, Context context) {
+    public GoodsRecycleViewAdapter(List<MainPageData>data,String type, Context context,boolean hasNet) {
         this.type = type;
         noNetData = data;
         this.context = context;
+        this.hasNet = hasNet;
 
     }
     @Override
@@ -64,7 +67,6 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
                 public void onClick(View v) {
                     Intent intent = new Intent(context, BrowseGlassesActivity.class);
                     intent.putExtra(Value.putGoodsListBeanDataEntityListEntity, data.get(position));
-                    Log.i("data", data.get(position).getGoods_data().toString());
                     BrowseGlassesActivity.setData(data.get(position));
                     context.startActivity(intent);
                 }
@@ -76,18 +78,29 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
             holder.priceTv.setText(noNetData.get(position).getPrice());
             holder.describeTv.setText(noNetData.get(position).getBrand());
             new NetHelper(context).setImage(holder.goodPic, noNetData.get(position).getPath());
+            holder.itemLl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if ( !hasNet) {
+                        Toast.makeText(context, "检查网络连接后重试", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Intent intent = new Intent(context, BrowseGlassesActivity.class);
+                        intent.putExtra(Value.putGoodsListBeanDataEntityListEntity, data.get(position));
+                        BrowseGlassesActivity.setData(data.get(position));
+                        context.startActivity(intent);
+                    }
+                }
+            });
         }
     }
 
     @Override
     public int getItemCount() {
-        if (data==null||data.size()==0){
-            hasNet = false;
-            Log.i("size",noNetData.size()+"");
+        if (!hasNet){
             return noNetData!=null&&noNetData.size()>0?noNetData.size():0;
         }
         else {
-            hasNet = true;
             return data!=null&&data.size()>0?data.size():0;
         }
     }

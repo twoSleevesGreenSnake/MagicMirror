@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -151,7 +153,7 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
 
         // 启动闪屏页
 
-        startActivityForResult(new Intent(this, WelcomeActivity.class),102);
+        startActivityForResult(new Intent(this, WelcomeActivity.class), 103);
 
         getNetInfo();
     }
@@ -196,6 +198,9 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
         builder.show();
     }
 
+    /**
+     * 拉取网络数据的方法
+     */
     public void getNetInfo() {
         NetHelper netHelper = new NetHelper(this);
         ArrayList<String> token = new ArrayList<>();
@@ -206,9 +211,12 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
 
             @Override
             public void onSuccess(CategoryListBean categoryListBean) {
-                Intent intent = new Intent(HomeActivity.this,WelcomeActivity.class);
-                intent.putExtra("success",true);
-                startActivity(intent);
+                if (getActivitys().get(WelcomeActivity.class)!=null) {
+                    Intent intent = new Intent(HomeActivity.this, WelcomeActivity.class);
+                    intent.putExtra("success", true);
+                    startActivity(intent);
+                }
+
                 SharedPreferences sp = getSharedPreferences("categoryId", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sp.edit();
                 editor.clear();
@@ -220,13 +228,26 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
                     editor.commit();
                 }
 
+                Log.i("netsuss",titles.size()+"");
                 adapter = new VerticalViewPagerAdapter(getSupportFragmentManager(), fragments, titles, HomeActivity.this, categoryId, true);
+                adapter.upData();
                 verticalViewPager.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+//                new Handler(new Handler.Callback() {
+//                    @Override
+//                    public boolean handleMessage(Message msg) {
+//
+//                        return false;
+//                    }
+//                }).sendEmptyMessageDelayed(1, 100);
+
             }
 
             @Override
             public void onFailure() {
+                startService(new Intent(HomeActivity.this, NetService.class));
 
+                getInfoFromDb();
 
             }
         });
@@ -280,6 +301,7 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
     protected void onNetCome() {
         super.onNetCome();
         Toast.makeText(HomeActivity.this, "网络来了", Toast.LENGTH_SHORT).show();
+        getNetInfo();
     }
 
 
@@ -287,6 +309,8 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        getInfoFromDb();
+
+
+
     }
 }

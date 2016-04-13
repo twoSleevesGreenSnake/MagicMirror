@@ -56,7 +56,7 @@ public class NetService extends Service{
             @Override
             public void run() {
                 while (true){
-
+                    testNet();
                     if (hasNet){
 
                         sendBroadcast(new Intent("com.qoo.magicmirror.NET_COMING"));

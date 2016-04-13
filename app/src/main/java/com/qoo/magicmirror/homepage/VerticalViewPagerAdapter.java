@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
+import android.view.ViewGroup;
 
 import com.qoo.magicmirror.R;
 
@@ -37,7 +39,9 @@ public class VerticalViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position < 3) {
+
             final GoodsFragment fragment = (GoodsFragment) GoodsFragment.getInstance(position, (ArrayList<String>) titles,categoryId,hasNet);
+            Log.i("hasNet",hasNet+"");
             fragment.setMenuListener(new MenuListener() {
                 @Override
                 public void clickMenu() {
@@ -55,4 +59,12 @@ public class VerticalViewPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return 5;
     }
+
+public void upData(){
+
+    for (int i = 0; i <fm.getFragments().size() ; i++) {
+        fm.beginTransaction().remove(fm.getFragments().get(i)).commit();
+
+    }
+}
 }

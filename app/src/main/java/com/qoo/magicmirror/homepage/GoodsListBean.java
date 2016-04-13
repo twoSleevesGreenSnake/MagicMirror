@@ -225,6 +225,10 @@ public class GoodsListBean implements Parcelable{
             private String brand;
             private String info_des;
             private String goods_share;
+
+            public ListEntity() {
+            }
+
             /**
              * introContent : 这款眼镜来自现在正热的韩国大势眼镜品牌Gentle Monster，专注复古，眼镜均为纯手工打造。这款飞行员金属太阳镜，镜圈采用黑色金属框，散发前卫与帅气相融合的气息，银色镜片时髦又新颖。
              * cellHeight : 590

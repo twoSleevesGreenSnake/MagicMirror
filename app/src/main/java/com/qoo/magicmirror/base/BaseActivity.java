@@ -38,7 +38,7 @@ import java.util.Map;
 public abstract class BaseActivity extends AutoLayoutActivity {
 
     protected static String token = "";
-    protected Map<Class<? extends BaseActivity>,BaseActivity> activities;
+    protected static  final Map<Class<? extends BaseActivity>,BaseActivity> activities = new HashMap<>();
     private Point point;
     private NetReceivier receivier = new NetReceivier();
 
@@ -48,7 +48,6 @@ public abstract class BaseActivity extends AutoLayoutActivity {
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
-        activities = new HashMap<>();
         activities.put(getClass(), this);
         setContentView(setLayout());// 绑定布局
         point = new Point();
@@ -165,6 +164,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             onNetCome();
+
         }
     }
     protected void onNetCome(){

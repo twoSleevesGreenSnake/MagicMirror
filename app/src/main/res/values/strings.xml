@@ -99,5 +99,9 @@
     <string name="log_method">的方法中执行：</string>
     <string name="change_address">更改地址</string>
     <string name="add_address">请添加收货地址</string>
+    <string name="has_register">此手机号已被注册</string>
+    <string name="wrong_code">验证码错误</string>
+    <string name="no_register">此手机号未注册</string>
+    <string name="welcome">welcome</string>
 
 </resources>

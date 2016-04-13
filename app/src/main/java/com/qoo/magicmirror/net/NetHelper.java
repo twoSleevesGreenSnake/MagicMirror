@@ -14,8 +14,10 @@ import android.preference.PreferenceActivity;
 import android.support.v4.util.LruCache;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.android.volley.RequestQueue;
 
@@ -61,7 +63,7 @@ import java.util.ArrayList;
  * Created by dllo on 16/3/29.
  */
 public class NetHelper<T> {
-    private RequestQueue requestQueue;
+
     private String diskPath;
     private final OkHttpClient mOkHttpClient;
     private Context context;
@@ -113,7 +115,7 @@ public class NetHelper<T> {
         imageLoader = ImageLoader.getInstance();
 
         //设置imageloader
-        options = new DisplayImageOptions.Builder()
+         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.mipmap.ic_launcher) // 设置图片下载期间显示的图片
                 .showImageForEmptyUri(R.mipmap.ic_launcher) // 设置图片Uri为空或是错误的时候显示的图片
                 .showImageOnFail(R.mipmap.ic_launcher) // 设置图片加载或解码过程中发生错误显示的图片
@@ -127,8 +129,7 @@ public class NetHelper<T> {
                 .handler(new Handler()) // default
                 .build();
 
-//
-        //handler回调之后的方法,用来刷新UI主线程
+
         handler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
@@ -148,14 +149,30 @@ public class NetHelper<T> {
     }
 
     /**
+     * 从网络获取bitmap的方法
+     * @param url 网址
+     * @return 获取的bitmap
+     */
+  private Bitmap getBitmapFromNet(String url){
+      return ImageLoader.getInstance().loadImageSync(url,options);
+  }
+
+    /**
+     *给view 添加progressbar的方法
+     * @param view 组件
+     */
+    private void addProgressBar(View view){
+        ((ViewGroup)view.getParent()).addView(new ProgressBar(context),0);
+    }
+
+    /**
      * 切图的方法
      *
      * @param imageView 组件
      * @param url       网址
-     * @param cutLenth  切掉的高度,取下部分
+     * @param cutLength  切掉的高度,取下部分
      */
-
-    public void setDrawable(final ImageView imageView, final String url, final int cutLenth) {
+    public void setDrawable(final ImageView imageView, final String url, final int cutLength) {
         final Handler imageHandler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
@@ -166,7 +183,7 @@ public class NetHelper<T> {
                     }
                     if (bitmap.getHeight() > 500) {
 
-                        Bitmap newBitmap = Bitmap.createBitmap(bitmap, 0, cutLenth, bitmap.getWidth(), bitmap.getHeight() - cutLenth);
+                        Bitmap newBitmap = Bitmap.createBitmap(bitmap, 0, cutLength, bitmap.getWidth(), bitmap.getHeight() - cutLength);
                         imageView.setImageBitmap(newBitmap);
                     } else imageView.setImageBitmap(bitmap);
 
@@ -177,7 +194,7 @@ public class NetHelper<T> {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url);
+                Bitmap bitmap = getBitmapFromNet(url);
                 Message message = new Message();
                 message.what = 3;
                 message.obj = bitmap;
@@ -187,24 +204,22 @@ public class NetHelper<T> {
 
     }
 
+    /**
+     * 佩戴图集 切图的方法
+     * @param imageView  组件
+     * @param url  图片请求网址
+     * @param screenWidth 屏幕宽度
+     * @return
+     */
     public Bitmap setCutBitmap(final ImageView imageView, final String url, int screenWidth) {
 
-        Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url);
+        Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url, options);
         if (bitmap == null) {
             return null;
         }
-        float ratio = (float) screenWidth / (float) bitmap.getWidth();
         Bitmap newBitmap = Bitmap.createBitmap(bitmap, 39, 0, bitmap.getWidth() - 78, bitmap.getHeight());
         imageView.setImageBitmap(newBitmap);
-//        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) imageView.getLayoutParams();
-//        params.topMargin = (int) (20 + bitmap.getHeight() * (ratio - 1));
-//        imageView.setLayoutParams(params);
-//        AnimatorSet set = new AnimatorSet();
-//        set.playTogether(
-//                ObjectAnimator.ofFloat(imageView, "scaleX", 1, ratio),
-//                ObjectAnimator.ofFloat(imageView, "scaleY", 1, ratio)
-//        );
-//        set.setDuration(1).start();
+
         return bitmap;
     }
 
@@ -215,7 +230,7 @@ public class NetHelper<T> {
      * @param url 网址
      */
     public void setBackGround(View v, String url) {
-        Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url);
+        Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url,options);
 
         v.setBackground(new BitmapDrawable(context.getResources(), bitmap));
     }
@@ -227,7 +242,7 @@ public class NetHelper<T> {
      * @param url       网址
      */
     public void setImage(ImageView imageView, String url) {
-        Log.i("path", imageLoader.getDiskCache().get(url).getPath());
+
         imageLoader.displayImage(url, imageView, options);
     }
 
@@ -293,12 +308,12 @@ public class NetHelper<T> {
     /**
      * 注册界面注册
      *
-     * @param url
-     * @param keys
-     * @param values
-     * @param cls
-     * @param listener
-     */
+     * @param url url
+     * @param keys 参数key
+     * @param values 参数value
+     * @param cls  解析类型
+     * @param listener 网络请求的接口
+      */
     public void getPostInfoForRegister(String url, ArrayList<String> keys, ArrayList<String> values, final Class<T> cls, final NetListener<T> listener) {
         FormEncodingBuilder builder = new FormEncodingBuilder();
         this.cls = cls;
@@ -324,10 +339,10 @@ public class NetHelper<T> {
             @Override
             public void onResponse(com.squareup.okhttp.Response response) throws IOException {
                 String body = response.body().string();
-                if (body.contains("此手机号已被注册")) {
+                if (body.contains(context.getString(R.string.has_register))) {
                     listener.onFailure();
                     return;
-                } else if (body.contains("验证码错误")) {
+                } else if (body.contains(context.getString(R.string.wrong_code))) {
                     listener.onFailure();
                     return;
                 }
@@ -342,11 +357,11 @@ public class NetHelper<T> {
     /**
      * 登陆界面登陆
      *
-     * @param url
-     * @param keys
-     * @param values
-     * @param cls
-     * @param listener
+     * @param url url
+     * @param keys 参数key
+     * @param values 参数value
+     * @param cls  解析类型
+     * @param listener 网络请求的接口
      */
     public void getPostInfoForLogin(String url, ArrayList<String> keys, ArrayList<String> values, final Class<T> cls, final NetListener<T> listener) {
         FormEncodingBuilder builder = new FormEncodingBuilder();
@@ -373,8 +388,7 @@ public class NetHelper<T> {
             @Override
             public void onResponse(com.squareup.okhttp.Response response) throws IOException {
                 String body = response.body().string();
-                Log.d("NetHelper", body);
-                if (body.contains("此手机号未注册")) {
+                if (body.contains(context.getString(R.string.no_register))) {
                     listener.onFailure();
                     return;
                 }

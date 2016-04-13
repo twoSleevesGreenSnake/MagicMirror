@@ -63,10 +63,11 @@ public class GoodsFragment extends Fragment {
         Fragment instance = new GoodsFragment();
         Bundle bundle = new Bundle();
         bundle.putStringArrayList("categoryId", categoryId);
-        bundle.putBoolean("hasNet",hasNet);
+        bundle.putBoolean("hasNet", hasNet);
         bundle.putInt(Value.putPosition, position);
         bundle.putStringArrayList(Value.putPopTitles, popTitles);
         instance.setArguments(bundle);
+        Log.i("static",hasNet+"");
         return instance;
     }
 
@@ -113,6 +114,7 @@ public class GoodsFragment extends Fragment {
         });
          //有网的情况下 取网络解析
         if (hasNet) {
+            Log.i("net","net");
             MainPageHelper.newHelper(getActivity()).deleteAll();
             ArrayList<String> token = new ArrayList<>();
             token.add(getString(R.string.token));
@@ -132,8 +134,9 @@ public class GoodsFragment extends Fragment {
             netHelper.getPostInfo(NetConstants.GOODS_TYPE, token, value, GoodsListBean.class, new NetHelper.NetListener<GoodsListBean>() {
                         @Override
                         public void onSuccess(GoodsListBean goodsListBean) {
+                            Log.i("net",datas.size()+"");
                             datas = (ArrayList<GoodsListBean.DataEntity.ListEntity>) goodsListBean.getData().getList();
-                            adapter = new GoodsRecycleViewAdapter(datas, getActivity(), categoryId.get(position));
+                            adapter = new GoodsRecycleViewAdapter(datas, getActivity(), categoryId.get(position),true);
                             GridLayoutManager gm = new GridLayoutManager(getActivity(), 1);
                             gm.setOrientation(GridLayoutManager.HORIZONTAL);
                             recyclerView.setLayoutManager(gm);
@@ -149,10 +152,7 @@ public class GoodsFragment extends Fragment {
         }
         //没网的情况下去数据库请求
         else {
-            Log.i("type",type);
-            Log.i("typessssssss",MainPageHelper.newHelper(getActivity()).show(type).toString());
-
-            adapter = new GoodsRecycleViewAdapter(MainPageHelper.newHelper(getActivity()).show(type),type,getActivity());
+            adapter = new GoodsRecycleViewAdapter(MainPageHelper.newHelper(getActivity()).show(type),type,getActivity(),false);
             GridLayoutManager gm = new GridLayoutManager(getActivity(), 1);
             gm.setOrientation(GridLayoutManager.HORIZONTAL);
             recyclerView.setLayoutManager(gm);

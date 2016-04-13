@@ -3,12 +3,15 @@ package com.qoo.magicmirror.homepage;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Parcel;
 import android.util.Log;
 import android.widget.ImageView;
 
 import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.base.BaseActivity;
 import com.qoo.magicmirror.constants.NetConstants;
+import com.qoo.magicmirror.db.MainPageData;
+import com.qoo.magicmirror.db.MainPageHelper;
 import com.qoo.magicmirror.net.NetHelper;
 import com.qoo.magicmirror.net.NetService;
 
@@ -45,7 +48,7 @@ public class WelcomeActivity extends BaseActivity {
 
             @Override
             public void onFailure() {
-
+               handler.sendEmptyMessage(2);
             }
         });
 
@@ -57,7 +60,18 @@ public class WelcomeActivity extends BaseActivity {
         handler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
-                netHelper.setImage(imageView, data.getImg());
+                if (msg.what==1) {
+
+                    GoodsListBean.DataEntity.ListEntity entity = new GoodsListBean.DataEntity.ListEntity();
+                    entity.setGoods_img(data.getImg());
+                    netHelper.setImage(imageView, data.getImg(), entity, getString(R.string.welcome));
+                }
+                if (msg.what==2){
+                    MainPageData entity = MainPageHelper.newHelper(WelcomeActivity.this).show(getString(R.string.welcome)).get(0);
+                    netHelper.setImage(imageView,entity.getPath());
+
+                }
+
                 return false;
             }
         });
@@ -65,7 +79,6 @@ public class WelcomeActivity extends BaseActivity {
             @Override
             public void run() {
                 while (true){
-
                     if (requestSuccessed){
                         try {
                             Thread.sleep(3000);
@@ -80,10 +93,9 @@ public class WelcomeActivity extends BaseActivity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    Log.i("time",time+"");
+                    l(time+"");
                     time++;
                     if (time>8){
-                        startService(new Intent(WelcomeActivity.this, NetService.class));
                         setResult(101);
                         finish();
                         break;
