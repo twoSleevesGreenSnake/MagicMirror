@@ -108,16 +108,24 @@
             android:name=".alipay.H5PayDemoActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind"></activity>
+            android:screenOrientation="behind"/>
         <!-- alipay sdk begin -->
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
 
         <!-- alipay sdk end -->
+
+
+
+
+
+        <activity android:name=".view.TestActivity"/>
+
+
 
 
     </application>

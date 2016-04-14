@@ -1,6 +1,7 @@
 package com.qoo.magicmirror.homepage;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Parcel;
@@ -14,6 +15,7 @@ import com.qoo.magicmirror.db.MainPageData;
 import com.qoo.magicmirror.db.MainPageHelper;
 import com.qoo.magicmirror.net.NetHelper;
 import com.qoo.magicmirror.net.NetService;
+import com.qoo.magicmirror.view.SYXImageLayout;
 
 import java.util.ArrayList;
 
@@ -22,12 +24,13 @@ import java.util.ArrayList;
  */
 public class WelcomeActivity extends BaseActivity {
 
-    private ImageView imageView;
+    private SYXImageLayout imageView;
     private Handler handler;
     private NetHelper netHelper;
     private WelcomeImgBean data;
     private boolean requestSuccessed = false;
     private int time = 0;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected int setLayout() {
@@ -38,6 +41,33 @@ public class WelcomeActivity extends BaseActivity {
     protected void initView() {
         imageView = bindView(R.id.activity_welcome_img);
         netHelper = new NetHelper(this);
+
+
+    }
+
+    @Override
+    protected void initData() {
+       sharedPreferences  = getSharedPreferences("welcome",MODE_PRIVATE);
+        handler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                if (data==null||data.getImg().equals("")) {
+                    if (!sharedPreferences.getString("url","").equals("")){
+                        imageView.setImage(sharedPreferences.getString("url",""));
+
+                    }
+                }
+               else {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.clear();
+                    editor.commit();
+                    editor.putString("url", data.getImg());
+                    editor.commit();
+                    imageView.setImage(data.getImg());
+                }
+                return false;
+            }
+        });
         netHelper.getGetInfo(NetConstants.STARTED_IMG, WelcomeImgBean.class, new NetHelper.NetListener<WelcomeImgBean>() {
 
             @Override
@@ -48,44 +78,15 @@ public class WelcomeActivity extends BaseActivity {
 
             @Override
             public void onFailure() {
-               handler.sendEmptyMessage(2);
-            }
-        });
-
-    }
-
-    @Override
-    protected void initData() {
-
-        handler = new Handler(new Handler.Callback() {
-            @Override
-            public boolean handleMessage(Message msg) {
-                if (msg.what==1) {
-
-                    GoodsListBean.DataEntity.ListEntity entity = new GoodsListBean.DataEntity.ListEntity();
-                    entity.setGoods_img(data.getImg());
-                    netHelper.setImage(imageView, data.getImg(), entity, getString(R.string.welcome));
-                }
-                if (msg.what==2){
-                    MainPageData entity = MainPageHelper.newHelper(WelcomeActivity.this).show(getString(R.string.welcome)).get(0);
-                    netHelper.setImage(imageView,entity.getPath());
-
-                }
-
-                return false;
+                handler.sendEmptyMessage(2);
             }
         });
         new Thread(new Runnable() {
             @Override
             public void run() {
-<<<<<<< HEAD
-                while (true){
-                    if (requestSuccessed){
-=======
                 while (true) {
 
                     if (requestSuccessed) {
->>>>>>> feature/4.12_登陆界面倒计时
                         try {
                             Thread.sleep(3000);
                         } catch (InterruptedException e) {
@@ -99,16 +100,8 @@ public class WelcomeActivity extends BaseActivity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-<<<<<<< HEAD
-                    l(time+"");
-                    time++;
-                    if (time>8){
-=======
-                    Log.i("time", time + "");
                     time++;
                     if (time > 8) {
-                        startService(new Intent(WelcomeActivity.this, NetService.class));
->>>>>>> feature/4.12_登陆界面倒计时
                         setResult(101);
                         finish();
                         break;

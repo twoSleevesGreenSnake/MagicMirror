@@ -2,13 +2,16 @@ package com.qoo.magicmirror.homepage;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.constants.Value;
@@ -41,7 +44,12 @@ public class ThematicRecycleViewAdapter extends RecyclerView.Adapter<ThematicRec
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.nameTv.setText(datas.get(position).getStory_title());
-        new NetHelper(context).setImage(holder.img, datas.get(position).getStory_img());
+        new NetHelper(context).setImage(holder.img, datas.get(position).getStory_img(), new NetHelper.ImageListener() {
+            @Override
+            public void imageFished(Bitmap bitmap) {
+                Toast.makeText(context, "你妹啊", Toast.LENGTH_SHORT).show();
+            }
+        });
         holder.itemRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

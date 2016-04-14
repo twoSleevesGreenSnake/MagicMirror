@@ -309,12 +309,5 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-<<<<<<< HEAD
-
-
-
-=======
-//        getInfoFromDb();
->>>>>>> feature/4.12_登陆界面倒计时
     }
 }

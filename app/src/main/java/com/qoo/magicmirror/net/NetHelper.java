@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.preference.PreferenceActivity;
 import android.support.v4.util.LruCache;
@@ -58,6 +59,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * Created by dllo on 16/3/29.
@@ -74,6 +78,12 @@ public class NetHelper<T> {
     private final DisplayImageOptions options;
     private Class<T> cls;
     private static NetHelper helper;
+    private ThreadPoolExecutor executor;
+    private ImageListener imageListener;
+
+    public void setImageListener(ImageListener imageListener) {
+        this.imageListener = imageListener;
+    }
 
     /**
      * 此构造方法并有没有彻底整完 有很大的问题 因为并没有了解okhttp的用法,只是强行使用而已
@@ -91,6 +101,7 @@ public class NetHelper<T> {
                 }
             }
         }
+
         return helper;
     }
 
@@ -109,6 +120,12 @@ public class NetHelper<T> {
             diskPath = file.getAbsolutePath();
         }
         this.context = context;
+        executor = (ThreadPoolExecutor) Executors.newCachedThreadPool(new ThreadFactory() {
+            @Override
+            public Thread newThread(Runnable r) {
+                return new Thread(r);
+            }
+        });
         mOkHttpClient = new OkHttpClient();
         configuration = new ImageLoaderConfiguration.Builder(context).diskCache(new UnlimitedDiscCache(file)).diskCacheFileNameGenerator(new Md5FileNameGenerator()).build();
         ImageLoader.getInstance().init(configuration);
@@ -135,13 +152,13 @@ public class NetHelper<T> {
             public boolean handleMessage(Message msg) {
                 if (msg.what == 1) {
                     String result = (String) msg.obj;
-                    Log.i("result", result);
                     T t = new Gson().fromJson(result, cls);
                     listener.onSuccess(t);
                 }
                 if (msg.what == 2) {
                     listener.onFailure();
                 }
+
                 return false;
             }
         });
@@ -161,9 +178,7 @@ public class NetHelper<T> {
      *给view 添加progressbar的方法
      * @param view 组件
      */
-    private void addProgressBar(View view){
-        ((ViewGroup)view.getParent()).addView(new ProgressBar(context),0);
-    }
+
 
     /**
      * 切图的方法
@@ -204,6 +219,11 @@ public class NetHelper<T> {
 
     }
 
+
+
+
+
+
     /**
      * 佩戴图集 切图的方法
      * @param imageView  组件
@@ -230,7 +250,7 @@ public class NetHelper<T> {
      * @param url 网址
      */
     public void setBackGround(View v, String url) {
-        Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url,options);
+        Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url, options);
 
         v.setBackground(new BitmapDrawable(context.getResources(), bitmap));
     }
@@ -241,10 +261,57 @@ public class NetHelper<T> {
      * @param imageView 组件
      * @param url       网址
      */
-    public void setImage(ImageView imageView, String url) {
-
-        imageLoader.displayImage(url, imageView, options);
+    public Bitmap setImage(ImageView imageView, String url) {
+        final Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url, options);
+        imageView.setImageBitmap(bitmap);
+        return bitmap;
     }
+
+
+    public void setImage(final ImageView imageView, final String url, final ImageListener imageListener) {
+
+        final Handler imageHandler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                if (msg.what == 4) {
+                    NetData data = (NetData) msg.obj;
+                    imageView.setImageBitmap(data.img);
+                    data.listener.imageFished(data.img);
+                }
+                return false;
+            }
+        });
+
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url, options);
+                while (true) {
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if (bitmap != null) {
+                        if (imageListener != null) {
+                            Message message = new Message();
+                            message.what = 4;
+
+                            message.obj = new NetData(imageListener,bitmap);
+                            imageHandler.sendMessage(message);
+
+                        }
+                        break;
+                    }
+
+                }
+            }
+        });
+
+
+    }
+
+
 
     /**
      * 加载图片并存入数据库的方法
@@ -430,6 +497,16 @@ public class NetHelper<T> {
 
         void onFailure();
     }
+    public interface ImageListener{
+        void imageFished(Bitmap bitmap);
+    }
+    private static class  NetData{
+        ImageListener listener;
+        Bitmap img;
 
-
+        public NetData(ImageListener listener, Bitmap img) {
+            this.listener = listener;
+            this.img = img;
+        }
+    }
 }

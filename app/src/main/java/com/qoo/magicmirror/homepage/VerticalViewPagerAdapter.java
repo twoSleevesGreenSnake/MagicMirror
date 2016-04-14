@@ -26,22 +26,22 @@ public class VerticalViewPagerAdapter extends FragmentPagerAdapter {
     private ArrayList<String> categoryId;
     private boolean hasNet;
 
-    public VerticalViewPagerAdapter(FragmentManager fm, ArrayList<Fragment> fragments, ArrayList<String> titles, Context context,ArrayList<String> categoryId,boolean hasNet) {
+    public VerticalViewPagerAdapter(FragmentManager fm, ArrayList<Fragment> fragments, ArrayList<String> titles, Context context, ArrayList<String> categoryId, boolean hasNet) {
         super(fm);
         this.fm = fm;
         this.fragments = fragments;
         this.titles = titles;
         this.context = context;
         this.categoryId = categoryId;
-        this.hasNet  = hasNet;
+        this.hasNet = hasNet;
     }
 
     @Override
     public Fragment getItem(int position) {
         if (position < 3) {
 
-            final GoodsFragment fragment = (GoodsFragment) GoodsFragment.getInstance(position, (ArrayList<String>) titles,categoryId,hasNet);
-            Log.i("hasNet",hasNet+"");
+            final GoodsFragment fragment = (GoodsFragment) GoodsFragment.getInstance(position, (ArrayList<String>) titles, categoryId, hasNet);
+            Log.i("hasNet", hasNet + "");
             fragment.setMenuListener(new MenuListener() {
                 @Override
                 public void clickMenu() {
@@ -60,11 +60,12 @@ public class VerticalViewPagerAdapter extends FragmentPagerAdapter {
         return 5;
     }
 
-public void upData(){
+    public void upData() {
+        if (fragments.size() > 0) {
+            for (int i = 0; i < fm.getFragments().size(); i++) {
+                fm.beginTransaction().remove(fm.getFragments().get(i)).commit();
 
-    for (int i = 0; i <fm.getFragments().size() ; i++) {
-        fm.beginTransaction().remove(fm.getFragments().get(i)).commit();
-
+            }
+        }
     }
-}
 }
