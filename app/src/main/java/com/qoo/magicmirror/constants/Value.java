@@ -6,6 +6,7 @@ package com.qoo.magicmirror.constants;
  * 常量类
  */
 public final class Value {
+
     public static String putPosition = "position";
     public static String putPopTitles = "poptitles";
     public static String putGoodsListBeanDataEntityListEntity = "GoodsListBean.DataEntity.ListEntity";

@@ -96,9 +96,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             Toast.makeText(RegisterActivity.this, R.string.please_write_your_code, Toast.LENGTH_SHORT).show();
         } else if (code.length() == 5) {
             ArrayList<String> token = new ArrayList<>();
-            token.add("phone_number");
-            token.add("number");
-            token.add("password");
+            token.add(getString(R.string.phone_number));
+            token.add(getString(R.string.number));
+            token.add(getString(R.string.password));
             token.add("");
             ArrayList<String> value = new ArrayList<>();
             value.add(phoneNumber);

@@ -68,7 +68,7 @@ public class ThematicFragment extends Fragment {
     private void initData() {
         // 设置标题
         Bundle bundle = getArguments();
-        titles = bundle.getStringArrayList("themtaictitle");
+        titles = bundle.getStringArrayList(getString(R.string.themtaictitle));
         titleTv.setText(titles.get(3));
     }
 

@@ -79,7 +79,7 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
             public void clickMenu() {
                 getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.fragment_menu_anim, R.anim.fragment_menu_anim)
-                        .show(getSupportFragmentManager().findFragmentByTag("menu"))
+                        .show(getSupportFragmentManager().findFragmentByTag(getString(R.string.MENU)))
                         .addToBackStack(null)
                         .commit();
             }
@@ -151,7 +151,7 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
 
         // 启动闪屏页
 
-        startActivityForResult(new Intent(this, WelcomeActivity.class),102);
+        startActivityForResult(new Intent(this, WelcomeActivity.class), 102);
 
         getNetInfo();
     }
@@ -206,10 +206,10 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
 
             @Override
             public void onSuccess(CategoryListBean categoryListBean) {
-                Intent intent = new Intent(HomeActivity.this,WelcomeActivity.class);
-                intent.putExtra("success",true);
+                Intent intent = new Intent(HomeActivity.this, WelcomeActivity.class);
+                intent.putExtra(getString(R.string.success), true);
                 startActivity(intent);
-                SharedPreferences sp = getSharedPreferences("categoryId", MODE_PRIVATE);
+                SharedPreferences sp = getSharedPreferences(getString(R.string.categoryId), MODE_PRIVATE);
                 SharedPreferences.Editor editor = sp.edit();
                 editor.clear();
                 editor.commit();
@@ -231,21 +231,23 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
             }
         });
     }
-  private void getInfoFromDb(){
-      SharedPreferences sp = getSharedPreferences("categoryId", Context.MODE_PRIVATE);
-      Iterator ir = sp.getAll().entrySet().iterator();
-      ArrayList<String> count = new ArrayList<String>();
-      while (ir.hasNext()) {
-          Map.Entry en = (Map.Entry) ir.next();
-          String Id = sp.getString(String.valueOf(en.getKey()), "");
-          count.add(Id);
-      }
-      for (int i = 0; i < count.size(); i++) {
-          categoryId.add(sp.getString(String.valueOf(i), ""));
-      }
-      adapter = new VerticalViewPagerAdapter(getSupportFragmentManager(), fragments, titles, HomeActivity.this, categoryId, false);
-      verticalViewPager.setAdapter(adapter);
-  }
+
+    private void getInfoFromDb() {
+        SharedPreferences sp = getSharedPreferences(getString(R.string.categoryId), Context.MODE_PRIVATE);
+        Iterator ir = sp.getAll().entrySet().iterator();
+        ArrayList<String> count = new ArrayList<>();
+        while (ir.hasNext()) {
+            Map.Entry en = (Map.Entry) ir.next();
+            String Id = sp.getString(String.valueOf(en.getKey()), "");
+            count.add(Id);
+        }
+        for (int i = 0; i < count.size(); i++) {
+            categoryId.add(sp.getString(String.valueOf(i), ""));
+        }
+        adapter = new VerticalViewPagerAdapter(getSupportFragmentManager(), fragments, titles, HomeActivity.this, categoryId, false);
+        verticalViewPager.setAdapter(adapter);
+    }
+
     /**
      * "购物车"和"登陆"
      */
@@ -279,14 +281,13 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
     @Override
     protected void onNetCome() {
         super.onNetCome();
-        Toast.makeText(HomeActivity.this, "网络来了", Toast.LENGTH_SHORT).show();
+        Toast.makeText(HomeActivity.this, R.string.netcome, Toast.LENGTH_SHORT).show();
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
 //        getInfoFromDb();
     }
 }

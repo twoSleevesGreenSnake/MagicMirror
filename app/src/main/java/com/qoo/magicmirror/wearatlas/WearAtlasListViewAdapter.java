@@ -25,7 +25,6 @@ public class WearAtlasListViewAdapter extends BaseAdapter {
 
     public WearAtlasListViewAdapter(List<GoodsListBean.DataEntity.ListEntity.WearVideoEntity> data, Context context) {
         this.data = data;
-//        Log.d("131313","Ss"+data.size());
         this.context = context;
     }
 

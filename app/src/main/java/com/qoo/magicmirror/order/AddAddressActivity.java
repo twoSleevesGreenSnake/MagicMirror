@@ -34,19 +34,17 @@ public class AddAddressActivity extends BaseActivity{
            public void onClick(View v) {
                final ArrayList<String> keys = new ArrayList<>();
                final ArrayList<String> values = new ArrayList<>();
-               keys.add("token");
-               keys.add("username");
-               keys.add("cellphone");
-               keys.add("addr_info");
-               values.add("f7d565803fbdb8f9c0bc64122895eea3");
+               keys.add(getString(R.string.token));
+               keys.add(getString(R.string.username));
+               keys.add(getString(R.string.cellphone));
+               keys.add(getString(R.string.addr_info));
+               values.add(BaseActivity.token);
                values.add(name.getText().toString());
                values.add(number.getText().toString());
                values.add(address.getText().toString());
-
-               Log.i("values",values.toString());
                for (String string:values){
                    if (string.equals("")){
-                       Toast.makeText(AddAddressActivity.this, "格式不正确", Toast.LENGTH_SHORT).show();
+                       Toast.makeText(AddAddressActivity.this, R.string.format_is_not_right, Toast.LENGTH_SHORT).show();
                        return;
                    }
                }

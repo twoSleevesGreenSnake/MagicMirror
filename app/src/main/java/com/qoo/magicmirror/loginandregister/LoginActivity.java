@@ -22,6 +22,7 @@ import java.util.ArrayList;
  * Created by dllo on 16/3/29.
  */
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
+
     private ImageView ivClose;
     private Button btnLogin, btnCreateAccount;
     private EditText etPhontNumber, etPassword;
@@ -42,8 +43,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void initData() {
         listenEditText();
-
-
     }
 
     @Override

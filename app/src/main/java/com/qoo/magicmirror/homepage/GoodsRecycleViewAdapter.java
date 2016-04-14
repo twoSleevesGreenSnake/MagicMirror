@@ -33,19 +33,19 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
     private String type;
     private boolean hasNet;
 
-    // MainActivity传递过来的ViewPager的位置
-
-    public GoodsRecycleViewAdapter(ArrayList<GoodsListBean.DataEntity.ListEntity> data, Context context,String type) {
+    public GoodsRecycleViewAdapter(ArrayList<GoodsListBean.DataEntity.ListEntity> data, Context context, String type) {
         this.type = type;
         this.data = data;
         this.context = context;
     }
-    public GoodsRecycleViewAdapter(List<MainPageData>data,String type, Context context) {
+
+    public GoodsRecycleViewAdapter(List<MainPageData> data, String type, Context context) {
         this.type = type;
         noNetData = data;
         this.context = context;
 
     }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.item_fragment_goods, parent, false));
@@ -64,13 +64,11 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
                 public void onClick(View v) {
                     Intent intent = new Intent(context, BrowseGlassesActivity.class);
                     intent.putExtra(Value.putGoodsListBeanDataEntityListEntity, data.get(position));
-                    Log.i("data", data.get(position).getGoods_data().toString());
                     BrowseGlassesActivity.setData(data.get(position));
                     context.startActivity(intent);
                 }
             });
-        }
-        else {
+        } else {
             holder.nameTv.setText(noNetData.get(position).getName());
             holder.originTv.setText(noNetData.get(position).getArea());
             holder.priceTv.setText(noNetData.get(position).getPrice());
@@ -81,14 +79,12 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
 
     @Override
     public int getItemCount() {
-        if (data==null||data.size()==0){
+        if (data == null || data.size() == 0) {
             hasNet = false;
-            Log.i("size",noNetData.size()+"");
-            return noNetData!=null&&noNetData.size()>0?noNetData.size():0;
-        }
-        else {
+            return noNetData != null && noNetData.size() > 0 ? noNetData.size() : 0;
+        } else {
             hasNet = true;
-            return data!=null&&data.size()>0?data.size():0;
+            return data != null && data.size() > 0 ? data.size() : 0;
         }
     }
 

@@ -53,7 +53,9 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
+        // 子线程通常执行耗时操作
+        // 1. Message
+        // Message消息，理解为线程间交流的信息，处理数据后台线程需要更新UI，则发送Message内含一些数据给UI线程。
         handler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
@@ -80,7 +82,6 @@ public class WelcomeActivity extends BaseActivity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    Log.i("time", time + "");
                     time++;
                     if (time > 8) {
                         startService(new Intent(WelcomeActivity.this, NetService.class));
@@ -98,11 +99,8 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        requestSuccessed = intent.getBooleanExtra("success", true);
+        requestSuccessed = intent.getBooleanExtra(getString(R.string.success), true);
 
     }
 
-    //    子线程通常执行耗时操作
-//    1. Message
-//    Message消息，理解为线程间交流的信息，处理数据后台线程需要更新UI，则发送Message内含一些数据给UI线程。
 }

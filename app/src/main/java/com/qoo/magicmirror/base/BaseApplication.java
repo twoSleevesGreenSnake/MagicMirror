@@ -15,10 +15,12 @@ import java.io.File;
  * Created by dllo on 16/3/29.
  */
 public class BaseApplication extends Application {
+
     public static Context context;
     private ImageLoader imageLoader;
     private ImageLoaderConfiguration configuration;
     private String diskPath;
+
     @Override
     public void onCreate() {
         super.onCreate();
