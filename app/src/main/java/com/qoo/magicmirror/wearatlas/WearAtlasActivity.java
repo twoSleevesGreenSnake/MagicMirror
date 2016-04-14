@@ -111,8 +111,8 @@ public class WearAtlasActivity extends BaseActivity {
                     @Override
                     public void logInSuccess() {
                         Intent intent = new Intent(WearAtlasActivity.this, OrderDetailActivity.class);
-                        intent.putExtra("goodsId", datas.getGoods_id());
-                        intent.putExtra("price", datas.getGoods_price());
+                        intent.putExtra(getString(R.string.goodsId), datas.getGoods_id());
+                        intent.putExtra(getString(R.string.price), datas.getGoods_price());
                         startActivity(intent);
                     }
                 });//判断有没有token的方法

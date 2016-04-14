@@ -27,12 +27,11 @@ public class EditAddressActivity extends BaseActivity{
 
     @Override
     protected void initData() {
-        DetailAddressBean.DataBean.ListBean listBean= getIntent().getParcelableExtra("oldAddress");
+        DetailAddressBean.DataBean.ListBean listBean= getIntent().getParcelableExtra(getString(R.string.oldAddress));
         addrId = listBean.getAddr_id();
         name.setText(listBean.getUsername());
         address.setText(listBean.getAddr_info());
         number.setText(listBean.getCellphone());
-        Log.i("addressvalues",addrId+"   "+listBean.getUsername()+"     "+listBean.getAddr_info()+"    "+listBean.getCellphone());
 
 
        submitBtn.setOnClickListener(new View.OnClickListener() {
@@ -45,14 +44,14 @@ public class EditAddressActivity extends BaseActivity{
                keys.add("cellphone");
                keys.add("addr_info");
                keys.add("addr_id");
-               values.add("f7d565803fbdb8f9c0bc64122895eea3");
+               values.add(BaseActivity.token);
                values.add(name.getText().toString());
                values.add(number.getText().toString());
                values.add(address.getText().toString());
                values.add(addrId);
                for (String string:values){
                    if (string.equals("")){
-                       Toast.makeText(EditAddressActivity.this, "格式不正确", Toast.LENGTH_SHORT).show();
+                       Toast.makeText(EditAddressActivity.this, getString(R.string.format_is_not_right), Toast.LENGTH_SHORT).show();
                        return;
                    }
                }
@@ -66,7 +65,7 @@ public class EditAddressActivity extends BaseActivity{
 
                    @Override
                    public void onFailure() {
-                       Toast.makeText(EditAddressActivity.this, "修改失败请稍后再试", Toast.LENGTH_SHORT).show();
+                       Toast.makeText(EditAddressActivity.this, R.string.change_fauiled, Toast.LENGTH_SHORT).show();
                    }
                });
            }

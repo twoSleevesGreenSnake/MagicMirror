@@ -40,7 +40,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
     protected static String token = "";
     protected static  final Map<Class<? extends BaseActivity>,BaseActivity> activities = new HashMap<>();
     private Point point;
-    private NetReceivier receivier = new NetReceivier();
+    private NetReceiver receivier = new NetReceiver();
 
 
 
@@ -53,7 +53,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         point = new Point();
         getWindowManager().getDefaultDisplay().getSize(point);
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("com.qoo.magicmirror.NET_COMING");
+        intentFilter.addAction(getString(R.string.com_qoo_magicmirror_NET_COMING));
         registerReceiver(receivier,intentFilter);
         initView();// 初始化数据，绑定组件
         initData();// 其他操作
@@ -67,18 +67,28 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         return point;
     }
 
+    /**
+     * findViewById的方法
+     * @param ResId 资源ID
+     * @param <T>
+     * @return
+     */
     public <T extends View> T bindView(int ResId) {
         T t = (T) findViewById(ResId);
         return t;
     }
 
+    /**
+     * 设置token的值
+     * @param token token值
+     */
     public static void setToken(String token) {
         BaseActivity.token = token;
     }
 
     protected abstract int setLayout();
-    protected abstract void initData();
     protected abstract void initView();
+    protected abstract void initData();
 
 
     public Map<Class<? extends BaseActivity>, BaseActivity> getActivitys() {
@@ -95,6 +105,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
             entry.getValue().finish();
         }
     }
+
     private void deleteSelf(){
         activities.remove(getClass());
     }
@@ -159,7 +170,8 @@ public abstract class BaseActivity extends AutoLayoutActivity {
             }
         });
     }
-    class NetReceivier extends BroadcastReceiver{
+
+    class NetReceiver extends BroadcastReceiver{
 
         @Override
         public void onReceive(Context context, Intent intent) {

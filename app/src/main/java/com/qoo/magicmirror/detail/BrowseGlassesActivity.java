@@ -29,6 +29,7 @@ import com.qoo.magicmirror.wearatlas.WearAtlasActivity;
  * Created by dllo on 16/3/29.
  */
 public class BrowseGlassesActivity extends BaseActivity {
+
     private RecyclerView recyclerView;
     private NetHelper netHelper;
     private int screenHeight;
@@ -40,18 +41,21 @@ public class BrowseGlassesActivity extends BaseActivity {
     private TextView picturesTv;
     private static GoodsListBean.DataEntity.ListEntity data;
     private int screenWidth;
-    private float itemHeight= 0;
+    private float itemHeight = 0;
     private boolean locationNotFinshed = true;
     private boolean notIsFirstItem = false;
 
     //序列化传不了 不知道为了点啥
+    /**
+     * 从主页获取数据的静态方法
+     * @param data 详情页的数据
+     */
     public static void setData(GoodsListBean.DataEntity.ListEntity data) {
         BrowseGlassesActivity.data = data;
     }
 
     /**
      * 实现浏览眼镜详情的activity
-     *
      * @return
      */
     @Override
@@ -87,7 +91,7 @@ public class BrowseGlassesActivity extends BaseActivity {
         recyclerView = bindView(R.id.activity_detail_browse_glasses_rv);
         picturesTv = bindView(R.id.activity_detail_browse_glasses_pictures_tv);
         netHelper = NetHelper.newNetHelper(this);
-        Point size  = new Point();
+        Point size = new Point();
         Display display = getWindowManager().getDefaultDisplay();
         display.getRealSize(size);
 
@@ -105,7 +109,7 @@ public class BrowseGlassesActivity extends BaseActivity {
 
     private void visibleLayout() {
         if (locationNotFinshed) {
-            animation = ObjectAnimator.ofFloat(btnLayout, "translationX", (screenWidth - btnLayout.getWidth())/2-39);
+            animation = ObjectAnimator.ofFloat(btnLayout, "translationX", (screenWidth - btnLayout.getWidth()) / 2 - 39);
             animation.setDuration(500);
             locationNotFinshed = false;
         }
@@ -128,8 +132,6 @@ public class BrowseGlassesActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-//        Intent intent = getIntent();
-//        data = intent.getParcelableExtra("GoodsListBean.DataEntity.ListEntity");
         backIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -301,7 +303,7 @@ public class BrowseGlassesActivity extends BaseActivity {
             private RelativeLayout layout;
             private float height;
             private boolean isFirst = true;
-            private  int y;
+            private int y;
 
             public FirstItemHolder(final View itemView) {
                 super(itemView);
@@ -368,16 +370,14 @@ public class BrowseGlassesActivity extends BaseActivity {
                     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                         super.onScrolled(recyclerView, dx, dy);
 //                         notIsFirstItem = true;
-                        if (btnNotShow && (itemView.getY() <= 0||(itemHeight==itemView.getY()&&itemView.getY()<300))) {
+                        if (btnNotShow && (itemView.getY() <= 0 || (itemHeight == itemView.getY() && itemView.getY() < 300))) {
 
-                                visibleLayout();
-                                btnNotShow = false;
-
-
+                            visibleLayout();
+                            btnNotShow = false;
 
 
                         }
-                        if (itemView.getY() > 0 && !btnNotShow&&(itemHeight!=itemView.getY())) {
+                        if (itemView.getY() > 0 && !btnNotShow && (itemHeight != itemView.getY())) {
                             goneLayout();
                             btnNotShow = true;
 
@@ -398,8 +398,6 @@ public class BrowseGlassesActivity extends BaseActivity {
             super(itemView);
         }
     }
-
-
 
 
 }

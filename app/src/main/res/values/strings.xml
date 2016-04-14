@@ -105,5 +105,23 @@
     <string name="item_address_detail_address_item_del_tv">删除</string>
     <string name="send_again">秒后重新发送</string>
     <string name="send_code">重新发送</string>
+    <string name="com.qoo.magicmirror.NET_COMING">com.qoo.magicmirror.NET_COMING</string>
+    <string name="two">2</string>
+    <string name="one_zero_one">1.0.1</string>
+    <string name="categoryId">categoryId</string>
+    <string name="hasNet">hasNet</string>
+    <string name="netcome">网络来了</string>
+    <string name="success">success</string>
+    <string name="themtaictitle">themtaictitle</string>
+    <string name="number">number</string>
+    <string name="username">username</string>
+    <string name="cellphone">cellphone</string>
+    <string name="addr_info">addr_info</string>
+    <string name="format_is_not_right">格式不正确</string>
+    <string name="oldAddress">oldAddress</string>
+    <string name="change_fauiled">修改失败请稍后再试</string>
+    <string name="goodsId">goodsId</string>
+    <string name="addressData">addressData</string>
+    <string name="MMDDHHmmss">MMddHHmmss</string>
 
 </resources>

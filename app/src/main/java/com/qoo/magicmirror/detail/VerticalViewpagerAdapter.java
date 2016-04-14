@@ -36,16 +36,6 @@ public class VerticalViewpagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         container.addView(views.get(position));
-//        View view = LayoutInflater.from(container.getContext()).inflate(R.layout.activity_specialtopic_detail_viewpager, null);
-//        view.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View v) {
-//                v.setVisibility(View.INVISIBLE);
-//
-//                return false;
-//            }
-//        });
-
         return views.get(position);
     }
 

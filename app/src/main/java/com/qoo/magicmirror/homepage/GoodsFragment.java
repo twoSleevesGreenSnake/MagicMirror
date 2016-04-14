@@ -46,7 +46,6 @@ public class GoodsFragment extends Fragment {
 
     /**
      * 相当于初始化
-     *
      * @param menuListener
      */
     public void setMenuListener(MenuListener menuListener) {
@@ -55,8 +54,6 @@ public class GoodsFragment extends Fragment {
 
     /**
      * 提供静态方法，添加fragment
-     * 静态方法，返回新的Fragment
-     *
      * @return 新的Fragment
      */
     public static Fragment getInstance(int position, ArrayList<String> popTitles,ArrayList<String> categoryId,boolean hasNet) {
@@ -82,28 +79,23 @@ public class GoodsFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView(view);// 初始化组件
-
-
     }
 
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         initData();// 接收静态方法传来的值，设置标题，标题点击事件
-
     }
 
 
     private void initData() {
         Bundle bundle = getArguments();
-        categoryId = bundle.getStringArrayList("categoryId");
+        categoryId = bundle.getStringArrayList(getString(R.string.categoryId));
         position = bundle.getInt(Value.putPosition);
         popTitles = bundle.getStringArrayList(Value.putPopTitles);
-        hasNet = bundle.getBoolean("hasNet");
+        hasNet = bundle.getBoolean(getString(R.string.hasNet));
         type = categoryId.get(position);
-        Log.d("GoodsFragment", "+++++" + categoryId);
         titleTv.setText(popTitles.get(position));
 
         titleFl.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +121,7 @@ public class GoodsFragment extends Fragment {
             value.add("");
             value.add("");
             value.add(categoryId.get(position));
-            value.add("1.0.1");
+            value.add(getString(R.string.one_zero_one));
             NetHelper netHelper = new NetHelper(getContext());
             netHelper.getPostInfo(NetConstants.GOODS_TYPE, token, value, GoodsListBean.class, new NetHelper.NetListener<GoodsListBean>() {
                         @Override
@@ -152,7 +144,11 @@ public class GoodsFragment extends Fragment {
         }
         //没网的情况下去数据库请求
         else {
+<<<<<<< HEAD
             adapter = new GoodsRecycleViewAdapter(MainPageHelper.newHelper(getActivity()).show(type),type,getActivity(),false);
+=======
+            adapter = new GoodsRecycleViewAdapter(MainPageHelper.newHelper(getActivity()).showByType(type),type,getActivity());
+>>>>>>> feature/4.12_登陆界面倒计时
             GridLayoutManager gm = new GridLayoutManager(getActivity(), 1);
             gm.setOrientation(GridLayoutManager.HORIZONTAL);
             recyclerView.setLayoutManager(gm);

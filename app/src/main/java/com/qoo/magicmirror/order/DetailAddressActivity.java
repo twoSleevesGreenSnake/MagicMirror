@@ -26,6 +26,7 @@ import java.util.ArrayList;
  * Created by dllo on 16/4/7.
  */
 public class DetailAddressActivity extends BaseActivity {
+
     private RecyclerView recyclerView;
     private TextView addAddress;
     private DetailAddressBean data;
@@ -182,7 +183,7 @@ public class DetailAddressActivity extends BaseActivity {
         keys.add(getString(R.string.page));
         keys.add(getString(R.string.last_time));
         valves.add(token);
-        valves.add("1");
+        valves.add(getString(R.string.one));
         valves.add(Value.NOTHING);
         valves.add(Value.NOTHING);
 

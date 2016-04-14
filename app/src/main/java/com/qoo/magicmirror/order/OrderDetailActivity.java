@@ -129,9 +129,8 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void initData() {
         Intent intent = getIntent();
-        price = intent.getStringExtra("price");
-        Log.i("price", price + goodsId);
-        goodsId = intent.getStringExtra("goodsId");
+        price = intent.getStringExtra(getString(R.string.price));
+        goodsId = intent.getStringExtra(getString(R.string.goodsId));
         sureOrder();
         addAddressTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,7 +147,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
         if (data == null) {
             return;
         }
-            DetailAddressBean.DataBean.ListBean detailAddressBean = data.getParcelableExtra("addressData");
+            DetailAddressBean.DataBean.ListBean detailAddressBean = data.getParcelableExtra(getString(R.string.addressData));
             showNameTv.setText(getString(R.string.name) + detailAddressBean.getUsername());
             showAddressTv.setText(getString(R.string.adress) + detailAddressBean.getAddr_info());
             showNumberTv.setText(getString(R.string.cellnumber) + detailAddressBean.getCellphone());
@@ -357,7 +356,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
      * get the out_trade_no for an order. 生成商户订单号，该值在商户端应保持唯一（可自定义格式规范）
      */
     private String getOutTradeNo() {
-        SimpleDateFormat format = new SimpleDateFormat("MMddHHmmss", Locale.getDefault());
+        SimpleDateFormat format = new SimpleDateFormat(getString(R.string.MMDDHHmmss), Locale.getDefault());
         Date date = new Date();
         String key = format.format(date);
 

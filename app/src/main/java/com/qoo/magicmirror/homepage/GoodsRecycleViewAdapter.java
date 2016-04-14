@@ -34,21 +34,31 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
     private String type;
     private boolean hasNet;
 
+<<<<<<< HEAD
     // MainActivity传递过来的ViewPager的位置
 
     public GoodsRecycleViewAdapter(ArrayList<GoodsListBean.DataEntity.ListEntity> data, Context context,String type,boolean hasNet) {
+=======
+    public GoodsRecycleViewAdapter(ArrayList<GoodsListBean.DataEntity.ListEntity> data, Context context, String type) {
+>>>>>>> feature/4.12_登陆界面倒计时
         this.type = type;
         this.data = data;
         this.context = context;
         this.hasNet = hasNet;
     }
+<<<<<<< HEAD
     public GoodsRecycleViewAdapter(List<MainPageData>data,String type, Context context,boolean hasNet) {
+=======
+
+    public GoodsRecycleViewAdapter(List<MainPageData> data, String type, Context context) {
+>>>>>>> feature/4.12_登陆界面倒计时
         this.type = type;
         noNetData = data;
         this.context = context;
         this.hasNet = hasNet;
 
     }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.item_fragment_goods, parent, false));
@@ -71,8 +81,7 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
                     context.startActivity(intent);
                 }
             });
-        }
-        else {
+        } else {
             holder.nameTv.setText(noNetData.get(position).getName());
             holder.originTv.setText(noNetData.get(position).getArea());
             holder.priceTv.setText(noNetData.get(position).getPrice());
@@ -97,11 +106,20 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
 
     @Override
     public int getItemCount() {
+<<<<<<< HEAD
         if (!hasNet){
             return noNetData!=null&&noNetData.size()>0?noNetData.size():0;
         }
         else {
             return data!=null&&data.size()>0?data.size():0;
+=======
+        if (data == null || data.size() == 0) {
+            hasNet = false;
+            return noNetData != null && noNetData.size() > 0 ? noNetData.size() : 0;
+        } else {
+            hasNet = true;
+            return data != null && data.size() > 0 ? data.size() : 0;
+>>>>>>> feature/4.12_登陆界面倒计时
         }
     }
 

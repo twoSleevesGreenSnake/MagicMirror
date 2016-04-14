@@ -29,6 +29,7 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
  * Created by Giraffe on 16/3/29.
  */
 public class SpecialTopicDetailActivity extends BaseActivity implements View.OnClickListener {
+
     private VerticalViewpagerAdapter verticalViewpagerAdapter;
     private ArrayList<View> views;
     private VerticalViewpager verticalViewpager;
@@ -41,6 +42,7 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
     private int time = 0;
 
     private boolean isLongClick;
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -61,7 +63,6 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
 
     @Override
     protected void initData() {
-
         // 接收首页的storyId
         Intent intent = getIntent();
         storyId = intent.getStringExtra(Value.putStoryId);
@@ -73,8 +74,8 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
         token.add(getString(R.string.stroy_id));
         ArrayList<String> value = new ArrayList<>();
         value.add("");
-        value.add("1");
-        value.add("2");
+        value.add(getString(R.string.one));
+        value.add(getString(R.string.two));
         final NetHelper netHelper = new NetHelper(this);
 
         netHelper.getPostInfo(NetConstants.STORY_INFO, token, value, SpecialTopicDetailBean.class, new NetHelper.NetListener<SpecialTopicDetailBean>() {
@@ -93,12 +94,9 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
                     subTitleTv.setText(data.getText_array().get(i).getSubTitle());
 
                     views.add(view);
-//
                 }
                 netHelper.setImage(specialNethermostIv, data.getImg_array().get(0));
 
-
-//                Log.d("！！！！！！", data.getImg_array().get(0));
                 verticalViewpagerAdapter = new VerticalViewpagerAdapter(views);
                 verticalViewpager.setOnTouchListener(new View.OnTouchListener() {
                     @Override
@@ -159,9 +157,6 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
         frameLayoutMiddle = (FrameLayout) findViewById(R.id.framelayout_middle);
         frameLayoutUppermost = (FrameLayout) findViewById(R.id.framelayout_uppermost);
 
-//        frameLayoutMain = (FrameLayout) findViewById(R.id.activity_specialtopic_detail_main_framelayout);
-//                frameLayoutUppermost = (FrameLayout) findViewById(R.id.framelayout_uppermost);
-
         closeIv.setOnClickListener(this);
         shareIv.setOnClickListener(this);
 
@@ -173,7 +168,6 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.activity_specialtopic_detail_share_iv:
-//
                 ShareSDK.initSDK(this);
                 OnekeyShare oks = new OnekeyShare();
                 //关闭sso授权 
@@ -207,16 +201,6 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
     private class onTouchThread extends Thread {
         @Override
         public void run() {
-//            try {
-//                Thread.sleep(2000);
-//                Message msg = new Message();
-//                msg.what = COMPLETED;
-//                handler.sendMessage(msg);
-//
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//
             while (isLongClick) {
                 time++;
                 try {
