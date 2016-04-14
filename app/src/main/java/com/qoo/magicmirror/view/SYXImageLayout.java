@@ -58,7 +58,6 @@ public class SYXImageLayout extends RelativeLayout{
         backParams.addRule(RelativeLayout.CENTER_IN_PARENT);
         src.setLayoutParams(srcParams);
         back.setLayoutParams(backParams);
-        back.setBackgroundColor(Color.WHITE);
     }
 
     private void initView(){

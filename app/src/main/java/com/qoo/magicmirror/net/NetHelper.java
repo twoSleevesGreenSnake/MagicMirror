@@ -32,9 +32,11 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
 import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.constants.NetConstants;
@@ -270,43 +272,66 @@ public class NetHelper<T> {
 
     public void setImage(final ImageView imageView, final String url, final ImageListener imageListener) {
 
-        final Handler imageHandler = new Handler(new Handler.Callback() {
+        imageLoader.displayImage(url, imageView,options, new ImageLoadingListener() {
             @Override
-            public boolean handleMessage(Message msg) {
-                if (msg.what == 4) {
-                    NetData data = (NetData) msg.obj;
-                    imageView.setImageBitmap(data.img);
-                    data.listener.imageFished(data.img);
-                }
-                return false;
+            public void onLoadingStarted(String imageUri, View view) {
+
+            }
+
+            @Override
+            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+
+            }
+
+            @Override
+            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                 imageListener.imageFished(loadedImage);
+            }
+
+            @Override
+            public void onLoadingCancelled(String imageUri, View view) {
+
             }
         });
 
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url, options);
-                while (true) {
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    if (bitmap != null) {
-                        if (imageListener != null) {
-                            Message message = new Message();
-                            message.what = 4;
 
-                            message.obj = new NetData(imageListener,bitmap);
-                            imageHandler.sendMessage(message);
-
-                        }
-                        break;
-                    }
-
-                }
-            }
-        });
+//        final Handler imageHandler = new Handler(new Handler.Callback() {
+//            @Override
+//            public boolean handleMessage(Message msg) {
+//                if (msg.what == 4) {
+//                    NetData data = (NetData) msg.obj;
+//                    imageView.setImageBitmap(data.img);
+//                    data.listener.imageFished(data.img);
+//                }
+//                return false;
+//            }
+//        });
+//
+//        executor.execute(new Runnable() {
+//            @Override
+//            public void run() {
+//                Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url, options);
+//                while (true) {
+//                    try {
+//                        Thread.sleep(500);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                    if (bitmap != null) {
+//                        if (imageListener != null) {
+//                            Message message = new Message();
+//                            message.what = 4;
+//
+//                            message.obj = new NetData(imageListener,bitmap);
+//                            imageHandler.sendMessage(message);
+//
+//                        }
+//                        break;
+//                    }
+//
+//                }
+//            }
+//        });
 
 
     }

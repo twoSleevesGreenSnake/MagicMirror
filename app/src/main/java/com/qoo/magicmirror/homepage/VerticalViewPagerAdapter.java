@@ -63,8 +63,9 @@ public class VerticalViewPagerAdapter extends FragmentPagerAdapter {
     public void upData() {
         if (fragments.size() > 0) {
             for (int i = 0; i < fm.getFragments().size(); i++) {
-                fm.beginTransaction().remove(fm.getFragments().get(i)).commit();
-
+                if (fm.getFragments().get(i)!=fm.findFragmentByTag("menu")) {
+                    fm.beginTransaction().remove(fm.getFragments().get(i)).commit();
+                }
             }
         }
     }
