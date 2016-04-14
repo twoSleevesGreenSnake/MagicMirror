@@ -23,6 +23,7 @@ import com.qoo.magicmirror.homepage.GoodsListBean;
 import com.qoo.magicmirror.net.NetHelper;
 import com.qoo.magicmirror.order.OrderDetailActivity;
 import com.qoo.magicmirror.tools.ViewSizeTool;
+import com.qoo.magicmirror.view.SYXImageLayout;
 import com.qoo.magicmirror.wearatlas.WearAtlasActivity;
 
 /**
@@ -212,13 +213,12 @@ public class BrowseGlassesActivity extends BaseActivity {
                     if (data.getGoods_data().get(position - 3).getLocation().equals("")) {
                         ((BrowseGlassesHolder) holder).locationTv.setText(data.getGoods_data().get(position - 3).getName());
                     }
-                    netHelper.setDrawable(((BrowseGlassesHolder) holder).backImg, data.getDesign_des().get(position - 3).getImg(), 150);
-
+                    ((BrowseGlassesHolder) holder).backImg.setImage(data.getDesign_des().get(position - 3).getImg());
                     ((BrowseGlassesHolder) holder).eTitleTv.setText(data.getGoods_data().get(position - 3).getEnglish());
 
                 } else {
                     ((BrowseGlassesHolder) holder).srcLayout.setVisibility(View.INVISIBLE);
-                    netHelper.setImage(((BrowseGlassesHolder) holder).backImg, data.getDesign_des().get(position - 3).getImg());
+                    ((BrowseGlassesHolder) holder).backImg.setImage(data.getDesign_des().get(position - 3).getImg());
 
 
                 }
@@ -251,7 +251,7 @@ public class BrowseGlassesActivity extends BaseActivity {
             private RelativeLayout relativeLayout;
             private int contentPosition;
             private TextView titleTv, eTitleTv, locationTv, contentTv;
-            private ImageView backImg;
+            private SYXImageLayout backImg;
 
 
             /**
@@ -267,7 +267,7 @@ public class BrowseGlassesActivity extends BaseActivity {
                 contentTv = (TextView) itemView.findViewById(R.id.item_detail_brose_glasses_rv_content_src_content_tv);
                 srcLayout = (LinearLayout) itemView.findViewById(R.id.item_detail_brose_glasses_rv_content_src_content_layout);
                 relativeLayout = (RelativeLayout) itemView.findViewById(R.id.item_detail_brose_glasses_rv_content_src_layout);
-                backImg = (ImageView) itemView.findViewById(R.id.item_detail_brose_glasses_rv_content_back_img);
+                backImg = (SYXImageLayout) itemView.findViewById(R.id.item_detail_brose_glasses_rv_content_back_img);
                 recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                     @Override
                     public void onScrollStateChanged(RecyclerView recyclerView, int newState) {

@@ -153,11 +153,8 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
 
         // 启动闪屏页
 
-<<<<<<< HEAD
         startActivityForResult(new Intent(this, WelcomeActivity.class), 103);
-=======
-        startActivityForResult(new Intent(this, WelcomeActivity.class), 102);
->>>>>>> feature/4.12_登陆界面倒计时
+
 
         getNetInfo();
     }
@@ -215,20 +212,12 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
 
             @Override
             public void onSuccess(CategoryListBean categoryListBean) {
-<<<<<<< HEAD
                 if (getActivitys().get(WelcomeActivity.class)!=null) {
                     Intent intent = new Intent(HomeActivity.this, WelcomeActivity.class);
-                    intent.putExtra("success", true);
+                    intent.putExtra(getString(R.string.success), true);
                     startActivity(intent);
                 }
-
-                SharedPreferences sp = getSharedPreferences("categoryId", MODE_PRIVATE);
-=======
-                Intent intent = new Intent(HomeActivity.this, WelcomeActivity.class);
-                intent.putExtra(getString(R.string.success), true);
-                startActivity(intent);
                 SharedPreferences sp = getSharedPreferences(getString(R.string.categoryId), MODE_PRIVATE);
->>>>>>> feature/4.12_登陆界面倒计时
                 SharedPreferences.Editor editor = sp.edit();
                 editor.clear();
                 editor.commit();
@@ -244,14 +233,6 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
                 adapter.upData();
                 verticalViewPager.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
-//                new Handler(new Handler.Callback() {
-//                    @Override
-//                    public boolean handleMessage(Message msg) {
-//
-//                        return false;
-//                    }
-//                }).sendEmptyMessageDelayed(1, 100);
-
             }
 
             @Override
@@ -313,22 +294,14 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
     @Override
     protected void onNetCome() {
         super.onNetCome();
-<<<<<<< HEAD
-        Toast.makeText(HomeActivity.this, "网络来了", Toast.LENGTH_SHORT).show();
         getNetInfo();
-=======
         Toast.makeText(HomeActivity.this, R.string.netcome, Toast.LENGTH_SHORT).show();
->>>>>>> feature/4.12_登陆界面倒计时
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-<<<<<<< HEAD
 
-=======
-//        getInfoFromDb();
->>>>>>> feature/4.12_登陆界面倒计时
     }
 }

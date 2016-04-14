@@ -2,6 +2,7 @@ package com.qoo.magicmirror.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -51,26 +52,29 @@ public class SYXImageLayout extends RelativeLayout{
         RelativeLayout.LayoutParams  backParams = (LayoutParams) back.getLayoutParams();
         srcParams.width = LayoutParams.MATCH_PARENT;
         srcParams.height = LayoutParams.WRAP_CONTENT;
-        backParams.setLayoutDirection(ViewGroup.LayoutParams.WRAP_CONTENT);
+        backParams.width = LayoutParams.MATCH_PARENT;
+        backParams.height = LayoutParams.MATCH_PARENT;
         src.setScaleType(ImageView.ScaleType.CENTER_CROP);
         backParams.addRule(RelativeLayout.CENTER_IN_PARENT);
         src.setLayoutParams(srcParams);
         back.setLayoutParams(backParams);
+        back.setBackgroundColor(Color.WHITE);
     }
 
     private void initView(){
         src = new ImageView(getContext());
         back = new ProgressBar(getContext());
-
-        addView(back);
         addView(src);
+        addView(back);
     }
     public void setImage(String url){
+        src.setVisibility(INVISIBLE);
         back.setVisibility(VISIBLE);
         NetHelper.newNetHelper(getContext()).setImage(src, url, new NetHelper.ImageListener() {
             @Override
             public void imageFished(Bitmap bitmap) {
                 SYXImageLayout.this.bitmap =bitmap;
+                src.setVisibility(VISIBLE);
                 back.setVisibility(GONE);
             }
         });

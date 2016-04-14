@@ -123,5 +123,6 @@
     <string name="goodsId">goodsId</string>
     <string name="addressData">addressData</string>
     <string name="MMDDHHmmss">MMddHHmmss</string>
+    <string name="url">url</string>
 
 </resources>

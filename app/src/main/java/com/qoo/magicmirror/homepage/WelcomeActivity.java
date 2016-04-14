@@ -47,19 +47,16 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-<<<<<<< HEAD
-       sharedPreferences  = getSharedPreferences("welcome",MODE_PRIVATE);
-=======
+       sharedPreferences  = getSharedPreferences(getString(R.string.welcome),MODE_PRIVATE);
         // 子线程通常执行耗时操作
         // 1. Message
         // Message消息，理解为线程间交流的信息，处理数据后台线程需要更新UI，则发送Message内含一些数据给UI线程。
->>>>>>> feature/4.12_登陆界面倒计时
         handler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
                 if (data==null||data.getImg().equals("")) {
-                    if (!sharedPreferences.getString("url","").equals("")){
-                        imageView.setImage(sharedPreferences.getString("url",""));
+                    if (!sharedPreferences.getString(getString(R.string.url),"").equals("")){
+                        imageView.setImage(sharedPreferences.getString(getString(R.string.url),""));
 
                     }
                 }
@@ -67,7 +64,7 @@ public class WelcomeActivity extends BaseActivity {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.clear();
                     editor.commit();
-                    editor.putString("url", data.getImg());
+                    editor.putString(getString(R.string.url), data.getImg());
                     editor.commit();
                     imageView.setImage(data.getImg());
                 }

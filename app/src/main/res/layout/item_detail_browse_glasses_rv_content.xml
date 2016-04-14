@@ -6,7 +6,7 @@
     android:background="@color/colorWhite"
  >
 
-    <ImageView
+    <com.qoo.magicmirror.view.SYXImageLayout
         android:id="@+id/item_detail_brose_glasses_rv_content_back_img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

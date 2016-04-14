@@ -144,11 +144,8 @@ public class GoodsFragment extends Fragment {
         }
         //没网的情况下去数据库请求
         else {
-<<<<<<< HEAD
-            adapter = new GoodsRecycleViewAdapter(MainPageHelper.newHelper(getActivity()).show(type),type,getActivity(),false);
-=======
-            adapter = new GoodsRecycleViewAdapter(MainPageHelper.newHelper(getActivity()).showByType(type),type,getActivity());
->>>>>>> feature/4.12_登陆界面倒计时
+
+            adapter = new GoodsRecycleViewAdapter(MainPageHelper.newHelper(getActivity()).showByType(type),type,getActivity(),false);
             GridLayoutManager gm = new GridLayoutManager(getActivity(), 1);
             gm.setOrientation(GridLayoutManager.HORIZONTAL);
             recyclerView.setLayoutManager(gm);
