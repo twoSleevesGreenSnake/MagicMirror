@@ -15,6 +15,8 @@ import java.util.ArrayList;
 
 /**
  * Created by dllo on 16/4/8.
+ *
+ * 编辑地址的Activity
  */
 public class EditAddressActivity extends BaseActivity{
     private EditText name,address,number;
@@ -39,11 +41,11 @@ public class EditAddressActivity extends BaseActivity{
            public void onClick(View v) {
                final ArrayList<String> keys = new ArrayList<>();
                final ArrayList<String> values = new ArrayList<>();
-               keys.add("token");
-               keys.add("username");
-               keys.add("cellphone");
-               keys.add("addr_info");
-               keys.add("addr_id");
+               keys.add(getString(R.string.token));
+               keys.add(getString(R.string.username));
+               keys.add(getString(R.string.callphone));
+               keys.add(getString(R.string.addr_indo));
+               keys.add(getString(R.string.addr_id));
                values.add(BaseActivity.token);
                values.add(name.getText().toString());
                values.add(number.getText().toString());

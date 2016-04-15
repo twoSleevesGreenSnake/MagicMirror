@@ -20,7 +20,6 @@ import java.util.ArrayList;
 
 /**
  * Created by dllo on 16/4/6.
- * <p/>
  * 注册界面
  */
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {

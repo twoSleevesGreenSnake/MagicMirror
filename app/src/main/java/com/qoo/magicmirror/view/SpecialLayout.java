@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
  * Created by dllo on 16/4/1.
  */
 public class SpecialLayout extends RelativeLayout {
+
     public SpecialLayout(Context context) {
         super(context);
     }
@@ -26,10 +27,16 @@ public class SpecialLayout extends RelativeLayout {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
+    /**
+     * 计算自己的宽高
+     * onlayout计算父类布局的
+     * @param widthMeasureSpec
+     * @param heightMeasureSpec
+     */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         ViewGroup parentView = (ViewGroup) getParent();
-        View brotherView  = parentView.getChildAt(0);
-        setMeasuredDimension(brotherView.getMeasuredWidth(),brotherView.getMeasuredHeight());
+        View brotherView = parentView.getChildAt(0);
+        setMeasuredDimension(brotherView.getMeasuredWidth(), brotherView.getMeasuredHeight());
     }
 }

@@ -68,8 +68,10 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * Created by dllo on 16/3/29.
+ * 网络封装类
  */
 public class NetHelper<T> {
+
 
     private String diskPath;
     private final OkHttpClient mOkHttpClient;
@@ -81,35 +83,31 @@ public class NetHelper<T> {
     private final DisplayImageOptions options;
     private Class<T> cls;
     private static NetHelper helper;
-    private ImageListener imageListener;
-
-    public void setImageListener(ImageListener imageListener) {
-        this.imageListener = imageListener;
-    }
 
     /**
-     * 此构造方法并有没有彻底整完 有很大的问题 因为并没有了解okhttp的用法,只是强行使用而已
-     * todo 优化代码
-     *
-     * @param context
+     * 单例NetHelper
+     * 此构造方法并有没有彻底整完
+     * 有很大的问题
+     * 因为okhttp的用法没有完全了解
+     * 只是强行使用而已
+     * @param context 上下文
      */
-
     public static NetHelper newNetHelper(Context context) {
         if (helper == null) {
             synchronized (SingleQueue.class) {
                 if (helper == null) {
                     helper = new NetHelper(context);
-
                 }
             }
         }
-
         return helper;
     }
 
     public NetHelper(Context context) {
         super();
-
+        /**
+         * 判断是否有SD卡，并获取SD的路径
+         */
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             File file = Environment.getExternalStorageDirectory();
             diskPath = file.getAbsolutePath();
@@ -117,7 +115,7 @@ public class NetHelper<T> {
             File file = context.getFilesDir();
             diskPath = file.getAbsolutePath();
         }
-        File file = new File(diskPath + "/img");
+        File file = new File(diskPath + context.getString(R.string.img));
         if (file.exists()) {
             diskPath = file.getAbsolutePath();
         }
@@ -128,19 +126,30 @@ public class NetHelper<T> {
         ImageLoader.getInstance().init(configuration);
         imageLoader = ImageLoader.getInstance();
 
-        //设置imageloader
-         options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(Color.TRANSPARENT) // 设置图片下载期间显示的图片
-                .showImageForEmptyUri(Color.TRANSPARENT) // 设置图片Uri为空或是错误的时候显示的图片
-                .showImageOnFail(Color.TRANSPARENT) // 设置图片加载或解码过程中发生错误显示的图片
-                .resetViewBeforeLoading(false)  // default 设置图片在加载前是否重置、复位
-                .delayBeforeLoading(1000)  // 下载前的延迟时间
-                .cacheInMemory(true) // default  设置下载的图片是否缓存在内存中
-                .cacheOnDisk(true) // default  设置下载的图片是否缓存在SD卡中
-                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) // default 设置图片以如何的编码方式显示
-                .bitmapConfig(Bitmap.Config.ARGB_4444) // default 设置图片的解码类型
-                .displayer(new SimpleBitmapDisplayer()) // default  还可以设置圆角图片new RoundedBitmapDisplayer(20)
-                .handler(new Handler()) // default
+        // 设置imageloader
+        options = new DisplayImageOptions.Builder()
+                // 设置图片下载期间显示的图片
+                .showImageOnLoading(Color.TRANSPARENT)
+                        // 设置图片Uri为空或是错误的时候显示的图片
+                .showImageForEmptyUri(Color.TRANSPARENT)
+                        // 设置图片加载或解码过程中发生错误显示的图片
+                .showImageOnFail(Color.TRANSPARENT)
+                        // default 设置图片在加载前是否重置、复位
+                .resetViewBeforeLoading(false)
+                        // 下载前的延迟时间
+                .delayBeforeLoading(1000)
+                        // default  设置下载的图片是否缓存在内存中
+                .cacheInMemory(true)
+                        // default  设置下载的图片是否缓存在SD卡中
+                .cacheOnDisk(true)
+                        // default 设置图片以如何的编码方式显示
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                        // default 设置图片的解码类型
+                .bitmapConfig(Bitmap.Config.ARGB_4444)
+                        // default  还可以设置圆角图片new RoundedBitmapDisplayer(20)
+                .displayer(new SimpleBitmapDisplayer())
+                        // default
+                .handler(new Handler())
                 .build();
 
 
@@ -155,11 +164,9 @@ public class NetHelper<T> {
                 if (msg.what == 2) {
                     listener.onFailure();
                 }
-
                 return false;
             }
         });
-
     }
 
     /**
@@ -167,24 +174,17 @@ public class NetHelper<T> {
      * @param url 网址
      * @return 获取的bitmap
      */
-  private Bitmap getBitmapFromNet(String url){
-      return ImageLoader.getInstance().loadImageSync(url,options);
-  }
-
-    /**
-     *给view 添加progressbar的方法
-     * @param view 组件
-     */
-
+    private Bitmap getBitmapFromNet(String url) {
+        return ImageLoader.getInstance().loadImageSync(url, options);
+    }
 
     /**
      * 切图的方法
-     *
      * @param imageView 组件
-     * @param url       网址
-     * @param cutLength  切掉的高度,取下部分
+     * @param url 网址
+     * @param cutLength 切掉的高度,取下部分
      */
-    public void setDrawable(final ImageView imageView, final String url, final int cutLength) {
+    public void setBitmapAndCut(final ImageView imageView, final String url, final int cutLength) {
         final Handler imageHandler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
@@ -198,7 +198,6 @@ public class NetHelper<T> {
                         Bitmap newBitmap = Bitmap.createBitmap(bitmap, 0, cutLength, bitmap.getWidth(), bitmap.getHeight() - cutLength);
                         imageView.setImageBitmap(newBitmap);
                     } else imageView.setImageBitmap(bitmap);
-
                 }
                 return false;
             }
@@ -213,63 +212,96 @@ public class NetHelper<T> {
                 imageHandler.sendMessage(message);
             }
         }).start();
-
     }
-
-
-
-
 
 
     /**
      * 佩戴图集 切图的方法
-     * @param imageView  组件
-     * @param url  图片请求网址
-     * @param screenWidth 屏幕宽度
+     * @param imageView   组件
+     * @param url 图片请求网址
+     * @param imageListener 图片加载完成的监听
      * @return
      */
-    public Bitmap setCutBitmap(final ImageView imageView, final String url, int screenWidth) {
+    public void setCutBitmap(final ImageView imageView, final String url, final ImageListener imageListener) {
+        final Handler mHandler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                if (msg.what == 9) {
+                    imageView.setImageBitmap((Bitmap)msg.obj);
+                }
+                return false;
+            }
+        });
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url, options);
+                Bitmap newBitmap = Bitmap.createBitmap(bitmap, 39, 0, bitmap.getWidth() - 78, bitmap.getHeight());
+                imageListener.imageFished(newBitmap);
+                Message message = new Message();
+                message.what = 9;
+                message.obj = bitmap;
+                mHandler.sendMessage(message);
+            }
+        }).start();
+    }
 
-        Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url, options);
-        if (bitmap == null) {
-            return null;
-        }
-        Bitmap newBitmap = Bitmap.createBitmap(bitmap, 39, 0, bitmap.getWidth() - 78, bitmap.getHeight());
-        imageView.setImageBitmap(newBitmap);
-
-        return bitmap;
+    /**
+     * 带监听设置图片的方法
+     * @param imageView
+     * @param url
+     * @param imageListener
+     */
+    public void setBitmap(final ImageView imageView, final String url, final ImageListener imageListener) {
+        final Handler mHandler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                if (msg.what == 9) {
+                    imageView.setImageBitmap((Bitmap)msg.obj);
+                    imageListener.imageFished((Bitmap)msg.obj);
+                }
+                return false;
+            }
+        });
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url, options);
+                Message message = new Message();
+                message.what = 9;
+                message.obj = bitmap;
+                mHandler.sendMessage(message);
+            }
+        }).start();
     }
 
     /**
      * 给view 网络拉取背景的方法
-     *
-     * @param v   组件
+     * @param v 组件
      * @param url 网址
      */
     public void setBackGround(View v, String url) {
-
         Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url, options);
-
         v.setBackground(new BitmapDrawable(context.getResources(), bitmap));
     }
 
     /**
-     * 给imageview 拉取图片并显示的方法
-     *
+     * 给ImageView 拉取图片并显示的方法
      * @param imageView 组件
-     * @param url       网址
+     * @param url 网址
      */
     public void setImage(ImageView imageView, String url) {
-        imageLoader.displayImage(url,imageView,options);
-//        final Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url, options);
-//        imageView.setImageBitmap(bitmap);
-//        return bitmap;
+        imageLoader.displayImage(url, imageView, options);
     }
 
-
-    public void setImage( ImageView imageView,  String url,  final ImageListener imageListener) {
-
-        imageLoader.displayImage(url, imageView,options, new ImageLoadingListener() {
+    /**
+     *
+     * @param imageView 显示图片的组件
+     * @param url 图片网址
+     * @param imageListener 网络请求的监听接口
+     */
+    public void setImage(ImageView imageView, String url, final ImageListener imageListener) {
+        imageLoader.displayImage(url, imageView, options, new ImageLoadingListener() {
             @Override
             public void onLoadingStarted(String imageUri, View view) {
 
@@ -282,7 +314,7 @@ public class NetHelper<T> {
 
             @Override
             public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                 imageListener.imageFished(loadedImage);
+                imageListener.imageFished(loadedImage);
             }
 
             @Override
@@ -290,57 +322,15 @@ public class NetHelper<T> {
 
             }
         });
-
-
-//        final Handler imageHandler = new Handler(new Handler.Callback() {
-//            @Override
-//            public boolean handleMessage(Message msg) {
-//                if (msg.what == 4) {
-//                    NetData data = (NetData) msg.obj;
-//                    imageView.setImageBitmap(data.img);
-//                    data.listener.imageFished(data.img);
-//                }
-//                return false;
-//            }
-//        });
-//
-//        executor.execute(new Runnable() {
-//            @Override
-//            public void run() {
-//                Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url, options);
-//                while (true) {
-//                    try {
-//                        Thread.sleep(500);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                    if (bitmap != null) {
-//                        if (imageListener != null) {
-//                            Message message = new Message();
-//                            message.what = 4;
-//
-//                            message.obj = new NetData(imageListener,bitmap);
-//                            imageHandler.sendMessage(message);
-//
-//                        }
-//                        break;
-//                    }
-//
-//                }
-//            }
-//        });
-
-
     }
-
 
 
     /**
      * 加载图片并存入数据库的方法
-     *
-     * @param imageView
-     * @param url
-     * @param data
+     * @param imageView 显示图片的组件
+     * @param url 用于判断的网址
+     * @param data 商品列表数据类
+     * @param type 商品的类型
      */
     public void setImage(ImageView imageView, String url, GoodsListBean.DataEntity.ListEntity data, String type) {
         setImage(imageView, url);
@@ -349,36 +339,30 @@ public class NetHelper<T> {
 
 
     /**
-     * @param url      需要拼接的网址
-     * @param keys     拼接参数的key集合
-     * @param values   拼接参数的valve结合
-     * @param cls      实体类的class对象
+     * Post请求方法
+     * @param url 需要拼接的网址
+     * @param keys 拼接参数的key集合
+     * @param values 拼接参数的valve结合
+     * @param cls 实体类的class对象
      * @param listener 请求之后的回调接口
      */
     public void getPostInfo(String url, ArrayList<String> keys, ArrayList<String> values, final Class<T> cls, final NetListener<T> listener) {
         FormEncodingBuilder builder = new FormEncodingBuilder();
-
         this.cls = cls;
-
         this.listener = listener;
         for (int i = 0; i < keys.size(); i++) {
             builder.add(keys.get(i), values.get(i));
         }
         RequestBody formBody = builder.build();
-
         Request request = new Request.Builder()
-
                 .url(NetConstants.SERVIE_ADRESS + url)
-
                 .post(formBody)
-
                 .build();
         mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
                 handler.sendEmptyMessage(2);
             }
-
             @Override
             public void onResponse(com.squareup.okhttp.Response response) throws IOException {
                 String body = response.body().string();
@@ -395,14 +379,13 @@ public class NetHelper<T> {
     }
 
     /**
-     * 注册界面注册
-     *
+     * 注册界面注册的Post请求
      * @param url url
      * @param keys 参数key
      * @param values 参数value
-     * @param cls  解析类型
+     * @param cls 解析类型
      * @param listener 网络请求的接口
-      */
+     */
     public void getPostInfoForRegister(String url, ArrayList<String> keys, ArrayList<String> values, final Class<T> cls, final NetListener<T> listener) {
         FormEncodingBuilder builder = new FormEncodingBuilder();
         this.cls = cls;
@@ -411,20 +394,15 @@ public class NetHelper<T> {
             builder.add(keys.get(i), values.get(i));
         }
         RequestBody formBody = builder.build();
-
         Request request = new Request.Builder()
-
                 .url(NetConstants.SERVIE_ADRESS + url)
-
                 .post(formBody)
-
                 .build();
         mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
                 handler.sendEmptyMessage(2);
             }
-
             @Override
             public void onResponse(com.squareup.okhttp.Response response) throws IOException {
                 String body = response.body().string();
@@ -445,11 +423,10 @@ public class NetHelper<T> {
 
     /**
      * 登陆界面登陆
-     *
      * @param url url
      * @param keys 参数key
      * @param values 参数value
-     * @param cls  解析类型
+     * @param cls 解析类型
      * @param listener 网络请求的接口
      */
     public void getPostInfoForLogin(String url, ArrayList<String> keys, ArrayList<String> values, final Class<T> cls, final NetListener<T> listener) {
@@ -460,20 +437,15 @@ public class NetHelper<T> {
             builder.add(keys.get(i), values.get(i));
         }
         RequestBody formBody = builder.build();
-
         Request request = new Request.Builder()
-
                 .url(NetConstants.SERVIE_ADRESS + url)
-
                 .post(formBody)
-
                 .build();
         mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
                 handler.sendEmptyMessage(2);
             }
-
             @Override
             public void onResponse(com.squareup.okhttp.Response response) throws IOException {
                 String body = response.body().string();
@@ -489,8 +461,12 @@ public class NetHelper<T> {
         });
     }
 
-
-    // get
+    /**
+     * Get请求的方法
+     * @param url 网址
+     * @param clazz 解析类型
+     * @param listener 请求的监听
+     */
     public void getGetInfo(String url, final Class<T> clazz, final NetListener listener) {
         Request request = new Request.Builder()
                 .url(NetConstants.SERVIE_ADRESS + url)
@@ -511,21 +487,26 @@ public class NetHelper<T> {
 
     /**
      * 用来区分拉取结果不同的 回调接口
-     *
      * @param <T>
      */
     public interface NetListener<T> {
         void onSuccess(T t);
-
         void onFailure();
     }
-    public interface ImageListener{
+
+    /**
+     * ImageLoader请求回调的接口
+     */
+    public interface ImageListener {
         void imageFished(Bitmap bitmap);
     }
-    private static class  NetData{
+
+    /**
+     * 用于监听图片是否加载完成
+     */
+    private static class NetData {
         ImageListener listener;
         Bitmap img;
-
         public NetData(ImageListener listener, Bitmap img) {
             this.listener = listener;
             this.img = img;

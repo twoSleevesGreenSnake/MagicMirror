@@ -73,7 +73,7 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
         // 给fragment传递titles，并设置点击替换的MenuFragment
         ThematicFragment thematicFragment = new ThematicFragment();
         Bundle bundleT = new Bundle();
-        bundleT.putStringArrayList(Value.putThematicTitle, titles);
+        bundleT.putStringArrayList(Value.PUTTHEMATICTITLE, titles);
         thematicFragment.setArguments(bundleT);
         fragments.add(thematicFragment);
         thematicFragment.setMenuListener(new MenuListener() {
@@ -89,7 +89,7 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
         // 给fragment传递titles，并设置点击替换的MenuFragment
         ShoppingCartFragment shoppingCartFragment = new ShoppingCartFragment();
         Bundle bundleS = new Bundle();
-        bundleS.putStringArrayList(Value.putShoppingTitle, titles);
+        bundleS.putStringArrayList(Value.PUTSHOPPINGTITLE, titles);
         shoppingCartFragment.setArguments(bundleS);
         fragments.add(shoppingCartFragment);
         shoppingCartFragment.setMenuListener(new MenuListener() {

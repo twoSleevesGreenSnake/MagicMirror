@@ -32,7 +32,7 @@ import java.util.Random;
 
 /**
  * Created by dllo on 16/4/7.
- * <p/>
+ *
  * 订单界面
  */
 public class OrderDetailActivity extends BaseActivity implements View.OnClickListener {
@@ -269,16 +269,6 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
 
 
     public void pay(View v) {
-//		if (TextUtils.isEmpty(PARTNER) || TextUtils.isEmpty(RSA_PRIVATE) || TextUtils.isEmpty(SELLER)) {
-//			new AlertDialog.Builder(this).setTitle("警告").setMessage("需要配置PARTNER | RSA_PRIVATE| SELLER")
-//					.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//						public void onClick(DialogInterface dialoginterface, int i) {
-//							//
-//							finish();
-//						}
-//					}).show();
-//			return;
-//		}
         String orderInfo = getOrderInfo();
 
 //		/**

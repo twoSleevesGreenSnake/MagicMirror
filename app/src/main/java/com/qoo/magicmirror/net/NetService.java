@@ -8,29 +8,30 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.qoo.magicmirror.R;
+
 /**
  * Created by dllo on 16/4/11.
+ *
+ * 动态监测的Service
  */
 public class NetService extends Service{
+    /**
+     * 是否有网
+     */
     private boolean hasNet;
     private Thread netThread;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.i("netcome", "55555555555555");
-
         netThread = newThread();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i("netcome","55555555555555");
         netThread.start();
         return super.onStartCommand(intent, flags, startId);
-
-
-
     }
 
     @Nullable
@@ -50,8 +51,8 @@ public class NetService extends Service{
         hasNet = true;
         return hasNet;
     }
-    private Thread newThread(){
 
+    private Thread newThread(){
         final Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -59,7 +60,7 @@ public class NetService extends Service{
                     testNet();
                     if (hasNet){
 
-                        sendBroadcast(new Intent("com.qoo.magicmirror.NET_COMING"));
+                        sendBroadcast(new Intent(getString(R.string.com_qoo_magicmirror_net_coming)));
                         break;
                     }
                     try {
@@ -72,5 +73,4 @@ public class NetService extends Service{
         });
         return thread;
     }
-
 }

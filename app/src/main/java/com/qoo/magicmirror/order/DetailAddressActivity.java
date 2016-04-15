@@ -24,6 +24,8 @@ import java.util.ArrayList;
 
 /**
  * Created by dllo on 16/4/7.
+ *
+ * 详细地址的Activity
  */
 public class DetailAddressActivity extends BaseActivity {
 
@@ -34,6 +36,7 @@ public class DetailAddressActivity extends BaseActivity {
     private DetailAddressAdapter adapter;
     private SYXDragViewGroup syxDragViewGroup;
     private Handler handler;
+    private ImageView closeIv;
 
     @Override
     protected int setLayout() {
@@ -50,7 +53,8 @@ public class DetailAddressActivity extends BaseActivity {
         });
         startNet();
         syxDragViewGroup = bindView(R.id.syxdragviewgroup);
-
+        closeIv = bindView(R.id.activity_address_detail_close);
+        clickColse(closeIv);
         handler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {

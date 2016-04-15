@@ -39,8 +39,11 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
 /**
  * Created by Giraffe on 16/4/5.
+ *
+ * 图集界面的Activity
  */
 public class WearAtlasActivity extends BaseActivity {
+
     private Context context;
     private ListView listView;
     private WearAtlasListViewAdapter wearAtlasListViewAdapter;
@@ -55,12 +58,15 @@ public class WearAtlasActivity extends BaseActivity {
     private RelativeLayout layout;
     private float ratio;
     private float alpha = 0.8f;
+    private static String price, goodsId;
     int startY;
     int endY;
     float a;
 
     public static void setData(GoodsListBean.DataEntity.ListEntity data) {
         WearAtlasActivity.data = (ArrayList<GoodsListBean.DataEntity.ListEntity.WearVideoEntity>) data.getWear_video();
+        price = data.getGoods_price();
+        goodsId = data.getGoods_id();
     }
 
     @Override
@@ -111,8 +117,8 @@ public class WearAtlasActivity extends BaseActivity {
                     @Override
                     public void logInSuccess() {
                         Intent intent = new Intent(WearAtlasActivity.this, OrderDetailActivity.class);
-                        intent.putExtra(getString(R.string.goodsId), datas.getGoods_id());
-                        intent.putExtra(getString(R.string.price), datas.getGoods_price());
+                        intent.putExtra(getString(R.string.goodsId), goodsId);
+                        intent.putExtra(getString(R.string.price), price);
                         startActivity(intent);
                     }
                 });//判断有没有token的方法
@@ -135,7 +141,6 @@ public class WearAtlasActivity extends BaseActivity {
         showBigLayout = bindView(R.id.show_big_layout);
         screenHeight = getWindowManager().getDefaultDisplay().getHeight();
         screenWidth = getWindowManager().getDefaultDisplay().getWidth();
-
     }
 
 
@@ -145,13 +150,9 @@ public class WearAtlasActivity extends BaseActivity {
                 ObjectAnimator.ofFloat(showBigImg, "scaleX", 1, scale),
                 ObjectAnimator.ofFloat(showBigImg, "scaleY", 1, scale),
                 ObjectAnimator.ofFloat(showBigLayout, "alpha", 0.5f, 1)
-
-
         );
         set.setDuration(200).start();
-
     }
-
 
     private void backAnimation(int startY, int endY, float scale) {
         set.playTogether(
@@ -159,23 +160,18 @@ public class WearAtlasActivity extends BaseActivity {
                 ObjectAnimator.ofFloat(showBigImg, "scaleX", 1, scale),
                 ObjectAnimator.ofFloat(showBigImg, "scaleY", 1, scale),
                 ObjectAnimator.ofFloat(showBigLayout, "alpha", 1, 0.5f)
-
-
         );
         set.setDuration(200).start();
-
     }
 
 
     public class WearAtlasListViewAdapter extends BaseAdapter {
         private List<GoodsListBean.DataEntity.ListEntity.WearVideoEntity> data;
         private Context context;
-
         public WearAtlasListViewAdapter(List<GoodsListBean.DataEntity.ListEntity.WearVideoEntity> data, Context context) {
             this.data = data;
             this.context = context;
         }
-
         @Override
         public int getCount() {
             return data != null && data.size() > 0 ? data.size() - 2 : 0;
@@ -211,8 +207,13 @@ public class WearAtlasActivity extends BaseActivity {
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewHolder.imageView.getLayoutParams();
                 params.topMargin = (100);
                 viewHolder.imageView.setLayoutParams(params);
-                viewHolder.bitmap = new NetHelper<GoodsListBean.DataEntity.ListEntity.WearVideoEntity>(parent.getContext()).setCutBitmap(viewHolder.imageView, wearVideoEntity.getData(), screenWidth - 78);
-
+                final ViewHolder finalViewHolder = viewHolder;
+                new NetHelper<GoodsListBean.DataEntity.ListEntity.WearVideoEntity>(parent.getContext()).setCutBitmap(viewHolder.imageView, wearVideoEntity.getData(), new NetHelper.ImageListener() {
+                    @Override
+                    public void imageFished(Bitmap bitmap) {
+                      finalViewHolder.bitmap = bitmap;
+                    }
+                });
             }
             return convertView;
         }
@@ -221,13 +222,14 @@ public class WearAtlasActivity extends BaseActivity {
         public class ViewHolder {
             ImageView imageView;
             Bitmap bitmap;
-
             public ViewHolder(final View convertView) {
                 imageView = (ImageView) convertView.findViewById(R.id.item_wear_atlas_rv_iv);
-
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if (bitmap == null) {
+                            return;
+                        }
                         a = (float) (1.0 + 39.0 / (float) bitmap.getWidth());
                         WearAtlasActivity.this.l(String.valueOf(a));
                         showBigImg.setImageBitmap(bitmap);
@@ -240,10 +242,7 @@ public class WearAtlasActivity extends BaseActivity {
                         layout.setVisibility(View.GONE);
                     }
                 });
-
             }
-
-
         }
     }
 }

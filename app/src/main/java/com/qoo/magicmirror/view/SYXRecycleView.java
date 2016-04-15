@@ -8,6 +8,8 @@ import android.view.MotionEvent;
 
 /**
  * Created by dllo on 16/4/12.
+ *
+ * 只是为了解决纵向滑动的Viewpager和RecycleView横向滑动的滑动冲突
  */
 public class SYXRecycleView extends RecyclerView {
 
@@ -36,7 +38,6 @@ public class SYXRecycleView extends RecyclerView {
                 moveX = e.getX();
                 moveY = e.getY();
                 if (Math.abs(moveX - downX) > Math.abs(moveY - downY)) {
-                    Log.d("SYXRecycleView", "Math.abs(moveX - downX) > Math.abs(moveY - downY):" + (Math.abs(moveX - downX) > Math.abs(moveY - downY)));
                     return false;
                 }
         }

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 /**
  * Created by dllo on 16/3/29.
+ * 登陆的Activity
  */
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 

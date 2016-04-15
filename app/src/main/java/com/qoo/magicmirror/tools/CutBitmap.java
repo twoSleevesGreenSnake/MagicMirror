@@ -11,6 +11,8 @@ import android.graphics.drawable.Drawable;
 
 /**
  * Created by dllo on 16/3/31.
+ *
+ * 切图
  */
 public class CutBitmap extends Drawable{
     private Paint paint;

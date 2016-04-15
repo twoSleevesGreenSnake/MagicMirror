@@ -12,12 +12,11 @@ import android.widget.RelativeLayout;
 
 /**
  * Created by dllo on 16/4/11.
- * <p/>
  * 自定义拖动视图
  */
 public class SYXDragViewGroup extends RelativeLayout {
 
-
+    //
     private ViewDragHelper viewDragHelper;
     private ViewGroup mainView;
 
@@ -39,6 +38,7 @@ public class SYXDragViewGroup extends RelativeLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        // 定义mainView是Viewgroup中的0位置
         mainView = (ViewGroup) getChildAt(0);
     }
 
@@ -46,6 +46,7 @@ public class SYXDragViewGroup extends RelativeLayout {
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                // 拦截 DragView的拦截方法
                 viewDragHelper.processTouchEvent(ev);
                 return false;
             case MotionEvent.ACTION_MOVE:
@@ -59,10 +60,14 @@ public class SYXDragViewGroup extends RelativeLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        // 拦截 DragView的拦截方法
         viewDragHelper.processTouchEvent(event);
         return true;
     }
 
+    /**
+     * 创建ViewDragHelper
+     */
     private void initView() {
         viewDragHelper = ViewDragHelper.create(this, callback);
     }
@@ -73,11 +78,13 @@ public class SYXDragViewGroup extends RelativeLayout {
             return mainView == child;
         }
 
+        // 定义滑动类型
         @Override
         public int clampViewPositionHorizontal(View child, int left, int dx) {
             return left;
         }
 
+        // 当试图改变的时候发生改变
         @Override
         public void onViewReleased(View releasedChild, float xvel, float yvel) {
             super.onViewReleased(releasedChild, xvel, yvel);
@@ -85,8 +92,7 @@ public class SYXDragViewGroup extends RelativeLayout {
                 viewDragHelper.smoothSlideViewTo(mainView, 0, 0);
                 ViewCompat.postInvalidateOnAnimation(SYXDragViewGroup.this);
             } else {
-                Log.d("width", -mainView.getChildAt(1).getWidth()+"");
-                viewDragHelper.smoothSlideViewTo(mainView, -(mainView.getChildAt(1).getRight()-mainView.getChildAt(0).getRight()+39*2), 0);
+                viewDragHelper.smoothSlideViewTo(mainView, -(mainView.getChildAt(1).getRight() - mainView.getChildAt(0).getRight() + 39 * 2), 0);
                 ViewCompat.postInvalidateOnAnimation(SYXDragViewGroup.this);
             }
         }

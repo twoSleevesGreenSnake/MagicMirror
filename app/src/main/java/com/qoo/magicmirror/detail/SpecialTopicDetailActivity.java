@@ -27,6 +27,8 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
 
 /**
  * Created by Giraffe on 16/3/29.
+ *
+ * 专题的Activity
  */
 public class SpecialTopicDetailActivity extends BaseActivity implements View.OnClickListener {
 
@@ -34,10 +36,10 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
     private ArrayList<View> views;
     private VerticalViewpager verticalViewpager;
     private SpecialTopicDetailBean.DataEntity.StoryDataEntity data;
-    private ImageView specialNethermostIv, viewpagerIv, shareIv, closeIv;
+    private ImageView specialNethermostIv, shareIv, closeIv;
     private TextView smallTitleTv, titleTv, subTitleTv;
     private String storyId;
-    private FrameLayout frameLayoutMiddle, frameLayoutUppermost, frameLayoutMain;
+    private FrameLayout frameLayoutMiddle, frameLayoutUppermost;
     private static final int COMPLETED = 0;
     private int time = 0;
 
@@ -65,8 +67,7 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
     protected void initData() {
         // 接收首页的storyId
         Intent intent = getIntent();
-        storyId = intent.getStringExtra(Value.putStoryId);
-        Log.d("SpecialTopicDetailActiv", storyId);
+        storyId = intent.getStringExtra(Value.PUTSTORYID);
 
         ArrayList<String> token = new ArrayList<>();
         token.add(getString(R.string.token));
@@ -82,21 +83,17 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
             @Override
             public void onSuccess(SpecialTopicDetailBean specialTopicDetailBean) {
                 data = specialTopicDetailBean.getData().getStory_data();
-
                 for (int i = 0; i < data.getImg_array().size(); i++) {
                     View view = LayoutInflater.from(SpecialTopicDetailActivity.this).inflate(R.layout.activity_specialtopic_detail_viewpager, null);
-
                     smallTitleTv = (TextView) view.findViewById(R.id.activity_specialtopic_detail_viewpager_little_title);
                     titleTv = (TextView) view.findViewById(R.id.activity_specialtopic_detail_viewpager_main_title);
                     subTitleTv = (TextView) view.findViewById(R.id.activity_specialtopic_detail_viewpager_content);
                     smallTitleTv.setText(data.getText_array().get(i).getSmallTitle());
                     titleTv.setText(data.getText_array().get(i).getTitle());
                     subTitleTv.setText(data.getText_array().get(i).getSubTitle());
-
                     views.add(view);
                 }
                 netHelper.setImage(specialNethermostIv, data.getImg_array().get(0));
-
                 verticalViewpagerAdapter = new VerticalViewpagerAdapter(views);
                 verticalViewpager.setOnTouchListener(new View.OnTouchListener() {
                     @Override
@@ -104,7 +101,6 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
                         if (event.getAction() == MotionEvent.ACTION_DOWN) {
                             isLongClick = true;
                             new onTouchThread().start();
-
                         } else if (event.getAction() == MotionEvent.ACTION_UP) {
                             time = 0;
                             isLongClick = false;
@@ -135,8 +131,6 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
 
                     }
                 });
-
-
             }
 
             @Override
@@ -144,7 +138,6 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
 
             }
         });
-
     }
 
     @Override
@@ -156,11 +149,8 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
         specialNethermostIv = (ImageView) findViewById(R.id.activity_specialtopic_detail_nethermost_iv);
         frameLayoutMiddle = (FrameLayout) findViewById(R.id.framelayout_middle);
         frameLayoutUppermost = (FrameLayout) findViewById(R.id.framelayout_uppermost);
-
         closeIv.setOnClickListener(this);
         shareIv.setOnClickListener(this);
-
-
     }
 
 
@@ -194,8 +184,6 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
                 finish();
                 break;
         }
-
-
     }
 
     private class onTouchThread extends Thread {
@@ -214,9 +202,6 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
                     break;
                 }
             }
-
-
         }
     }
-
 }

@@ -51,7 +51,7 @@ public class ThematicRecycleViewAdapter extends RecyclerView.Adapter<ThematicRec
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, SpecialTopicDetailActivity.class);
-                intent.putExtra(Value.putStoryId, datas.get(position).getStory_id());
+                intent.putExtra(Value.PUTSTORYID, datas.get(position).getStory_id());
                 context.startActivity(intent);
             }
         });

@@ -3,94 +3,103 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
+            android:id="@+id/activity_address_detail_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="添加收货地址"
             android:layout_marginLeft="@dimen/activity_address_detail_title_marginLeft"
-            android:id="@+id/activity_address_detail_title"
             android:layout_marginTop="@dimen/activity_address_detail_title_marginTop"
+            android:text="@string/activity_address_detail_title_tv"
             android:textColor="@color/colorLight_Black"
-            android:textSize="@dimen/activity_address_detail_title_textSize"/>
+            android:textSize="@dimen/activity_address_detail_title_textSize" />
+
         <ImageView
+            android:id="@+id/activity_address_detail_title_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:src="@mipmap/close"
             android:layout_marginRight="@dimen/activity_address_detail_title_iv_marginRight"
             android:layout_marginTop="@dimen/activity_address_detail_title_iv_marginTop"
-            />
+            android:src="@mipmap/close" />
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_address_detail_title_iv_bottom_marginTop"
-            android:src="@mipmap/line_of_create_account"
+            android:layout_below="@id/activity_address_detail_title"
             android:layout_marginLeft="@dimen/activity_address_detail_title_iv_bottom_marginLeft"
             android:layout_marginRight="@dimen/activity_address_detail_title_iv_bottom_marginRight"
-            android:layout_below="@id/activity_address_detail_title"
-            android:scaleType="fitXY"/>
+            android:layout_marginTop="@dimen/activity_address_detail_title_iv_bottom_marginTop"
+            android:scaleType="fitXY"
+            android:src="@mipmap/line_of_create_account" />
     </RelativeLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="添加收件人姓名"
+        android:layout_marginLeft="30px"
         android:layout_marginTop="40px"
+        android:text="添加收件人姓名"
         android:textColor="@color/colorLight_Black"
-        android:textSize="24px"
-        android:layout_marginLeft="30px"
-        />
+        android:textSize="24px" />
+
     <EditText
-        android:layout_width="match_parent"
-        android:layout_marginTop="20px"
         android:id="@+id/activity_add_address_name_et"
-        android:layout_height="@dimen/activity_register_setpassword_et_height"
-        android:background="@mipmap/edit_address"
-        android:layout_marginLeft="30px"
-        android:layout_marginRight="30px"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="添加联络人人电话号码"
-        android:layout_marginTop="30px"
-        android:textColor="@color/colorLight_Black"
-        android:textSize="24px"
-        android:layout_marginLeft="30px"/>
-    <EditText
         android:layout_width="match_parent"
         android:layout_height="@dimen/activity_register_setpassword_et_height"
-        android:background="@mipmap/edit_address"
         android:layout_marginLeft="30px"
         android:layout_marginRight="30px"
         android:layout_marginTop="20px"
-        android:id="@+id/activity_add_address_number_et"/>
+        android:background="@mipmap/edit_address" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="添加收货地址"
+        android:layout_marginLeft="30px"
         android:layout_marginTop="30px"
+        android:text="添加联络人人电话号码"
         android:textColor="@color/colorLight_Black"
-        android:textSize="24px"
-        android:layout_marginLeft="30px"/>
+        android:textSize="24px" />
+
     <EditText
+        android:id="@+id/activity_add_address_number_et"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_register_setpassword_et_height"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="20px"
+        android:background="@mipmap/edit_address" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="30px"
+        android:text="添加收货地址"
+        android:textColor="@color/colorLight_Black"
+        android:textSize="24px" />
+
+    <EditText
+        android:id="@+id/activity_add_address_address_et"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@mipmap/edit_address"
         android:layout_marginLeft="30px"
         android:layout_marginRight="30px"
         android:layout_marginTop="20px"
-        android:id="@+id/activity_add_address_address_et"
-        />
+        android:background="@mipmap/edit_address" />
+
     <Button
+        android:id="@+id/activity_add_address_submit_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/activity_add_address_submit_btn"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50px"
         android:background="@drawable/selector_login_btn"
         android:text="提交地址"
         android:textColor="@color/colorWhite"
-        android:textStyle="bold"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50px"/>
+        android:textStyle="bold" />
 </com.zhy.autolayout.AutoLinearLayout>

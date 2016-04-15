@@ -70,7 +70,7 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, BrowseGlassesActivity.class);
-                    intent.putExtra(Value.putGoodsListBeanDataEntityListEntity, data.get(position));
+                    intent.putExtra(Value.PUTGOODSLISTBEANDATAENTITYLISTENTITY, data.get(position));
                     BrowseGlassesActivity.setData(data.get(position));
                     context.startActivity(intent);
                 }
@@ -86,11 +86,11 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
                 @Override
                 public void onClick(View v) {
                     if ( !hasNet) {
-                        Toast.makeText(context, "检查网络连接后重试", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.check_net_try_again, Toast.LENGTH_SHORT).show();
                     }
                     else {
                         Intent intent = new Intent(context, BrowseGlassesActivity.class);
-                        intent.putExtra(Value.putGoodsListBeanDataEntityListEntity, data.get(position));
+                        intent.putExtra(Value.PUTGOODSLISTBEANDATAENTITYLISTENTITY, data.get(position));
                         BrowseGlassesActivity.setData(data.get(position));
                         context.startActivity(intent);
                     }

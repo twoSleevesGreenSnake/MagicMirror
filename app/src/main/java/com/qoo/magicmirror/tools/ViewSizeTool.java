@@ -16,34 +16,29 @@ public class ViewSizeTool {
 
     private ViewSizeTool() {
     }
-   public static ViewSizeTool newViewTool(){
-       Log.i("obobobobo111111","ssssss");
+
+    public static ViewSizeTool newViewTool() {
+        if (viewSizeTool == null) {
+            viewSizeTool = new ViewSizeTool();
+        }
+        return newViewTool();
+    }
 
 
-       if ( viewSizeTool==null){
-           viewSizeTool = new ViewSizeTool();
-       }
-       return newViewTool();
-   }
-
-
-    public Point getViewSize(final View view){
+    public Point getViewSize(final View view) {
         final Point point = new Point();
-
-        ViewTreeObserver viewTreeObserver = view .getViewTreeObserver();
-
+        ViewTreeObserver viewTreeObserver = view.getViewTreeObserver();
         ViewTreeObserver.OnPreDrawListener listener = new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
                 point.set(view.getWidth(), view.getHeight());
-                if (view.getWidth()!=0||view.getHeight()!=0){
+                if (view.getWidth() != 0 || view.getHeight() != 0) {
                     view.getViewTreeObserver().removeOnPreDrawListener(this);
                 }
-
                 return false;
             }
         };
-        viewTreeObserver.addOnPreDrawListener(listener) ;
+        viewTreeObserver.addOnPreDrawListener(listener);
         return point;
     }
 

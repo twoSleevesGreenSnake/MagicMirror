@@ -21,8 +21,8 @@ public class MainPageHelper {
 
     /**
      * 单例helper
-     * @param context
-     * @return
+     * @param context 上下文
+     * @return 返回单例的Dbhelper对象
      */
     public static MainPageHelper newHelper(Context context) {
         if (helper == null) {
@@ -90,7 +90,8 @@ public class MainPageHelper {
     public void deleteSingleDataByArea(String area) {
         if (builder.list().size() > 0) {
             DeleteQuery deleteQuery = builder.where(MainPageDataDao.Properties.Area.eq(area)).buildDelete();
-            deleteQuery.executeDeleteWithoutDetachingEntities();// 将查询到符合条件的删除
+            // 将查询到符合条件的删除
+            deleteQuery.executeDeleteWithoutDetachingEntities();
         }
     }
 
@@ -142,7 +143,7 @@ public class MainPageHelper {
     /**
      * 根据类型查询数据
      * @param type 类型
-     * @return
+     * @return 符合条件的单条数据
      */
     public List<MainPageData> showByType(String type) {
         QueryBuilder builder = session.getMainPageDataDao().queryBuilder();
@@ -153,7 +154,7 @@ public class MainPageHelper {
     /**
      * 根据网址查询数据
      * @param path 网址
-     * @return
+     * @return 符合条件的单条数据
      */
     public List<MainPageData> showByPath(String path) {
         builder.where(MainPageDataDao.Properties.Path.eq(path));
@@ -163,7 +164,7 @@ public class MainPageHelper {
     /**
      * 根据名称查询数据
      * @param name 名称
-     * @return
+     * @return 符合条件的单条数据
      */
     public List<MainPageData> showByName(String name) {
         builder.where(MainPageDataDao.Properties.Path.eq(name));
@@ -173,7 +174,7 @@ public class MainPageHelper {
     /**
      * 根据地区查询数据
      * @param area 产地
-     * @return
+     * @return 符合条件的单条数据
      */
     public List<MainPageData> showByArea(String area) {
         builder.where(MainPageDataDao.Properties.Path.eq(area));
@@ -183,7 +184,7 @@ public class MainPageHelper {
     /**
      * 根据价格查询数据
      * @param price 价格
-     * @return
+     * @return 符合条件的单条数据
      */
     public List<MainPageData> showByPrice(String price) {
         builder.where(MainPageDataDao.Properties.Path.eq(price));
@@ -193,7 +194,7 @@ public class MainPageHelper {
     /**
      * 根据品牌查询数据
      * @param brand 品牌
-     * @return
+     * @return 符合条件的单条数据
      */
     public List<MainPageData> showByBrand(String brand) {
         builder.where(MainPageDataDao.Properties.Path.eq(brand));

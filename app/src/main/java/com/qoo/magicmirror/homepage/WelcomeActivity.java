@@ -49,8 +49,6 @@ public class WelcomeActivity extends BaseActivity {
     protected void initData() {
        sharedPreferences  = getSharedPreferences(getString(R.string.welcome),MODE_PRIVATE);
         // 子线程通常执行耗时操作
-        // 1. Message
-        // Message消息，理解为线程间交流的信息，处理数据后台线程需要更新UI，则发送Message内含一些数据给UI线程。
         handler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {

@@ -24,7 +24,6 @@ import java.util.ArrayList;
 
 /**
  * Created by dllo on 16/3/29.
- * <p/>
  * 商品展示的Fragment
  */
 public class GoodsFragment extends Fragment {
@@ -45,9 +44,6 @@ public class GoodsFragment extends Fragment {
     private String type;
     private boolean hasNet;
 
-
-
-
     /**
      * 相当于初始化
      * @param menuListener
@@ -63,10 +59,10 @@ public class GoodsFragment extends Fragment {
     public static Fragment getInstance(int position, ArrayList<String> popTitles,ArrayList<String> categoryId,boolean hasNet) {
         Fragment instance = new GoodsFragment();
         Bundle bundle = new Bundle();
-        bundle.putStringArrayList("categoryId", categoryId);
-        bundle.putInt(Value.putPosition, position);
-        bundle.putStringArrayList(Value.putPopTitles, popTitles);
-        bundle.putBoolean("hasNet",hasNet);
+            bundle.putStringArrayList(Value.CATEGORYID, categoryId);
+        bundle.putInt(Value.POSITION, position);
+        bundle.putStringArrayList(Value.POPTITLES, popTitles);
+        bundle.putBoolean(Value.HASNET,hasNet);
         instance.setArguments(bundle);
         return instance;
     }
@@ -95,10 +91,9 @@ public class GoodsFragment extends Fragment {
     private void initData() {
         Bundle bundle = getArguments();
         categoryId = bundle.getStringArrayList(getString(R.string.categoryId));
-        position = bundle.getInt(Value.putPosition);
-        popTitles = bundle.getStringArrayList(Value.putPopTitles);
-        hasNet = bundle.getBoolean(getString(R.string.hasNet));
-        Log.i("hasnet", "initData: "+hasNet);
+        position = bundle.getInt(Value.POSITION);
+        popTitles = bundle.getStringArrayList(Value.POPTITLES);
+        hasNet = bundle.getBoolean(Value.HASNET);
         type = categoryId.get(position);
         titleTv.setText(popTitles.get(position));
 
@@ -110,7 +105,6 @@ public class GoodsFragment extends Fragment {
         });
          //有网的情况下 取网络解析
         if (hasNet) {
-            Log.i("net","net");
             MainPageHelper.newHelper(getActivity()).deleteAll();
             ArrayList<String> token = new ArrayList<>();
             token.add(getString(R.string.token));
@@ -130,7 +124,6 @@ public class GoodsFragment extends Fragment {
             netHelper.getPostInfo(NetConstants.GOODS_TYPE, token, value, GoodsListBean.class, new NetHelper.NetListener<GoodsListBean>() {
                         @Override
                         public void onSuccess(GoodsListBean goodsListBean) {
-                            Log.i("net",datas.size()+"");
                             datas = (ArrayList<GoodsListBean.DataEntity.ListEntity>) goodsListBean.getData().getList();
                             adapter = new GoodsRecycleViewAdapter(datas, getActivity(), categoryId.get(position),true);
                             GridLayoutManager gm = new GridLayoutManager(getActivity(), 1);

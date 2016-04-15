@@ -6,25 +6,11 @@ import java.util.ArrayList;
 
 /**
  * Created by dllo on 16/4/4.
+ *
+ * 所有网络拉去的Activity
  */
 public abstract class BaseNetActivity<T> extends BaseActivity{
-
-//    @Override
-//    protected void initNet() {
-//        NetHelper helper = new NetHelper(this);
-//        helper.getPostInfo(setUrl(), setKey(), setValue(), setEntityType(), new NetHelper.NetListener<T>() {
-//            @Override
-//            public void onSuccess(T t) {
-//            netHasSucceed(t);
-//            }
-//
-//            @Override
-//            public void onFailure() {
-//
-//            }
-//        });
-//    }
-
+    // TODO 未完成
     protected abstract String setUrl();
     protected abstract ArrayList<String> setKey();
     protected abstract ArrayList<String> setValue();

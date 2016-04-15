@@ -3,6 +3,9 @@ package com.qoo.magicmirror.view;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -19,10 +22,11 @@ import com.qoo.magicmirror.net.NetHelper;
 /**
  * Created by dllo on 16/4/14.
  */
-public class SYXImageLayout extends RelativeLayout{
+public class SYXImageLayout extends RelativeLayout {
     private ImageView src;
     private ProgressBar back;
     private Bitmap bitmap;
+    private Handler handler;
 
     public ImageView getSrc() {
         return src;
@@ -49,41 +53,51 @@ public class SYXImageLayout extends RelativeLayout{
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        RelativeLayout.LayoutParams  srcParams = (LayoutParams) src.getLayoutParams();
-        RelativeLayout.LayoutParams  backParams = (LayoutParams) back.getLayoutParams();
+        RelativeLayout.LayoutParams srcParams = (LayoutParams) src.getLayoutParams();
+        RelativeLayout.LayoutParams backParams = (LayoutParams) back.getLayoutParams();
         srcParams.width = LayoutParams.MATCH_PARENT;
-        srcParams.height = LayoutParams.WRAP_CONTENT;
-        backParams.width = LayoutParams.MATCH_PARENT;
-        backParams.height = LayoutParams.MATCH_PARENT;
+        srcParams.height = LayoutParams.MATCH_PARENT;
+        backParams.width = LayoutParams.WRAP_CONTENT;
+        backParams.height = LayoutParams.WRAP_CONTENT;
         backParams.addRule(RelativeLayout.CENTER_IN_PARENT);
         src.setLayoutParams(srcParams);
         src.setBackgroundColor(Color.TRANSPARENT);
         back.setLayoutParams(backParams);
     }
 
-    private void initView(){
+    private void initView() {
         src = new ImageView(getContext());
+        src.setScaleType(ImageView.ScaleType.FIT_XY);
         back = new ProgressBar(getContext());
         addView(back);
         addView(src);
-
-
-    }
-    public void setImage(String url){
-        back.setVisibility(VISIBLE);
-        NetHelper.newNetHelper(getContext()).setImage(src, url, new NetHelper.ImageListener() {
+        handler = new Handler(new Handler.Callback() {
             @Override
-            public void imageFished(Bitmap bitmap) {
-                SYXImageLayout.this.bitmap = bitmap;
-                Log.d("loadfinished",bitmap.toString());
+            public boolean handleMessage(Message msg) {
+                src.setVisibility(VISIBLE);
                 back.setVisibility(GONE);
+                return false;
             }
         });
     }
-    public void setImage(String url,GoodsListBean.DataEntity.ListEntity data,String type){
-        NetHelper.newNetHelper(getContext()).setImage(src,url,data,type);
+
+    public void setImage(String url) {
+        src.setVisibility(INVISIBLE);
+        back.setVisibility(VISIBLE);
+        NetHelper.newNetHelper(getContext()).setBitmap(src, url, new NetHelper.ImageListener() {
+            @Override
+            public void imageFished(Bitmap bitmap) {
+                SYXImageLayout.this.bitmap = bitmap;
+                handler.sendEmptyMessage(1);
+            }
+        });
     }
-    public void setScale(ImageView.ScaleType type){
+
+    public void setImage(String url, GoodsListBean.DataEntity.ListEntity data, String type) {
+        NetHelper.newNetHelper(getContext()).setImage(src, url, data, type);
+    }
+
+    public void setScale(ImageView.ScaleType type) {
         src.setScaleType(type);
     }
 }

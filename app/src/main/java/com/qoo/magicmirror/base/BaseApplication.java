@@ -17,19 +17,16 @@ import java.io.File;
 public class BaseApplication extends Application {
 
     public static Context context;
-    private ImageLoader imageLoader;
-    private ImageLoaderConfiguration configuration;
-    private String diskPath;
 
     @Override
     public void onCreate() {
         super.onCreate();
         context = this;
-
     }
 
     public static Context getContext() {
         if (context == null) {
+
         }
         return context;
     }

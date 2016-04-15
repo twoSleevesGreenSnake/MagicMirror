@@ -15,6 +15,7 @@ import java.util.ArrayList;
  * Created by Giraffe on 16/3/29.
  */
 public class VerticalViewpagerAdapter extends PagerAdapter {
+
     private ArrayList<View> views;
     private Context context;
 

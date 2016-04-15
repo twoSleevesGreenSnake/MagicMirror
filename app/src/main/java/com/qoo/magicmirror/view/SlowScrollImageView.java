@@ -10,9 +10,11 @@ import android.widget.Scroller;
 /**
  * Created by dllo on 16/3/29.
  */
-public class SlowScrollImageView  extends ImageView{
+public class SlowScrollImageView extends ImageView {
+
     private Scroller scroller;
     private ViewGroup group;
+
     public SlowScrollImageView(Context context) {
         super(context);
         initScroll(context);
@@ -31,18 +33,20 @@ public class SlowScrollImageView  extends ImageView{
     @Override
     public void computeScroll() {
         super.computeScroll();
-        if (scroller.computeScrollOffset()){
+        if (scroller.computeScrollOffset()) {
             group = (ViewGroup) getParent();
             group.scrollTo(scroller.getCurrX(), scroller.getCurrY());
             invalidate();
         }
     }
-    private void initScroll(Context context){
+
+    private void initScroll(Context context) {
         scroller = new Scroller(context);
         group = (ViewGroup) getParent();
     }
-    public void starScroll(int x,int y){
-        scroller.startScroll(x/10,(int)getY(),-x/10,-(int)getY(),1000);
+
+    public void starScroll(int x, int y) {
+        scroller.startScroll(x / 10, (int) getY(), -x / 10, -(int) getY(), 1000);
         invalidate();
     }
 }

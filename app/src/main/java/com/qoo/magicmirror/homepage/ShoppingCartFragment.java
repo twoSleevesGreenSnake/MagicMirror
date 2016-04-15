@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.qoo.magicmirror.R;
+import com.qoo.magicmirror.constants.Value;
 
 import java.util.ArrayList;
 
@@ -66,7 +67,7 @@ public class ShoppingCartFragment extends Fragment {
     private void initView() {
         // 设置标题
         Bundle bundle = getArguments();
-        shoppingTitle = bundle.getStringArrayList("shoppingTitle");
+        shoppingTitle = bundle.getStringArrayList(Value.SHOPPINGTITLE);
         titleTv.setText(shoppingTitle.get(4));
     }
 }

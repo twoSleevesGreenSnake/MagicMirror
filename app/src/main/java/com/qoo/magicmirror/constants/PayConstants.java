@@ -2,8 +2,10 @@ package com.qoo.magicmirror.constants;
 
 /**
  * Created by dllo on 16/4/8.
+ * 支付宝集成
  */
 public final class PayConstants {
+
     public static final String PARTNER = "";
     // 商户收款账号
     public static final String SELLER = "";
