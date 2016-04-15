@@ -17,6 +17,7 @@ import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.constants.Value;
 import com.qoo.magicmirror.detail.SpecialTopicDetailActivity;
 import com.qoo.magicmirror.net.NetHelper;
+import com.qoo.magicmirror.view.SYXImageLayout;
 
 import java.util.ArrayList;
 
@@ -44,12 +45,7 @@ public class ThematicRecycleViewAdapter extends RecyclerView.Adapter<ThematicRec
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.nameTv.setText(datas.get(position).getStory_title());
-        new NetHelper(context).setImage(holder.img, datas.get(position).getStory_img(), new NetHelper.ImageListener() {
-            @Override
-            public void imageFished(Bitmap bitmap) {
-                Toast.makeText(context, "你妹啊", Toast.LENGTH_SHORT).show();
-            }
-        });
+        holder.img.setImage(datas.get(position).getStory_img());
         holder.itemRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,12 +64,12 @@ public class ThematicRecycleViewAdapter extends RecyclerView.Adapter<ThematicRec
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView nameTv;
-        ImageView img;
+        SYXImageLayout img;
         RelativeLayout itemRl;
         public MyViewHolder(View itemView) {
             super(itemView);
             nameTv = (TextView) itemView.findViewById(R.id.item_fragment_thematic_name_tv);
-            img = (ImageView) itemView.findViewById(R.id.item_fragment_thematic_iv);
+            img = (SYXImageLayout) itemView.findViewById(R.id.item_fragment_thematic_iv);
             itemRl = (RelativeLayout) itemView.findViewById(R.id.item_fragment_thematic_rl);
         }
     }

@@ -1,6 +1,7 @@
 package com.qoo.magicmirror.homepage;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -44,6 +45,9 @@ public class GoodsFragment extends Fragment {
     private String type;
     private boolean hasNet;
 
+
+
+
     /**
      * 相当于初始化
      * @param menuListener
@@ -60,11 +64,10 @@ public class GoodsFragment extends Fragment {
         Fragment instance = new GoodsFragment();
         Bundle bundle = new Bundle();
         bundle.putStringArrayList("categoryId", categoryId);
-        bundle.putBoolean("hasNet", hasNet);
         bundle.putInt(Value.putPosition, position);
         bundle.putStringArrayList(Value.putPopTitles, popTitles);
+        bundle.putBoolean("hasNet",hasNet);
         instance.setArguments(bundle);
-        Log.i("static",hasNet+"");
         return instance;
     }
 
@@ -95,6 +98,7 @@ public class GoodsFragment extends Fragment {
         position = bundle.getInt(Value.putPosition);
         popTitles = bundle.getStringArrayList(Value.putPopTitles);
         hasNet = bundle.getBoolean(getString(R.string.hasNet));
+        Log.i("hasnet", "initData: "+hasNet);
         type = categoryId.get(position);
         titleTv.setText(popTitles.get(position));
 

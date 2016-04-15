@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Environment;
 import android.os.Handler;
@@ -80,7 +81,6 @@ public class NetHelper<T> {
     private final DisplayImageOptions options;
     private Class<T> cls;
     private static NetHelper helper;
-    private ThreadPoolExecutor executor;
     private ImageListener imageListener;
 
     public void setImageListener(ImageListener imageListener) {
@@ -122,12 +122,7 @@ public class NetHelper<T> {
             diskPath = file.getAbsolutePath();
         }
         this.context = context;
-        executor = (ThreadPoolExecutor) Executors.newCachedThreadPool(new ThreadFactory() {
-            @Override
-            public Thread newThread(Runnable r) {
-                return new Thread(r);
-            }
-        });
+
         mOkHttpClient = new OkHttpClient();
         configuration = new ImageLoaderConfiguration.Builder(context).diskCache(new UnlimitedDiscCache(file)).diskCacheFileNameGenerator(new Md5FileNameGenerator()).build();
         ImageLoader.getInstance().init(configuration);
@@ -135,9 +130,9 @@ public class NetHelper<T> {
 
         //设置imageloader
          options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.mipmap.ic_launcher) // 设置图片下载期间显示的图片
-                .showImageForEmptyUri(R.mipmap.ic_launcher) // 设置图片Uri为空或是错误的时候显示的图片
-                .showImageOnFail(R.mipmap.ic_launcher) // 设置图片加载或解码过程中发生错误显示的图片
+                .showImageOnLoading(Color.TRANSPARENT) // 设置图片下载期间显示的图片
+                .showImageForEmptyUri(Color.TRANSPARENT) // 设置图片Uri为空或是错误的时候显示的图片
+                .showImageOnFail(Color.TRANSPARENT) // 设置图片加载或解码过程中发生错误显示的图片
                 .resetViewBeforeLoading(false)  // default 设置图片在加载前是否重置、复位
                 .delayBeforeLoading(1000)  // 下载前的延迟时间
                 .cacheInMemory(true) // default  设置下载的图片是否缓存在内存中
@@ -252,6 +247,7 @@ public class NetHelper<T> {
      * @param url 网址
      */
     public void setBackGround(View v, String url) {
+
         Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url, options);
 
         v.setBackground(new BitmapDrawable(context.getResources(), bitmap));
@@ -270,7 +266,7 @@ public class NetHelper<T> {
     }
 
 
-    public void setImage(final ImageView imageView, final String url, final ImageListener imageListener) {
+    public void setImage( ImageView imageView,  String url,  final ImageListener imageListener) {
 
         imageLoader.displayImage(url, imageView,options, new ImageLoadingListener() {
             @Override

@@ -17,6 +17,7 @@ import com.qoo.magicmirror.constants.Value;
 import com.qoo.magicmirror.db.MainPageData;
 import com.qoo.magicmirror.detail.BrowseGlassesActivity;
 import com.qoo.magicmirror.net.NetHelper;
+import com.qoo.magicmirror.view.SYXImageLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +64,8 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
             holder.originTv.setText(data.get(position).getProduct_area());
             holder.priceTv.setText(data.get(position).getGoods_price());
             holder.describeTv.setText(data.get(position).getBrand());
-            new NetHelper(context).setImage(holder.goodPic, data.get(position).getGoods_img(), data.get(position), type);
+            holder.goodPic.setScale(ImageView.ScaleType.FIT_XY);
+            holder.goodPic.setImage(data.get(position).getGoods_img(),data.get(position),type);
             holder.itemLl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -78,7 +80,7 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
             holder.originTv.setText(noNetData.get(position).getArea());
             holder.priceTv.setText(noNetData.get(position).getPrice());
             holder.describeTv.setText(noNetData.get(position).getBrand());
-            new NetHelper(context).setImage(holder.goodPic, noNetData.get(position).getPath());
+            holder.goodPic.setImage(noNetData.get(position).getPath());
             holder.itemLl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -107,12 +109,12 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
     }
         class MyViewHolder extends RecyclerView.ViewHolder {
             private TextView nameTv, originTv, priceTv, describeTv;
-            private ImageView goodPic;
+            private SYXImageLayout goodPic;
             private LinearLayout itemLl;
 
             public MyViewHolder(View itemView) {
                 super(itemView);
-                goodPic = (ImageView) itemView.findViewById(R.id.item_fragment_goods_iv);
+                goodPic = (SYXImageLayout) itemView.findViewById(R.id.item_fragment_goods_iv);
                 nameTv = (TextView) itemView.findViewById(R.id.item_fragment_goods_name_tv);
                 originTv = (TextView) itemView.findViewById(R.id.item_fragment_goods_origin_tv);
                 priceTv = (TextView) itemView.findViewById(R.id.item_fragment_goods_price_tv);

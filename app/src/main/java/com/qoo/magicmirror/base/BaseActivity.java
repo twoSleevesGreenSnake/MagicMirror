@@ -40,7 +40,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
     protected static String token = "";
     protected static  final Map<Class<? extends BaseActivity>,BaseActivity> activities = new HashMap<>();
     private Point point;
-    private NetReceiver receivier = new NetReceiver();
+    private NetReceiver receiver = new NetReceiver();
 
 
 
@@ -54,7 +54,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         getWindowManager().getDefaultDisplay().getSize(point);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(getString(R.string.com_qoo_magicmirror_NET_COMING));
-        registerReceiver(receivier,intentFilter);
+        registerReceiver(receiver,intentFilter);
         initView();// 初始化数据，绑定组件
         initData();// 其他操作
     }
@@ -112,7 +112,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
 
     @Override
     protected void onDestroy() {
-        unregisterReceiver(receivier);
+        unregisterReceiver(receiver);
         super.onDestroy();
         deleteSelf();
     }

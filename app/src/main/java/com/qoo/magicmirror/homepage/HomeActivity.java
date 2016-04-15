@@ -237,7 +237,7 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
 
             @Override
             public void onFailure() {
-                startService(new Intent(HomeActivity.this, NetService.class));
+//                startService(new Intent(HomeActivity.this, NetService.class));
 
                 getInfoFromDb();
 

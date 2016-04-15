@@ -11,11 +11,10 @@
         android:layout_width="@dimen/item_fragment_goods_iv_width"
         android:layout_height="@dimen/item_fragment_goods_rl_height">
 
-        <ImageView
+        <com.qoo.magicmirror.view.SYXImageLayout
             android:id="@+id/item_fragment_goods_iv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scaleType="fitXY"
             android:src="@mipmap/ic_launcher"/>
 
         <RelativeLayout

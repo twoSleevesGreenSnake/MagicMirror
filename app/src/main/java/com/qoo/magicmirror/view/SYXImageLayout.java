@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -54,26 +55,27 @@ public class SYXImageLayout extends RelativeLayout{
         srcParams.height = LayoutParams.WRAP_CONTENT;
         backParams.width = LayoutParams.MATCH_PARENT;
         backParams.height = LayoutParams.MATCH_PARENT;
-        src.setScaleType(ImageView.ScaleType.CENTER_CROP);
         backParams.addRule(RelativeLayout.CENTER_IN_PARENT);
         src.setLayoutParams(srcParams);
+        src.setBackgroundColor(Color.TRANSPARENT);
         back.setLayoutParams(backParams);
     }
 
     private void initView(){
         src = new ImageView(getContext());
         back = new ProgressBar(getContext());
-        addView(src);
         addView(back);
+        addView(src);
+
+
     }
     public void setImage(String url){
-        src.setVisibility(INVISIBLE);
         back.setVisibility(VISIBLE);
         NetHelper.newNetHelper(getContext()).setImage(src, url, new NetHelper.ImageListener() {
             @Override
             public void imageFished(Bitmap bitmap) {
-                SYXImageLayout.this.bitmap =bitmap;
-                src.setVisibility(VISIBLE);
+                SYXImageLayout.this.bitmap = bitmap;
+                Log.d("loadfinished",bitmap.toString());
                 back.setVisibility(GONE);
             }
         });
@@ -81,5 +83,7 @@ public class SYXImageLayout extends RelativeLayout{
     public void setImage(String url,GoodsListBean.DataEntity.ListEntity data,String type){
         NetHelper.newNetHelper(getContext()).setImage(src,url,data,type);
     }
-
+    public void setScale(ImageView.ScaleType type){
+        src.setScaleType(type);
+    }
 }
