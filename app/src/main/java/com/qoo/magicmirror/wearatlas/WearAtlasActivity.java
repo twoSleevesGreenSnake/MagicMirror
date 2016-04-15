@@ -39,7 +39,7 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
 /**
  * Created by Giraffe on 16/4/5.
- *
+ * <p/>
  * 图集界面的Activity
  */
 public class WearAtlasActivity extends BaseActivity {
@@ -49,7 +49,7 @@ public class WearAtlasActivity extends BaseActivity {
     private WearAtlasListViewAdapter wearAtlasListViewAdapter;
     private static ArrayList<GoodsListBean.DataEntity.ListEntity.WearVideoEntity> data;
     private static GoodsListBean.DataEntity.ListEntity datas;
-    private ImageView  showBigImg,ivBack,ivPurchase;
+    private ImageView showBigImg, ivBack, ivPurchase;
     private JCVideoPlayer vp;
     private RelativeLayout showBigLayout;
     private int screenHeight;
@@ -57,6 +57,7 @@ public class WearAtlasActivity extends BaseActivity {
     private AnimatorSet set = new AnimatorSet();
     private RelativeLayout layout;
     private float ratio;
+    private int pos;
     private float alpha = 0.8f;
     private static String price, goodsId;
     int startY;
@@ -76,9 +77,19 @@ public class WearAtlasActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        GoodsListBean.DataEntity.ListEntity.WearVideoEntity wear = null;
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).getType().equals("8")) {
+                wear = data.get(i);
+                data.remove(wear);
+            }
+
+        }
+        data.add(0, wear);
         vp.setUp(data.get(0).getData(), null);
+
         NetHelper netHelper = new NetHelper(WearAtlasActivity.this);
-        netHelper.setImage(vp.ivThumb, data.get(0).getData());
+        netHelper.setImage(vp.ivThumb, data.get(1).getData());
         vp.ivThumb.setAlpha(alpha);
         wearAtlasListViewAdapter = new WearAtlasListViewAdapter(data, context);
         listView.setAdapter(wearAtlasListViewAdapter);
@@ -168,10 +179,12 @@ public class WearAtlasActivity extends BaseActivity {
     public class WearAtlasListViewAdapter extends BaseAdapter {
         private List<GoodsListBean.DataEntity.ListEntity.WearVideoEntity> data;
         private Context context;
+
         public WearAtlasListViewAdapter(List<GoodsListBean.DataEntity.ListEntity.WearVideoEntity> data, Context context) {
             this.data = data;
             this.context = context;
         }
+
         @Override
         public int getCount() {
             return data != null && data.size() > 0 ? data.size() - 2 : 0;
@@ -198,7 +211,7 @@ public class WearAtlasActivity extends BaseActivity {
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-            GoodsListBean.DataEntity.ListEntity.WearVideoEntity wearVideoEntity = data.get(position + 1);
+            GoodsListBean.DataEntity.ListEntity.WearVideoEntity wearVideoEntity = data.get(position + 2);
             if (wearVideoEntity != null) {
                 if (wearVideoEntity.getData() == null || wearVideoEntity.getData() == "") {
                     return convertView;
@@ -211,7 +224,7 @@ public class WearAtlasActivity extends BaseActivity {
                 new NetHelper<GoodsListBean.DataEntity.ListEntity.WearVideoEntity>(parent.getContext()).setCutBitmap(viewHolder.imageView, wearVideoEntity.getData(), new NetHelper.ImageListener() {
                     @Override
                     public void imageFished(Bitmap bitmap) {
-                      finalViewHolder.bitmap = bitmap;
+                        finalViewHolder.bitmap = bitmap;
                     }
                 });
             }
@@ -222,6 +235,7 @@ public class WearAtlasActivity extends BaseActivity {
         public class ViewHolder {
             ImageView imageView;
             Bitmap bitmap;
+
             public ViewHolder(final View convertView) {
                 imageView = (ImageView) convertView.findViewById(R.id.item_wear_atlas_rv_iv);
                 imageView.setOnClickListener(new View.OnClickListener() {
