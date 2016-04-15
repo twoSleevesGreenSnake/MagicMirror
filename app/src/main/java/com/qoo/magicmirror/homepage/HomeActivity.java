@@ -228,7 +228,7 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
                     editor.commit();
                 }
 
-                Log.i("netsuss",titles.size()+"");
+
                 adapter = new VerticalViewPagerAdapter(getSupportFragmentManager(), fragments, titles, HomeActivity.this, categoryId, true);
                 adapter.upData();
                 verticalViewPager.setAdapter(adapter);
@@ -237,7 +237,7 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
 
             @Override
             public void onFailure() {
-//                startService(new Intent(HomeActivity.this, NetService.class));
+                startService(new Intent(HomeActivity.this, NetService.class));
 
                 getInfoFromDb();
 

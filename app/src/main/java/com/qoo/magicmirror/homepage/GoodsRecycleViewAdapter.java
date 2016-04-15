@@ -80,6 +80,7 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
             holder.originTv.setText(noNetData.get(position).getArea());
             holder.priceTv.setText(noNetData.get(position).getPrice());
             holder.describeTv.setText(noNetData.get(position).getBrand());
+            holder.goodPic.setScale(ImageView.ScaleType.FIT_XY);
             holder.goodPic.setImage(noNetData.get(position).getPath());
             holder.itemLl.setOnClickListener(new View.OnClickListener() {
                 @Override
