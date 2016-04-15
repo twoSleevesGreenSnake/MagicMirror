@@ -259,10 +259,11 @@ public class NetHelper<T> {
      * @param imageView 组件
      * @param url       网址
      */
-    public Bitmap setImage(ImageView imageView, String url) {
-        final Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url, options);
-        imageView.setImageBitmap(bitmap);
-        return bitmap;
+    public void setImage(ImageView imageView, String url) {
+        imageLoader.displayImage(url,imageView,options);
+//        final Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url, options);
+//        imageView.setImageBitmap(bitmap);
+//        return bitmap;
     }
 
 

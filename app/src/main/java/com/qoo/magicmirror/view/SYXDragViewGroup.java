@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 /**
@@ -18,7 +19,7 @@ public class SYXDragViewGroup extends RelativeLayout {
 
 
     private ViewDragHelper viewDragHelper;
-    private View mainView;
+    private ViewGroup mainView;
 
     public SYXDragViewGroup(Context context) {
         super(context);
@@ -38,7 +39,7 @@ public class SYXDragViewGroup extends RelativeLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        mainView = getChildAt(0);
+        mainView = (ViewGroup) getChildAt(0);
     }
 
     @Override
@@ -84,7 +85,8 @@ public class SYXDragViewGroup extends RelativeLayout {
                 viewDragHelper.smoothSlideViewTo(mainView, 0, 0);
                 ViewCompat.postInvalidateOnAnimation(SYXDragViewGroup.this);
             } else {
-                viewDragHelper.smoothSlideViewTo(mainView, -200, 0);
+                Log.d("width", -mainView.getChildAt(1).getWidth()+"");
+                viewDragHelper.smoothSlideViewTo(mainView, -(mainView.getChildAt(1).getRight()-mainView.getChildAt(0).getRight()+39*2), 0);
                 ViewCompat.postInvalidateOnAnimation(SYXDragViewGroup.this);
             }
         }

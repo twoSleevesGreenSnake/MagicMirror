@@ -45,6 +45,7 @@ public class ThematicRecycleViewAdapter extends RecyclerView.Adapter<ThematicRec
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.nameTv.setText(datas.get(position).getStory_title());
+        holder.img.setScale(ImageView.ScaleType.FIT_XY);
         holder.img.setImage(datas.get(position).getStory_img());
         holder.itemRl.setOnClickListener(new View.OnClickListener() {
             @Override
