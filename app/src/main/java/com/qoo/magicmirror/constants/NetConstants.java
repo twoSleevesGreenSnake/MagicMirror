@@ -63,5 +63,7 @@ public final class NetConstants {
     // 分享开关
     public static final String SHARED_SWITCH = "index.php/index/share_switch";
 
+    public static final String SHARE_GOODS = "http://api.mirroreye.cn/index.php/storyweb/share_array?";
+    public static final String SHARE_GOODS_BOTTOM = "&from=singlemessage&isappinstalled=1";
 
 }

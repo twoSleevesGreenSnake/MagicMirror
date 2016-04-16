@@ -130,5 +130,6 @@
     <string name="callphone">cellphone</string>
     <string name="addr_indo">addr_info</string>
     <string name="activity_address_detail_title_tv">添加收货地址</string>
+    <string name="share_goods">我是分享宝贝</string>
 
 </resources>
