@@ -123,11 +123,6 @@
 
 
 
-        <activity android:name=".view.TestActivity"/>
-
-
-
-
     </application>
 
 </manifest>

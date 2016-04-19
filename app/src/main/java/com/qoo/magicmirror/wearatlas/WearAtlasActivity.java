@@ -30,6 +30,7 @@ import com.qoo.magicmirror.constants.NetConstants;
 import com.qoo.magicmirror.homepage.GoodsListBean;
 import com.qoo.magicmirror.net.NetHelper;
 import com.qoo.magicmirror.order.OrderDetailActivity;
+import com.qoo.magicmirror.view.SYXImageLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -221,23 +222,30 @@ public class WearAtlasActivity extends BaseActivity {
                 params.topMargin = (100);
                 viewHolder.imageView.setLayoutParams(params);
                 final ViewHolder finalViewHolder = viewHolder;
-                new NetHelper<GoodsListBean.DataEntity.ListEntity.WearVideoEntity>(parent.getContext()).setCutBitmap(viewHolder.imageView, wearVideoEntity.getData(), new NetHelper.ImageListener() {
+                viewHolder.imageView.setScale(ImageView.ScaleType.CENTER_CROP);
+                viewHolder.imageView.setImage(wearVideoEntity.getData(), new NetHelper.ImageListener() {
                     @Override
                     public void imageFished(Bitmap bitmap) {
                         finalViewHolder.bitmap = bitmap;
                     }
                 });
+//                new NetHelper<GoodsListBean.DataEntity.ListEntity.WearVideoEntity>(parent.getContext()).setCutBitmap(viewHolder.imageView, wearVideoEntity.getData(), new NetHelper.ImageListener() {
+//                    @Override
+//                    public void imageFished(Bitmap bitmap) {
+//                        finalViewHolder.bitmap = bitmap;
+//                    }
+//                });
             }
             return convertView;
         }
 
 
         public class ViewHolder {
-            ImageView imageView;
+            SYXImageLayout imageView;
             Bitmap bitmap;
 
             public ViewHolder(final View convertView) {
-                imageView = (ImageView) convertView.findViewById(R.id.item_wear_atlas_rv_iv);
+                imageView = (SYXImageLayout) convertView.findViewById(R.id.item_wear_atlas_rv_iv);
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

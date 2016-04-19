@@ -100,4 +100,16 @@ public class SYXImageLayout extends RelativeLayout {
     public void setScale(ImageView.ScaleType type) {
         src.setScaleType(type);
     }
+    public void setImage(String url, final NetHelper.ImageListener listener) {
+        src.setVisibility(INVISIBLE);
+        back.setVisibility(VISIBLE);
+        NetHelper.newNetHelper(getContext()).setBitmap(src, url, new NetHelper.ImageListener() {
+            @Override
+            public void imageFished(Bitmap bitmap) {
+                Bitmap newBitmap = Bitmap.createBitmap(bitmap, 39, 0, bitmap.getWidth() - 78, bitmap.getHeight());
+                listener.imageFished(newBitmap);
+                handler.sendEmptyMessage(1);
+            }
+        });
+    }
 }

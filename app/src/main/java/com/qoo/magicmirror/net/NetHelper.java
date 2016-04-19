@@ -227,7 +227,7 @@ public class NetHelper<T> {
             @Override
             public boolean handleMessage(Message msg) {
                 if (msg.what == 9) {
-                    imageView.setImageBitmap((Bitmap)msg.obj);
+                    imageView.setImageBitmap((Bitmap) msg.obj);
                 }
                 return false;
             }
@@ -280,9 +280,15 @@ public class NetHelper<T> {
      * @param v 组件
      * @param url 网址
      */
-    public void setBackGround(View v, String url) {
-        Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url, options);
-        v.setBackground(new BitmapDrawable(context.getResources(), bitmap));
+    public void setBackGround(final View v, final String url) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                Bitmap bitmap = ImageLoader.getInstance().loadImageSync(url, options);
+                v.setBackground(new BitmapDrawable(context.getResources(), bitmap));
+            }
+        });
+
     }
 
     /**
