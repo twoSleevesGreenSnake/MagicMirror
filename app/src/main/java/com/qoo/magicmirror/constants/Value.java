@@ -18,6 +18,7 @@ public final class Value {
     public static final String CATEGORYID = "categoryId";
     public static final String HASNET = "hasNet";
     public static final String SHOPPINGTITLE = "shoppingTitle";
+    public static  final String GOODS_SHARE_ID = "id=";
 
 
 
