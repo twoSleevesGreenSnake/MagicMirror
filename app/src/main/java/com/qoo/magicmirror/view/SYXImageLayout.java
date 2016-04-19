@@ -21,12 +21,14 @@ import com.qoo.magicmirror.net.NetHelper;
 
 /**
  * Created by dllo on 16/4/14.
+ * 没加载出来带转圈的东西
+ * 此类真的好low啊
+ *
+ * 所以此类并没有什么注释
  */
 public class SYXImageLayout extends RelativeLayout {
     private ImageView src;
     private ProgressBar back;
-    private Bitmap bitmap;
-    private Handler handler;
 
     public ImageView getSrc() {
         return src;
@@ -64,21 +66,29 @@ public class SYXImageLayout extends RelativeLayout {
         src.setBackgroundColor(Color.TRANSPARENT);
         back.setLayoutParams(backParams);
     }
-
+    private void onImageFinished(){
+        post(new Runnable() {
+            @Override
+            public void run() {
+                src.setVisibility(VISIBLE);
+                back.setVisibility(GONE);
+            }
+        });
+    }
     private void initView() {
         src = new ImageView(getContext());
         src.setScaleType(ImageView.ScaleType.FIT_XY);
         back = new ProgressBar(getContext());
         addView(back);
         addView(src);
-        handler = new Handler(new Handler.Callback() {
-            @Override
-            public boolean handleMessage(Message msg) {
-                src.setVisibility(VISIBLE);
-                back.setVisibility(GONE);
-                return false;
-            }
-        });
+//        handler = new Handler(new Handler.Callback() {
+//            @Override
+//            public boolean handleMessage(Message msg) {
+//                src.setVisibility(VISIBLE);
+//                back.setVisibility(GONE);
+//                return false;
+//            }
+//        });
     }
 
     public void setImage(String url) {
@@ -87,8 +97,7 @@ public class SYXImageLayout extends RelativeLayout {
         NetHelper.newNetHelper(getContext()).setBitmap(src, url, new NetHelper.ImageListener() {
             @Override
             public void imageFished(Bitmap bitmap) {
-                SYXImageLayout.this.bitmap = bitmap;
-                handler.sendEmptyMessage(1);
+                onImageFinished();
             }
         });
     }
@@ -108,7 +117,7 @@ public class SYXImageLayout extends RelativeLayout {
             public void imageFished(Bitmap bitmap) {
                 Bitmap newBitmap = Bitmap.createBitmap(bitmap, 39, 0, bitmap.getWidth() - 78, bitmap.getHeight());
                 listener.imageFished(newBitmap);
-                handler.sendEmptyMessage(1);
+                onImageFinished();
             }
         });
     }
