@@ -66,7 +66,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected void initData() {
-        netHelper = new NetHelper(this);
+        netHelper = NetHelper.newNetHelper(this);
         sendCodeBtn.setOnClickListener(this);
         createCountBtn.setOnClickListener(this);
         closeIv.setOnClickListener(this);

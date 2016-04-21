@@ -40,7 +40,7 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     protected void initView() {
         imageView = bindView(R.id.activity_welcome_img);
-        netHelper = new NetHelper(this);
+        netHelper = NetHelper.newNetHelper(this);
 
 
     }

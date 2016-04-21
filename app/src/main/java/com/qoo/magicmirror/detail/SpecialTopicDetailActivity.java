@@ -79,7 +79,7 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
         value.add("");
         value.add(getString(R.string.one));
         value.add(storyId);
-        final NetHelper netHelper = new NetHelper(this);
+        final NetHelper netHelper = NetHelper.newNetHelper(this);
 
         netHelper.getPostInfo(NetConstants.STORY_INFO, token, value, SpecialTopicDetailBean.class, new NetHelper.NetListener<SpecialTopicDetailBean>() {
             @Override

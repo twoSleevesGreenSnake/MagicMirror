@@ -103,7 +103,7 @@ public class NetHelper<T> {
         return helper;
     }
 
-    public NetHelper(Context context) {
+    private NetHelper(Context context) {
         super();
         /**
          * 判断是否有SD卡，并获取SD的路径

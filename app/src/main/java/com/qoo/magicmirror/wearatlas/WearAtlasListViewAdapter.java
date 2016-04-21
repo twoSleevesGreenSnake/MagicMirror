@@ -56,7 +56,7 @@ public class WearAtlasListViewAdapter extends BaseAdapter {
         }
         GoodsListBean.DataEntity.ListEntity.WearVideoEntity wearVideoEntity = data.get(position + 1);
         if (wearVideoEntity != null) {
-            new NetHelper<GoodsListBean.DataEntity.ListEntity.WearVideoEntity>(context).setImage(viewHolder.imageView, wearVideoEntity.getData());
+            NetHelper.newNetHelper(context).setImage(viewHolder.imageView, wearVideoEntity.getData());
 
         }
         return convertView;

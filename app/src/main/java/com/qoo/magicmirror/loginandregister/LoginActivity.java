@@ -58,7 +58,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         closeIv.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
         btnCreateAccount.setOnClickListener(this);
-        netHelper = new NetHelper(this);
+        netHelper = NetHelper.newNetHelper(this);
     }
 
     private void listenEditText() {

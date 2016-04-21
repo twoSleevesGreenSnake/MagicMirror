@@ -203,7 +203,7 @@ public class HomeActivity extends BaseActivity implements MenuFragment.MenuClick
      * 拉取网络数据的方法
      */
     public void getNetInfo() {
-        NetHelper netHelper = new NetHelper(this);
+        NetHelper netHelper = NetHelper.newNetHelper(this);
         ArrayList<String> token = new ArrayList<>();
         token.add(getString(R.string.token));
         ArrayList<String> value = new ArrayList<>();

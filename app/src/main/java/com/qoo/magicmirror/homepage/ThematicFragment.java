@@ -73,7 +73,7 @@ public class ThematicFragment extends Fragment {
     }
 
     private void initView() {
-        netHelper = new NetHelper(getContext());
+        netHelper = NetHelper.newNetHelper(getContext());
         ArrayList<String> token = new ArrayList<>();
         ArrayList<String> value = new ArrayList<>();
         token.add(getString(R.string.token));

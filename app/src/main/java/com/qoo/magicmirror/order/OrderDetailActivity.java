@@ -153,15 +153,6 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
             showNumberTv.setText(getString(R.string.cellnumber) + detailAddressBean.getCellphone());
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (showNumberTv.length() != 0) {
-            addAddressTv.setText(R.string.change_address);
-        } else {
-            addAddressTv.setText(R.string.add_address);
-        }
-    }
 
     @Override
     public void onClick(View v) {

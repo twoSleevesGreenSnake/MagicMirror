@@ -90,7 +90,7 @@ public class WearAtlasActivity extends BaseActivity {
         if (wear!=null) {
             vp.setUp(data.get(0).getData(), null);
         }
-        NetHelper netHelper = new NetHelper(WearAtlasActivity.this);
+        NetHelper netHelper = NetHelper.newNetHelper(this);
         netHelper.setImage(vp.ivThumb, data.get(1).getData());
         vp.ivThumb.setAlpha(alpha);
         wearAtlasListViewAdapter = new WearAtlasListViewAdapter(data, context);

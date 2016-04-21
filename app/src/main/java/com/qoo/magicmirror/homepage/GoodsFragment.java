@@ -120,7 +120,7 @@ public class GoodsFragment extends Fragment {
             value.add("");
             value.add(categoryId.get(position));
             value.add(getString(R.string.one_zero_one));
-            NetHelper netHelper = new NetHelper(getContext());
+            NetHelper netHelper = NetHelper.newNetHelper(getContext());
             netHelper.getPostInfo(NetConstants.GOODS_TYPE, token, value, GoodsListBean.class, new NetHelper.NetListener<GoodsListBean>() {
                         @Override
                         public void onSuccess(GoodsListBean goodsListBean) {
