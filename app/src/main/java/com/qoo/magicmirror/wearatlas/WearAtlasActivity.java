@@ -230,12 +230,6 @@ public class WearAtlasActivity extends BaseActivity {
                         finalViewHolder.bitmap = bitmap;
                     }
                 });
-//                new NetHelper<GoodsListBean.DataEntity.ListEntity.WearVideoEntity>(parent.getContext()).setCutBitmap(viewHolder.imageView, wearVideoEntity.getData(), new NetHelper.ImageListener() {
-//                    @Override
-//                    public void imageFished(Bitmap bitmap) {
-//                        finalViewHolder.bitmap = bitmap;
-//                    }
-//                });
             }
             return convertView;
         }

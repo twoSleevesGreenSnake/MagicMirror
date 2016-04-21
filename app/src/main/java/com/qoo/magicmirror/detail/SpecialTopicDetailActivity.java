@@ -42,8 +42,10 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
     private FrameLayout frameLayoutMiddle, frameLayoutUppermost;
     private static final int COMPLETED = 0;
     private int time = 0;
+    private int postion = 0;
 
     private boolean isLongClick;
+
 
     private Handler handler = new Handler() {
         @Override
@@ -124,6 +126,7 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
                         @Override
                         public void onPageSelected(int position) {
                             netHelper.setImage(specialNethermostIv, data.getImg_array().get(position));
+                            SpecialTopicDetailActivity.this.postion = position;
 
                         }
 
@@ -201,7 +204,6 @@ public class SpecialTopicDetailActivity extends BaseActivity implements View.OnC
                     e.printStackTrace();
                 }
                 if (time >= 2) {
-
                     handler.sendEmptyMessage(0);
                     break;
                 }

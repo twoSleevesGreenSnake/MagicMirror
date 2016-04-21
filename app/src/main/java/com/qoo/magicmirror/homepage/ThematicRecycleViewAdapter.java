@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,12 +67,12 @@ public class ThematicRecycleViewAdapter extends RecyclerView.Adapter<ThematicRec
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView nameTv;
         SYXImageLayout img;
-        RelativeLayout itemRl;
+        LinearLayout itemRl;
         public MyViewHolder(View itemView) {
             super(itemView);
             nameTv = (TextView) itemView.findViewById(R.id.item_fragment_thematic_name_tv);
             img = (SYXImageLayout) itemView.findViewById(R.id.item_fragment_thematic_iv);
-            itemRl = (RelativeLayout) itemView.findViewById(R.id.item_fragment_thematic_rl);
+            itemRl = (LinearLayout) itemView.findViewById(R.id.item_fragment_thematic_rl);
         }
     }
 }
