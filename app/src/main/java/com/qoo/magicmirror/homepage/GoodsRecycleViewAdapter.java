@@ -2,6 +2,7 @@ package com.qoo.magicmirror.homepage;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,7 +17,6 @@ import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.constants.Value;
 import com.qoo.magicmirror.db.MainPageData;
 import com.qoo.magicmirror.detail.BrowseGlassesActivity;
-import com.qoo.magicmirror.net.NetHelper;
 import com.qoo.magicmirror.view.SYXImageLayout;
 
 import java.util.ArrayList;
@@ -70,8 +70,9 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, BrowseGlassesActivity.class);
+//
                     intent.putExtra(Value.PUTGOODSLISTBEANDATAENTITYLISTENTITY, data.get(position));
-                    BrowseGlassesActivity.setData(data.get(position));
+
                     context.startActivity(intent);
                 }
             });
@@ -91,7 +92,6 @@ public class GoodsRecycleViewAdapter extends RecyclerView.Adapter<GoodsRecycleVi
                     else {
                         Intent intent = new Intent(context, BrowseGlassesActivity.class);
                         intent.putExtra(Value.PUTGOODSLISTBEANDATAENTITYLISTENTITY, data.get(position));
-                        BrowseGlassesActivity.setData(data.get(position));
                         context.startActivity(intent);
                     }
                 }

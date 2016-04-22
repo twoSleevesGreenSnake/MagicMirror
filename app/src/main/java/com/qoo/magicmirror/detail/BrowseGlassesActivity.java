@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.base.BaseActivity;
 import com.qoo.magicmirror.base.BaseAdapter;
+import com.qoo.magicmirror.constants.Value;
 import com.qoo.magicmirror.homepage.GoodsListBean;
 import com.qoo.magicmirror.net.NetHelper;
 import com.qoo.magicmirror.order.OrderDetailActivity;
@@ -37,25 +38,16 @@ public class BrowseGlassesActivity extends BaseActivity {
     private NetHelper netHelper;
     private int screenHeight;
     private boolean btnNotShow = true;
-    private ImageView backIv, buyIv, pircturesIv;
+    private ImageView backIv, buyIv;
     private RelativeLayout btnLayout;
     private ObjectAnimator animation;
     private ObjectAnimator animationBack;
     private TextView picturesTv;
-    private static GoodsListBean.DataEntity.ListEntity data;
+    private  GoodsListBean.DataEntity.ListEntity data;
     private int screenWidth;
     private float itemHeight = 0;
     private boolean locationNotFinshed = true;
-    private boolean notIsFirstItem = false;
 
-    /**
-     * 从主页获取数据的静态方法
-     *
-     * @param data 详情页的数据
-     */
-    public static void setData(GoodsListBean.DataEntity.ListEntity data) {
-        BrowseGlassesActivity.data = data;
-    }
 
     @Override
     protected int setLayout() {
@@ -64,6 +56,7 @@ public class BrowseGlassesActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        data = getIntent().getParcelableExtra(Value.PUTGOODSLISTBEANDATAENTITYLISTENTITY);
         buyIv = bindView(R.id.activity_detail_browse_glasses_buy_iv);
         buyIv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +83,6 @@ public class BrowseGlassesActivity extends BaseActivity {
         Point size = new Point();
         Display display = getWindowManager().getDefaultDisplay();
         display.getRealSize(size);
-
         screenHeight = size.y;
         screenWidth = size.x;
         btnLayout = bindView(R.id.activity_detail_browse_glasses_pictures_bottom_layout);
@@ -136,8 +128,8 @@ public class BrowseGlassesActivity extends BaseActivity {
         picturesTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WearAtlasActivity.setData(data);
                 Intent intent = new Intent(BrowseGlassesActivity.this, WearAtlasActivity.class);
+                intent.putExtra(Value.PUTGOODSLISTBEANDATAENTITYLISTENTITY,data);
                 startActivity(intent);
             }
         });

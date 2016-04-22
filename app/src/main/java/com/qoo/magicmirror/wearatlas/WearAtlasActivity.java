@@ -27,6 +27,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.qoo.magicmirror.R;
 import com.qoo.magicmirror.base.BaseActivity;
 import com.qoo.magicmirror.constants.NetConstants;
+import com.qoo.magicmirror.constants.Value;
 import com.qoo.magicmirror.homepage.GoodsListBean;
 import com.qoo.magicmirror.net.NetHelper;
 import com.qoo.magicmirror.order.OrderDetailActivity;
@@ -48,8 +49,8 @@ public class WearAtlasActivity extends BaseActivity {
     private Context context;
     private ListView listView;
     private WearAtlasListViewAdapter wearAtlasListViewAdapter;
-    private static ArrayList<GoodsListBean.DataEntity.ListEntity.WearVideoEntity> data;
-    private static GoodsListBean.DataEntity.ListEntity datas;
+    private ArrayList<GoodsListBean.DataEntity.ListEntity.WearVideoEntity> data;
+
     private ImageView showBigImg, ivBack, ivPurchase;
     private JCVideoPlayer vp;
     private RelativeLayout showBigLayout;
@@ -60,15 +61,15 @@ public class WearAtlasActivity extends BaseActivity {
     private float ratio;
     private int pos;
     private float alpha = 0.8f;
-    private static String price, goodsId;
+    private  String price, goodsId;
     int startY;
     int endY;
     float a;
 
     public static void setData(GoodsListBean.DataEntity.ListEntity data) {
-        WearAtlasActivity.data = (ArrayList<GoodsListBean.DataEntity.ListEntity.WearVideoEntity>) data.getWear_video();
-        price = data.getGoods_price();
-        goodsId = data.getGoods_id();
+//        WearAtlasActivity.data = (ArrayList<GoodsListBean.DataEntity.ListEntity.WearVideoEntity>) data.getWear_video();
+//        price = data.getGoods_price();
+//        goodsId = data.getGoods_id();
     }
 
     @Override
@@ -78,6 +79,10 @@ public class WearAtlasActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        GoodsListBean.DataEntity.ListEntity datas = getIntent().getParcelableExtra(Value.PUTGOODSLISTBEANDATAENTITYLISTENTITY);
+        price = datas.getGoods_price();
+        goodsId = datas.getGoods_id();
+        data = (ArrayList<GoodsListBean.DataEntity.ListEntity.WearVideoEntity>) datas.getWear_video();
         GoodsListBean.DataEntity.ListEntity.WearVideoEntity wear = null;
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).getType().equals("8")) {
